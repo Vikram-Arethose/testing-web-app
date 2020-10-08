@@ -1,0 +1,7 @@
+{
+  "name": "brötchenApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
