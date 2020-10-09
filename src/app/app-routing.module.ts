@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'google-login',
     loadChildren: () => import('./pages/google-login/google-login.module').then( m => m.GoogleLoginPageModule)
+  },
+  {
+    path: 'location-setting',
+    loadChildren: () => import('./pages/location-setting/location-setting.module').then( m => m.LocationSettingPageModule)
   }
 ];
 

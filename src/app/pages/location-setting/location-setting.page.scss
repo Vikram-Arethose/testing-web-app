@@ -1,0 +1,49 @@
+.header {
+  background: #F3F3F3;
+
+  &__title {
+    width: 290px;
+    margin: 0 auto;
+    padding: 3.57vh 0;
+
+    text-align: center;
+    font: normal normal 500 25px/30px Montserrat;
+    color: #493735;
+  }
+}
+
+.btn-wrapper {
+  width: 84.5vw;
+  margin: 4.3vh auto;
+
+  &__btn {
+    margin: 0 0 1.85vh;
+    --border-color: #707070;
+    --color: #493735;
+    &:nth-child(1) {
+      font: normal normal 300 16px/19px Montserrat;
+    }
+    &:nth-child(2) {
+      font: italic normal 100 14px/18px Montserrat;
+    }
+    &:nth-child(3) {
+      --background: #35B2A5;
+      font: normal normal 500 20px/24px Montserrat;
+      text-transform: uppercase;
+      --color: #fff;
+    }
+  }
+  .btn {
+    height: 7.39vh;
+    --border-radius: 36px;
+
+    &__icon {
+      position: absolute;
+      left: 3.5vw;
+      font-size: 31px;
+      color: #000;
+    }
+  }
+}
+
+.img {}
