@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'location-setting',
     loadChildren: () => import('./pages/location-setting/location-setting.module').then( m => m.LocationSettingPageModule)
+  },
+  {
+    path: 'apple-registration',
+    loadChildren: () => import('./pages/apple-registration/apple-registration.module').then( m => m.AppleRegistrationPageModule)
   }
 ];
 
