@@ -1,0 +1,12 @@
+{
+  "start": {
+    "header": "simply. pre-order.",
+    "googleBtn": "continue with google",
+    "appleBtn": "continue with apple",
+    "fbBtn": "continue with facebook",
+    "emailBtn": "registration by email",
+    "otherOpt": "other options",
+    "guest": "continue as guest"
+  }
+
+}

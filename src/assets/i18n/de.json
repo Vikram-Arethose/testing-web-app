@@ -1,0 +1,11 @@
+{
+  "start": {
+    "header": "einfach. vorbestellen.",
+    "googleBtn": "weiter über google",
+    "appleBtn": "weiter über apple",
+    "fbBtn": "weiter über facebook",
+    "emailBtn": "registrieren per email",
+    "otherOpt": "andere option",
+    "guest": "ohne anmeldung"
+  }
+}

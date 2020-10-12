@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlatformService } from '../../../services/platform.service';
 
 @Component({
   selector: 'app-google-login',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./google-login.page.scss'],
 })
 export class GoogleLoginPage implements OnInit {
-  ios = true;
+  android = this.platformService.android;
 
-  constructor() { }
+  constructor(
+    private platformService: PlatformService
+  ) { }
 
   ngOnInit() {
   }

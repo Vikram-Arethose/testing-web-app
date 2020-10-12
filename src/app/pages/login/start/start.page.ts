@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
+import { PlatformService } from '../../../services/platform.service';
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
 export class StartPage implements OnInit {
-  android = false;
+  android = this.platformService.android;
   otherOptOn = false;
 
-  constructor() { }
+  constructor(
+    private platformService: PlatformService
+  ) { }
 
   ngOnInit() {
   }
