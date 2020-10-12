@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartPage implements OnInit {
   android = false;
+  otherOptOn = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onOtherOpt() {
+    this.otherOptOn = true;
   }
 
 }

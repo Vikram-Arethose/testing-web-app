@@ -42,6 +42,11 @@
       --background: #0E8DF1;
       --color: #fff;
     }
+    &_mail {
+      margin: 6.16vh 0 0 0;
+      --background: #22F6E8;
+      --color: #493735;
+    }
   }
 
   .btn {
@@ -50,9 +55,7 @@
     text-transform: uppercase;
     font: normal normal 500 16px/19px Montserrat;
 
-    &__icon {
-      //font-size: 25px;
-    }
+    &__icon {}
   }
 
   &__link {
@@ -60,4 +63,14 @@
     text-transform: uppercase;
     color: #493735;
   }
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.hide-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

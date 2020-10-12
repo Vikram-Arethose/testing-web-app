@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./google-login.page.scss'],
 })
 export class GoogleLoginPage implements OnInit {
+  ios = true;
 
   constructor() { }
 
