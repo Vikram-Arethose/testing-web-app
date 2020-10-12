@@ -13,23 +13,23 @@ const routes: Routes = [
   },
   {
     path: 'start',
-    loadChildren: () => import('./pages/start/start.module').then( m => m.StartPageModule)
+    loadChildren: () => import('./pages/login/start/start.module').then(m => m.StartPageModule)
   },
   {
     path: 'google-login',
-    loadChildren: () => import('./pages/google-login/google-login.module').then( m => m.GoogleLoginPageModule)
+    loadChildren: () => import('./pages/login/google-login/google-login.module').then(m => m.GoogleLoginPageModule)
   },
   {
     path: 'location-setting',
-    loadChildren: () => import('./pages/location-setting/location-setting.module').then( m => m.LocationSettingPageModule)
+    loadChildren: () => import('./pages/login/location-setting/location-setting.module').then(m => m.LocationSettingPageModule)
   },
   {
     path: 'apple-registration',
-    loadChildren: () => import('./pages/apple-registration/apple-registration.module').then( m => m.AppleRegistrationPageModule)
+    loadChildren: () => import('./pages/login/apple-registration/apple-registration.module').then(m => m.AppleRegistrationPageModule)
   },
   {
     path: 'email-registration',
-    loadChildren: () => import('./pages/email-registration/email-registration.module').then( m => m.EmailRegistrationPageModule)
+    loadChildren: () => import('./pages/login/email-registration/email-registration.module').then(m => m.EmailRegistrationPageModule)
   }
 ];
 
