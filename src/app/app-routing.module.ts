@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'apple-registration',
     loadChildren: () => import('./pages/apple-registration/apple-registration.module').then( m => m.AppleRegistrationPageModule)
+  },
+  {
+    path: 'email-registration',
+    loadChildren: () => import('./pages/email-registration/email-registration.module').then( m => m.EmailRegistrationPageModule)
   }
 ];
 
