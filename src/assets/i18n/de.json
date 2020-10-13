@@ -39,5 +39,18 @@
     "password": "Passwort",
     "welcome": "Willkommen,",
     "letsStart": "Jetzt kann es los gehen!"
+  },
+  "account": {
+    "accountDetails": "Account Details",
+    "email": "Email-Address",
+    "phoneNum": "Phone Number",
+    "country": "Country",
+    "language": "Language",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "changePass": "Change Password",
+    "managePayment": "Manage Payment Method",
+    "privacy": "Privacy & Imprint",
+    "logout": "Logout"
   }
 }

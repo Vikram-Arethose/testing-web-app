@@ -1,0 +1,52 @@
+.toolbar {
+  padding: 1vh 0;
+  --background: #FEDE00;
+  &__button {
+    --icon-font-size: 25px;
+  }
+  &__title {
+    font: normal normal 500 25px/30px Montserrat;
+    color: #493735;
+  }
+}
+
+.ion-content {
+  --background: #F5F5F5;
+}
+.title {
+  padding: 6vw 3vh;
+  font: normal normal 400 20px/24px Montserrat;
+  color: #493735;
+}
+.list {
+  &__item {
+    --padding-start: 0;
+  }
+  .item {
+    &::part(detail-icon) {
+      opacity: 1;
+    }
+    &__label {
+      padding: 0 0 0 6vw;
+      &_left {
+        font: normal normal 400 15px/19px Montserrat;
+        color: #493735;
+      }
+      &_purple {
+        font: normal normal 300 12px/15px Montserrat;
+        color: #FF68B4;
+      }
+    }
+  }
+}
+
+.logout {
+  height: 6vh;
+  margin: 8.5vh 0 0;
+  background: #fff;
+  &__text{
+    padding: 0.9vh 0 0 8vw;
+    font: normal normal 500 16px/19px Montserrat;
+    color: #F3250E;
+  }
+}
