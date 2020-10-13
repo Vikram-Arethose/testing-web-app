@@ -7,5 +7,14 @@
     "emailBtn": "registrieren per email",
     "otherOpt": "andere option",
     "guest": "ohne anmeldung"
+  },
+  "googleLogin": {
+    "welcome": "Willkommen!",
+    "youAreIn": "Sieht so aus als bist du in:",
+    "germany": "Deutschland",
+    "googleDsgvo": "Ich erlaube Brötchen.app meine Email-Adresse und meinen von Google erhaltenen Namen gemäß unserer Datenschutz-bestimmungen zu speichern.",
+    "privacyPolicy": "Ich bestätige die <a>AGB's</a> und die <a>Datenschutzrichtlinien</a>.",
+    "googleBtn": "weiter über google"
   }
+
 }

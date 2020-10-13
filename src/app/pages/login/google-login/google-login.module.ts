@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { GoogleLoginPageRoutingModule } from './google-login-routing.module';
 
 import { GoogleLoginPage } from './google-login.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GoogleLoginPageRoutingModule
+    GoogleLoginPageRoutingModule,
+    TranslateModule
   ],
   declarations: [GoogleLoginPage]
 })

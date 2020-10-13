@@ -13,7 +13,6 @@
     padding: 21px 12px;
   }
   .form-top {
-    width: 256px;
     margin: 0 auto;
   }
 
@@ -21,6 +20,8 @@
     text-align: center;
     font: normal normal 500 25px/30px Montserrat;
     color: #493735;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #707070;
     @media (max-device-height: 568px) {
       font: normal normal 500 20px/25px Montserrat;
     }
@@ -32,11 +33,12 @@
 
   &__item {
     &_select {
-      margin: 0 0 10vh;
+      width: 80%;
+      margin: 0 auto 8vh;
       --padding-start: 0;
       --inner-padding-start: 18px;
       @media (max-device-height: 568px) {
-        margin: 0 0 5vh;
+        margin: 0 auto 5vh;
       }
     }
 
@@ -55,6 +57,8 @@
       font: normal normal 400 20px/24px Montserrat;
       --placeholder-color: #493735;
       --placeholder-opacity: 1;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #707070;
       &::part(icon) {
         color: #493735;
         opacity: 1;
@@ -83,4 +87,8 @@
 
 .opacity {
   opacity: 0;
+}
+
+:host ::ng-deep a {
+  text-decoration: underline;
 }
