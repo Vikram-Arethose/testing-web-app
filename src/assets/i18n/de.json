@@ -1,4 +1,7 @@
 {
+  "general": {
+    "continue": "weiter"
+  },
   "start": {
     "header": "einfach. vorbestellen.",
     "googleBtn": "weiter über google",
@@ -24,7 +27,17 @@
   },
   "appleRegister": {
     "title": "Erstelle für die Brötchen.app einen Account mit deiner Apple ID \"name@iclooud.com\"",
-    "nameSurname": "Name, Nachname",
-    "continue": "weiter"
+    "nameSurname": "Name, Nachname"
+  },
+  "emailRegister": {
+    "title1": "Los geht's.",
+    "questionEmail": "Wie ist deine E-Mail-Adresse?",
+    "email": "E-Mail-Addresse",
+    "hello": "Hallo",
+    "questionName": "Wie heißt du?",
+    "choosePassword": "Bitte wähle ein Passwort?",
+    "password": "Passwort",
+    "welcome": "Willkommen,",
+    "letsStart": "Jetzt kann es los gehen!"
   }
 }

@@ -3,12 +3,12 @@
   <form class="form">
     <div class="form-item" *ngIf="counter === 0">
     <div class="form-item__header header">
-      <h1 class="header__item">Here we go!</h1>
-      <h1 class="header__item">What's yourE-Mail Address?</h1>
+      <h1 class="header__item">{{ 'emailRegister.title1' | translate }}</h1>
+      <h1 class="header__item">{{ 'emailRegister.questionEmail' | translate }}</h1>
     </div>
     <div class="form-item__body">
       <ion-item class="item">
-        <ion-label class="item__label" position="stacked">E-Mail-Address</ion-label>
+        <ion-label class="item__label" position="stacked">{{ 'emailRegister.email' | translate }}</ion-label>
         <ion-input [(ngModel)]="email" name="email"></ion-input>
       </ion-item>
       <ion-fab-button class="form-item__btn" (click)="counterIncrease()">
@@ -18,12 +18,12 @@
   </div>
     <div class="form-item" *ngIf="counter === 1">
       <div class="form-item__header header">
-        <h1 class="header__item">Hello <span class="header__item_purple">{{ email }}</span>.</h1>
-        <h1 class="header__item">What's your name?</h1>
+        <h1 class="header__item">{{ 'emailRegister.hello' | translate }} <span class="header__item_purple">{{ email }}</span>.</h1>
+        <h1 class="header__item">{{ 'emailRegister.questionName' | translate }}</h1>
       </div>
       <div class="form-item__body">
         <ion-item class="item">
-          <ion-label class="item__label" position="stacked">E-Mail-Adsress</ion-label>
+          <ion-label class="item__label" position="stacked">Name</ion-label>
           <ion-input [(ngModel)]="name" name="name"></ion-input>
         </ion-item>
         <ion-fab-button class="form-item__btn" (click)="counterIncrease()">
@@ -33,12 +33,12 @@
     </div>
     <div class="form-item" *ngIf="counter === 2">
       <div class="form-item__header header">
-        <h1 class="header__item">Hello <span class="header__item_purple">{{ name }}</span>.</h1>
-        <h1 class="header__item">Please choose a Password!</h1>
+        <h1 class="header__item">{{ 'emailRegister.hello' | translate }} <span class="header__item_purple">{{ name }}</span>.</h1>
+        <h1 class="header__item">{{ 'emailRegister.choosePassword' | translate }}</h1>
       </div>
       <div class="form-item__body">
         <ion-item class="item">
-          <ion-label class="item__label" position="stacked">Password</ion-label>
+          <ion-label class="item__label" position="stacked">{{ 'emailRegister.password' | translate }}</ion-label>
           <ion-input [(ngModel)]="password" name="password"></ion-input>
         </ion-item>
         <ion-fab-button class="form-item__btn" (click)="counterIncrease()">
@@ -48,11 +48,11 @@
     </div>
     <div class="form-item" *ngIf="counter === 3">
       <div class="form-item__header header">
-        <h1 class="header__item">Welcome, <span class="header__item_purple">{{ name }}</span>!</h1>
+        <h1 class="header__item">{{ 'emailRegister.welcome' | translate }}  <span class="header__item_purple">{{ name }}</span>!</h1>
       </div>
-      <p class="text">Let's get started …</p>
+      <p class="text">{{ 'emailRegister.letsStart' | translate }}</p>
       <div class="button-wrapper">
-        <ion-button class="button-wrapper__btn" [routerLink]="'/location-setting'">continue</ion-button>
+        <ion-button class="button-wrapper__btn" [routerLink]="'/location-setting'">{{ 'general.continue' | translate }}</ion-button>
       </div>
     </div>
   </form>
