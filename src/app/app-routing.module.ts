@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'start',
+    redirectTo: 'bakery-search',
     pathMatch: 'full'
   },
   {
@@ -30,6 +30,14 @@ const routes: Routes = [
   {
     path: 'email-registration',
     loadChildren: () => import('./pages/login/email-registration/email-registration.module').then(m => m.EmailRegistrationPageModule)
+  },
+  {
+    path: 'bakery-search',
+    loadChildren: () => import('./pages/bakery-search/bakery-search.module').then( m => m.BakerySearchPageModule)
+  },
+  {
+    path: 'account',
+    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
   }
 ];
 

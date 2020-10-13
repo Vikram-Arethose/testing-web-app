@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { Platform } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,41 +18,45 @@ export class AppComponent implements OnInit {
     {
       title: 'Inbox',
       url: '/folder/Inbox',
-      icon: 'mail'
+      src: './assets/icons/menu/mail-png.svg'
+      // icon: 'mail'
     },
     {
-      title: 'Outbox',
+      title: 'Orders',
       url: '/folder/Outbox',
-      icon: 'paper-plane'
+      src: './assets/icons/menu/shopping-cart-png.svg'
     },
     {
       title: 'Favorites',
       url: '/folder/Favorites',
-      icon: 'heart'
+      src: './assets/icons/menu/favorite.svg'
+      // icon: 'heart'
     },
     {
-      title: 'Archived',
+      title: 'Payment Methods',
       url: '/folder/Archived',
-      icon: 'archive'
+      src: './assets/icons/menu/credit-card-png.svg'
     },
     {
-      title: 'Trash',
+      title: 'Legal',
       url: '/folder/Trash',
-      icon: 'trash'
+      src: 'assets/icons/menu/check.svg'
     },
     {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
+      title: 'Support',
+      url: '/folder/Trash',
+      src: './assets/icons/menu/help-circle-png.svg'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private menu: MenuController,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -70,5 +75,10 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  toAccount() {
+    this.router.navigate(['account']);
+    this.menu.close();
   }
 }
