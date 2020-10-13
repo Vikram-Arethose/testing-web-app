@@ -15,6 +15,12 @@
     "googleDsgvo": "I allow Brötchen.app my email address and my names obtained from Google according to our data protection to save provisions",
     "privacyPolicy": "I confirm the <a>terms of use</a> and the <a>Privacy Policy</a>",
     "googleBtn": "continue with google"
+  },
+  "locationSet": {
+    "title": "Select your location to find your bakery",
+    "useCurrLocation": "Use current location",
+    "searchLocation": "Search for a location",
+    "apply": "apply"
   }
 
 }

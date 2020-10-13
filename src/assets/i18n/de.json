@@ -15,6 +15,12 @@
     "googleDsgvo": "Ich erlaube Brötchen.app meine Email-Adresse und meinen von Google erhaltenen Namen gemäß unserer Datenschutz-bestimmungen zu speichern.",
     "privacyPolicy": "Ich bestätige die <a>AGB's</a> und die <a>Datenschutzrichtlinien</a>.",
     "googleBtn": "weiter über google"
+  },
+  "locationSet": {
+    "title": "Standort wählen, um deine Bäckerei zu finden",
+    "useCurrLocation": "Aktuellen Standort nutzen",
+    "searchLocation": "Nach einem Ort suchen",
+    "apply": "anwenden"
   }
 
 }

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { LocationSettingPageRoutingModule } from './location-setting-routing.module';
 
 import { LocationSettingPage } from './location-setting.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LocationSettingPageRoutingModule
+    LocationSettingPageRoutingModule,
+    TranslateModule
   ],
   declarations: [LocationSettingPage]
 })
