@@ -21,6 +21,11 @@
     "useCurrLocation": "Use current location",
     "searchLocation": "Search for a location",
     "apply": "apply"
+  },
+  "appleRegister": {
+    "title": "Create an account for Brötchen.app with your Apple ID \"name@iclooud.com\"",
+    "nameSurname": "Name, Surname",
+    "continue": "continue"
   }
 
 }

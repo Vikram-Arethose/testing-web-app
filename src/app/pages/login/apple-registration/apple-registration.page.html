@@ -1,5 +1,5 @@
 <ion-content>
-  <h1 class="title">simply. pre-order.</h1>
+  <h1 class="title">{{ 'start.header' | translate }}</h1>
   <div class="img-container">
     <ion-img class="img-container__img" src="../../../assets/img/girl.png"></ion-img>
   </div>
@@ -7,7 +7,7 @@
     <ion-grid class="grid">
       <ion-row class="grid__row">
         <ion-col class="grid__col">
-          <p class="text grid__title">Create an account for Brötchen.app withyour Apple ID "name@iclooud.com"</p>
+          <p class="text grid__title">{{ 'appleRegister.title' | translate }}</p>
         </ion-col>
       </ion-row>
       <ion-row class="grid__row">
@@ -15,7 +15,7 @@
           <p class="text">Name</p>
         </ion-col>
         <ion-col class="grid__col">
-          <p class="text">Name, Surname</p>
+          <p class="text">{{ 'appleRegister.nameSurname' | translate }}</p>
         </ion-col>
       </ion-row>
       <ion-row class="grid__row">
@@ -27,6 +27,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button class="btn" expand="block" [routerLink]="'/google-login'">continue</ion-button>
+    <ion-button class="btn" expand="block" [routerLink]="'/google-login'">{{ 'appleRegister.continue' | translate }}</ion-button>
   </div>
 </ion-content>

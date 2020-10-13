@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('en');
-      this.translate.use('de');
+      this.translate.use('en');
     });
   }
 

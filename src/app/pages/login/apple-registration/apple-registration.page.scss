@@ -10,8 +10,8 @@
 }
 
 .img-container {
-  //background: #FEDE00;
   &__img {
+    //padding: 0 0 7vh;
     object-fit: cover;
     object-position: top;
     opacity: 0.44;
@@ -19,7 +19,7 @@
   }
 }
 
-.form {
+.content {
   padding: 6.53vh 3vw;
   margin: 0 auto;
   @media (max-device-height: 568px) {
