@@ -61,5 +61,8 @@
     "managePayment": "Manage Payment Method",
     "privacy": "Privacy & Imprint",
     "logout": "Logout"
+  },
+  "accDetails": {
+    "yourName": "Your Name"
   }
 }

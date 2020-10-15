@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'menu.myAcc',
+      title: 'menu.inbox',
       url: '/folder/Inbox',
       src: './assets/icons/menu/mail-png.svg'
       // icon: 'mail'

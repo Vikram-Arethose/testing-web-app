@@ -37,11 +37,15 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
+    loadChildren: () => import('./pages/my-account/account/account.module').then(m => m.AccountPageModule)
   },
   {
     path: 'name',
-    loadChildren: () => import('./pages/name/name.module').then( m => m.NamePageModule)
+    loadChildren: () => import('./pages/my-account/name/name.module').then(m => m.NamePageModule)
+  },
+  {
+    path: 'email',
+    loadChildren: () => import('./pages/my-account/email/email.module').then(m => m.EmailPageModule)
   }
 ];
 

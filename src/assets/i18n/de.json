@@ -61,5 +61,8 @@
     "managePayment": "Zahlungsmittel verwalten",
     "privacy": "Datenschutz & Impressum",
     "logout": "Ausloggen"
+  },
+  "accDetails": {
+    "yourName": "Your Name"
   }
 }

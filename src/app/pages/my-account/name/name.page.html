@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="toolbar">
+    <ion-buttons>
+      <ion-back-button class="toolbar__button" mode="md" slot="start" defaultHref="account"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="toolbar__title ion-text-left">{{ 'accDetails.yourName' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="setting">
+    <h3 class="setting__label">Name</h3>
+    <ion-item class="setting__item item" lines="none">
+      <ion-input class="item__input" value="Jenny"></ion-input>
+      <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
+    </ion-item>
+  </div>
+
+</ion-content>
