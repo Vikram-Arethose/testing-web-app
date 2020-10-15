@@ -46,6 +46,10 @@ const routes: Routes = [
   {
     path: 'email',
     loadChildren: () => import('./pages/my-account/email/email.module').then(m => m.EmailPageModule)
+  },
+  {
+    path: 'phone',
+    loadChildren: () => import('./pages/my-account/phone/phone.module').then( m => m.PhonePageModule)
   }
 ];
 

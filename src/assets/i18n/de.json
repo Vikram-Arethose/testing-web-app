@@ -63,6 +63,7 @@
     "logout": "Ausloggen"
   },
   "accDetails": {
-    "yourName": "Your Name"
+    "yourName": "Your Name",
+    "yourEmail": "Your Email-Address"
   }
 }

@@ -1,0 +1,12 @@
+.toolbar {
+  padding: 1vh 0;
+  --background: #FEDE00;
+  &__button {
+    --icon-font-size: 25px;
+  }
+  &__title {
+    padding: 0 0 0 3vw;
+    font: normal normal 500 25px/30px Montserrat;
+    color: #493735;
+  }
+}

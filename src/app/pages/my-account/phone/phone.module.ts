@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AccountPageRoutingModule } from './account-routing.module';
+import { PhonePageRoutingModule } from './phone-routing.module';
 
-import { AccountPage } from './account.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { PhonePage } from './phone.page';
 import { ComponentsModule } from '../../../components/components.module';
 
 @NgModule({
@@ -15,10 +14,9 @@ import { ComponentsModule } from '../../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountPageRoutingModule,
-    TranslateModule,
+    PhonePageRoutingModule,
     ComponentsModule
   ],
-  declarations: [AccountPage]
+  declarations: [PhonePage]
 })
-export class AccountPageModule {}
+export class PhonePageModule {}

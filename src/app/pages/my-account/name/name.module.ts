@@ -8,6 +8,7 @@ import { NamePageRoutingModule } from './name-routing.module';
 
 import { NamePage } from './name.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from '../../../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     NamePageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule
   ],
   declarations: [NamePage]
 })

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AccountPageRoutingModule } from './account-routing.module';
+import { EmailPageRoutingModule } from './email-routing.module';
 
-import { AccountPage } from './account.page';
+import { EmailPage } from './email.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../../components/components.module';
 
@@ -15,10 +15,10 @@ import { ComponentsModule } from '../../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountPageRoutingModule,
+    EmailPageRoutingModule,
     TranslateModule,
     ComponentsModule
   ],
-  declarations: [AccountPage]
+  declarations: [EmailPage]
 })
-export class AccountPageModule {}
+export class EmailPageModule {}
