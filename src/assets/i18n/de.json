@@ -40,17 +40,26 @@
     "welcome": "Willkommen,",
     "letsStart": "Jetzt kann es los gehen!"
   },
+  "menu": {
+    "myAcc": "Mein Account",
+    "inbox": "Posteingang",
+    "orders": "Bestellungen",
+    "favorites": "Favoriten",
+    "paymentMethods": "Zahlungsmethoden",
+    "legal": "AGB",
+    "support": "Hilfecenter"
+  },
   "account": {
-    "accountDetails": "Account Details",
-    "email": "Email-Address",
-    "phoneNum": "Phone Number",
-    "country": "Country",
+    "accountDetails": "Accountdaten",
+    "email": "Email-Adresse",
+    "phoneNum": "Mobilnummer",
+    "country": "Land",
     "language": "Language",
-    "settings": "Settings",
-    "notifications": "Notifications",
-    "changePass": "Change Password",
-    "managePayment": "Manage Payment Method",
-    "privacy": "Privacy & Imprint",
-    "logout": "Logout"
+    "settings": "Accountdaten",
+    "notifications": "Benachrichtigungen",
+    "changePass": "Passwort ändern",
+    "managePayment": "Zahlungsmittel verwalten",
+    "privacy": "Datenschutz & Impressum",
+    "logout": "Ausloggen"
   }
 }

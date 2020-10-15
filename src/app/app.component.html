@@ -4,15 +4,16 @@
       <ion-content class="content">
         <ion-item class="menu-header" lines="none" detail="false" button (click)="toAccount()">
           <ion-icon class="menu-header__icon" slot="start" src="./assets/icons/menu/user-png.svg"></ion-icon>
-          <ion-label class="menu-header__label">My Account</ion-label>
+          <ion-label class="menu-header__label">{{ 'menu.myAcc' | translate }}</ion-label>
         </ion-item>
         <ion-list id="inbox-list">
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item class="menu-item" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none"
+            <ion-item class="menu-item" (click)="selectedIndex = i" routerDirection="root"
+                      [routerLink]="[p.url]" lines="none"
                       detail="false" [class.selected]="selectedIndex == i">
               <ion-icon class="menu-item__icon" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" [src]="p.src"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

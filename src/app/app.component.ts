@@ -16,39 +16,40 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Inbox',
+      title: 'menu.myAcc',
       url: '/folder/Inbox',
       src: './assets/icons/menu/mail-png.svg'
       // icon: 'mail'
     },
     {
-      title: 'Orders',
+      title: 'menu.orders',
       url: '/folder/Outbox',
       src: './assets/icons/menu/shopping-cart-png.svg'
     },
     {
-      title: 'Favorites',
+      title: 'menu.favorites',
       url: '/folder/Favorites',
       src: './assets/icons/menu/favorite.svg'
       // icon: 'heart'
     },
     {
-      title: 'Payment Methods',
+      title: 'menu.paymentMethods',
       url: '/folder/Archived',
       src: './assets/icons/menu/credit-card-png.svg'
     },
     {
-      title: 'Legal',
+      title: 'menu.legal',
       url: '/folder/Trash',
       src: 'assets/icons/menu/check.svg'
     },
     {
-      title: 'Support',
+      title: 'menu.support',
       url: '/folder/Trash',
       src: './assets/icons/menu/help-circle-png.svg'
     }
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  private myAccount: string;
 
   constructor(
     private platform: Platform,
@@ -66,7 +67,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('en');
-      this.translate.use('de');
+      this.translate.use('en');
     });
   }
 

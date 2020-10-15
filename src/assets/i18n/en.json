@@ -40,6 +40,15 @@
     "welcome": "Welcome,",
     "letsStart": "Let's get started …"
   },
+  "menu": {
+    "myAcc": "My Account",
+    "inbox": "Inbox",
+    "orders": "Orders",
+    "favorites": "Favorites",
+    "paymentMethods": "Payment Methods",
+    "legal": "Legal",
+    "support": "Support"
+  },
   "account": {
     "accountDetails": "Account Details",
     "email": "Email-Address",
@@ -53,5 +62,4 @@
     "privacy": "Privacy & Imprint",
     "logout": "Logout"
   }
-
 }
