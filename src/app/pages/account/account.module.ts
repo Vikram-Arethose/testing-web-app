@@ -8,7 +8,7 @@ import { AccountPageRoutingModule } from './account-routing.module';
 
 import { AccountPage } from './account.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { ComponentsModule } from '../../../components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [

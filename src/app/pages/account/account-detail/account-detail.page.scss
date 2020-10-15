@@ -1,0 +1,33 @@
+.toolbar {
+  padding: 1vh 0;
+  --background: #FEDE00;
+  &__button {
+    --icon-font-size: 25px;
+  }
+  &__title {
+    padding: 0 0 0 3vw;
+    font: normal normal 500 25px/30px Montserrat;
+    color: #493735;
+  }
+}
+
+.setting {
+  background: #F5F5F5;
+  &__label {
+    padding: 5.5vh 0 1vh 4.3vw;
+    font: normal normal 400 15px/19px Montserrat;
+    color: #493735;
+  }
+  &__item {
+    padding: 0 0 11.2vh;
+  }
+
+  .item {
+    --padding-start: 0;
+    &__input {
+      --padding-start: 20px;
+      font: normal normal 300 12px/15px Montserrat;
+      color: #FF68B4;
+    }
+  }
+}

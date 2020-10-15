@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button class="toolbar__button" mode="md"  defaultHref="account"></ion-back-button>
+    </ion-buttons>
+    <h1 class="toolbar__title ion-text-left">{{title}}</h1>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div [ngSwitch]="true">
+    <div *ngSwitchCase="data === 'name' || data === 'email'">
+      <div class="setting">
+        <h3 class="setting__label">{{settingLabel}}</h3>
+        <ion-item class="setting__item item" lines="none">
+          <ion-input class="item__input" [value]="inputValue"></ion-input>
+          <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
+        </ion-item>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
