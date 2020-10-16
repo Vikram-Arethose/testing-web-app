@@ -8,10 +8,16 @@ import { LoggerService } from '../../../services/logger.service';
   styleUrls: ['./account-detail.page.scss'],
 })
 export class AccountDetailPage implements OnInit {
+  countries: string[] = ['Germany', 'Austria', 'Switzerland'];
+  country: string[];
   data: string;
-  settingLabel: string;
   inputValue: string;
+  placeholder: string;
+  languages: string[] = ['English', 'German'];
+  settingLabel: string;
+  settingLabel2: string;
   public title: string;
+  dataForRepeat: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +27,6 @@ export class AccountDetailPage implements OnInit {
     this.route.queryParams.subscribe( params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.page;
-        this.logger.log('this.data', this.data);
       }
     });
   }
@@ -41,6 +46,33 @@ export class AccountDetailPage implements OnInit {
         this.title = 'Your Email-Address';
         this.settingLabel = 'E-Mail-Address';
         this.inputValue = 'Jenny@gmail.com';
+        break;
+      case 'phone':
+        this.title = 'Your Phone Number';
+        this.settingLabel = 'Phone number';
+        this.placeholder = 'Enter your number';
+        break;
+      case 'country':
+        this.title = 'Country';
+        this.settingLabel = 'Country';
+        this.dataForRepeat = this.countries;
+        break;
+      case 'language':
+        this.title = 'Language';
+        this.settingLabel = 'Language';
+        this.dataForRepeat = this.languages;
+        break;
+      case 'notifications':
+        this.title = 'Notifications';
+        break;
+      case 'password':
+        this.title = 'Change Password';
+        break;
+      case 'payments':
+        this.title = 'Payment Methods';
+        break;
+      case 'privacy':
+        this.title = 'Privacy';
         break;
     }
   }

@@ -11,12 +11,110 @@
 <ion-content>
 
   <div [ngSwitch]="true">
-    <div *ngSwitchCase="data === 'name' || data === 'email'">
+    <div *ngSwitchCase="data === 'name' || data === 'email' || data === 'phone'">
+      <div class="setting">
+        <div class="label-wrapper">
+          <h3 class="setting__label" *ngIf="data === 'phone'">Country</h3>
+          <h3 class="setting__label">{{settingLabel}}</h3>
+        </div>
+        <ion-item class="setting__item setting__item_purple item" lines="none">
+          <ion-label class="item__label" *ngIf="data === 'phone'">+49</ion-label>
+          <ion-input class="item__input" [value]="inputValue" [placeholder]="placeholder"></ion-input>
+          <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
+        </ion-item>
+      </div>
+    </div>
+    <div *ngSwitchCase="data === 'country' || data === 'language'">
       <div class="setting">
         <h3 class="setting__label">{{settingLabel}}</h3>
-        <ion-item class="setting__item item" lines="none">
-          <ion-input class="item__input" [value]="inputValue"></ion-input>
-          <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
+        <ion-list class="setting__item list">
+          <ion-radio-group class="radio-group" value="country">
+            <ion-item class="radio-group__item item" *ngFor="let item of dataForRepeat">
+              <ion-label class="item__label">{{item}}</ion-label>
+              <ion-radio value="item"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          <ion-item lines="none">
+            <ion-button class="btn-check" slot="end" fill="none">
+              <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div *ngSwitchCase="data === 'notifications'">
+      <div class="setting">
+        <h3 class="setting__label"></h3>
+          <ion-item class="setting__item item">
+            <ion-label class="item__label">Push-Notifications</ion-label>
+            <ion-toggle class="item__toggle"></ion-toggle>
+          </ion-item>
+      </div>
+    </div>
+    <div *ngSwitchCase="data === 'password'">
+      <div class="setting">
+        <h3 class="setting__label setting__label_upper">current password</h3>
+        <ion-item class="item" lines="none">
+          <ion-input class="item__input item__input_upper" placeholder="enter current password"></ion-input>
+        </ion-item>
+      </div>
+      <div class="setting">
+        <h3 class="setting__label setting__label_upper">new password</h3>
+        <ion-item class="setting__item item">
+          <ion-input class="item__input item__input_upper" placeholder="enter new password"></ion-input>
+        </ion-item>
+        <ion-item class="setting__item item">
+          <ion-input class="item__input item__input_upper" placeholder="confirm new password"></ion-input>
+        </ion-item>
+        <ion-item class="setting__item" lines="none">
+          <ion-button class="btn-check" slot="end" fill="none">
+            <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+    </div>
+    <div *ngSwitchCase="data === 'payments'">
+      <div class="setting">
+        <h3 class="setting__label">Preferred payment methods</h3>
+        <ion-item class="item">
+          <img class="item__img" width="79px" src="../../../../assets/icons/payments/paypal.png">
+          <ion-toggle slot="end" class="item__toggle"></ion-toggle>
+        </ion-item>
+      </div>
+      <div class="setting">
+        <h3 class="setting__label">Change payment method</h3>
+        <ion-item class="item">
+          <ion-img class="item__img" src="../../../../assets/icons/payments/apple-pay-google.png"></ion-img>
+          <ion-toggle slot="end" class="item__toggle"></ion-toggle>
+        </ion-item>
+        <ion-item class="item">
+          <img class="item__img" width="39px" src="../../../../assets/icons/payments/sepa.png">
+          <ion-toggle slot="end" class="item__toggle"></ion-toggle>
+        </ion-item>
+        <ion-item class="item">
+          <ion-img class="item__img" src="../../../../assets/icons/payments/visa.svg"></ion-img>
+          <ion-img class="item__img" src="../../../../assets/icons/payments/maestro.svg"></ion-img>
+          <ion-img class="item__img" src="../../../../assets/icons/payments/mastercard.svg"></ion-img>
+          <ion-toggle slot="end" class="item__toggle"></ion-toggle>
+        </ion-item>
+        <ion-item class="setting__item" lines="none">
+          <ion-button class="btn-check" slot="end" fill="none">
+            <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+    </div>
+    <div *ngSwitchCase="data === 'privacy'">
+      <div class="setting">
+        <div class="top-grey"></div>
+        <ion-item class="item" detail="false" button>
+          <ion-label class="item__label">Data Privacy</ion-label>
+        </ion-item>
+        <ion-item class="item" detail="false" button>
+          <ion-label class="item__label">Imprint</ion-label>
+        </ion-item>
+        <ion-item class="item setting__item_pd" detail="false" button>
+          <ion-label class="item__label item__label_red">Delete account</ion-label>
         </ion-item>
       </div>
     </div>

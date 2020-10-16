@@ -13,21 +13,94 @@
 
 .setting {
   background: #F5F5F5;
+  .label-wrapper {
+    display: flex;
+  }
   &__label {
     padding: 5.5vh 0 1vh 4.3vw;
     font: normal normal 400 15px/19px Montserrat;
     color: #493735;
+    &_upper {
+      text-transform: uppercase;
+    }
   }
   &__item {
-    padding: 0 0 11.2vh;
+    &_pd {
+      padding: 11.2vh 0;
+    }
+    &:last-child {
+      padding: 0 0 11.2vh;
+    }
+
+    &_purple {
+      --color: #FF68B4;
+    }
   }
 
   .item {
     --padding-start: 0;
+    font: normal normal 400 12px/15px Montserrat;
+    &__label {
+      padding: 0 30px 0 15px;
+      &_red {
+        --color: #FA0808;
+      }
+    }
     &__input {
       --padding-start: 20px;
-      font: normal normal 300 12px/15px Montserrat;
-      color: #FF68B4;
+      --placeholder-font-style: italic;
+      --placeholder-color: #493735;
+      --placeholder-opacity: 1;
+      &_upper {
+        text-transform: uppercase;
+      }
+    }
+    &__toggle {
+      width: 44px;
+      height: 15px;
+      padding: 0 20px 0 0;
+      --background: #9AA8B5;
+      --background-checked: #95E2BE;
+      --handle-background: #C8D0D7;
+      --handle-background-checked: #3CCA88;
+      --handle-spacing: 0;
+      --handle-width: 40%;
+      --handle-height: 110%;
+      --border-radius: 2vw;
+      overflow: visible;
+      contain: none;
+        &.toggle-checked {
+          --handle-box-shadow: 0 0 2px 0 #33F333;
+        }
+    }
+    &__img {
+      &:first-child {
+        margin-left: 19px;
+      }
     }
   }
+}
+
+.setting {
+  .list {
+    background: #F5F5F5;
+  }
+  .radio-group {
+    &__item {
+      font: normal normal 400 12px/15px Montserrat;
+      color: #493735;
+      --border-color: #CBCBCB;
+    }
+    &__label {
+      padding: 0 0 0 16px;
+    }
+    .btn-check {
+      padding: 15px 0 0 5px;
+    }
+  }
+}
+
+.top-grey {
+  height: 32px;
+  background: #F5F5F5;
 }
