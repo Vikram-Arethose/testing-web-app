@@ -55,6 +55,14 @@ const routes: Routes = [
     path: 'privacy',
     loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
+  {
+    path: 'inbox',
+    loadChildren: () => import('./pages/inbox/inbox.module').then( m => m.InboxPageModule)
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
+  },
 ];
 
 @NgModule({

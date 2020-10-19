@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'menu.inbox',
-      url: '/folder/Inbox',
+      url: '/inbox',
       src: './assets/icons/menu/mail-png.svg'
       // icon: 'mail'
     },
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('en');
-      this.translate.use('en');
+      this.translate.use('de');
     });
   }
 
