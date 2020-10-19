@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { LoggerService } from '../../../services/logger.service';
+import { TranslateService } from '@ngx-translate/core';
+
+import { Language } from '../../../models/language';
 
 @Component({
   selector: 'app-account-detail',
@@ -13,16 +16,22 @@ export class AccountDetailPage implements OnInit {
   data: string;
   inputValue: string;
   placeholder: string;
-  languages: string[] = ['English', 'German'];
+  languages: Language[] = [
+    { title: 'English', value: 'en'},
+    { title: 'German', value: 'de'}
+  ];
+  language: string;
   settingLabel: string;
   settingLabel2: string;
   public title: string;
   dataForRepeat: any[];
+  private radioValue: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private translate: TranslateService
   ) {
     this.route.queryParams.subscribe( params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -61,6 +70,7 @@ export class AccountDetailPage implements OnInit {
         this.title = 'Language';
         this.settingLabel = 'Language';
         this.dataForRepeat = this.languages;
+        this.radioValue = this.language;
         break;
       case 'notifications':
         this.title = 'Notifications';
@@ -82,6 +92,12 @@ export class AccountDetailPage implements OnInit {
       state: { data: subPage }
     };
     this.router.navigate(['privacy'], navigationExtras);
+  }
+
+  onRadioChange(value) {
+    this.language = value;
+    this.logger.log('this.language', this.language);
+    this.translate.use(this.language);
   }
 
 }
