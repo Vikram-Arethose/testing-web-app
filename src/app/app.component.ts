@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'menu.orders',
-      url: '/folder/Outbox',
+      url: '/orders',
       src: './assets/icons/menu/shopping-cart-png.svg'
     },
     {
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('en');
-      this.translate.use('de');
+      this.translate.use('en');
     });
   }
 

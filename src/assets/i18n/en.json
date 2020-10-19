@@ -70,5 +70,16 @@
     "header": "Inbox",
     "title": "You've got mail",
     "text": "You have just received a message."
+  },
+  "orders": {
+    "header": "Orders",
+    "current": "Current",
+    "completed": "Completed",
+    "pickUpTime": "Pick-up time:",
+    "total": "Total",
+    "pickUpAt": "Pick-up at:",
+    "pickUpCode": "Your pick-up code is:",
+    "showThisCode": "Show this code at your bakery for pick-up.",
+    "note": "Note: If an item is sold-out, the bakery will offer you a replacement item."
   }
 }
