@@ -50,7 +50,11 @@ const routes: Routes = [
   {
     path: 'phone',
     loadChildren: () => import('./pages/my-account/phone/phone.module').then( m => m.PhonePageModule)
-  }
+  },
+  {
+    path: 'privacy',
+    loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
+  },
 ];
 
 @NgModule({

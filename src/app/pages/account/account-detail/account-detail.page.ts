@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { LoggerService } from '../../../services/logger.service';
 
 @Component({
@@ -75,6 +75,13 @@ export class AccountDetailPage implements OnInit {
         this.title = 'Privacy';
         break;
     }
+  }
+
+  open(subPage: string) {
+    const navigationExtras: NavigationExtras = {
+      state: { data: subPage }
+    };
+    this.router.navigate(['privacy'], navigationExtras);
   }
 
 }

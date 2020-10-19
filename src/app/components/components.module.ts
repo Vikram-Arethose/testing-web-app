@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccountHeaderComponent } from './account-header/account-header.component';
+import { MenuHeaderComponent } from './menu-header/menu-header.component';
 import { IonicModule } from '@ionic/angular';
 
 
 
 @NgModule({
   declarations: [
-    AccountHeaderComponent
+    MenuHeaderComponent
   ],
   imports: [
     CommonModule,
     IonicModule
   ],
   exports: [
-    AccountHeaderComponent
+    MenuHeaderComponent
   ]
 })
 export class ComponentsModule { }

@@ -107,10 +107,10 @@
     <div *ngSwitchCase="data === 'privacy'">
       <div class="setting">
         <div class="top-grey"></div>
-        <ion-item class="item" detail="false" button>
+        <ion-item class="item" detail="false" button (click)="open('privacy')">
           <ion-label class="item__label">Data Privacy</ion-label>
         </ion-item>
-        <ion-item class="item" detail="false" button>
+        <ion-item class="item" detail="false" button (click)="open('imprint')">
           <ion-label class="item__label">Imprint</ion-label>
         </ion-item>
         <ion-item class="item setting__item_pd" detail="false" button>
