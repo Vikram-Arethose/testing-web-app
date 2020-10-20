@@ -67,6 +67,10 @@ const routes: Routes = [
     path: 'favorites',
     loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },
+  {
+    path: 'payment-methods',
+    loadChildren: () => import('./pages/payment-methods/payment-methods.module').then( m => m.PaymentMethodsPageModule)
+  },
 ];
 
 @NgModule({

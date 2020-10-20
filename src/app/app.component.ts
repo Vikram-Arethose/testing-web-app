@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'menu.paymentMethods',
-      url: '/folder/Archived',
+      url: '/payment-methods',
       src: './assets/icons/menu/credit-card-png.svg'
     },
     {
