@@ -82,5 +82,9 @@
     "showThisCode": "Show this code at your bakery for pick-up.",
     "note": "Note: If an item is sold-out, the bakery will offer you a replacement item.",
     "repeatBtn": "Repeat Order"
+  },
+  "favorites": {
+    "header": "Favorites",
+    "openUntil": "Open until"
   }
 }
