@@ -90,5 +90,6 @@
   "paymentMethods": {
     "header": "Zahlungsmethoden",
     "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an "
-  }
+  },
+  "legal": "AGBs"
 }

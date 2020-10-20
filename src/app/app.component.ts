@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'menu.legal',
-      url: '/folder/Trash',
+      url: '/legal',
       src: 'assets/icons/menu/check.svg'
     },
     {

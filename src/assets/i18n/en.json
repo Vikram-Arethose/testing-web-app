@@ -90,5 +90,6 @@
   "paymentMethods": {
     "header": "Payment Methods",
     "title": "We offer the following payment methods in our order process."
-  }
+  },
+  "legal": "Legal"
 }
