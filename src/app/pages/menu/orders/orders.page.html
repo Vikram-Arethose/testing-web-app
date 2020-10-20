@@ -1,0 +1,82 @@
+<app-menu-header [title]="'orders.header' | translate"></app-menu-header>
+
+<ion-content>
+  <div class="container">
+    <ion-segment mode="ios" class="segment" (ionChange)="segmentChanged($event.target.value)" value="current">
+      <ion-segment-button  class="segment__btn" value="current">
+        <ion-label>{{ 'orders.current' | translate }}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button class="segment__btn" value="completed">
+        <ion-label>{{ 'orders.completed' | translate }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div class="full-order" *ngIf="dataToShow === 'completed'">
+    <div class="order">
+      <p class="order__bakery">Bakery Wiebusch</p>
+      <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
+      <p class="order__time">Sunday, 14.09.2020
+        10:45 hrs</p>
+      <ion-grid class="order__grid grid">
+        <ion-row class="grid__row">
+          <ion-col class="grid__col" size="1">1</ion-col>
+          <ion-col class="grid__col" size="8">5 x Multigrain rolls a 0,65 €</ion-col>
+          <ion-col class="grid__col">3,25 €</ion-col>
+        </ion-row>
+        <ion-row class="grid__row">
+          <ion-col class="grid__col" size="3">Total</ion-col>
+          <ion-col class="grid__col" size="6"></ion-col>
+          <ion-col class="grid__col">3,25 €</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="container">
+      <div class="pick-up">
+        <p class="pick-up__text">{{ 'orders.pickUpAt' | translate }}</p>
+        <p class="pick-up__text">Bakery Wiebusch - Knetterheide</p>
+        <h3 class="pick-up__title">{{ 'orders.pickUpCode' | translate }}</h3>
+        <div class="pick-up__code" [class.pick-up__code_completed]="dataToShow === 'completed'">187</div>
+        <h3 class="pick-up__title">{{ 'orders.showThisCode' | translate }}</h3>
+        <p class="pick-up__text" *ngIf="dataToShow === 'current'">{{ 'orders.note' | translate }}</p>
+        <ion-button class="repeat-btn" *ngIf="dataToShow === 'completed'" expand="block">
+          Repeat Order
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  <div class="full-order">
+    <div class="order">
+      <p class="order__bakery">Bakery Wiebusch</p>
+      <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
+      <p class="order__time">Sunday, 14.09.2020
+        10:45 hrs</p>
+      <ion-grid class="order__grid grid">
+        <ion-row class="grid__row">
+          <ion-col class="grid__col" size="1">1</ion-col>
+          <ion-col class="grid__col" size="8">5 x Multigrain rolls a 0,65 €</ion-col>
+          <ion-col class="grid__col">3,25 €</ion-col>
+        </ion-row>
+        <ion-row class="grid__row">
+          <ion-col class="grid__col" size="3">Total</ion-col>
+          <ion-col class="grid__col" size="6"></ion-col>
+          <ion-col class="grid__col">3,25 €</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="container">
+      <div class="pick-up">
+        <p class="pick-up__text">{{ 'orders.pickUpAt' | translate }}</p>
+        <p class="pick-up__text">Bakery Wiebusch - Knetterheide</p>
+        <h3 class="pick-up__title">{{ 'orders.pickUpCode' | translate }}</h3>
+        <div class="pick-up__code" [class.pick-up__code_completed]="dataToShow === 'completed'">188</div>
+        <h3 class="pick-up__title">{{ 'orders.showThisCode' | translate }}</h3>
+        <p class="pick-up__text" *ngIf="dataToShow === 'current'">{{ 'orders.note' | translate }}</p>
+        <ion-button class="repeat-btn" *ngIf="dataToShow === 'completed'" expand="block">
+          Repeat Order
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>

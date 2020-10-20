@@ -1,0 +1,56 @@
+.mail {
+  margin: 3.82vh 8.27vw;
+  padding: 0 0 5.9vh;
+  border-radius: 5px;
+  background: #F5F5F5;
+  display: flex;
+  color: #493735;
+  &__avatar {
+    font-size: 15.5vw;
+    margin: 4.6vh 2.67vh 0 5.07vw;
+  }
+  &__text-block {
+    width: 100%;
+  }
+  &__date {
+    text-align: right;
+    padding: 6px 4.53vw 0 0;
+    font: normal normal 300 14px/18px Montserrat;
+  }
+  &__title {
+    width: 50vw;
+    padding: 0 0 25px;
+    font: normal normal 400 20px/24px Montserrat;
+  }
+  &__text {
+    width: 50vw;
+    font: normal normal 300 14px/18px Montserrat;
+  }
+
+}
+
+/*
+.mail {
+  width: 313px;
+  height: 154px;
+  margin: 0 auto;
+
+  background: #F5F5F5;
+  display: flex;
+  &__avatar {
+    font-size: 58px;
+    margin: 2.59vh 2.67vh 0 5.07vw;
+  }
+  &__date {
+    text-align: right;
+    padding: 0 4.53vw 0 0;
+    font: normal normal 300 14px/18px Montserrat;
+    color: #493735;
+  }
+  &__title {
+
+  }
+  &__text {}
+
+}
+*/

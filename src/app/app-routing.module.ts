@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountPageModule)
+    loadChildren: () => import('./pages/menu/account/account.module').then(m => m.AccountPageModule)
   },
   {
     path: 'name',
@@ -53,27 +53,27 @@ const routes: Routes = [
   },
   {
     path: 'privacy',
-    loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
+    loadChildren: () => import('./pages/menu/privacy/privacy.module').then(m => m.PrivacyPageModule)
   },
   {
     path: 'inbox',
-    loadChildren: () => import('./pages/inbox/inbox.module').then( m => m.InboxPageModule)
+    loadChildren: () => import('./pages/menu/inbox/inbox.module').then(m => m.InboxPageModule)
   },
   {
     path: 'orders',
-    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
+    loadChildren: () => import('./pages/menu/orders/orders.module').then(m => m.OrdersPageModule)
   },
   {
     path: 'favorites',
-    loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
+    loadChildren: () => import('./pages/menu/favorites/favorites.module').then(m => m.FavoritesPageModule)
   },
   {
     path: 'payment-methods',
-    loadChildren: () => import('./pages/payment-methods/payment-methods.module').then( m => m.PaymentMethodsPageModule)
+    loadChildren: () => import('./pages/menu/payment-methods/payment-methods.module').then(m => m.PaymentMethodsPageModule)
   },
   {
     path: 'legal',
-    loadChildren: () => import('./pages/legal/legal.module').then( m => m.LegalPageModule)
+    loadChildren: () => import('./pages/menu/legal/legal.module').then(m => m.LegalPageModule)
   },
 ];
 
