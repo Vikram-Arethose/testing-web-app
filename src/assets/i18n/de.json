@@ -85,12 +85,17 @@
   },
   "favorites": {
     "header": "Favorites",
-    "openUntil": "Open until",
+    "openUntil": "Geöffnet bis",
     "bakery": "Bäckerei"
   },
   "paymentMethods": {
     "header": "Zahlungsmethoden",
     "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an "
   },
-  "legal": "AGBs"
+  "legal": "AGBs",
+  "locationOpt": {
+    "searchCity": "Ort suchen",
+    "myLocation": "Mein Standort",
+    "recently": "Kürzlich"
+  }
 }

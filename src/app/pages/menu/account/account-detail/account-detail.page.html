@@ -31,7 +31,7 @@
           <ion-radio-group class="radio-group" (ionChange)="onRadioChange($event.target.value)" [value]="language">
             <ion-item class="radio-group__item item" *ngFor="let item of dataForRepeat">
               <ion-label class="item__label">{{item.title}}</ion-label>
-              <ion-radio [value]="item.value"></ion-radio>
+              <ion-radio mode="ios" [value]="item.value"></ion-radio>
             </ion-item>
           </ion-radio-group>
           <ion-item lines="none">

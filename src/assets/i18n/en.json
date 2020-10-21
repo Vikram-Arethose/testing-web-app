@@ -92,5 +92,10 @@
     "header": "Payment Methods",
     "title": "We offer the following payment methods in our order process."
   },
-  "legal": "Legal"
+  "legal": "Legal",
+  "locationOpt": {
+    "searchCity": "Search City",
+    "myLocation": "My location:",
+    "recently": "Recently:"
+  }
 }

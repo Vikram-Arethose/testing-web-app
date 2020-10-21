@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Bakery } from '../../models/bakery';
 import { Bakeries } from '../../core/mocks/bakeries';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-bakery-search',
@@ -11,14 +12,17 @@ import { Bakeries } from '../../core/mocks/bakeries';
 export class BakerySearchPage implements OnInit {
   bakeries: Bakery[] = Bakeries;
 
-  constructor() {
+  constructor(
+    private logger: LoggerService
+  ) {
   }
 
   ngOnInit() {
   }
 
-  onLike(bakery: Bakery) {
+  onLike(bakery, $event) {
     bakery.isFavorite = !bakery.isFavorite;
+    $event.stopPropagation();
   }
 
 }

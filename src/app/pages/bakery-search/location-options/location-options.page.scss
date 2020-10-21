@@ -1,0 +1,45 @@
+.top {
+  height: 18px;
+  background: #FEDE00;
+}
+
+.toolbar {
+  &__search {
+    padding-bottom: 0;
+    --background: none;
+    font: italic normal 200 20px/24px Montserrat;
+    color: #493735;
+  }
+}
+
+.block {
+  border-bottom: 1px solid #CBCBCB;
+}
+
+.my-location {
+  display: flex;
+  align-items: center;
+  padding: 5% 0 5% 25%;
+  &__text {
+    font: normal normal 400 15px/19px Montserrat;
+    color: #493735;
+  }
+}
+
+.recently {
+  padding: 4% 10vw 20% 14.5vw;
+  font: normal normal 400 15px/19px Montserrat;
+  color: #493735;
+  &__label {
+    padding-bottom: 20px;
+  }
+  &__icon {
+    font-size: 24px;
+    padding-right: 17px;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}

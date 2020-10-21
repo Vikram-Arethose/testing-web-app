@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
-      <ion-menu-button class="toolbar__button"></ion-menu-button>
+      <ion-menu-button mode="ios" class="toolbar__button"></ion-menu-button>
     </ion-buttons>
-    <ion-router-link slot="end" class="toolbar__link" routerDirection="forward" [routerLink]="'/legal'">
+    <ion-router-link slot="end" class="toolbar__link" routerDirection="forward" [routerLink]="'/bakery-search/location-options'">
       Herforder Str. 10, 33602 Bielefeld</ion-router-link>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +11,7 @@
 <ion-content>
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
-    <div class="bakery bakery-search" *ngFor="let bakery of bakeries">
+    <div class="bakery bakery-search" *ngFor="let bakery of bakeries" [routerLink]="'/bakery'">
       <div class="col">
         <ion-img class="bakery__img" [src]="bakery.imgSrc"></ion-img>
         <ion-img class="bakery__stars" src="../../../assets/img/stars.png"></ion-img>
@@ -26,10 +26,10 @@
       </div>
       <div class="col">
         <ion-icon class="icon-like" *ngIf="!bakery.isFavorite"
-                  (click)="onLike(bakery)" slot="icon-only"
+                  (click)="onLike(bakery, $event)" slot="icon-only"
                   src="../../../assets/icons/bakery/heart-outline.svg" tappable></ion-icon>
         <ion-icon class="icon-like" *ngIf="bakery.isFavorite"
-                  (click)="onLike(bakery)" slot="icon-only"
+                  (click)="onLike(bakery, $event)" slot="icon-only"
                   src="../../../assets/icons/bakery/heart-filled.svg" tappable></ion-icon>
       </div>
     </div>

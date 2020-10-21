@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: BakerySearchPage
+  },
+  {
+    path: 'location-options',
+    loadChildren: () => import('./location-options/location-options.module').then( m => m.LocationOptionsPageModule)
   }
 ];
 
