@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BakerySearchPageRoutingModule } from './bakery-search-routing.module';
 
 import { BakerySearchPage } from './bakery-search.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BakerySearchPageRoutingModule
+    BakerySearchPageRoutingModule,
+    TranslateModule
   ],
   declarations: [BakerySearchPage]
 })

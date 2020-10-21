@@ -40,18 +40,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/menu/account/account.module').then(m => m.AccountPageModule)
   },
   {
-    path: 'name',
-    loadChildren: () => import('./pages/my-account/name/name.module').then(m => m.NamePageModule)
-  },
-  {
-    path: 'email',
-    loadChildren: () => import('./pages/my-account/email/email.module').then(m => m.EmailPageModule)
-  },
-  {
-    path: 'phone',
-    loadChildren: () => import('./pages/my-account/phone/phone.module').then( m => m.PhonePageModule)
-  },
-  {
     path: 'privacy',
     loadChildren: () => import('./pages/menu/privacy/privacy.module').then(m => m.PrivacyPageModule)
   },

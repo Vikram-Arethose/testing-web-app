@@ -9,7 +9,7 @@
     <ion-button class="btn-wrapper__btn btn" size="block" fill="outline">{{ 'locationSet.searchLocation' | translate }}
       <ion-icon slot="start" class="btn__icon" src="../../../assets/icons/search.svg"></ion-icon>
     </ion-button>
-    <ion-button class="btn-wrapper__btn btn" size="block">{{ 'locationSet.apply' | translate }}</ion-button>
+    <ion-button class="btn-wrapper__btn btn" size="block" [routerLink]="'/'">{{ 'locationSet.apply' | translate }}</ion-button>
   </div>
   <ion-img class="img" src="../../../assets/img/map.jpg"></ion-img>
 </ion-content>

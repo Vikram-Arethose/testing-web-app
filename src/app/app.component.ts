@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     {
       title: 'menu.favorites',
       url: '/favorites',
-      src: './assets/icons/menu/favorite.svg'
+      src: './assets/icons/bakery/heart-outline.svg'
       // icon: 'heart'
     },
     {
