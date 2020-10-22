@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button class="toolbar__btn" mode="md" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+  <img class="toolbar__img" src="../../../../assets/img/bakery/bakery-logo.jpg">
+</ion-header>
+
+<ion-content >
+  <div class="info">
+    <div class="container">
+      <div class="row">
+        <div>
+          <h3 class="info__title">{{ 'general.bakery' | translate }} Wiebusch</h3>
+          <p class="info__text">Bielefelder Str. 21, Knetterheide</p>
+        </div>
+        <ion-icon class="info__icon" src="../../../../assets/icons/bakery/info.svg"></ion-icon>
+      </div>
+      <div class="info__rate rate">
+        <img class="rate__img" src="../../../../assets/img/bakery/stars4.jpg">
+        <span class="info__text">4,1 /5 (15)</span>
+      </div>
+      <p class="info__description description">
+        This bakery is known for its delicious bread, rolls and cake. Especially tasty are the ...
+        <span class="description__continue" tappable>Continue</span>
+      </p>
+    </div>
+  </div>
+  <div class="sections">
+    <div class="sections__item"*ngFor="let section of sections, let i = index"
+         (click)="onSectionSelect(i)" [class.sections__item_selected]="selected[i]" tappable>{{section}}</div>
+  </div>
+  <div class="product-list">
+    <div class="container">
+      <div class="product">
+        <div class="col">
+          <ion-img class="product__img" src="../../../../assets/img/bakery/roll1.jpg"></ion-img>
+<!--          <ion-img class="product__img" src="../../../../assets/img/bakery/roll1.jpg"></ion-img>-->
+        </div>
+        <div class="col">
+          <p class="product__name">Stone oven roll</p>
+          <p class="product__details-title">Details</p>
+        </div>
+        <div class="col">
+          <p class="product__price">0,34 €</p>
+          <div class="product__count count">
+            <div class="count__reduce" tappable>-</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
