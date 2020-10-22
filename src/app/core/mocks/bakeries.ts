@@ -36,7 +36,7 @@ export const Bakeries: Bakery[] = [
     distance: '1,6 km',
     isFavorite: false
   }, {
-    imgSrc: '../../../assets/img/milk&bread.png',
+    imgSrc: '../../../assets/img/bakery/girl.jpg',
     name: 'Meier',
     address: 'Otto-Brenner Str. 55, Bielefeld',
     icons: [],
@@ -44,7 +44,7 @@ export const Bakeries: Bakery[] = [
     distance: '2,6 km',
     isFavorite: false
   }, {
-    imgSrc: '../../../assets/img/milk&bread.png',
+    imgSrc: '../../../assets/img/bread.png',
     name: 'Bernd',
     address: 'Meller Str. 145, Bielefeld',
     icons: [],

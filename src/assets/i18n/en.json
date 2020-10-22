@@ -1,6 +1,7 @@
 {
   "general": {
-    "continue": "continue"
+    "continue": "continue",
+    "bakery" : "Bakery"
   },
   "start": {
     "header": "simply. pre-order.",

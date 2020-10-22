@@ -65,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: 'bakery',
-    loadChildren: () => import('./pages/bakery/bakery.module').then( m => m.BakeryPageModule)
+    loadChildren: () => import('./pages/bakery-search/bakery/bakery.module').then(m => m.BakeryPageModule)
   },
 ];
 

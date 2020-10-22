@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'location-options',
     loadChildren: () => import('./location-options/location-options.module').then( m => m.LocationOptionsPageModule)
+  },
+  {
+    path: 'bakery',
+    loadChildren: () => import('./bakery/bakery.module').then( m => m.BakeryPageModule)
   }
 ];
 
