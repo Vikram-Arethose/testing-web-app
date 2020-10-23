@@ -98,5 +98,13 @@
     "searchCity": "Ort suchen",
     "myLocation": "Mein Standort",
     "recently": "Kürzlich"
+  },
+  "dateCollect": {
+    "title": "Wann möchtest du deine Bestellung abholen?",
+    "day": "Tag",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "time": "Uhrzeit",
+    "confirm": "Bestätigen"
   }
 }

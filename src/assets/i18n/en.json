@@ -98,5 +98,13 @@
     "searchCity": "Search City",
     "myLocation": "My location:",
     "recently": "Recently:"
+  },
+  "dateChoose": {
+    "title": "When would you like to pick up your rolls?",
+    "day": "Day",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "time": "Time",
+    "confirm": "Confirm"
   }
 }
