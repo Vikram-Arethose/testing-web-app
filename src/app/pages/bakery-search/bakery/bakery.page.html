@@ -34,20 +34,22 @@
   </div>
   <div class="product-list">
     <div class="container">
-      <div class="product">
-        <div class="col">
-          <ion-img class="product__img" src="../../../../assets/img/bakery/roll1.jpg"></ion-img>
-<!--          <ion-img class="product__img" src="../../../../assets/img/bakery/roll1.jpg"></ion-img>-->
+      <div class="product" *ngFor="let product of productsList, let i = index">
+        <div class="col-left">
+          <ion-img class="product__img" [src]="product.img"></ion-img>
+          <ion-img class="product__img-corner" *ngIf="product.imgCorner" [src]="product.imgCorner"></ion-img>
         </div>
-        <div class="col">
-          <p class="product__name">Stone oven roll</p>
+        <div class="col-center">
+          <p class="product__name">{{product.name}}</p>
           <p class="product__details-title">Details</p>
+          <p class="product__details-text">{{product.details}}</p>
         </div>
         <div class="col">
-          <p class="product__price">0,34 €</p>
+          <p class="product__price">{{product.price}}</p>
           <div class="product__count count">
-            <div class="count__reduce" tappable>-</div>
-
+            <div class="count__btn" (click)="onCountReduce(i)" tappable>-</div>
+            <div class="count__value">{{product.count}}</div>
+            <div class="count__btn" (click)="onCountAdd(i)" tappable>+</div>
           </div>
         </div>
       </div>

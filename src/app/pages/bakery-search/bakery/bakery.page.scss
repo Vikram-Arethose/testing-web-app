@@ -97,7 +97,61 @@
 .product {
   width: 313px;
   height: 77px;
+  margin: 0 0 1.11vh;
+  display: flex;
   border: 1px solid #D9D9D9;
   border-radius: 5px;
+  font: normal normal 400 12px/15px Montserrat;
   color: #493735;
+  .col-left {
+    position: relative;
+  }
+  .col-center {
+    padding: 4px 0;
+    flex: 1 0 auto;
+  }
+
+  &__img {
+    width: 76px;
+    height: 52px;
+    margin: 4px 20px 0 10px;
+    object-fit: cover;
+  }
+
+  &__img-corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__details-title {
+    padding: 3px 0 19px;
+    font: normal normal 400 10px/13px Montserrat;
+  }
+  &__details-text {
+    font: normal normal 400 10px/13px Montserrat;
+  }
+  &__price {
+    padding: 8px 6px 23px;
+    text-align: right;
+  }
+  &__count {
+    padding: 0 6px 0;
+  }
+
+  .count {
+    width: 78px;
+    display: flex;
+    text-align: center;
+    &__btn{
+      width: 22px;
+      border: 1px solid #CBCBCB;
+    }
+    &__value {
+      width: 42px;
+      height: 18px;
+      border-top: 1px solid #CBCBCB;
+      border-bottom: 1px solid #CBCBCB;
+    }
+  }
 }

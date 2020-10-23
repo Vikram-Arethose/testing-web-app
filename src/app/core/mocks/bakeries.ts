@@ -2,7 +2,7 @@ import { Bakery } from '../../models/bakery';
 
 export const Bakeries: Bakery[] = [
   {
-    imgSrc: '../../../assets/img/milk&bread.png',
+    imgSrc: '../../../assets/img/bakery/milk&bread.png',
     name: 'Wiebusch',
     address: 'Bielefelder Str. 21, Knetterheide',
     icons: [
@@ -14,7 +14,7 @@ export const Bakeries: Bakery[] = [
     distance: '0,6 km',
     isFavorite: false
   }, {
-    imgSrc: '../../../assets/img/rolls_and_bread.png',
+    imgSrc: '../../../assets/img/bakery/rolls_and_bread.png',
     name: 'Bremehr',
     address: 'Gütersloher Str. 21, Gütersloh',
     icons: [

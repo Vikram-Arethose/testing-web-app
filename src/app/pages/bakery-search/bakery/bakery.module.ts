@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     BakeryPageRoutingModule,
-    TranslateModule
+    TranslateModule,
   ],
   declarations: [BakeryPage]
 })
