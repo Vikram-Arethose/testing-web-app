@@ -1,0 +1,74 @@
+.container {
+  width: 307px;
+  height: 568px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .close-btn {
+    align-self: flex-end;
+  }
+
+  .title {
+    padding: 0 20px 30px;
+    text-align: center;
+    font: normal normal 400 20px/24px Montserrat;
+    color: #493735;
+    &-time {
+      padding: 0 0 14px;
+    }
+  }
+  .row {
+    margin: 0 0 34px;
+  }
+
+
+  .btn {
+    height: 56px;
+    text-transform: capitalize;
+  }
+  .btn-outline {
+    margin: 0 6px 0 0;
+    --border-color: #9AA8B5;
+    font: normal normal 400 20px/24px Montserrat;
+    color: #493735;
+  }
+  .calendar-icon {
+    font-size: 27px;
+  }
+
+  .time-item {
+    width: 100%;
+    padding: 0 30px;
+    margin:  0 0 67px;
+    --border-color: #9AA8B5;
+    --border-width: 1px;
+    --border-radius: 5px;
+    font: normal normal 400 20px/24px Montserrat;
+    color: #FF68B4;
+    --inner-padding-bottom: 6px;
+    --inner-padding-top: 6px;
+    --inner-padding-end: 0;
+    --padding-start: 0;
+    .ion-datetime {
+      width: 100%;
+      padding-right: 0;
+      text-align: center;
+    }
+  }
+
+  .btn-filled {
+    width: 200px;
+    --background: #FEDE00;
+    font: normal normal 600 20px/24px Montserrat;
+  }
+
+  .date {
+    display: none;
+  }
+
+}
+
+
+

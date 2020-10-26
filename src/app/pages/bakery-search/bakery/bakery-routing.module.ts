@@ -9,10 +9,6 @@ const routes: Routes = [
     path: '',
     component: BakeryPage
   },
-  {
-    path: 'pick',
-    component: PickUpDateComponent
-  },
 ];
 
 @NgModule({

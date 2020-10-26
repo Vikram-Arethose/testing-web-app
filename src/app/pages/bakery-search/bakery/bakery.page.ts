@@ -4,6 +4,8 @@ import { Product } from '../../../models/product';
 import { ProductsList } from '../../../core/mocks/products-list';
 import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
+import { PickUpDateComponent } from '../../../components/pick-up-date/pick-up-date.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-bakery',
@@ -14,16 +16,15 @@ export class BakeryPage implements OnInit {
   productsList: Product[] = ProductsList;
   selected: boolean[] = [];
   sections: string[] = ['Rolls', 'Bread', 'Cake', 'Lunch', 'Rolls', 'Bread', 'Cake', 'Lunch'];
-  firstClick = true;
 
   constructor(
     private logger: LoggerService,
-    private dateService: DateService
+    private dateService: DateService,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
     this.selected[0] = true;
-    this.logger.log('productsList: ', this.productsList);
   }
 
   onSectionSelect(index: number) {
@@ -38,11 +39,19 @@ export class BakeryPage implements OnInit {
     this.productsList[index].count--;
   }
 
+  async presentPickUpDateModal() {
+    const modal = await this.modalController.create({
+      component: PickUpDateComponent,
+      cssClass: 'pick-up-date-modal'
+    });
+    return await modal.present();
+  }
+
   onCountAdd(index: number) {
-    if (this.firstClick) {
-      this.dateService.presentPickUpDateModal();
-      this.firstClick = false;
+    if (!this.dateService.date) {
+      this.presentPickUpDateModal();
+    } else {
+      this.productsList[index].count++;
     }
-    this.productsList[index].count++;
   }
 }

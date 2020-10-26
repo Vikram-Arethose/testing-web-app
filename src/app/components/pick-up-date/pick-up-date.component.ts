@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DateService } from '../../services/date.service';
+import { ModalController } from '@ionic/angular';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-pick-up-date',
@@ -6,9 +9,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pick-up-date.component.scss'],
 })
 export class PickUpDateComponent implements OnInit {
+  today: string = new Date().toISOString();
+  datePickerMin: string = this.today;
+  date: string;
+  time: string;
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController,
+    private logger: LoggerService,
+    private dateService: DateService
+  ) { }
 
   ngOnInit() {}
 
+  onToday() {
+    this.date = this.today;
+  }
+
+  onTomorrow() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.date = tomorrow.toISOString();
+  }
+
+  onConfirm() {
+    this.date = this.date.split('T')[0];
+    this.time = this.time.split('T')[1];
+    this.dateService.date = this.date + this.time;
+    this.logger.log('date: ', this.date);
+    this.logger.log('time: ', this.time);
+    this.closeModal();
+  }
+
+  closeModal() {
+    this.modalController.dismiss();
+  }
 }

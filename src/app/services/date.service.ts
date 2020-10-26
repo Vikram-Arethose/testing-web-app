@@ -6,16 +6,13 @@ import { PickUpDateComponent } from '../components/pick-up-date/pick-up-date.com
   providedIn: 'root'
 })
 export class DateService {
+  date: string;
 
   constructor(
     private modalController: ModalController,
   ) { }
 
-  async presentPickUpDateModal() {
-    const modal = await this.modalController.create({
-      component: PickUpDateComponent,
-      cssClass: 'pick-up-date-modal'
-    });
-    return await modal.present();
+  dismiss() {
+    this.modalController.dismiss();
   }
 }
