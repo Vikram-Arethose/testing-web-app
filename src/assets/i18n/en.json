@@ -106,5 +106,9 @@
     "tomorrow": "Tomorrow",
     "time": "Time",
     "confirm": "Confirm"
+  },
+  "productDetails": {
+    "allergens": "Allergens:",
+    "ingredients": "Ingredients:"
   }
 }

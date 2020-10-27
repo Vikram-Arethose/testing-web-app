@@ -6,6 +6,7 @@ import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
 import { PickUpDateComponent } from '../../../components/pick-up-date/pick-up-date.component';
 import { ModalController } from '@ionic/angular';
+import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 
 @Component({
   selector: 'app-bakery',
@@ -47,7 +48,16 @@ export class BakeryPage implements OnInit {
     return await modal.present();
   }
 
-  onCountAdd(index: number) {
+  async presentProductDetailsModal() {
+    const modal = await this.modalController.create({
+      component: ProductDetailsComponent,
+      cssClass: 'product-details-modal'
+    });
+    return await modal.present();
+  }
+
+  onCountAdd(index: number, $event) {
+    $event.stopPropagation();
     if (!this.dateService.date) {
       this.presentPickUpDateModal();
     } else {

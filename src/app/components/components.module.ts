@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { PickUpDateComponent } from './pick-up-date/pick-up-date.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     MenuHeaderComponent,
     PickUpDateComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { FormsModule } from '@angular/forms';
   exports: [
     MenuHeaderComponent,
     PickUpDateComponent,
+    ProductDetailsComponent
   ]
 })
 export class ComponentsModule { }

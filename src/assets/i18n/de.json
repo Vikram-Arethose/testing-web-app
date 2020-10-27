@@ -106,5 +106,9 @@
     "tomorrow": "Morgen",
     "time": "Uhrzeit",
     "confirm": "Bestätigen"
+  },
+  "productDetails": {
+    "allergens": "Allergene:",
+    "ingredients": "Inhaltsstoffe:"
   }
 }
