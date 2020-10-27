@@ -1,19 +1,23 @@
-.toolbar {
-  $logoSize: 46vw;
-  height: 18.47vh;
-  --background: url('../../../../assets/img/croissants.jpg') center/cover;
-  &__btn {
-    --color: #fff;
-    --icon-font-size: 35px;
-  }
-  &__img {
-    width: $logoSize;
-    height: $logoSize;
-    border-radius: 50%;
-    position: absolute;
-    bottom: -80%;
-    left: calc((100% - #{$logoSize}) / 2);
-    z-index: 10;
+.header {
+  position: relative;
+
+  .toolbar {
+    $logoSize: 46vw;
+    height: 18.47vh;
+    --background: url('../../../../assets/img/croissants.jpg') center/cover;
+    &__btn {
+      --color: #fff;
+      --icon-font-size: 35px;
+    }
+    &__img {
+      width: $logoSize;
+      height: $logoSize;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -80%;
+      left: calc((100% - #{$logoSize}) / 2);
+      z-index: 10;
+    }
   }
 }
 
@@ -68,6 +72,9 @@
   padding: 0 0 0 8.27vw;
   margin: 0 0 5.42vh;
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   overflow-x: scroll;
   background: #F6F6F6;
   &__item {
@@ -87,6 +94,7 @@
 }
 
 .product-list{
+  margin: 0 0 30%;
   @media (max-width: 320px) {
     .container{
       padding: 0 3px;
@@ -153,5 +161,28 @@
       border-top: 1px solid #CBCBCB;
       border-bottom: 1px solid #CBCBCB;
     }
+  }
+}
+
+.cart {
+  width: 100%;
+  height: 63px;
+  position: fixed;
+  bottom: 5.17vh;
+  display: flex;
+  align-items: center;
+  background: #0E8DF1;
+  border: 1px solid #FEDE00;
+  .icon-wrapper
+  &__icon{
+    padding: 0 11vw 0 5vw;
+    font-size: 36px;
+    @media (max-width: 320px) {
+      padding: 0 5vw 0 3vw;
+    }
+  }
+  &__text{
+    font: normal normal 400 20px/24px Montserrat;
+    color: #FFFFFF;
   }
 }

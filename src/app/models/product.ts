@@ -5,5 +5,4 @@ export interface Product {
   name: string;
   details: string;
   price: string;
-  count: number;
 }

@@ -1,14 +1,12 @@
-<ion-header>
-  <ion-toolbar class="toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button class="toolbar__btn" mode="md" defaultHref="/"></ion-back-button>
-    </ion-buttons>
-
-  </ion-toolbar>
-  <img class="toolbar__img" src="../../../../assets/img/bakery/bakery-logo.jpg">
-</ion-header>
-
-<ion-content >
+<ion-content>
+  <div class="header">
+    <ion-toolbar class="toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button class="toolbar__btn" mode="md" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <img class="toolbar__img" src="../../../../assets/img/bakery/bakery-logo.jpg">
+  </div>
   <div class="info">
     <div class="container">
       <div class="row">
@@ -34,7 +32,7 @@
   </div>
   <div class="product-list">
     <div class="container">
-      <div class="product" *ngFor="let product of productsList, let i = index" (click)="presentProductDetailsModal()">
+      <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal()">
         <div class="col-left">
           <ion-img class="product__img" [src]="product.img"></ion-img>
           <ion-img class="product__img-corner" *ngIf="product.imgCorner" [src]="product.imgCorner"></ion-img>
@@ -47,12 +45,20 @@
         <div class="col">
           <p class="product__price">{{product.price}}</p>
           <div class="product__count count">
-            <div class="count__btn" (click)="onCountReduce(i)" tappable>-</div>
-            <div class="count__value">{{product.count}}</div>
-            <div class="count__btn" (click)="onCountAdd(i, $event)" tappable>+</div>
+            <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
+            <div class="count__value">{{getProductCount(product.id)}}</div>
+            <div class="count__btn" (click)="addProductToCart(product, $event)" tappable>+</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="cart" tappable>
+<!--  <div class="cart" tappable *ngIf="cartService.cart.length > 0">-->
+    <div class="icon-wrapper">
+      <ion-icon class="cart__icon" src="../../../../assets/icons/bakery/shopping-bag.svg"></ion-icon>
+      <ion-badge ></ion-badge>
+    </div>
+    <p class="cart__text">Shopping cart (333,00€)</p>
   </div>
 </ion-content>

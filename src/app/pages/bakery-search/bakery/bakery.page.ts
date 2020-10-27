@@ -7,6 +7,7 @@ import { DateService } from '../../../services/date.service';
 import { PickUpDateComponent } from '../../../components/pick-up-date/pick-up-date.component';
 import { ModalController } from '@ionic/angular';
 import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-bakery',
@@ -14,6 +15,7 @@ import { ProductDetailsComponent } from '../../../components/product-details/pro
   styleUrls: ['./bakery.page.scss'],
 })
 export class BakeryPage implements OnInit {
+  cart: Product[] = [];
   productsList: Product[] = ProductsList;
   selected: boolean[] = [];
   sections: string[] = ['Rolls', 'Bread', 'Cake', 'Lunch', 'Rolls', 'Bread', 'Cake', 'Lunch'];
@@ -22,6 +24,7 @@ export class BakeryPage implements OnInit {
     private logger: LoggerService,
     private dateService: DateService,
     private modalController: ModalController,
+    public cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -33,11 +36,12 @@ export class BakeryPage implements OnInit {
     this.selected[index] = !this.selected[index];
   }
 
-  onCountReduce(index: number) {
-    if (this.productsList[index].count === 0) {
-      return;
-    }
-    this.productsList[index].count--;
+  getCart() {
+    this.cartService.getCart();
+  }
+
+  getProductCount(id: number): number {
+    return this.cartService.getProductCount(id);
   }
 
   async presentPickUpDateModal() {
@@ -56,12 +60,17 @@ export class BakeryPage implements OnInit {
     return await modal.present();
   }
 
-  onCountAdd(index: number, $event) {
+  removeProductFromCart(product: Product, $event) {
+    $event.stopPropagation();
+    this.cartService.removeProductFromCart(product);
+  }
+
+  addProductToCart(product: Product, $event) {
     $event.stopPropagation();
     if (!this.dateService.date) {
       this.presentPickUpDateModal();
     } else {
-      this.productsList[index].count++;
+      this.cartService.addProductToCart(product);
     }
   }
 }
