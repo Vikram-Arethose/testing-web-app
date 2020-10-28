@@ -110,5 +110,11 @@
   "productDetails": {
     "allergens": "Allergens:",
     "ingredients": "Ingredients:"
+  },
+  "shoppingCart": {
+    "header": "Shopping cart",
+    "pickUp": "Pick-up",
+    "addMore": "Add more products",
+    "checkout": "Checkout"
   }
 }

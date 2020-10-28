@@ -17,7 +17,6 @@ export class DateService {
     const timeHourOffset = -(today.getTimezoneOffset() / 60);
     today.setHours(today.getHours() + timeHourOffset, today.getMinutes() + timeRangeMin);
     const datePickerMin = today.toISOString();
-    this.logger.log('datePickerMin', datePickerMin);
     return datePickerMin;
   }
 

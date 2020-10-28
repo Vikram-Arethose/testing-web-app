@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '',
     component: BakeryPage
   },
+  {
+    path: 'shopping-cart',
+    loadChildren: () => import('./shopping-cart/shopping-cart.module').then( m => m.ShoppingCartPageModule)
+  },
 ];
 
 @NgModule({

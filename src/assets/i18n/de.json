@@ -110,5 +110,11 @@
   "productDetails": {
     "allergens": "Allergene:",
     "ingredients": "Inhaltsstoffe:"
+  },
+  "shoppingCart": {
+    "header": "Warenkorb",
+    "pickUp": "Abholung",
+    "addMore": "Weitere Produkte hinzufügen",
+    "checkout": "Zur Kasse"
   }
 }

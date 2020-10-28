@@ -34,7 +34,6 @@ export class CartService {
         this.cart[index].count++;
       }
     }
-    this.logger.log('cart: ', this.cart);
   }
 
   removeProductFromCart(product: Product) {

@@ -1,0 +1,62 @@
+.toolbar {
+  padding: 1vh 0;
+  --background: #F2F2F2;
+
+  &__button {
+    --icon-font-size: 35px;
+  }
+
+  &__title {
+    padding: 0 0 0 3vw;
+    font: normal normal 500 25px/30px Montserrat;
+    text-transform: capitalize;
+    color: #493735;
+  }
+}
+
+.shopping-cart {
+  font: normal normal 400 15px/19px Montserrat;
+  color: #493735;
+}
+
+.date {
+  padding: 1.11vh 7.73vw 4.56vh 6.67vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    font: normal normal 400 20px/24px Montserrat;
+
+    &_purple {
+      color: #FF68B4;
+    }
+  }
+
+  &__btn-icon {
+    font-size: 14px;
+  }
+}
+
+.product-list {
+  padding: 0 11.47vw 0 8.53vw;
+
+  &__item {
+  }
+
+  .item {
+    .info {
+      display: flex;
+      padding-bottom: 2.09vh;
+      &__order-num {
+        width: 8vw;
+      }
+      &__name {
+        flex: 1 0 auto;
+      }
+      &__price {
+        padding-left: 5px;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar mode="ios" class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button class="toolbar__button" [icon]="'close-outline'" mode="md" defaultHref="/bakery-search/bakery"></ion-back-button>
+    </ion-buttons>
+    <h1 class="toolbar__title ion-text-left">{{ 'shoppingCart.header' | translate }}</h1>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="shopping-cart">
+    <div class="date">
+      <h2 class="date__title">{{ 'shoppingCart.pickUp' | translate }}:
+        <span class="date__title_purple">Day, Time</span></h2>
+      <ion-button fill="none" size="small">
+        <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="product-list">
+      <div class="product-list__item item">
+        <div class="info">
+          <p class="info__order-num">1</p>
+          <p class="info__name">8 x Stone oven rolls</p>
+          <p class="info__price">2,72 €</p>
+        </div>
+        <div class="controls">
+          <ion-button class="controls__remove" fill="none" size="small">
+            <ion-icon src="../../../../../assets/icons/shopping-cart/trash.svg"></ion-icon>
+          </ion-button>
+          <div class="controls__btn">-</div>
+          <div class="controls__btn">+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
