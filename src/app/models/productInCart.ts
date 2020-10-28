@@ -3,4 +3,5 @@ export interface ProductInCart {
   name: string;
   price: number;
   count: number;
+  limit: string;
 }

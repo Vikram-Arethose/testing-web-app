@@ -73,4 +73,8 @@ export class BakeryPage implements OnInit {
       this.cartService.addProductToCart(product);
     }
   }
+
+  onExit() {
+    this.cartService.cart.length = 0;
+  }
 }

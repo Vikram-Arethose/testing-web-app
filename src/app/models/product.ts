@@ -5,4 +5,5 @@ export interface Product {
   name: string;
   details: string;
   price: number;
+  limit: string;
 }

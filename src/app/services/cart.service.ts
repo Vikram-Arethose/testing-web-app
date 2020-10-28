@@ -26,11 +26,13 @@ export class CartService {
   }
 
   addProductToCart(product: Product){
-    const cartProductIndex = this.cart.findIndex(item => item.id === product.id);
-    if (cartProductIndex === -1) {
-      this.cart.push({id: product.id, name: product.name, price: product.price, count: 1});
+    const index = this.cart.findIndex(item => item.id === product.id);
+    if (index === -1) {
+      this.cart.push({id: product.id, name: product.name, price: product.price, count: 1, limit: product.limit});
     } else {
-      this.cart[cartProductIndex].count++;
+      if (this.cart[index].limit === 'unlimited' || +this.cart[index].limit > this.cart[index].count) {
+        this.cart[index].count++;
+      }
     }
   }
 
