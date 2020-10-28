@@ -12,8 +12,10 @@
   </div>
   <h2 class="title title-time">{{ 'dateChoose.time' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
-    <ion-datetime class="ion-datetime" placeholder="Select time" displayFormat="HH:mm" minuteValues="0,15,30,45"
+    <ion-datetime class="ion-datetime" placeholder="Select time" [min]="datePickerMin"
+                  displayFormat="HH:mm" minuteValues="0,15,30,45"
                   [(ngModel)]="time"></ion-datetime>
   </ion-item>
-  <ion-button class="btn btn-filled" expand="block" (click)="onConfirm()">{{ 'dateChoose.confirm' | translate }}</ion-button>
+  <ion-button class="btn btn-filled" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
+    {{ 'dateChoose.confirm' | translate }}</ion-button>
 </div>

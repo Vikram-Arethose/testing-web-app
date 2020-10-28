@@ -10,7 +10,7 @@ import { LoggerService } from '../../services/logger.service';
 })
 export class PickUpDateComponent implements OnInit {
   today: string = new Date().toISOString();
-  datePickerMin: string = this.today;
+  datePickerMin: string;
   date: string;
   time: string;
 
@@ -20,7 +20,10 @@ export class PickUpDateComponent implements OnInit {
     private dateService: DateService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit(
+  ) {
+      this.datePickerMin = this.dateService.getDatePickerMin();
+  }
 
   onToday() {
     this.date = this.today;

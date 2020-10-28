@@ -43,7 +43,7 @@
           <p class="product__details-text">{{product.details}}</p>
         </div>
         <div class="col">
-          <p class="product__price">{{product.price}}</p>
+          <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>
           <div class="product__count count">
             <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
             <div class="count__value">{{getProductCount(product.id)}}</div>
@@ -53,12 +53,12 @@
       </div>
     </div>
   </div>
-  <div class="cart" tappable>
-<!--  <div class="cart" tappable *ngIf="cartService.cart.length > 0">-->
-    <div class="icon-wrapper">
+  <div class="cart" *ngIf="cartService.cart.length > 0" tappable>
+    <div class="cart__icon-wrapper">
       <ion-icon class="cart__icon" src="../../../../assets/icons/bakery/shopping-bag.svg"></ion-icon>
-      <ion-badge ></ion-badge>
+      <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>
     </div>
-    <p class="cart__text">Shopping cart (333,00€)</p>
+    <p class="cart__text">
+      Shopping cart ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
   </div>
 </ion-content>

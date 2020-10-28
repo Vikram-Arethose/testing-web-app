@@ -1,6 +1,6 @@
 export interface ProductInCart {
   id: number;
   name: string;
-  price: string;
+  price: number;
   count: number;
 }

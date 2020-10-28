@@ -4,5 +4,5 @@ export interface Product {
   imgCorner: string;
   name: string;
   details: string;
-  price: string;
+  price: number;
 }

@@ -45,4 +45,18 @@ export class CartService {
       this.cart.splice(cartProductIndex, 1);
     }
   }
+
+  getTotalCount() {
+    const reducer = (accumulator, currentValue: ProductInCart) => accumulator + currentValue.count;
+    const initialValue = 0;
+    const totalCount = this.cart.reduce(reducer, initialValue);
+    return totalCount;
+  }
+
+  getTotalPrice() {
+    const reducer = (accumulator, currentValue: ProductInCart) => accumulator + +(currentValue.count * currentValue.price).toFixed(2);
+    const initialValue = 0;
+    const totalPrice = this.cart.reduce(reducer, initialValue);
+    return totalPrice;
+  }
 }
