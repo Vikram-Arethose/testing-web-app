@@ -30,10 +30,11 @@ export class CartService {
     if (index === -1) {
       this.cart.push({id: product.id, name: product.name, price: product.price, count: 1, limit: product.limit});
     } else {
-      if (this.cart[index].limit === 'unlimited' || +this.cart[index].limit > this.cart[index].count) {
+      if (!this.cart[index].limit || this.cart[index].limit > this.cart[index].count) {
         this.cart[index].count++;
       }
     }
+    this.logger.log('cart: ', this.cart);
   }
 
   removeProductFromCart(product: Product) {

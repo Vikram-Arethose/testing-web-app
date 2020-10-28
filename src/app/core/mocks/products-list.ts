@@ -8,7 +8,7 @@ export const ProductsList: Product[] = [
     name: 'Stone oven roll',
     details: '',
     price: 0.34,
-    limit: 'unlimited'
+    limit: null
   },
   {
     id: 1,
@@ -17,7 +17,7 @@ export const ProductsList: Product[] = [
     name: 'Pumpkin roll',
     details: 'Only Thu, Sun',
     price: 0.64,
-    limit: 'unlimited'
+    limit: null
   },  {
     id: 2,
     img: '../../../../assets/img/bakery/roll3.jpg',
@@ -25,7 +25,7 @@ export const ProductsList: Product[] = [
     name: 'Multigrain roll',
     details: '',
     price: 0.74,
-    limit: 'unlimited'
+    limit: null
   },  {
     id: 3,
     img: '../../../../assets/img/bakery/roll4.jpg',
@@ -33,6 +33,6 @@ export const ProductsList: Product[] = [
     name: 'Sponky roll',
     details: '',
     price: 0.69,
-    limit: '2'
+    limit: 2
   },
 ];
