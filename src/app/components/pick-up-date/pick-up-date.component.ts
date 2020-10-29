@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DateService } from '../../services/date.service';
 import { ModalController } from '@ionic/angular';
 import { LoggerService } from '../../services/logger.service';
@@ -9,20 +9,25 @@ import { LoggerService } from '../../services/logger.service';
   styleUrls: ['./pick-up-date.component.scss'],
 })
 export class PickUpDateComponent implements OnInit {
+  @Input() isVerify;
   today: string = new Date().toISOString();
   datePickerMin: string;
   date: string;
   time: string;
 
   constructor(
+    public dateService: DateService,
     private modalController: ModalController,
     private logger: LoggerService,
-    private dateService: DateService
   ) { }
 
-  ngOnInit(
-  ) {
-      this.datePickerMin = this.dateService.getDatePickerMin();
+  ngOnInit() {
+    this.datePickerMin = this.dateService.getDatePickerMin();
+    if (this.dateService.date) {
+      this.date = this.time = this.dateService.date;
+    }
+    this.logger.log('date: ', this.date);
+    this.logger.log('date: ', this.time);
   }
 
   onToday() {
@@ -35,10 +40,14 @@ export class PickUpDateComponent implements OnInit {
     this.date = tomorrow.toISOString();
   }
 
+  onTimeChange($event) {
+    this.time = $event.target.value;
+  }
+
   onConfirm() {
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
-    this.dateService.date = this.date + this.time;
+    this.dateService.date = this.date + 'T' + this.time;
     this.logger.log('date: ', this.date);
     this.logger.log('time: ', this.time);
     this.closeModal();

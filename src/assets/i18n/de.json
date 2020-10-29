@@ -105,7 +105,8 @@
     "today": "Heute",
     "tomorrow": "Morgen",
     "time": "Uhrzeit",
-    "confirm": "Bestätigen"
+    "confirm": "Bestätigen",
+    "verify": "überprüfen"
   },
   "productDetails": {
     "allergens": "Allergene:",

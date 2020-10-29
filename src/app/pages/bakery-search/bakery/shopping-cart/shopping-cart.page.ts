@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DateService } from '../../../../services/date.service';
+import { CartService } from '../../../../services/cart.service';
+import { ModalController } from '@ionic/angular';
+import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up-date.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,10 +12,32 @@ import { DateService } from '../../../../services/date.service';
 export class ShoppingCartPage implements OnInit {
 
   constructor(
-    public dateService: DateService
+    public dateService: DateService,
+    public cartService: CartService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
+  }
+
+  async presentVerifyDateModal() {
+    const modal = await this.modalController.create({
+      component: PickUpDateComponent,
+      componentProps: {isVerify: true}
+    });
+    return await modal.present();
+  }
+
+  add(i: number) {
+    this.cartService.cart[i].count++;
+  }
+
+  reduce(i: number) {
+    this.cartService.cart[i].count--;
+  }
+
+  delete(i: number) {
+    this.cartService.cart.splice(i, 1);
   }
 
 }

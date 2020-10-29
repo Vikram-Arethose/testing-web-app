@@ -63,6 +63,11 @@
     --background: #FEDE00;
     font: normal normal 600 20px/24px Montserrat;
   }
+  .verify {
+    --background: #3CCA88;
+    --border-radius: 5px;
+    text-transform: uppercase;
+  }
 
   .date {
     display: none;

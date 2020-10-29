@@ -9,29 +9,46 @@
 
 
 <ion-content>
+
   <div class="shopping-cart">
     <div class="date">
       <h2 class="date__title">{{ 'shoppingCart.pickUp' | translate }}:
-        <span class="date__title_purple">Day, Time</span></h2>
-      <ion-button fill="none" size="small">
+        <span class="date__title_purple">{{ dateService.date | date:'M/d/yy, HH:mm'}}</span></h2>
+      <ion-button fill="none" size="small" (click)="presentVerifyDateModal()">
         <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
       </ion-button>
     </div>
     <div class="product-list">
-      <div class="product-list__item item">
-        <div class="info">
-          <p class="info__order-num">1</p>
-          <p class="info__name">8 x Stone oven rolls</p>
-          <p class="info__price">2,72 €</p>
+      <ion-grid class="grid">
+        <div class="item" *ngFor="let item of cartService.cart, let i = index">
+          <ion-row class="grid__row">
+            <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
+            <ion-col class="grid__col" size="8">{{item.count}} x {{item.name}}</ion-col>
+            <ion-col class="grid__col">{{item.price | currency:'EUR':'symbol'}}</ion-col>
+          </ion-row>
+          <ion-row class="grid__row controls">
+            <ion-button fill="none" size="small" (click)="delete(i)">
+              <ion-icon class="controls__remove-icon" src="../../../../../assets/icons/shopping-cart/trash.svg"></ion-icon>
+            </ion-button>
+            <div class="controls__btn" (click)="reduce(i)">-</div>
+            <div class="controls__btn" (click)="add(i)">+</div>
+          </ion-row>
         </div>
-        <div class="controls">
-          <ion-button class="controls__remove" fill="none" size="small">
-            <ion-icon src="../../../../../assets/icons/shopping-cart/trash.svg"></ion-icon>
-          </ion-button>
-          <div class="controls__btn">-</div>
-          <div class="controls__btn">+</div>
-        </div>
-      </div>
+        <ion-row class="grid__row grid__row_total">
+            <ion-col class="grid__col" size="1"></ion-col>
+            <ion-col class="grid__col" size="6">{{ 'orders.total' | translate }}</ion-col>
+            <ion-col class="grid__col">
+              {{cartService.getTotalPrice() | currency:'EUR':'symbol'}}</ion-col>
+          </ion-row>
+      </ion-grid>
+    </div>
+    <div class="buttons-wrapper">
+      <ion-button class="buttons-wrapper__btn" expand="block"
+                  [routerLink]="'/bakery-search/bakery'"
+                  routerDirection="back">{{ 'shoppingCart.addMore' | translate }}</ion-button>
+      <ion-button class="buttons-wrapper__btn" expand="block">
+        {{ 'shoppingCart.checkout' | translate }}
+        ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</ion-button>
     </div>
   </div>
 

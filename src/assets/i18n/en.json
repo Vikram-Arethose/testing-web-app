@@ -105,7 +105,8 @@
     "today": "Today",
     "tomorrow": "Tomorrow",
     "time": "Time",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "verify": "Verify"
   },
   "productDetails": {
     "allergens": "Allergens:",
