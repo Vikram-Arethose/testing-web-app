@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="title">{{ 'menu.paymentMethods' | translate }}</div>
+  <div class="payment" tappable (click)="onGooglePay()">
+    <div class="payment__img-container">
+      <img class="payment__img" src="assets/img/payments/g-pay.png">
+    </div>
+    <p class="payment__name">Google Pay</p>
+  </div>
+  <div class="payment" tappable>
+    <div class="payment__img-container">
+      <img class="payment__img" src="assets/img/payments/p.png">
+    </div>
+    <p class="payment__name">Paypal</p>
+  </div>
+  <div class="payment" tappable>
+    <div class="payment__img-container">
+      <img class="payment__img" src="assets/icons/payments/credit-card.svg">
+    </div>
+    <p class="payment__name">Kreditkarte</p>
+  </div>
+  <div class="payment" tappable>
+    <div class="payment__img-container">
+      <img class="payment__img payment__img_sepa" src="assets/icons/payments/sepa.png">
+    </div>
+    <p class="payment__name">Lastschrift</p>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { DateService } from '../../../../services/date.service';
 import { CartService } from '../../../../services/cart.service';
 import { ModalController } from '@ionic/angular';
 import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up-date.component';
+import { PaymentMethodsComponent } from '../../../../components/payment-methods/payment-methods.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -24,6 +25,14 @@ export class ShoppingCartPage implements OnInit {
     const modal = await this.modalController.create({
       component: PickUpDateComponent,
       componentProps: {isVerify: true}
+    });
+    return await modal.present();
+  }
+
+  async presentPaymentMethodsModal() {
+    const modal = await this.modalController.create({
+      component: PaymentMethodsComponent,
+      cssClass: 'payment-methods-modal'
     });
     return await modal.present();
   }
