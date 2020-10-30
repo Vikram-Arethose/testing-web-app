@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CartService } from '../../services/cart.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-google-pay',
@@ -13,14 +13,19 @@ export class GooglePayComponent implements OnInit {
   constructor(
     public cartService: CartService,
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {}
 
   async onPay() {
     await this.modalController.dismiss();
-    await this.router.navigate(['orders']);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        isConfirm: true
+      }
+    };
+    await this.router.navigate(['orders'], navigationExtras);
     this.cartService.cart.length = 0;
   }
 
