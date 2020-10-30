@@ -4,4 +4,19 @@
       <img class="payment__img" src="assets/img/payments/g-pay.png">
     </div>
   </div>
+  <div class="personal-data">
+    <div class="item">
+      <ion-icon class="item__icon" src="../../../assets/icons/menu/user-circle.svg"></ion-icon>
+      <p class="item__text">jenny.bre@gmail.com</p>
+    </div>
+    <div class="item">
+      <ion-icon class="item__icon" src="../../../assets/icons/payments/mastercard-grey.svg"></ion-icon>
+      <p class="item__text">Mastercard *** 0854</p>
+    </div>
+  </div>
+  <p class="data-protection">{{ 'gPay.dataProtection' | translate }}</p>
+  <div class="pay">
+    <p class="pay__total">{{cartService.getTotalPrice() | currency:'EUR':'symbol'}}</p>
+    <ion-button class="pay__btn" (click)="onPay()">{{ 'gPay.pay' | translate }}</ion-button>
+  </div>
 </div>

@@ -117,5 +117,9 @@
     "pickUp": "Abholung",
     "addMore": "Weitere Produkte hinzufügen",
     "checkout": "Zur Kasse"
+  },
+  "gPay": {
+    "dataProtection": "Wenn Sie fortfahren aktzeptieren Sie damit die Datenschutzhinweise und Nutzungsbedingungen von Google Payments",
+    "pay": "bezahlen"
   }
 }

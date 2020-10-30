@@ -117,5 +117,9 @@
     "pickUp": "Pick-up",
     "addMore": "Add more products",
     "checkout": "Checkout"
+  },
+  "gPay": {
+    "dataProtection": "If you continue you accept it the data protection information and Terms of Use from Google Payments",
+    "pay": "pay"
   }
 }

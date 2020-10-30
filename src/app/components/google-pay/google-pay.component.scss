@@ -4,16 +4,53 @@
   color: #493735;
 }
 
-payment {
+.payment {
   height: 102px;
   display: flex;
   align-items: center;
 
   &__img-container {
     width: 85px;
-    margin-right: 13vw;
+    margin: 5px 0 0 8vw;
     text-align: center;
-    vertical-align: center;
+  }
+}
 
+.personal-data {
+  .item {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #CBCBCB;
+    &:last-child {
+      border-bottom: 1px solid #CBCBCB;
+    }
+    &__icon {
+      margin: 3vh 8vw 3vh 14.4vw;
+      font-size: 35px;
+    }
+    &__text {
+      font: normal normal 500 16px/19px Montserrat;
+    }
+  }
+}
+
+.data-protection {
+  padding: 1.85vh 22.5vw 5.3vh 8.5vw;
+  font: normal normal 500 14px/18px Montserrat;
+}
+
+.pay {
+  margin: 0 0 14vh;
+  display: flex;
+  align-items: center;
+  &__total {
+    padding: 0 14.67vw 0 10.67vw;
+  }
+  &__btn {
+    width: 49.33vw;
+    height: 6.16vh;
+    --border-radius: 18px;
+    --background: #0E8DF1;
+    font: normal normal 600 18px/22px Montserrat;
   }
 }
