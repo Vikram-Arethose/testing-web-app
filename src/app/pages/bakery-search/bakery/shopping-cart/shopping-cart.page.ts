@@ -32,7 +32,7 @@ export class ShoppingCartPage implements OnInit {
   async presentPaymentMethodsModal() {
     const modal = await this.modalController.create({
       component: PaymentMethodsComponent,
-      cssClass: 'payment-methods-modal'
+      cssClass: 'payment-methods-modal',
     });
     return await modal.present();
   }

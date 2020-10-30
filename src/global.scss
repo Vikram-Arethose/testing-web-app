@@ -50,14 +50,14 @@ a {
   --border-color: #CBCBCB;
 }
 
-.payment-methods-modal .modal-wrapper {
+.payment-methods-modal .modal-wrapper, .payment-methods-modal .modal-shadow {
   height: 494px;
   bottom: 0;
   position: absolute;
 }
 
-.google-pay-modal .modal-wrapper {
-  height: 75vh;
+.google-pay-modal .modal-wrapper, .google-pay-modal .modal-shadow {
+  height: 70vh;
   bottom: 0;
   position: absolute;
 }
