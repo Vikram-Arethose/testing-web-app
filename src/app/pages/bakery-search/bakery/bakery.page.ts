@@ -15,6 +15,7 @@ import { CartService } from '../../../services/cart.service';
   styleUrls: ['./bakery.page.scss'],
 })
 export class BakeryPage implements OnInit {
+  info: boolean;
   cart: Product[] = [];
   productsList: Product[] = ProductsList;
   selected: boolean[] = [];

@@ -121,5 +121,10 @@
   "gPay": {
     "dataProtection": "If you continue you accept it the data protection information and Terms of Use from Google Payments",
     "pay": "pay"
+  },
+  "bakery": {
+    "openHour": "Opening Hours:",
+    "pickUpHere": "Pick-up your order here:",
+    "remember": "Remember! In order to pick up your order you need the Pick-up Code!"
   }
 }

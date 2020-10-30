@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class OrdersPage implements OnInit {
   dataToShow = 'current';
   header: string;
-  isConfirm = true;
+  isConfirm: boolean;
 
   constructor(
     private route: ActivatedRoute,

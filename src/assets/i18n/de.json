@@ -121,5 +121,10 @@
   "gPay": {
     "dataProtection": "Wenn Sie fortfahren aktzeptieren Sie damit die Datenschutzhinweise und Nutzungsbedingungen von Google Payments",
     "pay": "bezahlen"
+  },
+  "bakery": {
+    "openHour": "Öffnungszeiten",
+    "pickUpHere": "HOLE DEINE BESTELLUNG HIER AB",
+    "remember": "Denke daran! Um Deine Bestellung abzuholen musst du den Abholcode vorzeigen!"
   }
 }

@@ -14,7 +14,7 @@
           <h3 class="info__title">{{ 'general.bakery' | translate }} Wiebusch</h3>
           <p class="info__text">Bielefelder Str. 21, Knetterheide</p>
         </div>
-        <ion-icon class="info__icon" src="../../../../assets/icons/bakery/info.svg"></ion-icon>
+        <ion-icon class="info__icon" src="../../../../assets/icons/bakery/info.svg" (click)="info = true" tappable></ion-icon>
       </div>
       <div class="info__rate rate">
         <img class="rate__img" src="../../../../assets/img/bakery/stars4.jpg">
@@ -26,28 +26,30 @@
       </p>
     </div>
   </div>
-  <div class="sections">
-    <div class="sections__item"*ngFor="let section of sections, let i = index"
-         (click)="onSectionSelect(i)" [class.sections__item_selected]="selected[i]" tappable>{{section}}</div>
-  </div>
-  <div class="product-list">
-    <div class="container">
-      <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal()">
-        <div class="col-left">
-          <ion-img class="product__img" [src]="product.img"></ion-img>
-          <ion-img class="product__img-corner" *ngIf="product.imgCorner" [src]="product.imgCorner"></ion-img>
-        </div>
-        <div class="col-center">
-          <p class="product__name">{{product.name}}</p>
-          <p class="product__details-title">Details</p>
-          <p class="product__details-text">{{product.details}}</p>
-        </div>
-        <div class="col">
-          <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>
-          <div class="product__count count">
-            <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
-            <div class="count__value">{{getProductCount(product.id)}}</div>
-            <div class="count__btn" (click)="addProductToCart(product, $event)" tappable>+</div>
+  <div class="products" *ngIf="!info">
+    <div class="sections">
+      <div class="sections__item" *ngFor="let section of sections, let i = index"
+           (click)="onSectionSelect(i)" [class.sections__item_selected]="selected[i]" tappable>{{section}}</div>
+    </div>
+    <div class="product-list">
+      <div class="container">
+        <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal()">
+          <div class="col-left">
+            <ion-img class="product__img" [src]="product.img"></ion-img>
+            <ion-img class="product__img-corner" *ngIf="product.imgCorner" [src]="product.imgCorner"></ion-img>
+          </div>
+          <div class="col-center">
+            <p class="product__name">{{product.name}}</p>
+            <p class="product__details-title">Details</p>
+            <p class="product__details-text">{{product.details}}</p>
+          </div>
+          <div class="col">
+            <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>
+            <div class="product__count count">
+              <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
+              <div class="count__value">{{getProductCount(product.id)}}</div>
+              <div class="count__btn" (click)="addProductToCart(product, $event)" tappable>+</div>
+            </div>
           </div>
         </div>
       </div>
