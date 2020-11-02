@@ -23,9 +23,13 @@
           <span class="info__text">4,1 /5 (15)</span>
         </div>
         <p class="info__description description">
-          This bakery is known for its delicious bread, rolls and cake. Especially tasty are the ...
-          <span class="description__continue" tappable>Continue</span>
-        </p></div>
+          {{bakeryInfo}}
+          <span class="description__continue" *ngIf="bakeryInfoTrim !== bakeryInfoFull && !isFullDescription"
+                (click)="toggleBakeryInfo()" tappable>Continue</span>
+          <span class="description__continue" *ngIf="bakeryInfoTrim !== bakeryInfoFull && isFullDescription"
+                (click)="toggleBakeryInfo()" tappable>Turn</span>
+        </p>
+      </div>
     </div>
     <div class="info-details" *ngIf="info">
       <div class="container">

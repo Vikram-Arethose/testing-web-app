@@ -15,7 +15,7 @@ import { CartService } from '../../../services/cart.service';
   styleUrls: ['./bakery.page.scss'],
 })
 export class BakeryPage implements OnInit {
-  info: boolean = true;
+  info: boolean;
   cart: Product[] = [];
   productsList: Product[] = ProductsList;
   selected: boolean[] = [];
@@ -24,6 +24,11 @@ export class BakeryPage implements OnInit {
     '../../../../assets/icons/bakery/coffee.svg'];
   openingHours = [{day: 'Mon', time: '7:00 - 18:30'}, {day: 'Tue', time: '7:00 - 18:30'}, {day: 'Wed', time: '7:00 - 18:30'},
     {day: 'Thu', time: '7:00 - 18:30'}, {day: 'Fri', time: '7:00 - 18:30'}, {day: 'Sat', time: '7:00 - 18:30'}, {day: 'Sun', time: '7:00 - 18:30'}];
+  bakeryInfoFull = 'This bakery is known for its delicious bread, rollsand cake. Especially tasty are the' +
+                    'This bakery is known for its delicious bread, rollsand cake. Especially tasty are the';
+  bakeryInfoTrim: string;
+  bakeryInfo: string;
+  isFullDescription: boolean;
 
   constructor(
     private logger: LoggerService,
@@ -34,6 +39,7 @@ export class BakeryPage implements OnInit {
 
   ngOnInit() {
     this.selected[0] = true;
+    this.bakeryInfo = this.trimBakeryInfo();
   }
 
   onSectionSelect(index: number) {
@@ -85,5 +91,21 @@ export class BakeryPage implements OnInit {
 
   onInfo() {
     this.info = !this.info;
+  }
+
+  trimBakeryInfo(): string {
+    const maxLength = 90;
+    if (this.bakeryInfoFull.length > maxLength) {
+      const limit = this.bakeryInfoFull.substr(0, maxLength).lastIndexOf(' ');
+      this.bakeryInfoTrim = `${this.bakeryInfoFull.substr(0, limit)} ...`;
+    } else {
+      this.bakeryInfoTrim = this.bakeryInfoFull;
+    }
+    return this.bakeryInfoTrim;
+  }
+
+  toggleBakeryInfo() {
+    this.bakeryInfo = this.isFullDescription ? this.bakeryInfoTrim : this.bakeryInfoFull;
+    this.isFullDescription = !this.isFullDescription;
   }
 }
