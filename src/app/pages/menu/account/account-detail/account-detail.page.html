@@ -19,8 +19,10 @@
         </div>
         <ion-item class="setting__item setting__item_purple item" lines="none">
           <ion-label class="item__label" *ngIf="data === 'phone'">+49</ion-label>
-          <ion-input class="item__input" [value]="inputValue" [placeholder]="placeholder"></ion-input>
-          <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
+          <ion-input class="item__input" [(ngModel)]="inputText" [placeholder]="placeholder"></ion-input>
+          <ion-button class="btn-check" slot="end" fill="none" (click)="accept()">
+            <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
+          </ion-button>
         </ion-item>
       </div>
     </div>
@@ -28,14 +30,14 @@
       <div class="setting">
         <h3 class="setting__label">{{settingLabel}}</h3>
         <ion-list class="setting__item list">
-          <ion-radio-group class="radio-group" (ionChange)="onRadioChange($event.target.value)" [value]="language">
+          <ion-radio-group class="radio-group" (ionChange)="onRadioChange($event.target.value)" [value]="account.language.value">
             <ion-item class="radio-group__item item" *ngFor="let item of dataForRepeat">
               <ion-label class="item__label">{{item.title}}</ion-label>
               <ion-radio mode="ios" [value]="item.value"></ion-radio>
             </ion-item>
           </ion-radio-group>
           <ion-item lines="none">
-            <ion-button class="btn-check" slot="end" fill="none">
+            <ion-button class="btn-check" slot="end" fill="none" (click)="acceptRadio()">
               <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
             </ion-button>
           </ion-item>

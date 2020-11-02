@@ -4,6 +4,7 @@ import { LoggerService } from '../../../../services/logger.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Language } from '../../../../models/language';
+import { AccountService } from '../../../../services/account.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -11,10 +12,11 @@ import { Language } from '../../../../models/language';
   styleUrls: ['./account-detail.page.scss'],
 })
 export class AccountDetailPage implements OnInit {
+  account;
   countries: string[] = ['Germany', 'Austria', 'Switzerland'];
   country: string[];
   data: string;
-  inputValue: string;
+  inputText: string;
   placeholder: string;
   languages: Language[] = [
     { title: 'English', value: 'en'},
@@ -25,13 +27,15 @@ export class AccountDetailPage implements OnInit {
   settingLabel2: string;
   public title: string;
   dataForRepeat: any[];
+  // private name = 'Jenny';
   private radioValue: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private accountService: AccountService
   ) {
     this.route.queryParams.subscribe( params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -41,7 +45,9 @@ export class AccountDetailPage implements OnInit {
   }
 
   ngOnInit() {
+    this.accountService.sharedAccount.subscribe(res => this.account = res);
     this.chooseDataToShow();
+    this.logger.log('this.account: ', this.account);
   }
 
   chooseDataToShow() {
@@ -49,12 +55,12 @@ export class AccountDetailPage implements OnInit {
       case 'name':
         this.title = 'Your Name';
         this.settingLabel = 'Name';
-        this.inputValue = 'Jenny';
+        this.inputText = this.account.name;
         break;
       case 'email':
         this.title = 'Your Email-Address';
         this.settingLabel = 'E-Mail-Address';
-        this.inputValue = 'Jenny@gmail.com';
+        this.inputText = this.account.email;
         break;
       case 'phone':
         this.title = 'Your Phone Number';
@@ -95,9 +101,22 @@ export class AccountDetailPage implements OnInit {
   }
 
   onRadioChange(value) {
-    this.language = value;
-    this.logger.log('this.language', this.language);
-    this.translate.use(this.language);
+    this.radioValue = value;
+    this.logger.log('this.radioValue', this.radioValue);
+  }
+
+  accept() {
+    this.account[this.data] = this.inputText;
+    this.accountService.changeAccount(this.account);
+  }
+
+  acceptRadio() {
+    if (this.data === 'language' && this.radioValue && this.radioValue !== this.account.language.value) {
+      const selectedLanguage = this.languages.find(item => item.value === this.radioValue);
+      this.account[this.data] = selectedLanguage;
+      this.accountService.changeAccount(this.account);
+      this.translate.use(this.radioValue);
+    }
   }
 
 }
