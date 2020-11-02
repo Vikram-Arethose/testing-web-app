@@ -8,22 +8,51 @@
     <img class="toolbar__img" src="../../../../assets/img/bakery/bakery-logo.jpg">
   </div>
   <div class="info">
-    <div class="container">
-      <div class="row">
-        <div>
-          <h3 class="info__title">{{ 'general.bakery' | translate }} Wiebusch</h3>
-          <p class="info__text">Bielefelder Str. 21, Knetterheide</p>
+    <div class="info-main">
+      <div class="container">
+        <div class="row">
+          <div>
+            <h3 class="info__title">{{ 'general.bakery' | translate }} Wiebusch</h3>
+            <p class="info__text">Bielefelder Str. 21, Knetterheide</p>
+          </div>
+          <ion-icon class="info__icon" src="../../../../assets/icons/bakery/info.svg" (click)="onInfo()"
+                    tappable></ion-icon>
         </div>
-        <ion-icon class="info__icon" src="../../../../assets/icons/bakery/info.svg" (click)="info = true" tappable></ion-icon>
+        <div class="info__rate rate">
+          <img class="rate__img" src="../../../../assets/img/bakery/stars4.jpg">
+          <span class="info__text">4,1 /5 (15)</span>
+        </div>
+        <p class="info__description description">
+          This bakery is known for its delicious bread, rolls and cake. Especially tasty are the ...
+          <span class="description__continue" tappable>Continue</span>
+        </p></div>
+    </div>
+    <div class="info-details" *ngIf="info">
+      <div class="container">
+        <div class="info-details__icons-row">
+          <ion-icon class="info-details__icons-row-icon" *ngFor="let icon of iconsRow" [src]="icon"></ion-icon>
+        </div>
+        <div class="open-hours">
+          <div class="open-hours__row">
+            <ion-icon class="open-hours__icon" src="../../../../assets/icons/bakery/calendar&clock.svg"></ion-icon>
+            <p>{{ 'bakery.openHour' | translate }}</p>
+          </div>
+          <div class="open-hours__list list">
+            <div class="list__item" *ngFor="let item of openingHours">
+              <span>{{item.day}}</span>
+              <span>{{item.time}}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="info__rate rate">
-        <img class="rate__img" src="../../../../assets/img/bakery/stars4.jpg">
-        <span class="info__text">4,1 /5 (15)</span>
+      <div class="pick-up-place">
+        <p class="pick-up-place__title">{{ 'bakery.pickUpHere' | translate }}</p>
+        <p class="pick-up-place__text">Bielefelder Str. 21, Knetterheide</p>
       </div>
-      <p class="info__description description">
-        This bakery is known for its delicious bread, rolls and cake. Especially tasty are the ...
-        <span class="description__continue" tappable>Continue</span>
-      </p>
+      <div class="reminder">
+        <p class="reminder__title">{{ 'bakery.reminderTitle' | translate }}</p>
+        <p class="reminder__txt">{{ 'bakery.reminderTxt' | translate }}</p>
+      </div>
     </div>
   </div>
   <div class="products" *ngIf="!info">

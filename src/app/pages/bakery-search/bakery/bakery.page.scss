@@ -21,8 +21,13 @@
   }
 }
 
+.content {
+  font: normal normal 400 12px/15px Montserrat;
+  color: #493735;
+}
+
 .container {
-  padding: 5px 8.27vw;
+  padding: 0 8.27vw;
 }
 
 .info {
@@ -64,6 +69,61 @@
       color: #FEDE00;
     }
   }
+
+}
+
+.info-details {
+  font: normal normal 400 12px/15px Montserrat;
+  color: #493735;
+  &__icons-row {
+    padding: 3.94vh 0 2.09vh;
+    &-icon {
+      margin: 0 4.8vw 0 0;
+      font-size: 27px;
+    }
+  }
+
+  .open-hours {
+    &__row {
+      display: flex;
+      align-items: flex-end;
+    }
+    &__icon {
+      margin: 0 15px 0 0;
+      font-size: 24px;
+    }
+    &__list {
+      padding: 11px 0 16px 75px;
+    }
+    .list {
+      &__item {
+        width: 110px;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .pick-up-place {
+    padding: 17px 33px 25px;
+    border-top: 1px solid #707070;
+    border-bottom: 1px solid #707070;
+    &__title {
+      padding: 0 0 11px;
+    }
+    &__text {
+      width: 150px;
+    }
+  }
+
+  .reminder {
+    padding: 0 3vw 0 8.27vw;
+    margin: 15px 0 11px;
+    font: normal normal 400 15px/19px Montserrat;
+    &__title {}
+    &__txt {}
+  }
+
 }
 
 .sections {

@@ -15,11 +15,15 @@ import { CartService } from '../../../services/cart.service';
   styleUrls: ['./bakery.page.scss'],
 })
 export class BakeryPage implements OnInit {
-  info: boolean;
+  info: boolean = true;
   cart: Product[] = [];
   productsList: Product[] = ProductsList;
   selected: boolean[] = [];
   sections: string[] = ['Rolls', 'Bread', 'Cake', 'Lunch', 'Rolls', 'Bread', 'Cake', 'Lunch'];
+  iconsRow: string[] = ['../../../../assets/icons/bakery/people-at-table.svg', '../../../../assets/icons/bakery/piece-of-cake.svg',
+    '../../../../assets/icons/bakery/coffee.svg'];
+  openingHours = [{day: 'Mon', time: '7:00 - 18:30'}, {day: 'Tue', time: '7:00 - 18:30'}, {day: 'Wed', time: '7:00 - 18:30'},
+    {day: 'Thu', time: '7:00 - 18:30'}, {day: 'Fri', time: '7:00 - 18:30'}, {day: 'Sat', time: '7:00 - 18:30'}, {day: 'Sun', time: '7:00 - 18:30'}];
 
   constructor(
     private logger: LoggerService,
@@ -77,5 +81,9 @@ export class BakeryPage implements OnInit {
 
   onExit() {
     this.cartService.cart.length = 0;
+  }
+
+  onInfo() {
+    this.info = !this.info;
   }
 }

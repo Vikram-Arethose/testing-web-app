@@ -125,6 +125,7 @@
   "bakery": {
     "openHour": "Öffnungszeiten",
     "pickUpHere": "HOLE DEINE BESTELLUNG HIER AB",
-    "remember": "Denke daran! Um Deine Bestellung abzuholen musst du den Abholcode vorzeigen!"
+    "reminderTitle": "Denke daran!",
+    "reminderTxt": "Um Deine Bestellung abzuholen musst du den Abholcode vorzeigen!",
   }
 }

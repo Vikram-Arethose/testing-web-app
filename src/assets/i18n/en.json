@@ -125,6 +125,7 @@
   "bakery": {
     "openHour": "Opening Hours:",
     "pickUpHere": "Pick-up your order here:",
-    "remember": "Remember! In order to pick up your order you need the Pick-up Code!"
+    "reminderTitle": "Remember!",
+    "reminderTxt": " In order to pick up your order you need the Pick-up Code!"
   }
 }
