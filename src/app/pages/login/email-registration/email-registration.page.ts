@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./email-registration.page.scss'],
 })
 export class EmailRegistrationPage implements OnInit {
-  private counter = 0;
-  private email: string;
-  private name: string;
-  private password: string;
+  counter = 0;
+  email: string;
+  name: string;
+  password: string;
 
   constructor() { }
 

@@ -7,7 +7,7 @@
       <h1 class="header__item">{{ 'emailRegister.questionEmail' | translate }}</h1>
     </div>
     <div class="form-item__body">
-      <ion-item class="item">
+      <ion-item class="item" mode="ios">
         <ion-label class="item__label" position="stacked">{{ 'emailRegister.email' | translate }}</ion-label>
         <ion-input [(ngModel)]="email" name="email"></ion-input>
       </ion-item>
@@ -22,7 +22,7 @@
         <h1 class="header__item">{{ 'emailRegister.questionName' | translate }}</h1>
       </div>
       <div class="form-item__body">
-        <ion-item class="item">
+        <ion-item class="item" mode="ios">
           <ion-label class="item__label" position="stacked">Name</ion-label>
           <ion-input [(ngModel)]="name" name="name"></ion-input>
         </ion-item>
@@ -37,7 +37,7 @@
         <h1 class="header__item">{{ 'emailRegister.choosePassword' | translate }}</h1>
       </div>
       <div class="form-item__body">
-        <ion-item class="item">
+        <ion-item class="item" mode="ios">
           <ion-label class="item__label" position="stacked">{{ 'emailRegister.password' | translate }}</ion-label>
           <ion-input [(ngModel)]="password" name="password"></ion-input>
         </ion-item>

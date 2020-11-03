@@ -19,7 +19,6 @@ export class AccountPage implements OnInit {
 
   ngOnInit() {
     this.accountService.sharedAccount.subscribe(res => this.account = res);
-    this.logger.log(this.account);
   }
 
   open(page: string) {

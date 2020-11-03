@@ -28,7 +28,7 @@ export class AccountDetailPage implements OnInit {
   public title: string;
   dataForRepeat: any[];
   // private name = 'Jenny';
-  private radioValue: string;
+  radioValue: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,12 +70,13 @@ export class AccountDetailPage implements OnInit {
         this.title = 'Country';
         this.settingLabel = 'Country';
         this.dataForRepeat = this.countries;
+        this.radioValue = this.account.country;
         break;
       case 'language':
         this.title = 'Language';
         this.settingLabel = 'Language';
         this.dataForRepeat = this.languages;
-        this.radioValue = this.language;
+        this.radioValue = this.account.language.value;
         break;
       case 'notifications':
         this.title = 'Notifications';

@@ -30,7 +30,8 @@
       <div class="setting">
         <h3 class="setting__label">{{settingLabel}}</h3>
         <ion-list class="setting__item list">
-          <ion-radio-group class="radio-group" (ionChange)="onRadioChange($event.target.value)" [value]="account.language.value">
+          <ion-radio-group class="radio-group" (ionChange)="onRadioChange($event.target.value)"
+                           [value]="radioValue">
             <ion-item class="radio-group__item item" *ngFor="let item of dataForRepeat">
               <ion-label class="item__label">{{item.title || item}}</ion-label>
               <ion-radio mode="ios" [value]="item.value || item"></ion-radio>
