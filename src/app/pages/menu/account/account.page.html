@@ -39,7 +39,7 @@
       <ion-label class="item__label item__label_left">{{ 'account.privacy&' | translate }}</ion-label>
     </ion-item>
   </ion-list>
-  <div class="logout" tappable>
+  <div class="logout" tappable [routerLink]="'/start'">
     <p class="logout__text">{{ 'account.logout' | translate }}</p>
   </div>
 </ion-content>

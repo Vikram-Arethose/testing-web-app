@@ -1,24 +1,27 @@
 <ion-content>
   <ion-img src="../../../../assets/img/bread.png" class="img"></ion-img>
-  <form class="form">
+  <form class="form" #form>
     <div class="form-top">
       <h1 class="form__title">{{ 'googleLogin.welcome' | translate }}</h1>
       <h1 class="form__title">{{ 'googleLogin.youAreIn' | translate }}</h1>
       <ion-item class="form__item form__item_select item">
-        <ion-select class="item__select" placeholder="{{ 'googleLogin.germany' | translate }}">
-          <ion-select-option>Germany</ion-select-option>
+        <ion-select class="item__select" [value]="'googleLogin.germany' | translate">
+          <ion-select-option value="Germany">Germany</ion-select-option>
+          <ion-select-option value="Austria">Austria</ion-select-option>
         </ion-select>
       </ion-item>
     </div>
       <ion-item class="form__item form__item_check item ion-align-items-start" [class.opacity]="!android" lines="none">
-        <ion-checkbox mode="md" class="item__checkbox"></ion-checkbox>
+        <ion-checkbox mode="md" class="item__checkbox" required></ion-checkbox>
         <ion-label class="item__label ion-text-wrap">{{ 'googleLogin.googleDsgvo' | translate }}</ion-label>
       </ion-item>
     <ion-item class="form__item item ion-align-items-start" lines="none">
-      <ion-checkbox mode="md" class="item__checkbox"></ion-checkbox>
+      <ion-checkbox mode="md" class="item__checkbox" required></ion-checkbox>
       <ion-label class="item__label ion-text-wrap" [innerHTML]="'googleLogin.privacyPolicy' | translate">
         </ion-label>
     </ion-item>
-    <ion-button class="form__button" expand="block" size="large" [routerLink]="'/email-registration'">continue with google</ion-button>
+    <ion-button class="form__button" expand="block" size="large"
+                (click)="continue()" [routerLink]="btnRouterLink" [disabled]="form.invalid">
+      {{continueBtnLabel}}</ion-button>
   </form>
 </ion-content>

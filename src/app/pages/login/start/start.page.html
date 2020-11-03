@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content (click)="onContentTap()">
   <div [class.opacity]="otherOptOn">
     <h1 class="title">{{ 'start.header' | translate }}</h1>
     <div class="img-container">
@@ -7,13 +7,13 @@
   </div>
   <div class="controls">
     <ion-button class="controls__btn controls__btn_g btn"
-                *ngIf="android" [routerLink]="'/google-login'"
+                *ngIf="android" (click)="loginWith('md')" [routerLink]="'/google-login'"
                 expand="block" size="large" fill="outline" [disabled]="otherOptOn">
       <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/google.svg"></ion-icon>
       {{ 'start.googleBtn' | translate }}
     </ion-button>
     <ion-button class="controls__btn controls__btn_g btn"
-                *ngIf="!android" [routerLink]="'/apple-registration'"
+                *ngIf="!android" (click)="loginWith('ios')" [routerLink]="'/apple-registration'"
                 expand="block" size="large" fill="outline" [disabled]="otherOptOn">
       <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/apple.svg"></ion-icon>
       {{ 'start.appleBtn' | translate }}
@@ -23,12 +23,12 @@
       {{ 'start.fbBtn' | translate }}
     </ion-button>
     <ion-button class="controls__btn controls__btn_mail btn"
-                *ngIf="otherOptOn" [routerLink]="'/google-login'" expand="block" size="large">
+                *ngIf="otherOptOn" (click)="loginWith('email')" [routerLink]="'/google-login'" expand="block" size="large">
       <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/mail.svg"></ion-icon>
       {{ 'start.emailBtn' | translate }}
     </ion-button>
     <div class="hide-block" *ngIf="!otherOptOn">
-      <ion-button class="controls__link" fill="clear" size="small" (click)="onOtherOpt()">{{ 'start.otherOpt' | translate }}</ion-button>
+      <ion-button class="controls__link" fill="clear" size="small" (click)="onOtherOpt($event)">{{ 'start.otherOpt' | translate }}</ion-button>
       <ion-button class="controls__link" fill="clear" size="small">{{ 'start.guest' | translate }}</ion-button>
     </div>
   </div>

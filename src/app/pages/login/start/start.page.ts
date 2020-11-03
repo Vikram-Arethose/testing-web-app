@@ -18,8 +18,19 @@ export class StartPage implements OnInit {
   ngOnInit() {
   }
 
-  onOtherOpt() {
+  onOtherOpt($event) {
+    $event.stopPropagation();
     this.otherOptOn = true;
+  }
+
+  loginWith(loginWith: string) {
+    this.platformService.loginWith = loginWith;
+  }
+
+  onContentTap() {
+    if (this.otherOptOn) {
+      this.otherOptOn = false;
+    }
   }
 
 }
