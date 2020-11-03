@@ -47,7 +47,6 @@ export class AccountDetailPage implements OnInit {
   ngOnInit() {
     this.accountService.sharedAccount.subscribe(res => this.account = res);
     this.chooseDataToShow();
-    this.logger.log('this.account: ', this.account);
   }
 
   chooseDataToShow() {
@@ -102,7 +101,6 @@ export class AccountDetailPage implements OnInit {
 
   onRadioChange(value) {
     this.radioValue = value;
-    this.logger.log('this.radioValue', this.radioValue);
   }
 
   accept() {
@@ -116,6 +114,9 @@ export class AccountDetailPage implements OnInit {
       this.account[this.data] = selectedLanguage;
       this.accountService.changeAccount(this.account);
       this.translate.use(this.radioValue);
+    } else if (this.data === 'country' && this.radioValue !== this.account.country) {
+      this.account[this.data] = this.radioValue;
+      this.accountService.changeAccount(this.account);
     }
   }
 
