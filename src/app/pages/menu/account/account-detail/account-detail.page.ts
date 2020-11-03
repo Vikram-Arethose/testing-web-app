@@ -16,6 +16,7 @@ export class AccountDetailPage implements OnInit {
   countries: string[] = ['Germany', 'Austria', 'Switzerland'];
   country: string[];
   data: string;
+  enter: string = this.translate.instant('account.enter');
   inputText: string;
   placeholder: string;
   languages: Language[] = [
@@ -50,45 +51,50 @@ export class AccountDetailPage implements OnInit {
   }
 
   chooseDataToShow() {
+    const your: string = this.translate.instant('account.your');
     switch (this.data) {
       case 'name':
-        this.title = 'Your Name';
+        this.title = your + 'Name';
         this.settingLabel = 'Name';
         this.inputText = this.account.name;
         break;
       case 'email':
-        this.title = 'Your Email-Address';
-        this.settingLabel = 'E-Mail-Address';
+        const email: string = this.translate.instant('account.email');
+        this.title = your + email;
+        this.settingLabel = email;
         this.inputText = this.account.email;
         break;
       case 'phone':
-        this.title = 'Your Phone Number';
-        this.settingLabel = 'Phone number';
-        this.placeholder = 'Enter your number';
+        const phone: string = this.translate.instant('account.phoneNum');
+        this.title = your + phone;
+        this.settingLabel = phone;
+        this.placeholder = this.translate.instant('account.enterYourNum');
         break;
       case 'country':
-        this.title = 'Country';
-        this.settingLabel = 'Country';
+        const country: string = this.translate.instant('account.country');
+        this.title = country;
+        this.settingLabel = country;
         this.dataForRepeat = this.countries;
         this.radioValue = this.account.country;
         break;
       case 'language':
-        this.title = 'Language';
-        this.settingLabel = 'Language';
+        const language: string = this.translate.instant('account.language');
+        this.title = language;
+        this.settingLabel = language;
         this.dataForRepeat = this.languages;
         this.radioValue = this.account.language.value;
         break;
       case 'notifications':
-        this.title = 'Notifications';
+        this.title = this.translate.instant('account.notifications');
         break;
       case 'password':
-        this.title = 'Change Password';
+        this.title = this.translate.instant('account.changePass');
         break;
       case 'payments':
-        this.title = 'Payment Methods';
+        this.title = this.translate.instant('account.paymentMeth');
         break;
       case 'privacy':
-        this.title = 'Privacy';
+        this.title = this.translate.instant('account.privacy');
         break;
     }
   }

@@ -94,6 +94,6 @@
       <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>
     </div>
     <p class="cart__text">
-      Shopping cart ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
+      {{ 'shoppingCart.header' | translate }} ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
   </div>
 </ion-content>

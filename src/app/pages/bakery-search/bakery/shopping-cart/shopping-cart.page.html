@@ -14,7 +14,7 @@
   <div class="shopping-cart">
     <div class="date">
       <h2 class="date__title">{{ 'shoppingCart.pickUp' | translate }}:
-        <span class="date__title_purple">{{ dateService.date | date:'M/d/yy, HH:mm'}}</span></h2>
+        <span class="date__title_purple">{{ dateService.date | date:'dd.MM.yy, HH:mm'}}</span></h2>
       <ion-button fill="none" size="small" (click)="presentVerifyDateModal()">
         <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
       </ion-button>

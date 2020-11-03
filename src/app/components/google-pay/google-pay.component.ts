@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CartService } from '../../services/cart.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { DateService } from '../../services/date.service';
 
 @Component({
   selector: 'app-google-pay',
@@ -14,6 +15,7 @@ export class GooglePayComponent implements OnInit {
     public cartService: CartService,
     private modalController: ModalController,
     private router: Router,
+    private dateService: DateService
   ) { }
 
   ngOnInit() {}
@@ -27,6 +29,7 @@ export class GooglePayComponent implements OnInit {
     };
     await this.router.navigate(['orders'], navigationExtras);
     this.cartService.cart.length = 0;
+    this.dateService.date = '';
   }
 
 }

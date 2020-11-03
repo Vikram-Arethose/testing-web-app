@@ -14,7 +14,7 @@
     <div *ngSwitchCase="data === 'name' || data === 'email' || data === 'phone'">
       <div class="setting">
         <div class="label-wrapper">
-          <h3 class="setting__label" *ngIf="data === 'phone'">Country</h3>
+          <h3 class="setting__label" *ngIf="data === 'phone'">{{ 'account.country'  | translate }}</h3>
           <h3 class="setting__label">{{settingLabel}}</h3>
         </div>
         <ion-item class="setting__item setting__item_purple item" lines="none">
@@ -49,25 +49,28 @@
       <div class="setting">
         <h3 class="setting__label"></h3>
           <ion-item class="setting__item item">
-            <ion-label class="item__label">Push-Notifications</ion-label>
+            <ion-label class="item__label">{{ 'account.pushNotifications' | translate }}</ion-label>
             <ion-toggle class="item__toggle"></ion-toggle>
           </ion-item>
       </div>
     </div>
     <div *ngSwitchCase="data === 'password'">
       <div class="setting">
-        <h3 class="setting__label setting__label_upper">current password</h3>
+        <h3 class="setting__label setting__label_upper">{{ 'account.currentPass' | translate }}</h3>
         <ion-item class="item" lines="none">
-          <ion-input class="item__input item__input_upper" placeholder="enter current password"></ion-input>
+          <ion-input class="item__input item__input_upper"
+                     [placeholder]="enter + ('account.currentPass' | translate)"></ion-input>
         </ion-item>
       </div>
       <div class="setting">
-        <h3 class="setting__label setting__label_upper">new password</h3>
+        <h3 class="setting__label setting__label_upper">{{ 'account.newPass' | translate }}</h3>
         <ion-item class="setting__item item">
-          <ion-input class="item__input item__input_upper" placeholder="enter new password"></ion-input>
+          <ion-input class="item__input item__input_upper"
+                     [placeholder]="enter + ('account.newPass' | translate)"></ion-input>
         </ion-item>
         <ion-item class="setting__item item">
-          <ion-input class="item__input item__input_upper" placeholder="confirm new password"></ion-input>
+          <ion-input class="item__input item__input_upper"
+                     [placeholder]="('dateChoose.confirm' | translate) + ' ' + ('account.newPass' | translate)"></ion-input>
         </ion-item>
         <ion-item class="setting__item" lines="none">
           <ion-button class="btn-check" slot="end" fill="none">
@@ -78,14 +81,14 @@
     </div>
     <div *ngSwitchCase="data === 'payments'">
       <div class="setting">
-        <h3 class="setting__label">Preferred payment methods</h3>
+        <h3 class="setting__label">{{ 'account.prefPaymentMeth' | translate }}</h3>
         <ion-item class="item">
           <img class="item__img" width="79px" src="../../../../../assets/icons/payments/paypal.png">
           <ion-toggle slot="end" class="item__toggle"></ion-toggle>
         </ion-item>
       </div>
       <div class="setting">
-        <h3 class="setting__label">Change payment method</h3>
+        <h3 class="setting__label">{{ 'account.changePaymentMeth' | translate }}</h3>
         <ion-item class="item">
           <ion-img class="item__img" src="../../../../assets/icons/payments/apple-pay-google.png"></ion-img>
           <ion-toggle slot="end" class="item__toggle"></ion-toggle>
@@ -111,13 +114,13 @@
       <div class="setting">
         <div class="top-grey"></div>
         <ion-item class="item" detail="false" button (click)="open('privacy')">
-          <ion-label class="item__label">Data Privacy</ion-label>
+          <ion-label class="item__label">{{ 'account.dataPrivacy' | translate}}</ion-label>
         </ion-item>
         <ion-item class="item" detail="false" button (click)="open('imprint')">
-          <ion-label class="item__label">Imprint</ion-label>
+          <ion-label class="item__label">{{ 'account.imprint' | translate}}</ion-label>
         </ion-item>
         <ion-item class="item setting__item_pd" detail="false" button>
-          <ion-label class="item__label item__label_red">Delete account</ion-label>
+          <ion-label class="item__label item__label_red">{{ 'account.deleteAcc' | translate}}</ion-label>
         </ion-item>
       </div>
     </div>

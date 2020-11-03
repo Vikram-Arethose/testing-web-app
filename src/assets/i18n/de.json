@@ -54,14 +54,27 @@
     "accountDetails": "Accountdaten",
     "email": "Email-Adresse",
     "phoneNum": "Mobilnummer",
+    "enterYourNum": "Geben Sie ihre Nummer ein",
     "country": "Land",
-    "language": "Language",
+    "language": "Sprache",
     "settings": "Accountdaten",
     "notifications": "Benachrichtigungen",
+    "pushNotifications": "Mitteilungen",
     "changePass": "Passwort ändern",
+    "currentPass": "derzeitiges Passwort",
+    "newPass": "Neues Kennwort",
+    "enter": "eingeben ",
     "managePayment": "Zahlungsmittel verwalten",
-    "privacy": "Datenschutz & Impressum",
-    "logout": "Ausloggen"
+    "paymentMeth": "Zahlungsarten",
+    "prefPaymentMeth": "Bevorzugte Zahlungsmethoden",
+    "changePaymentMeth": "Bezahlungsmethode ändern",
+    "privacy&": "Datenschutz & Impressum",
+    "privacy": "Datenschutz",
+    "dataPrivacy": "Datenprivatsphäre",
+    "imprint": "Impressum",
+    "deleteAcc": "Konto löschen",
+    "logout": "Ausloggen",
+    "your": "Ihre "
   },
   "accDetails": {
     "yourName": "Your Name",
@@ -99,7 +112,7 @@
     "myLocation": "Mein Standort",
     "recently": "Kürzlich"
   },
-  "dateCollect": {
+  "dateChoose": {
     "title": "Wann möchtest du deine Bestellung abholen?",
     "day": "Tag",
     "today": "Heute",
