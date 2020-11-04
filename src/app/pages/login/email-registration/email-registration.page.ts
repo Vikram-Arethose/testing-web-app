@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailRegister } from '../../../models/emailRegister';
+import { LoggerService } from '../../../services/logger.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-registration',
@@ -6,18 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./email-registration.page.scss'],
 })
 export class EmailRegistrationPage implements OnInit {
-  counter = 0;
-  email: string;
-  name: string;
-  password: string;
+  step = 0;
+  emailRegister: EmailRegister = new EmailRegister();
 
-  constructor() { }
+  constructor(
+    private logger: LoggerService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
-  counterIncrease() {
-    this.counter++;
+  nextStep() {
+    this.step++;
+  }
+
+  onContinue() {
+    this.logger.log('emailRegister: ', this.emailRegister);
+    this.router.navigate(['location-setting']);
   }
 
 }
