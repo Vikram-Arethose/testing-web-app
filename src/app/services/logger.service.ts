@@ -7,7 +7,7 @@ export class LoggerService {
 
   constructor() { }
 
-  log(description?: string, value?: any) {
+  log(description?, value?: any) {
     console.log(description, value);
   }
 }

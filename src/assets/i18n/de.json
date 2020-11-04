@@ -9,6 +9,7 @@
     "appleBtn": "weiter über apple",
     "fbBtn": "weiter über facebook",
     "emailBtn": "registrieren per email",
+    "emailBtnLogin": "Login per E-Mail",
     "otherOpt": "andere option",
     "guest": "ohne anmeldung"
   },
@@ -31,6 +32,7 @@
     "nameSurname": "Name, Nachname"
   },
   "emailRegister": {
+    "login": "Anmeldung",
     "title1": "Los geht's.",
     "questionEmail": "Wie ist deine E-Mail-Adresse?",
     "email": "E-Mail-Addresse",

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PlatformService } from '../../../services/platform.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-start',
@@ -12,7 +13,8 @@ export class StartPage implements OnInit {
   otherOptOn = false;
 
   constructor(
-    private platformService: PlatformService
+    private platformService: PlatformService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -23,8 +25,14 @@ export class StartPage implements OnInit {
     this.otherOptOn = true;
   }
 
-  loginWith(loginWith: string) {
+  loginWith(loginWith: string, isLogin?: boolean) {
     this.platformService.loginWith = loginWith;
+    if (isLogin) {
+      const navigationExtras: NavigationExtras = {
+        state: { isLogin }
+      };
+      this.router.navigate(['email-registration'], navigationExtras);
+    }
   }
 
   onContentTap() {

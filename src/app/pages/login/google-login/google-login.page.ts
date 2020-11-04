@@ -3,6 +3,7 @@ import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../services/logger.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-google-login',
@@ -13,6 +14,7 @@ export class GoogleLoginPage implements OnInit {
   android = this.platformService.android;
   btnRouterLink = '/location-setting';
   continueBtnLabel: string;
+  isLogin: boolean;
   loginWith: string;
   myForm: FormGroup;
 
@@ -21,8 +23,8 @@ export class GoogleLoginPage implements OnInit {
     private translate: TranslateService,
     private platformService: PlatformService,
     private formBuilder: FormBuilder,
-    private logger: LoggerService
-  ) { }
+    private logger: LoggerService,
+  ) {}
 
   ngOnInit() {
     this.loginWith = this.platformService.loginWith;

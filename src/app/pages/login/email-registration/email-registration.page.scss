@@ -61,3 +61,19 @@
     font: normal normal 500 20px/24px Montserrat;
   }
 }
+
+.login {
+  .form {
+    padding: 50px 20px 0 0;
+    &__item {
+      margin-bottom: 20px;
+    }
+    .button-wrapper {
+      padding-top: 50px;
+    }
+  }
+}
+
+ion-item.ion-invalid.ion-touched {
+  --border-color: var(--ion-color-danger);
+}

@@ -1,64 +1,82 @@
 <ion-content>
   <div class="top"></div>
-  <form class="form">
-    <div class="form-item" *ngIf="step === 0">
-    <div class="form-item__header header">
-      <h1 class="header__item">{{ 'emailRegister.title1' | translate }}</h1>
-      <h1 class="header__item">{{ 'emailRegister.questionEmail' | translate }}</h1>
-    </div>
-    <div class="form-item__body">
-      <ion-item class="item" mode="ios">
+  <div class="login" *ngIf="isLogin">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-item class="form__item" mode="ios">
         <ion-label class="item__label" position="stacked">{{ 'emailRegister.email' | translate }}</ion-label>
-        <ion-input [(ngModel)]="emailRegister.email" name="email" #emailInput="ngModel"
-                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required></ion-input>
+        <ion-input name="email" formControlName="email" inputmode="email"></ion-input>
       </ion-item>
-      <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="emailInput.invalid">
-        <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
-      </ion-fab-button>
-    </div>
-  </div>
-    <div class="form-item" *ngIf="step === 1">
-      <div class="form-item__header header">
-        <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
-          <span class="header__item_purple">{{ emailRegister.email }}</span>.</h1>
-        <h1 class="header__item">{{ 'emailRegister.questionName' | translate }}</h1>
-      </div>
-      <div class="form-item__body">
-        <ion-item class="item" mode="ios">
-          <ion-label class="item__label" position="stacked">Name</ion-label>
-          <ion-input [(ngModel)]="emailRegister.name" name="name" #nameInput="ngModel" required></ion-input>
-        </ion-item>
-        <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="nameInput.invalid">
-          <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
-        </ion-fab-button>
-      </div>
-    </div>
-    <div class="form-item" *ngIf="step === 2">
-      <div class="form-item__header header">
-        <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
-          <span class="header__item_purple">{{ emailRegister.name }}</span>.</h1>
-        <h1 class="header__item">{{ 'emailRegister.choosePassword' | translate }}</h1>
-      </div>
-      <div class="form-item__body">
-        <ion-item class="item" mode="ios">
-          <ion-label class="item__label" position="stacked">{{ 'emailRegister.password' | translate }}</ion-label>
-          <ion-input [(ngModel)]="emailRegister.password" name="password"
-                     #passwordInput="ngModel" required minlength="6"></ion-input>
-        </ion-item>
-        <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="passwordInput.invalid">
-          <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
-        </ion-fab-button>
-      </div>
-    </div>
-    <div class="form-item" *ngIf="step === 3">
-      <div class="form-item__header header">
-        <h1 class="header__item">{{ 'emailRegister.welcome' | translate }}
-          <span class="header__item_purple">{{ emailRegister.name }}</span>!</h1>
-      </div>
-      <p class="text">{{ 'emailRegister.letsStart' | translate }}</p>
+      <ion-item class="form__item" mode="ios">
+        <ion-label class="item__label" position="stacked">{{ 'emailRegister.password' | translate }}</ion-label>
+        <ion-input type="password" name="password" formControlName="password"></ion-input>
+      </ion-item>
       <div class="button-wrapper">
-        <ion-button class="button-wrapper__btn" (click)="onContinue()">{{ 'general.continue' | translate }}</ion-button>
+        <ion-button class="button-wrapper__btn" type="submit" [disabled]="loginForm.invalid">{{ 'emailRegister.login' | translate }}</ion-button>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
+  <div class="registration" *ngIf="!isLogin">
+    <form class="form">
+      <div class="form-item" *ngIf="step === 0">
+        <div class="form-item__header header">
+          <h1 class="header__item">{{ 'emailRegister.title1' | translate }}</h1>
+          <h1 class="header__item">{{ 'emailRegister.questionEmail' | translate }}</h1>
+        </div>
+        <div class="form-item__body">
+          <ion-item class="item" mode="ios">
+            <ion-label class="item__label" position="stacked">{{ 'emailRegister.email' | translate }}</ion-label>
+            <ion-input [(ngModel)]="emailRegister.email" name="email" #emailInput="ngModel" inputmode="email"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required></ion-input>
+          </ion-item>
+          <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="emailInput.invalid">
+            <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
+          </ion-fab-button>
+        </div>
+      </div>
+      <div class="form-item" *ngIf="step === 1">
+        <div class="form-item__header header">
+          <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
+            <span class="header__item_purple">{{ emailRegister.email }}</span>.</h1>
+          <h1 class="header__item">{{ 'emailRegister.questionName' | translate }}</h1>
+        </div>
+        <div class="form-item__body">
+          <ion-item class="item" mode="ios">
+            <ion-label class="item__label" position="stacked">Name</ion-label>
+            <ion-input [(ngModel)]="emailRegister.name" name="name" #nameInput="ngModel" required></ion-input>
+          </ion-item>
+          <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="nameInput.invalid">
+            <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
+          </ion-fab-button>
+        </div>
+      </div>
+      <div class="form-item" *ngIf="step === 2">
+        <div class="form-item__header header">
+          <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
+            <span class="header__item_purple">{{ emailRegister.name }}</span>.</h1>
+          <h1 class="header__item">{{ 'emailRegister.choosePassword' | translate }}</h1>
+        </div>
+        <div class="form-item__body">
+          <ion-item class="item" mode="ios">
+            <ion-label class="item__label" position="stacked">{{ 'emailRegister.password' | translate }}</ion-label>
+            <ion-input [(ngModel)]="emailRegister.password" name="password" type="password"
+                       #passwordInput="ngModel" required minlength="6"></ion-input>
+          </ion-item>
+          <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="passwordInput.invalid">
+            <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
+          </ion-fab-button>
+        </div>
+      </div>
+      <div class="form-item" *ngIf="step === 3">
+        <div class="form-item__header header">
+          <h1 class="header__item">{{ 'emailRegister.welcome' | translate }}
+            <span class="header__item_purple">{{ emailRegister.name }}</span>!</h1>
+        </div>
+        <p class="text">{{ 'emailRegister.letsStart' | translate }}</p>
+        <div class="button-wrapper">
+          <ion-button class="button-wrapper__btn"
+                      (click)="register()">{{ 'general.continue' | translate }}</ion-button>
+        </div>
+      </div>
+    </form>
+  </div>
 </ion-content>

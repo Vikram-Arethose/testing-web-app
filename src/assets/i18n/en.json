@@ -9,6 +9,7 @@
     "appleBtn": "continue with apple",
     "fbBtn": "continue with facebook",
     "emailBtn": "registration by email",
+    "emailBtnLogin": "login by email",
     "otherOpt": "other options",
     "guest": "continue as guest"
   },
@@ -31,6 +32,7 @@
     "nameSurname": "Name, Surname"
   },
   "emailRegister": {
+    "login": "login",
     "title1": "Here we go!",
     "questionEmail": "What's your E-Mail Address?",
     "email": "E-Mail-Address",
