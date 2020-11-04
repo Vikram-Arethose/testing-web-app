@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PlatformService {
-  android = false;
+  android = true;
   loginWith: string;
 
   constructor() { }
