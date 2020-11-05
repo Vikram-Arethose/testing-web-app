@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class AccountService {
+
   private account = new BehaviorSubject({name: 'Jenny', email: 'Jenny@gmail.com', country: 'Germany',
     language: { title: 'English', value: 'en'}, });
   sharedAccount = this.account.asObservable();
