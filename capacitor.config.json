@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.brotchen.app",
   "appName": "brötchenApp",
   "bundledWebRuntime": false,
   "npmClient": "npm",

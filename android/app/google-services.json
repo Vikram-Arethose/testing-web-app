@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1009001698071",
+    "firebase_url": "https://brotchenapp.firebaseio.com",
+    "project_id": "brotchenapp",
+    "storage_bucket": "brotchenapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009001698071:android:6e6542852ce9485d6d5d52",
+        "android_client_info": {
+          "package_name": "com.brotchen.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009001698071-cjv2tsd94jbf07upg3e1pq5r82jqigbo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brotchen.app",
+            "certificate_hash": "0179cbc4328d86937a1d4255d25f766307e335f7"
+          }
+        },
+        {
+          "client_id": "1009001698071-6s9678cu04pt47n3bbi5c399lv4dk9c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZz9JayB_p8feyvf3p8MavG4iNF-_enWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009001698071-6s9678cu04pt47n3bbi5c399lv4dk9c6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
