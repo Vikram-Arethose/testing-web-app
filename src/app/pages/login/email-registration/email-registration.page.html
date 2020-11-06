@@ -11,7 +11,8 @@
         <ion-input type="password" name="password" formControlName="password"></ion-input>
       </ion-item>
       <div class="button-wrapper">
-        <ion-button class="button-wrapper__btn" type="submit" [disabled]="loginForm.invalid">{{ 'emailRegister.login' | translate }}</ion-button>
+        <ion-button class="button-wrapper__btn" type="submit" [disabled]="loginForm.invalid">
+          {{ 'emailRegister.login' | translate }}</ion-button>
       </div>
     </form>
   </div>
@@ -42,7 +43,7 @@
         <div class="form-item__body">
           <ion-item class="item" mode="ios">
             <ion-label class="item__label" position="stacked">Name</ion-label>
-            <ion-input [(ngModel)]="emailRegisterData.name" name="name" #nameInput="ngModel" required></ion-input>
+            <ion-input [(ngModel)]="emailRegisterData.first_name" name="first_name" #nameInput="ngModel" required></ion-input>
           </ion-item>
           <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="nameInput.invalid">
             <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>

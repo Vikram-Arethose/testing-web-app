@@ -1,13 +1,29 @@
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { consoleTestResultHandler } from 'tslint/lib/test';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggerService {
 
-  constructor() { }
+  constructor(
+    private errorHandler: ErrorHandler
+  ) { }
 
-  log(description?, value?: any) {
-    console.log(description, value);
+  log(value: any, ...rest: any) {
+    if (!environment.production) {
+      console.log(value, ...rest);
+    }
+  }
+
+  error(error: Error) {
+    this.errorHandler.handleError(error);
+  }
+
+  warn(value: any, ...rest: any) {
+    if (!environment.production) {
+      console.warn(value, ...rest);
+    }
   }
 }

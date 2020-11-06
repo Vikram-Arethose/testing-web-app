@@ -1,8 +1,6 @@
 export class EmailRegister {
-  constructor(
-    public email: string = '',
-    public name: string = '',
-    public password: string = ''
-  ) {
-  }
+  public email = '';
+  // tslint:disable-next-line:variable-name
+  public first_name = '';
+  public password = '';
 }

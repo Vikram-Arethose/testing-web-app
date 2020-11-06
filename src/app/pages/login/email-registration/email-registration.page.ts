@@ -4,6 +4,8 @@ import { LoggerService } from '../../../services/logger.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { AuthResponse } from '../../../models/authResponse';
 
 @Component({
   selector: 'app-email-registration',
@@ -22,7 +24,8 @@ export class EmailRegistrationPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private localStorageServ: LocalStorageService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -47,14 +50,16 @@ export class EmailRegistrationPage implements OnInit {
   register() {
     this.logger.log('emailRegister: ', this.emailRegisterData);
     this.httpService.postData('/register', this.emailRegisterData).subscribe(
-      res => {
+      (res: AuthResponse)  => {
       this.logger.log('server res: ', res);
       this.nextStep();
-      localStorage.setItem('user', JSON.stringify(res));
+      this.localStorageServ.setArr([{key: 'token', value: res.access_token}, {key: 'user', value: res.user}]);
     },
       error => {
         this.logger.log(error);
+        this.httpService.handleError(error.error);
         this.step = 0;
+        this.emailRegisterData = new EmailRegister();
       });
 
   }
@@ -62,11 +67,16 @@ export class EmailRegistrationPage implements OnInit {
   login() {
     this.logger.log('this.loginForm', this.loginForm.value);
     this.httpService.postData('/login', this.loginForm.value).subscribe(
-      res => {
+      (res: AuthResponse) => {
         this.logger.log('server res: ', res);
+        this.localStorageServ.setArr([{key: 'token', value: res.access_token}, {key: 'user', value: res.user}]);
         this.router.navigate(['bakery-search']);
       },
-      error => this.logger.log(error));
+      error => {
+        this.logger.log(error);
+        this.loginForm.reset();
+        this.httpService.handleError(error.error);
+      });
   }
 
 }
