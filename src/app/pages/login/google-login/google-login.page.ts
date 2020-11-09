@@ -3,7 +3,9 @@ import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../services/logger.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-google-login',
@@ -12,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GoogleLoginPage implements OnInit {
   android = this.platformService.android;
-  btnRouterLink = '/location-setting';
+  // btnRouterLink = '/location-setting';
   continueBtnLabel: string;
   isLogin: boolean;
   loginWith: string;
@@ -24,6 +26,7 @@ export class GoogleLoginPage implements OnInit {
     private platformService: PlatformService,
     private formBuilder: FormBuilder,
     private logger: LoggerService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -46,11 +49,20 @@ export class GoogleLoginPage implements OnInit {
         break;
       case 'email':
         this.continueBtnLabel = this.translate.instant('general.continue');
-        this.btnRouterLink = '/email-registration';
         break;
     }
   }
 
-  continue() {}
+   async continue() {
+    if (this.loginWith === 'email') {
+      this.router.navigate(['/email-registration']);
+      return;
+    } else if (this.loginWith === 'md') {
+       const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+       this.logger.log('my user: ', googleUser);
+     }
+
+    this.router.navigate(['/location-setting']);
+   }
 
 }
