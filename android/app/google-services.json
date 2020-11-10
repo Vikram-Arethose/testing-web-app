@@ -8,14 +8,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1009001698071:android:4a3d8b25ac9c13376d5d52",
+        "mobilesdk_app_id": "1:1009001698071:android:15a6f892b81603fd6d5d52",
         "android_client_info": {
           "package_name": "com.brotchen.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1009001698071-cjv2tsd94jbf07upg3e1pq5r82jqigbo.apps.googleusercontent.com",
+          "client_id": "1009001698071-1kigc7rhci1qrvj4ij4dr164ik02vabj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.brotchen.app",

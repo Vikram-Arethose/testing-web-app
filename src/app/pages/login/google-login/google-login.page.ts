@@ -58,8 +58,8 @@ export class GoogleLoginPage implements OnInit {
       this.router.navigate(['/email-registration']);
       return;
     } else if (this.loginWith === 'md') {
-       const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
-       this.logger.log('my user: ', googleUser);
+        const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+        console.log('my user: ', googleUser);
      }
 
     this.router.navigate(['/location-setting']);
