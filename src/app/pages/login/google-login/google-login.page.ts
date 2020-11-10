@@ -3,9 +3,10 @@ import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../services/logger.service';
+import { Router } from '@angular/router';
+
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-google-login',
@@ -19,6 +20,7 @@ export class GoogleLoginPage implements OnInit {
   isLogin: boolean;
   loginWith: string;
   myForm: FormGroup;
+  private userInfo: null;
 
 
   constructor(
@@ -58,8 +60,9 @@ export class GoogleLoginPage implements OnInit {
       this.router.navigate(['/email-registration']);
       return;
     } else if (this.loginWith === 'md') {
-        const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
-        console.log('my user: ', googleUser);
+      const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+      this.logger.log('my user: ', googleUser);
+      this.userInfo = googleUser;
      }
 
     this.router.navigate(['/location-setting']);
