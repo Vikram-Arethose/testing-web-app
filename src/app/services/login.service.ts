@@ -14,7 +14,7 @@ import { RegisterData } from '../models/registerData';
   providedIn: 'root'
 })
 export class LoginService {
-  user: RegisterData;
+  user: any = {};
 
   constructor(
     private alertController: AlertController,
@@ -23,6 +23,29 @@ export class LoginService {
     private router: Router,
     private localStorageServ: LocalStorageService
   ) { }
+
+  async googleLogin() {
+    const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+    if (googleUser) {
+      // prepare user info for posting on server
+      this.user.email = googleUser.email;
+      this.user.first_name = googleUser.givenName;
+      this.user.reg_auth_type = 'google';
+      this.user.reg_auth_token = googleUser.idToken;
+      this.user.reg_auth_user_id = googleUser.id;
+      this.logger.log('googleUser', this.user);
+      // posting on server
+      this.httpService.postData('/register', this.user).subscribe(
+        (response: any) => {
+          this.logger.log('server response: ', response);
+          this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
+          this.router.navigate(['location-setting']);
+        }, error => {
+          this.logger.warn('server response error: ', error);
+          this.httpService.handleError(error);
+        });
+    }
+  }
 
   openAppleSignIn() {
     const { SignInWithApple } = Plugins;
@@ -43,7 +66,8 @@ export class LoginService {
               this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
               this.router.navigate(['google-login']);
             }, error => {
-              this.logger.log('server response error: ', error);
+              this.logger.warn('server response error: ', error);
+              this.httpService.handleError(error);
             }
           );
         } else {

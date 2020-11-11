@@ -57,7 +57,7 @@ export class EmailRegistrationPage implements OnInit {
     },
       error => {
         this.logger.log(error);
-        this.httpService.handleError(error.error);
+        this.httpService.handleError(error);
         this.step = 0;
         this.emailRegisterData = new EmailRegister();
       });
@@ -75,7 +75,7 @@ export class EmailRegistrationPage implements OnInit {
       error => {
         this.logger.log(error);
         this.loginForm.reset();
-        this.httpService.handleError(error.error);
+        this.httpService.handleError(error);
       });
   }
 

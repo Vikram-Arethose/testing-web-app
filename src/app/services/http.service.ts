@@ -21,7 +21,7 @@ export class HttpService {
   }
 
   handleError(error) {
-    const errorMessage = getProps(error);
+    const errorMessage = getProps(error.error);
     this.presentAlert(errorMessage);
 
     function getProps(obj) {
