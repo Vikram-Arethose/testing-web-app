@@ -13,7 +13,7 @@
       {{ 'start.googleBtn' | translate }}
     </ion-button>
     <ion-button class="controls__btn controls__btn_g btn"
-                *ngIf="!android" (click)="loginWith('ios')" [routerLink]="'/apple-registration'"
+                *ngIf="!android" (click)="loginWith('ios')"
                 expand="block" size="large" fill="outline" [disabled]="otherOptOn">
       <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/apple.svg"></ion-icon>
       {{ 'start.appleBtn' | translate }}

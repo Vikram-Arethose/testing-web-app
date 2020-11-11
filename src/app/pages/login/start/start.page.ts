@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { PlatformService } from '../../../services/platform.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-start',
@@ -14,7 +15,8 @@ export class StartPage implements OnInit {
 
   constructor(
     private platformService: PlatformService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
@@ -27,11 +29,14 @@ export class StartPage implements OnInit {
 
   loginWith(loginWith: string, isLogin?: boolean) {
     this.platformService.loginWith = loginWith;
+    if (loginWith === 'ios') {
+      this.loginService.openAppleSignIn();
+    }
     if (isLogin) {
       const navigationExtras: NavigationExtras = {
         state: { isLogin }
       };
-      this.router.navigate(['email-registration'], navigationExtras);
+      // this.router.navigate(['email-registration'], navigationExtras);
     }
   }
 

@@ -19,4 +19,5 @@ export class AccountService {
   changeAccount(data) {
     this.account.next(data);
   }
+  
 }
