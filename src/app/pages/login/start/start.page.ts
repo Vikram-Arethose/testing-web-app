@@ -40,6 +40,10 @@ export class StartPage implements OnInit {
     }
   }
 
+  facebookSignIn() {
+    this.loginService.facebookSignIn();
+  }
+
   onContentTap() {
     if (this.otherOptOn) {
       this.otherOptOn = false;

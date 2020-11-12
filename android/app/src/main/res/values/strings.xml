@@ -5,4 +5,6 @@
     <string name="package_name">com.brotchen.app</string>
     <string name="custom_url_scheme">com.brotchen.app</string>
     <string name="server_client_id">251191030312-gos047vr2a4bg9otk8nab48fpqdb84jv.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">416414712876916</string>
+    <string name="fb_login_protocol_scheme">fb416414712876916</string>
 </resources>

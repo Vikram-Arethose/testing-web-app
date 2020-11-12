@@ -79,6 +79,28 @@ export class LoginService {
       });
   }
 
+  async facebookSignIn(): Promise<void> {
+    this.logger.log('facebookSignIn');
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
+
+    const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    this.logger.log('login result: ', result);
+    if (result && result.accessToken) {
+      this.user.reg_auth_type = 'facebook';
+      this.user.reg_auth_token = result.accessToken.token;
+      this.user.reg_auth_user_id = result.accessToken.userId;
+      this.facebookGetUserInfo();
+    }
+  }
+
+  async facebookGetUserInfo() {
+    const response = await fetch(`https://graph.facebook.com/${this.user.reg_auth_user_id}?fields=id,email,name,gender,link,picture&type=large&access_token=${this.user.reg_auth_token}`);
+    this.logger.log('get info response', response);
+    const myJson = await response.json();
+    this.logger.log('myJson', myJson);
+    // this.user = myJson
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Login Failed',
