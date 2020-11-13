@@ -38,7 +38,7 @@ export class LoginService {
         (response: any) => {
           this.logger.log('server response: ', response);
           this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
-          this.router.navigate(['location-setting']);
+          this.router.navigate(['google-login']);
         }, error => {
           this.logger.warn('server response error: ', error);
           this.httpService.handleError(error);
@@ -49,7 +49,8 @@ export class LoginService {
   openAppleSignIn() {
     const { SignInWithApple } = Plugins;
     SignInWithApple.Authorize()
-      .then((res) => {
+      .then(
+        (res) => {
         if (res.response && res.response.identityToken) {
           // prepare user info for posting on server
           this.user.email = res.response.email;
@@ -74,7 +75,7 @@ export class LoginService {
         }
       })
       .catch((error) => {
-        this.logger.warn('response error', error);
+        this.presentAlert();
       });
   }
 
@@ -103,7 +104,7 @@ export class LoginService {
           (response: any) => {
             this.logger.log('server response: ', response);
             this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
-            this.router.navigate(['location-setting']);
+            this.router.navigate(['google-login']);
           }, error => {
             this.logger.warn('server response error: ', error);
             this.httpService.handleError(error);

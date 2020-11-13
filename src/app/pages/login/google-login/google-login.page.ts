@@ -42,7 +42,7 @@ export class GoogleLoginPage implements OnInit {
 
   getBtnLabel() {
     switch (this.loginWith) {
-      case 'md':
+      case 'google':
         this.continueBtnLabel = this.translate.instant('start.googleBtn');
         break;
       case 'ios':
@@ -55,12 +55,7 @@ export class GoogleLoginPage implements OnInit {
   }
 
    continue() {
-    if (this.loginWith === 'email') {
-      this.router.navigate(['/email-registration']);
-      return;
-    } else if (this.loginWith === 'md') {
-      this.loginService.googleLogin();
-     }
+     this.router.navigate(['location-setting']);
    }
 
 }

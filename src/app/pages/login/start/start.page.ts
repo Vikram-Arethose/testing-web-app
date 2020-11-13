@@ -29,8 +29,12 @@ export class StartPage implements OnInit {
 
   loginWith(loginWith: string, isLogin?: boolean) {
     this.platformService.loginWith = loginWith;
-    if (loginWith === 'ios') {
-      this.loginService.openAppleSignIn();
+    switch (loginWith) {
+      case 'ios':
+        this.loginService.openAppleSignIn();
+        break;
+      case 'google':
+        this.loginService.googleLogin();
     }
     if (isLogin) {
       const navigationExtras: NavigationExtras = {
