@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
+import { Router } from '@angular/router';
+
+import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
-import { User } from '../models/user';
-import { Router } from '@angular/router';
 import { LocalStorageService } from './local-storage.service';
-import { RegisterData } from '../models/registerData';
-
 
 @Injectable({
   providedIn: 'root'
@@ -86,19 +85,35 @@ export class LoginService {
     const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
     this.logger.log('login result: ', result);
     if (result && result.accessToken) {
+      // prepare user info for posting on server
       this.user.reg_auth_type = 'facebook';
-      this.user.reg_auth_token = result.accessToken.token;
+      const token = result.accessToken.token;
+      const userIdHashed = new Md5().appendStr(result.accessToken.userId).end();
+      this.user.reg_auth_token = userIdHashed;
       this.user.reg_auth_user_id = result.accessToken.userId;
-      this.facebookGetUserInfo();
+      let userInfo: any = await fetch(`https://graph.facebook.com/${this.user.reg_auth_user_id}?fields=email,first_name&access_token=${token}`);
+      userInfo = await userInfo.json();
+      this.logger.log('userInfo: ', userInfo);
+      if (userInfo.email) {
+        this.user.email = userInfo.email;
+        this.user.first_name = userInfo.first_name;
+        this.logger.log('this.user: ', this.user);
+        // posting on server
+        this.httpService.postData('/register', this.user).subscribe(
+          (response: any) => {
+            this.logger.log('server response: ', response);
+            this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
+            this.router.navigate(['location-setting']);
+          }, error => {
+            this.logger.warn('server response error: ', error);
+            this.httpService.handleError(error);
+          });
+      } else {
+        this.presentAlert();
+      }
+    } else {
+      this.presentAlert();
     }
-  }
-
-  async facebookGetUserInfo() {
-    const response = await fetch(`https://graph.facebook.com/${this.user.reg_auth_user_id}?fields=id,email,name,gender,link,picture&type=large&access_token=${this.user.reg_auth_token}`);
-    this.logger.log('get info response', response);
-    const myJson = await response.json();
-    this.logger.log('myJson', myJson);
-    // this.user = myJson
   }
 
   async presentAlert() {

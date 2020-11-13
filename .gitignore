@@ -37,5 +37,7 @@ android
 !android/app/src/main/java/com/devdactic/capalogin/MainActivity.java
 !android/app/src/main/AndroidManifest.xml
 
-/ios
+ios
+!ios/App/App/AppDelegate.swift
+!ios/App/App/info.plist
 

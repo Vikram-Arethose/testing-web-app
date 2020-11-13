@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { EmailRegister } from '../models/emailRegister';
 import { AlertController } from '@ionic/angular';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,24 @@ export class HttpService {
 
   constructor(
     private http: HttpClient,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private logger: LoggerService
   ) { }
 
   postData(endPoint: string, data) {
     return this.http.post(this.baseUrl + endPoint, data);
   }
 
-  handleError(error) {
-    const errorMessage = getProps(error.error);
-    this.presentAlert(errorMessage);
+  handleError(err) {
+    if (err.error instanceof Error) {
+      // A client-side or network error occurred. Handle it accordingly.
+      this.presentAlert(err.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      this.presentAlert('Something went wrong! Please try later.');
+      this.logger.warn(`Backend returned code ${err.status}, body was: ${err.error}`);
+    }
 
     function getProps(obj) {
       let result = '';
@@ -53,4 +62,5 @@ export class HttpService {
 
     await alert.present();
   }
+
 }

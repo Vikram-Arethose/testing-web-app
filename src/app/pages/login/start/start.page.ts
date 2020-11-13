@@ -36,7 +36,7 @@ export class StartPage implements OnInit {
       const navigationExtras: NavigationExtras = {
         state: { isLogin }
       };
-      // this.router.navigate(['email-registration'], navigationExtras);
+      this.router.navigate(['email-registration'], navigationExtras);
     }
   }
 
