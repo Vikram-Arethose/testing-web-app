@@ -70,7 +70,7 @@ export class EmailRegistrationPage implements OnInit {
       (res: AuthResponse) => {
         this.logger.log('server res: ', res);
         this.localStorageServ.setArr([{key: 'token', value: res.access_token}, {key: 'user', value: res.user}]);
-        this.router.navigate(['bakery-search']);
+        this.router.navigate(['location-setting']);
       },
       error => {
         this.logger.log(error);

@@ -1,15 +1,25 @@
 <ion-content>
-  <div class="header">
-    <h1 class="header__title">{{ 'locationSet.title' | translate }}</h1>
+  <div class="content">
+    <div class="header">
+      <h1 class="header__title">{{ 'locationSet.title' | translate }}</h1>
+    </div>
+    <div class="btn-wrapper">
+      <ion-button class="btn-wrapper__btn btn" fill="outline" [class.selected]="useCurrLocation"
+                  (click)="onUseCurrLocation()"
+                  expand="block">{{ 'locationSet.useCurrLocation' | translate }}
+        <ion-icon slot="start" class="btn__icon" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
+      </ion-button>
+      <ion-item class="item" lines="none">
+        <input #search class="item__input" [placeholder]="'locationSet.searchLocation' | translate "
+                   autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
+        <ion-icon slot="start" class="item__icon" src="../../../assets/icons/search.svg"></ion-icon>
+      </ion-item>
+      <ion-button class="btn-wrapper__btn btn" size="block"
+                  [routerLink]="'/bakery-search'"
+                  [disabled]="!useCurrLocation  && !locationSearched">{{ 'locationSet.apply' | translate }}</ion-button>
+    </div>
+    <agm-map class="map" [latitude]="latitude" [longitude]="longitude" [zoom]="12">
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
   </div>
-  <div class="btn-wrapper">
-    <ion-button class="btn-wrapper__btn btn" fill="outline" expand="block">{{ 'locationSet.useCurrLocation' | translate }}
-      <ion-icon slot="start" class="btn__icon" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
-    </ion-button>
-    <ion-button class="btn-wrapper__btn btn" size="block" fill="outline">{{ 'locationSet.searchLocation' | translate }}
-      <ion-icon slot="start" class="btn__icon" src="../../../assets/icons/search.svg"></ion-icon>
-    </ion-button>
-    <ion-button class="btn-wrapper__btn btn" size="block" [routerLink]="'/bakery-search'">{{ 'locationSet.apply' | translate }}</ion-button>
-  </div>
-  <ion-img class="img" src="../../../assets/img/map.jpg"></ion-img>
 </ion-content>
