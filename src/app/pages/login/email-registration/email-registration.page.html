@@ -53,7 +53,7 @@
       <div class="form-item" *ngIf="step === 2">
         <div class="form-item__header header">
           <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
-            <span class="header__item_purple">{{ emailRegisterData.name }}</span>.</h1>
+            <span class="header__item_purple">{{ emailRegisterData.first_name }}</span>.</h1>
           <h1 class="header__item">{{ 'emailRegister.choosePassword' | translate }}</h1>
         </div>
         <div class="form-item__body">
@@ -70,7 +70,7 @@
       <div class="form-item" *ngIf="step === 3">
         <div class="form-item__header header">
           <h1 class="header__item">{{ 'emailRegister.welcome' | translate }}
-            <span class="header__item_purple">{{ emailRegisterData.name }}</span>!</h1>
+            <span class="header__item_purple">{{ emailRegisterData.first_name }}</span>!</h1>
         </div>
         <p class="text">{{ 'emailRegister.letsStart' | translate }}</p>
         <div class="button-wrapper">

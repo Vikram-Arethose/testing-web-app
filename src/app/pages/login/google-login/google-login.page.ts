@@ -49,6 +49,7 @@ export class GoogleLoginPage implements OnInit {
         this.continueBtnLabel = this.translate.instant('googleLogin.createAccBtn');
         break;
       case 'email':
+      case 'facebook':
         this.continueBtnLabel = this.translate.instant('general.continue');
         break;
     }

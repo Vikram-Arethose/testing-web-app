@@ -35,6 +35,10 @@ export class StartPage implements OnInit {
         break;
       case 'google':
         this.loginService.googleLogin();
+        break;
+      case 'facebook':
+        this.loginService.facebookSignIn();
+        break;
     }
     if (isLogin) {
       const navigationExtras: NavigationExtras = {
@@ -42,10 +46,6 @@ export class StartPage implements OnInit {
       };
       this.router.navigate(['email-registration'], navigationExtras);
     }
-  }
-
-  facebookSignIn() {
-    this.loginService.facebookSignIn();
   }
 
   onContentTap() {
