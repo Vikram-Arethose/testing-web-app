@@ -34,7 +34,7 @@
   &__item {
     &_select {
       width: 80%;
-      margin: 0 auto 8vh;
+      margin: 0 auto 6vh;
       --padding-start: 0;
       --inner-padding-start: 18px;
       @media (max-device-height: 568px) {
@@ -43,7 +43,7 @@
     }
 
     &_check {
-      margin: 0 0 6vh;
+      margin: 0 0 4vh;
       @media (max-device-height: 568px) {
         margin: 0 0 3vh;
       }

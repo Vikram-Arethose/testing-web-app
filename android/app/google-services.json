@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "251191030312",
-    "firebase_url": "https://brotchenuserapp.firebaseio.com",
-    "project_id": "brotchenuserapp",
-    "storage_bucket": "brotchenuserapp.appspot.com"
+    "project_number": "997978298378",
+    "firebase_url": "https://brotchenuserapp-4f1b7.firebaseio.com",
+    "project_id": "brotchenuserapp-4f1b7",
+    "storage_bucket": "brotchenuserapp-4f1b7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:251191030312:android:76249a7cb627e22f16fb1d",
+        "mobilesdk_app_id": "1:997978298378:android:4fe78b2336d0de617f27f3",
         "android_client_info": {
           "package_name": "com.brotchen.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "251191030312-enrgd4848nbp2ogsr983mshnkj5crd29.apps.googleusercontent.com",
+          "client_id": "997978298378-21d70ejl0v8204hb0ue9ibkenje2io0n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.brotchen.app",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "251191030312-gos047vr2a4bg9otk8nab48fpqdb84jv.apps.googleusercontent.com",
+          "client_id": "997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAOt5UjEiI712ivUVQvEvOqAYpc4K3CIFQ"
+          "current_key": "AIzaSyAN-3ERtYhrN11RJVjorBCnIBU0dhWlYm4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "251191030312-gos047vr2a4bg9otk8nab48fpqdb84jv.apps.googleusercontent.com",
+              "client_id": "997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

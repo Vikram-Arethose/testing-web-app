@@ -18,7 +18,7 @@ import { AgmCoreModule } from '@agm/core';
     LocationSettingPageRoutingModule,
     TranslateModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA_ynyzstxQIf-zeIivWRD-lL_WFpfdbug',
+      apiKey: 'AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ',
       libraries: ['places']
     })
   ],
