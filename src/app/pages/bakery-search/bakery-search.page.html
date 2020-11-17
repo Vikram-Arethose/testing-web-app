@@ -9,6 +9,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
     <div class="bakery bakery-search" *ngFor="let bakery of bakeries" [routerLink]="'/bakery-search/bakery'">

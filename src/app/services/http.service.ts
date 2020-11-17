@@ -4,8 +4,8 @@ import { environment } from '../../environments/environment';
 import { EmailRegister } from '../models/emailRegister';
 import { AlertController } from '@ionic/angular';
 import { LoggerService } from './logger.service';
-import { Observable } from 'rxjs';
-import { BranchesNearResponse } from '../models/http/branchesNear';
+import { Observable, Subject } from 'rxjs';
+import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,15 @@ export class HttpService {
   ) { }
 
   getBranchesNear(lat: string, lng: string) {
-    return this.http.get(this.baseUrl + '/branches-near-me?lat=' + lat + '&lng=' + lng)
+    const subject = new Subject<BranchNear[]>();
+    this.http.get(this.baseUrl + '/branches-near-me?lat=' + lat + '&lng=' + lng)
       .subscribe((res: any) => {
         if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
-          this.logger.log('BranchesNearResponse', res);
+          subject.next(res.data);
+          this.logger.log('BranchesNearResponse data', res.data);
         }
     });
+    return subject.asObservable();
   }
 
   postData(endPoint: string, data) {
