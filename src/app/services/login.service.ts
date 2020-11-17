@@ -37,11 +37,9 @@ export class LoginService {
       this.httpService.postData('/register', this.user).subscribe(
         (response: any) => {
           this.logger.log('server response: ', response);
-          this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
+          localStorage.setItem('token', response.access_token);
+          this.localStorageServ.setArr([{key: 'user', value: response.user}]);
           this.router.navigate(['google-login']);
-        }, error => {
-          this.logger.warn('server response error: ', error);
-          this.httpService.handleError(error);
         });
     }
   }
@@ -63,11 +61,11 @@ export class LoginService {
           this.httpService.postData('/register', this.user).subscribe(
             (response: any) => {
               this.logger.log('server response: ', response);
-              this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
+              localStorage.setItem('token', response.access_token);
+              this.localStorageServ.setArr([{key: 'user', value: response.user}]);
               this.router.navigate(['google-login']);
             }, error => {
               this.logger.warn('server response error: ', error);
-              this.httpService.handleError(error);
             }
           );
         } else {
@@ -103,11 +101,11 @@ export class LoginService {
         this.httpService.postData('/register', this.user).subscribe(
           (response: any) => {
             this.logger.log('server response: ', response);
-            this.localStorageServ.setArr([{key: 'token', value: response.access_token}, {key: 'user', value: response.user}]);
+            localStorage.setItem('token', response.access_token);
+            this.localStorageServ.setArr([{key: 'user', value: response.user}]);
             this.router.navigate(['google-login']);
           }, error => {
             this.logger.warn('server response error: ', error);
-            this.httpService.handleError(error);
           });
       } else {
         this.presentAlert();

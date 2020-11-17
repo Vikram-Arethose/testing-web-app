@@ -20,6 +20,9 @@
     </div>
     <agm-map class="map" [latitude]="latitude" [longitude]="longitude" [zoom]="12">
       <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      <agm-marker *ngFor="let bakery of branchesNear"
+                  [latitude]="bakery.lat" [longitude]="bakery.lng"
+                  [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></agm-marker>
     </agm-map>
   </div>
 </ion-content>

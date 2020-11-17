@@ -53,11 +53,10 @@ export class EmailRegistrationPage implements OnInit {
       (res: AuthResponse)  => {
       this.logger.log('server res: ', res);
       this.nextStep();
-      this.localStorageServ.setArr([{key: 'token', value: res.access_token}, {key: 'user', value: res.user}]);
+      localStorage.setItem('token', res.access_token);
+      this.localStorageServ.setArr([{key: 'user', value: res.user}]);
     },
       error => {
-        this.logger.log(error);
-        this.httpService.handleError(error);
         this.step = 0;
         this.emailRegisterData = new EmailRegister();
       });
@@ -69,13 +68,12 @@ export class EmailRegistrationPage implements OnInit {
     this.httpService.postData('/login', this.loginForm.value).subscribe(
       (res: AuthResponse) => {
         this.logger.log('server res: ', res);
-        this.localStorageServ.setArr([{key: 'token', value: res.access_token}, {key: 'user', value: res.user}]);
+        localStorage.setItem('token', res.access_token);
+        this.localStorageServ.setArr([{key: 'user', value: res.user}]);
         this.router.navigate(['location-setting']);
       },
       error => {
-        this.logger.log(error);
         this.loginForm.reset();
-        this.httpService.handleError(error);
       });
   }
 

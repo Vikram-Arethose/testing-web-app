@@ -1,7 +1,7 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -17,7 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 
-import { AgmCoreModule } from '@agm/core';
+import { Interceptor } from './core/interceptors/interceptor';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -46,7 +46,8 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: LOCALE_ID, useValue: 'de-De'}
+    { provide: LOCALE_ID, useValue: 'de-De'},
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

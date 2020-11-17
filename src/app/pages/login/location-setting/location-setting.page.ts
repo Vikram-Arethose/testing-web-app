@@ -2,6 +2,9 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core'
 
 import { MapsAPILoader } from '@agm/core';
 import { LoggerService } from '../../../services/logger.service';
+import { GeolocationService } from '../../../services/geolocation.service';
+import { BakeriesAround, BranchNear } from '../../../core/mocks/bakeries-around';
+import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-location-setting',
@@ -10,17 +13,13 @@ import { LoggerService } from '../../../services/logger.service';
 })
 export class LocationSettingPage implements OnInit {
 
+  branchesNear: BranchNear[] = BakeriesAround;
   useCurrLocation: boolean;
   locationSearched: boolean;
   location: string;
   latitude: number;
   longitude: number;
   googleMapType = 'satellite';
-  private address: string;
-  private web_site: string;
-  private name: string;
-  private zip_code: string;
-  private zoom: number;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -28,11 +27,16 @@ export class LocationSettingPage implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private geolocationServ: GeolocationService,
+    private httpServ: HttpService
   ) { }
 
-  ngOnInit() {
-    this.setCurrentLocation();
+  async ngOnInit() {
+    await this.setCurrentLocation();
+    this.httpServ.getBranchesNear(this.latitude.toString(), this.longitude.toString());
+    // this.setCurrentLocation();
+    this.findAddress();
 /*    // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       // this.setCurrentLocation();
@@ -59,25 +63,29 @@ export class LocationSettingPage implements OnInit {
   }
 
   onUseCurrLocation() {
+    this.setCurrentLocation();
     this.useCurrLocation = !this.useCurrLocation;
     this.locationSearched = false;
     this.searchElementRef.nativeElement.value = '';
   }
 
   ionViewDidEnter() {
-    this.findAddress();
+
   }
 
   // Get Current Location Coordinates
-  private setCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 8;
-        // this.getAddress(this.latitude, this.longitude);
-      });
-    }
+  private async setCurrentLocation() {
+    const coordinates = await this.geolocationServ.getCurrentPosition();
+    this.latitude = coordinates.coords.latitude;
+    this.longitude = coordinates.coords.longitude;
+    // if ('geolocation' in navigator) {
+    //   navigator.geolocation.getCurrentPosition((position) => {
+    //     this.latitude = position.coords.latitude;
+    //     this.longitude = position.coords.longitude;
+    //     this.zoom = 8;
+    //     // this.getAddress(this.latitude, this.longitude);
+    //   });
+    // }
   }
 
   findAddress(){
@@ -102,6 +110,10 @@ export class LocationSettingPage implements OnInit {
         });
       });
     });
+  }
+
+  getBranchesNear() {
+    // this.httpServ.
   }
 
 }
