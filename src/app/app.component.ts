@@ -6,6 +6,8 @@ import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { LoggerService } from './services/logger.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -57,7 +59,9 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private translate: TranslateService,
     private menu: MenuController,
-    private router: Router
+    private router: Router,
+    private logger: LoggerService,
+    private localStorageServ: LocalStorageService
   ) {
     this.initializeApp();
   }
@@ -67,6 +71,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.setDefaultLang('en');
+      this.openFirstPage();
       // this.translate.use('en');
     });
   }
@@ -81,5 +86,15 @@ export class AppComponent implements OnInit {
   toAccount() {
     this.router.navigate(['account']);
     this.menu.close();
+  }
+
+  openFirstPage() {
+    const token = localStorage.getItem('token');
+    this.logger.log('token: ', token);
+    if (token) {
+      this.router.navigate(['bakery-search']);
+    } else {
+      this.router.navigate(['start']);
+    }
   }
 }

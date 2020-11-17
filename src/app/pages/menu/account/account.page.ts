@@ -30,4 +30,9 @@ export class AccountPage implements OnInit {
     this.router.navigate(['account/account-detail'], navigationExtras);
   }
 
+  logout() {
+    localStorage.setItem('token', '');
+    this.router.navigate(['start']);
+  }
+
 }
