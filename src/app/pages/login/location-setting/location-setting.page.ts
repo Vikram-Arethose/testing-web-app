@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class LocationSettingPage implements OnInit {
 
   branchesNear$: Observable<BranchNear[]>;
-  useCurrLocation = true;
+  useCurrLocation: boolean;
   locationSearched: boolean;
   location: string;
   latitude: number;
@@ -34,8 +34,10 @@ export class LocationSettingPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.setCurrentLocation();
-    this.branchesNear$ = this.httpServ.getBranchesNear(this.latitude.toString(), this.longitude.toString());
+    if (await this.setCurrentLocation()) {
+      this.useCurrLocation = true;
+    }
+    this.getBranchesNear();
     this.findAddress();
   }
 
@@ -43,22 +45,22 @@ export class LocationSettingPage implements OnInit {
     if (this.useCurrLocation) {
       return false;
     }
-    await this.setCurrentLocation();
-    this.useCurrLocation = !this.useCurrLocation;
-    this.locationSearched = false;
-    this.searchElementRef.nativeElement.value = '';
-    this.branchesNear$ = this.httpServ.getBranchesNear(this.latitude.toString(), this.longitude.toString());
-  }
-
-  ionViewDidEnter() {
-
+    if (await this.setCurrentLocation()) {
+      this.useCurrLocation = !this.useCurrLocation;
+      this.searchElementRef.nativeElement.value = '';
+      this.getBranchesNear();
+      this.locationSearched = false;
+    }
   }
 
   // Get Current Location Coordinates
   private async setCurrentLocation() {
     const coordinates = await this.geolocationServ.getCurrentPosition();
-    this.latitude = coordinates.coords.latitude;
-    this.longitude = coordinates.coords.longitude;
+    if (coordinates) {
+      this.latitude = coordinates.coords.latitude;
+      this.longitude = coordinates.coords.longitude;
+      return true;
+    }
   }
 
   findAddress(){
@@ -72,10 +74,16 @@ export class LocationSettingPage implements OnInit {
           this.locationSearched = true;
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.branchesNear$ = this.httpServ.getBranchesNear(this.latitude.toString(), this.longitude.toString());
+          this.getBranchesNear();
         });
       });
     });
+  }
+
+  getBranchesNear() {
+    if (this.longitude && this.latitude) {
+      this.branchesNear$ = this.httpServ.getBranchesNear(this.latitude.toString(), this.longitude.toString());
+    }
   }
 
 }

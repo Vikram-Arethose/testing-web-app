@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { Plugins } from '@capacitor/core';
+import { AlertService } from './alert.service';
 
 const { Geolocation } = Plugins;
 
@@ -10,18 +11,20 @@ const { Geolocation } = Plugins;
 export class GeolocationService {
 
   constructor(
-    private logger: LoggerService
+    private logger: LoggerService,
+    private alertServ: AlertService
   ) { }
 
   async getCurrentPosition() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    this.logger.log('Current', coordinates);
-    return coordinates;
-    // this.geolocation.getCurrentPosition().then((resp) => {
-    //   this.logger.log('geolocation resp: ', resp);
-    //   return resp;
-    // }).catch((error) => {
-    //   this.logger.warn('Error getting location', error);
-    // });
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      this.logger.log('Current', coordinates);
+      return coordinates;
+    } catch (error) {
+        this.logger.warn('Geolocation.getCurrentPosition error: ', error);
+        if (error.message) {
+          this.alertServ.presentAlert(error.message + ' You can go to app settings and enable geolocation permission.');
+        }
+    }
   }
 }
