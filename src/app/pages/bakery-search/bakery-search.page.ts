@@ -52,9 +52,11 @@ export class BakerySearchPage implements OnInit {
     }
   }
 
-  async onLike(bakery, $event) {
-    await this.httpServ.removeAddToFavorites(bakery.id).subscribe(res => bakery.isFavourite = !bakery.isFavourite);
-    $event.stopPropagation();
+  onFavourite(bakeryId: number, $event) {
+     this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
+       this.getBakeries();
+    });
+     $event.stopPropagation();
   }
 
   async doRefresh(event) {
