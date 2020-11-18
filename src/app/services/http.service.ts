@@ -6,6 +6,8 @@ import { AlertController } from '@ionic/angular';
 import { LoggerService } from './logger.service';
 import { Observable, Subject } from 'rxjs';
 import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
+import { HomeBranch, HomeBranchesRes } from '../models/http/homeBranch';
+import { ApiResponse } from '../models/http/apiResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +22,6 @@ export class HttpService {
     private logger: LoggerService
   ) { }
 
-  getBranchesNear(lat: string, lng: string) {
-    const subject = new Subject<BranchNear[]>();
-    this.http.get(this.baseUrl + '/branches-near-me?lat=' + lat + '&lng=' + lng)
-      .subscribe((res: any) => {
-        if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
-          subject.next(res.data);
-          this.logger.log('BranchesNearResponse data', res.data);
-        }
-    });
-    return subject.asObservable();
-  }
-
-  postData(endPoint: string, data) {
-    return this.http.post(this.baseUrl + endPoint, data);
-  }
-
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Error',
@@ -44,6 +30,46 @@ export class HttpService {
     });
 
     await alert.present();
+  }
+
+  postData(endPoint: string, data) {
+    return this.http.post(this.baseUrl + endPoint, data);
+  }
+
+  getBranchesNear(lat: string, lng: string) {
+    const subject = new Subject<BranchNear[]>();
+    this.http.get(this.baseUrl + '/branches-near-me?lat=' + lat + '&lng=' + lng)
+      .subscribe((res: BranchesNearResponse) => {
+        if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+          subject.next(res.data);
+          this.logger.log('BranchesNearResponse data', res.data);
+        }
+    });
+    return subject.asObservable();
+  }
+
+  getHomeBranches(lat: string, lng: string) {
+    const subject = new Subject<HomeBranch[]>();
+    this.http.get(`${this.baseUrl}/branches/home?lat=${lat}&lng=${lng}`)
+      .subscribe((res: HomeBranchesRes) => {
+        if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+          subject.next(res.data);
+          this.logger.log('http res.data: ', res.data);
+        }
+      });
+    return subject.asObservable();
+  }
+
+  removeAddToFavorites(branchId: number) {
+    const subject = new Subject();
+    this.http.put(`${this.baseUrl}/branches/favourites/${branchId}`, null)
+      .subscribe((res: ApiResponse) => {
+        if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+          subject.next(res.data);
+          this.logger.log('http res.data: ', res.data);
+        }
+      });
+    return subject.asObservable();
   }
 
 }

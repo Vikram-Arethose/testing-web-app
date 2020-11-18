@@ -5,6 +5,9 @@ import { Bakeries } from '../../core/mocks/bakeries';
 import { LoggerService } from '../../services/logger.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Coordinates } from '../../models/coordinates';
+import { HomeBranch } from '../../models/http/homeBranch';
+import { HttpService } from '../../services/http.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-bakery-search',
@@ -13,42 +16,50 @@ import { Coordinates } from '../../models/coordinates';
 })
 export class BakerySearchPage implements OnInit {
 
-  bakeries: Bakery[] = Bakeries;
+  bakeries: Observable<HomeBranch[]>;
+  iconHeartOutline = '../../../assets/icons/bakery/heart-outline.svg';
+  iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
   lat: number;
   lng: number;
   myAddress: string;
 
   constructor(
     private logger: LoggerService,
-    private geolocationServ: GeolocationService
+    private geolocationServ: GeolocationService,
+    private httpServ: HttpService
   ) { }
 
   async ngOnInit() {
-    await this.getMyLocation();
-    this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
+    if (await this.getMyLocation()) {
+      this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
+      this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
+    }
   }
 
   async getMyLocation() {
     const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
     if (coordinates) {
-      this.logger.log('coordinates: ', coordinates);
+      this.logger.log('my coordinates : ', coordinates);
       this.lat = coordinates.latitude;
       this.lng = coordinates.longitude;
+      return true;
     }
   }
 
-  onLike(bakery, $event) {
-    bakery.isFavorite = !bakery.isFavorite;
+  async getBakeries() {
+    if (this.lat && this.lng) {
+      this.bakeries = await this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
+    }
+  }
+
+  async onLike(bakery, $event) {
+    await this.httpServ.removeAddToFavorites(bakery.id).subscribe(res => bakery.isFavourite = !bakery.isFavourite);
     $event.stopPropagation();
   }
 
-  doRefresh(event) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+  async doRefresh(event) {
+    await this.getBakeries();
+    event.target.complete();
   }
 
 }
