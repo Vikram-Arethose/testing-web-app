@@ -2,36 +2,24 @@
 
 <ion-content>
   <div class="container">
-    <div class="bakery bakery-favorites">
+    <div class="bakery bakery-search" *ngFor="let bakery of bakeries | async" [routerLink]="'/bakery-search/bakery'">
       <div class="col">
-        <ion-img class="bakery__img" src="../../../assets/img/bakery/girl.jpg"></ion-img>
+        <ion-img class="bakery__img" [src]="bakery.photo"></ion-img>
         <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>
       </div>
       <div class="col main">
-        <h3 class="bakery__title">Bakery Meier</h3>
-        <p class="bakery__text bakery__text_pb">Bielefelder Str. 21, Knetterheide</p>
-        <div class="bakery__icons-row"></div>
-        <p class="bakery__text"><span>{{ 'favorites.openUntil' | translate }}</span> 19:00 hrs - 0,6 km</p>
-      </div>
-      <div class="col">
-          <ion-icon class="icon-like" slot="icon-only" src="../../../assets/icons/bakery/heart-filled.svg" tappable></ion-icon>
-      </div>
-    </div>
-    <div class="bakery bakery-favorites">
-      <div class="col">
-        <ion-img class="bakery__img" src="../../../assets/img/croissants.jpg"></ion-img>
-        <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>
-      </div>
-      <div class="col main">
-        <h3 class="bakery__title">Bakery Hansel</h3>
-        <p class="bakery__text bakery__text_pb">Bielefelder Str. 21, Knetterheide</p>
+        <h3 class="bakery__title">{{ 'favorites.bakery' | translate }} {{bakery.name}}</h3>
+        <p class="bakery__text bakery__text_pb">{{bakery.address}}</p>
         <div class="bakery__icons-row">
-          <ion-icon src="../../../assets/icons/bakery/drink.svg"></ion-icon>
+          <ion-icon class="icon" src="{{icon}}" *ngFor="let icon of bakery.features"></ion-icon>
         </div>
-        <p class="bakery__text"><span>{{ 'favorites.openUntil' | translate }}</span> 19:00 hrs - 0,6 km</p>
+        <p class="bakery__text"><span>{{ 'favorites.openUntil' | translate }}</span>
+<!--             {{bakery.openingHours[0]}}-->
+          - {{bakery.distance | number:'1.1-1'}}</p>
       </div>
       <div class="col">
-        <ion-icon class="icon-like" slot="icon-only" src="../../../assets/icons/bakery/heart-filled.svg" tappable></ion-icon>
+        <ion-icon class="icon-like" (click)="onFavorite(bakery.id, $event)" slot="icon-only"
+                  src="../../../assets/icons/bakery/heart-filled.svg" tappable></ion-icon>
       </div>
     </div>
   </div>

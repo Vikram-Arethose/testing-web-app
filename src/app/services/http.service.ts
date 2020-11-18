@@ -72,4 +72,15 @@ export class HttpService {
     return subject.asObservable();
   }
 
+  getFavorites(): Observable<HomeBranch[]> {
+    const subject = new Subject<HomeBranch[]>();
+    this.http.get<Observable<ApiResponse>>(`${this.baseUrl}/branches/favourites`).subscribe((res: any) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
+      }
+    });
+    return subject.asObservable();
+  }
+
 }
