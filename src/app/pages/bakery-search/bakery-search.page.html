@@ -4,7 +4,7 @@
       <ion-menu-button mode="ios" class="toolbar__button"></ion-menu-button>
     </ion-buttons>
     <ion-router-link slot="end" class="toolbar__link" routerDirection="forward" [routerLink]="'/bakery-search/location-options'">
-      Herforder Str. 10, 33602 Bielefeld</ion-router-link>
+      {{myAddress || 'Look for a bakery'}}</ion-router-link>
   </ion-toolbar>
 </ion-header>
 

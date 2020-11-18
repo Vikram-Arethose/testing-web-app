@@ -19,6 +19,7 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 
 import { Interceptor } from './core/interceptors/interceptor';
 import { ErrorService } from './services/error.service';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -49,7 +50,8 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'de-De'},
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
-    { provide: ErrorHandler, useClass: ErrorService }
+    { provide: ErrorHandler, useClass: ErrorService },
+    NativeGeocoder
   ],
   bootstrap: [AppComponent]
 })

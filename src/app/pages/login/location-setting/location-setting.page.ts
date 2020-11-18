@@ -6,6 +6,7 @@ import { GeolocationService } from '../../../services/geolocation.service';
 import { BranchNear } from '../../../models/http/branchesNear';
 import { HttpService } from '../../../services/http.service';
 import { Observable } from 'rxjs';
+import { Coordinates } from '../../../models/coordinates';
 
 @Component({
   selector: 'app-location-setting',
@@ -55,10 +56,10 @@ export class LocationSettingPage implements OnInit {
 
   // Get Current Location Coordinates
   private async setCurrentLocation() {
-    const coordinates = await this.geolocationServ.getCurrentPosition();
+    const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
     if (coordinates) {
-      this.latitude = coordinates.coords.latitude;
-      this.longitude = coordinates.coords.longitude;
+      this.latitude = coordinates.latitude;
+      this.longitude = coordinates.longitude;
       return true;
     }
   }
