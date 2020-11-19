@@ -23,7 +23,7 @@
         <h3 class="bakery__title">{{ 'favorites.bakery' | translate }} {{bakery.name}}</h3>
         <p class="bakery__text bakery__text_pb">{{bakery.address}}</p>
         <div class="bakery__icons-row">
-          <ion-icon class="icon" src="{{icon}}" *ngFor="let icon of bakery.features"></ion-icon>
+          <ion-icon class="icon" src="{{getIcon(icon)}}" *ngFor="let icon of bakery.features"></ion-icon>
         </div>
         <p class="bakery__text">
           <span *ngIf="bakery.openingHours?.default[today]?.end">

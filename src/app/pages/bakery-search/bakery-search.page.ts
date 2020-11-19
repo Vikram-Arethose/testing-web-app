@@ -74,6 +74,26 @@ export class BakerySearchPage implements OnInit {
     const day = date.getDay();
     const weekDays: string[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     this.today = weekDays[day];
-    this.logger.log('this.today', this.today);
+  }
+
+  getIcon(name: string) {
+    let icon: string;
+
+    switch (name) {
+      case 'seating':
+        icon = '../../../assets/icons/bakery/people-at-table.svg';
+        break;
+      case 'coffeeToGo':
+        icon = '../../../assets/icons/bakery/coffee.svg';
+        break;
+      case 'lunch':
+        icon = '../../../assets/icons/bakery/drink.svg';
+        break;
+      case 'pastry':
+        icon = '../../../assets/icons/bakery/piece-of-cake.svg';
+        break;
+    }
+
+    return icon;
   }
 }
