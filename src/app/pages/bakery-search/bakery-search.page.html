@@ -25,9 +25,11 @@
         <div class="bakery__icons-row">
           <ion-icon class="icon" src="{{icon}}" *ngFor="let icon of bakery.features"></ion-icon>
         </div>
-        <p class="bakery__text"><span>{{ 'favorites.openUntil' | translate }}</span>
-<!--          {{bakery.openingHours[0]}}-->
-          - {{bakery.distance | number:'1.1-1'}}</p>
+        <p class="bakery__text">
+          <span *ngIf="bakery.openingHours?.default[today]?.end">
+            {{ 'favorites.openUntil' | translate }} {{bakery.openingHours?.default[today]?.end}} Uhr -
+          </span>
+          {{bakery.distance | number:'1.1-1'}} km</p>
       </div>
       <div class="col">
         <ion-icon class="icon-like" (click)="onFavorite(bakery.id, $event)" slot="icon-only"

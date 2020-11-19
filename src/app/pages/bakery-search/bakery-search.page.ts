@@ -5,7 +5,7 @@ import { Bakeries } from '../../core/mocks/bakeries';
 import { LoggerService } from '../../services/logger.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Coordinates } from '../../models/coordinates';
-import { HomeBranch } from '../../models/http/homeBranch';
+import { DayOpeningHours, HomeBranch } from '../../models/http/homeBranch';
 import { HttpService } from '../../services/http.service';
 import { Observable } from 'rxjs';
 
@@ -22,6 +22,7 @@ export class BakerySearchPage implements OnInit {
   lat: number;
   lng: number;
   myAddress: string;
+  today: string;
 
   constructor(
     private logger: LoggerService,
@@ -29,7 +30,9 @@ export class BakerySearchPage implements OnInit {
     private httpServ: HttpService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setToday();
+  }
 
   async ionViewWillEnter() {
     if (await this.getMyLocation()) {
@@ -66,4 +69,11 @@ export class BakerySearchPage implements OnInit {
     event.target.complete();
   }
 
+  setToday() {
+    const date = new Date();
+    const day = date.getDay();
+    const weekDays: string[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    this.today = weekDays[day];
+    this.logger.log('this.today', this.today);
+  }
 }
