@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable, NgZone } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { Plugins } from '@capacitor/core';
 import { AlertService } from './alert.service';
 import { Coordinates } from '../models/coordinates';
 
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { MapsAPILoader } from '@agm/core';
 
 const { Geolocation } = Plugins;
 
@@ -16,7 +17,9 @@ export class GeolocationService {
   constructor(
     private logger: LoggerService,
     private alertServ: AlertService,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    // private mapsApiLoader: MapsAPILoader,
+    private ngZone: NgZone
   ) { }
 
   async getCurrentPosition(): Promise<Coordinates> {
@@ -44,5 +47,16 @@ export class GeolocationService {
       this.logger.warn('get address error: ', error);
     }
   }
+
+ /* findAddress(elementRef: ElementRef) {
+    this.mapsApiLoader.load().then(() => {
+      const autocomplete = new google.maps.places.Autocomplete(elementRef.nativeElement);
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+        });
+      });
+    });
+  }*/
 
 }

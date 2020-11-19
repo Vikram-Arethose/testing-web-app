@@ -4,7 +4,9 @@
     <ion-buttons slot="start">
       <ion-back-button mode="md" defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-searchbar mode="ios" class="toolbar__search" searchIcon="none" [placeholder]="'locationOpt.searchCity' | translate"></ion-searchbar>
+    <input #search class="input" [placeholder]="'locationSet.searchLocation' | translate "
+           autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
+<!--    <ion-searchbar mode="ios" class="toolbar__search" searchIcon="none" [placeholder]="'locationOpt.searchCity' | translate"></ion-searchbar>-->
   </ion-toolbar>
 </ion-header>
 
