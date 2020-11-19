@@ -22,7 +22,7 @@ export class FavoritesPage implements OnInit {
 
   onFavorite(bakeryId: number, $event) {
     this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
-      this.httpServ.getFavorites();
+      this.bakeries = this.httpServ.getFavorites();
     });
     $event.stopPropagation();
   }

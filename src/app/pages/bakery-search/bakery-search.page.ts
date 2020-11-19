@@ -29,7 +29,9 @@ export class BakerySearchPage implements OnInit {
     private httpServ: HttpService
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {}
+
+  async ionViewWillEnter() {
     if (await this.getMyLocation()) {
       this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
       this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
@@ -52,7 +54,12 @@ export class BakerySearchPage implements OnInit {
     }
   }
 
-  
+  onFavorite(bakeryId: number, $event) {
+    this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
+      this.getBakeries();
+    });
+    $event.stopPropagation();
+  }
 
   async doRefresh(event) {
     await this.getBakeries();
