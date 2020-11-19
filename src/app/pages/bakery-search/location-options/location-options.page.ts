@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Coordinates } from '../../../models/coordinates';
 import { GeolocationService } from '../../../services/geolocation.service';
+import { Location } from '../../../models/location';
 
 @Component({
   selector: 'app-location-options',
@@ -11,22 +12,30 @@ export class LocationOptionsPage implements OnInit {
 
   @ViewChild('search')
   private searchElementRef: ElementRef;
+  private myAddress: string;
 
   constructor(
     private geolocationServ: GeolocationService
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.geolocationServ.currLocation.subscribe((res: Location) => {
+      this.myAddress = res.address;
+    });
     // if (await this.getMyLocation()) {
     //   this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
     //   this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
     // }
   }
 
-  async getInitData() {
-    const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
-    if (coordinates) {
-    }
+  ionViewDidEnter() {
+    this.geolocationServ.findAddress(this.searchElementRef);
   }
+
+  // async getInitData() {
+  //   const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
+  //   if (coordinates) {
+  //   }
+  // }
 
 }

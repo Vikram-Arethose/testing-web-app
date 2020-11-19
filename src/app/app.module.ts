@@ -20,6 +20,7 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import { Interceptor } from './core/interceptors/interceptor';
 import { ErrorService } from './services/error.service';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { AgmCoreModule } from '@agm/core';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -42,6 +43,10 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ',
+      libraries: ['places']
+    })
 
   ],
   providers: [

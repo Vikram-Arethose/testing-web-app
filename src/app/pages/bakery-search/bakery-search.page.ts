@@ -8,6 +8,8 @@ import { Coordinates } from '../../models/coordinates';
 import { DayOpeningHours, HomeBranch } from '../../models/http/homeBranch';
 import { HttpService } from '../../services/http.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'app-bakery-search',
@@ -17,6 +19,7 @@ import { Observable } from 'rxjs';
 export class BakerySearchPage implements OnInit {
 
   bakeries: Observable<HomeBranch[]>;
+  currLocation: Observable<Location>;
   iconHeartOutline = '../../../assets/icons/bakery/heart-outline.svg';
   iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
   lat: number;
@@ -27,27 +30,25 @@ export class BakerySearchPage implements OnInit {
   constructor(
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
-    private httpServ: HttpService
+    private httpServ: HttpService,
+    private router: Router
   ) { }
 
-  ngOnInit() {
-    this.setToday();
-  }
-
-  async ionViewWillEnter() {
-    if (await this.getMyLocation()) {
-      this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
-      this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
+  async ngOnInit() {
+    this.geolocationServ.currLocation.subscribe((res: Location) => {
+      this.myAddress = res.address;
+      this.lat = res.lat;
+      this.lng = res.lng;
+    });
+    if (!await this.geolocationServ.getCurrentPosition()) {
+      await this.router.navigate(['bakery-search/location-options']);
     }
   }
 
-  async getMyLocation() {
-    const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
-    if (coordinates) {
-      this.logger.log('my coordinates : ', coordinates);
-      this.lat = coordinates.latitude;
-      this.lng = coordinates.longitude;
-      return true;
+  async ionViewWillEnter() {
+    this.setToday();
+    if (this.lat && this.lng) {
+      this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
     }
   }
 
