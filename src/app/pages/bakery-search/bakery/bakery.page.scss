@@ -97,9 +97,14 @@
     }
     .list {
       &__item {
-        width: 110px;
+        width: 115px;
         display: flex;
-        justify-content: space-between;
+        //justify-content: space-between;
+        text-transform: capitalize;
+      }
+      &__item-day {
+        width: 30px;
+        margin-right: 5px;
       }
     }
   }
@@ -175,91 +180,97 @@
     position: relative;
   }
   .col-center {
-    padding: 4px 0;
-    flex: 1 0 auto;
-  }
-
-  &__img {
-    width: 76px;
-    height: 52px;
-    margin: 4px 20px 0 10px;
-    object-fit: cover;
-  }
-
-  &__img-corner {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  &__details-title {
-    padding: 3px 0 19px;
-    font: normal normal 400 10px/13px Montserrat;
-  }
-  &__details-text {
-    font: normal normal 400 10px/13px Montserrat;
-  }
-  &__price {
-    padding: 8px 6px 23px;
-    text-align: right;
-  }
-  &__count {
-    padding: 0 6px 0;
-  }
-
-  .count {
-    width: 78px;
+    width: 127px;
+    padding: 0 0 4px;
     display: flex;
-    text-align: center;
-    &__btn{
-      width: 22px;
-      border: 1px solid #CBCBCB;
-    }
-    &__value {
-      width: 42px;
-      height: 18px;
-      border-top: 1px solid #CBCBCB;
-      border-bottom: 1px solid #CBCBCB;
-    }
-  }
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+&__img {
+width: 76px;
+height: 52px;
+margin: 4px 20px 0 10px;
+object-fit: cover;
+}
+
+&__img-corner {
+position: absolute;
+top: 0;
+left: 0;
+}
+
+&__details-title {
+padding: 3px 0 3px;
+font: normal normal 400 10px/13px Montserrat;
+}
+&__details-text {
+font: normal normal 400 10px/13px Montserrat;
+.available-day {
+  text-transform: capitalize;
+}
+}
+&__price {
+padding: 8px 6px 23px;
+text-align: right;
+}
+&__count {
+padding: 0 6px 0;
+}
+
+.count {
+width: 78px;
+display: flex;
+text-align: center;
+&__btn{
+  width: 22px;
+  border: 1px solid #CBCBCB;
+}
+&__value {
+  width: 42px;
+  height: 18px;
+  border-top: 1px solid #CBCBCB;
+  border-bottom: 1px solid #CBCBCB;
+}
+}
 }
 
 .cart {
-  width: 100%;
-  height: 63px;
-  position: fixed;
-  bottom: 5.17vh;
-  display: flex;
-  align-items: center;
-  background: #0E8DF1;
-  border: 1px solid #FEDE00;
+width: 100%;
+height: 63px;
+position: fixed;
+bottom: 5.17vh;
+display: flex;
+align-items: center;
+background: #0E8DF1;
+border: 1px solid #FEDE00;
 
-  &__icon-wrapper {
-    margin: 0 11vw 0 5vw;
-    position: relative;
-    @media (max-width: 320px) {
-      margin: 0 5vw 0 3vw;
-    }
-  }
-  &__icon {
-    font-size: 36px;
-  }
-  &__icon-badge {
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    bottom: -3px;
-    right: -15px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #FEDE00;
-    font: normal normal 400 12px/15px Montserrat;
-  }
+&__icon-wrapper {
+margin: 0 11vw 0 5vw;
+position: relative;
+@media (max-width: 320px) {
+  margin: 0 5vw 0 3vw;
+}
+}
+&__icon {
+font-size: 36px;
+}
+&__icon-badge {
+width: 25px;
+height: 25px;
+position: absolute;
+bottom: -3px;
+right: -15px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+background: #FEDE00;
+font: normal normal 400 12px/15px Montserrat;
+}
 
-  &__text{
-    font: normal normal 400 20px/24px Montserrat;
-    color: #FFFFFF;
-  }
+&__text{
+font: normal normal 400 20px/24px Montserrat;
+color: #FFFFFF;
+}
 }

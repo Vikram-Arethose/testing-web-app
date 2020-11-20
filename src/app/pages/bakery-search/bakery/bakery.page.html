@@ -12,15 +12,15 @@
       <div class="container">
         <div class="row">
           <div>
-            <h3 class="info__title">{{ 'general.bakery' | translate }} Wiebusch</h3>
-            <p class="info__text">Bielefelder Str. 21, Knetterheide</p>
+            <h3 class="info__title">{{ 'general.bakery' | translate }} {{bakeryDetails?.name}}</h3>
+            <p class="info__text">{{bakeryAddress}}</p>
           </div>
           <ion-icon class="info__icon" src="../../../../assets/icons/bakery/info.svg" (click)="onInfo()"
                     tappable></ion-icon>
         </div>
         <div class="info__rate rate">
-          <img class="rate__img" src="../../../../assets/img/bakery/stars4.jpg">
-          <span class="info__text">4,1 /5 (15)</span>
+<!--          <img class="rate__img" src="../../../../assets/img/bakery/stars4.jpg">-->
+<!--          <span class="info__text">4,1 /5 (15)</span>-->
         </div>
         <p class="info__description description">
           {{bakeryInfo}}
@@ -31,10 +31,11 @@
         </p>
       </div>
     </div>
-    <div class="info-details" *ngIf="infoDetails">
+    <div class="info-details" *ngIf="isInfoFull">
       <div class="container">
         <div class="info-details__icons-row">
-          <ion-icon class="info-details__icons-row-icon" *ngFor="let icon of iconsRow" [src]="icon"></ion-icon>
+          <ion-icon class="info-details__icons-row-icon" *ngFor="let feature of bakeryDetails?.features"
+                    [src]="bakeryServ.getIcon(feature)"></ion-icon>
         </div>
         <div class="open-hours">
           <div class="open-hours__row">
@@ -43,15 +44,15 @@
           </div>
           <div class="open-hours__list list">
             <div class="list__item" *ngFor="let item of openingHours">
-              <span>{{item.day}}</span>
-              <span>{{item.time}}</span>
+              <span class="list__item-day">{{item[0].substr(0, 3)}}</span>
+              <span>{{item[1].start}} - {{item[1].end}}</span>
             </div>
           </div>
         </div>
       </div>
       <div class="pick-up-place">
         <p class="pick-up-place__title">{{ 'bakery.pickUpHere' | translate }}</p>
-        <p class="pick-up-place__text">Bielefelder Str. 21, Knetterheide</p>
+        <p class="pick-up-place__text">{{bakeryAddress}}</p>
       </div>
       <div class="reminder">
         <p class="reminder__title">{{ 'bakery.reminderTitle' | translate }}</p>
@@ -59,22 +60,26 @@
       </div>
     </div>
   </div>
-  <div class="products" *ngIf="!infoDetails">
+  <div class="products" *ngIf="!isInfoFull">
     <div class="sections">
-      <div class="sections__item" *ngFor="let section of sections, let i = index"
-           (click)="onSectionSelect(i)" [class.sections__item_selected]="selected[i]" tappable>{{section}}</div>
+      <div class="sections__item" *ngFor="let category of categories, let i = index"
+           (click)="onSectionSelect(i)" [class.sections__item_selected]="selected[i]" tappable>{{category.name}}</div>
     </div>
     <div class="product-list">
       <div class="container">
         <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal()">
           <div class="col-left">
-            <ion-img class="product__img" [src]="product.img"></ion-img>
-            <ion-img class="product__img-corner" *ngIf="product.imgCorner" [src]="product.imgCorner"></ion-img>
+            <ion-img class="product__img" [src]="product.photo"></ion-img>
+            <ion-img class="product__img-corner" *ngIf="product.is_new || product.bio_certification"
+                     [src]="getProductImgCorner(product)"></ion-img>
           </div>
           <div class="col-center">
-            <p class="product__name">{{product.name}}</p>
-            <p class="product__details-title">Details</p>
-            <p class="product__details-text">{{product.details}}</p>
+            <div>
+              <p class="product__name">{{product.name}}</p>
+              <p class="product__details-title">Details</p>
+            </div>
+            <p class="product__details-text"><span *ngIf="product.availability">Only </span>
+              <span class="available-day" *ngFor="let day of product.availability">{{day}}, </span></p>
           </div>
           <div class="col">
             <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>

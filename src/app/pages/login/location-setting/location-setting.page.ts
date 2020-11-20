@@ -56,7 +56,8 @@ export class LocationSettingPage implements OnInit {
 
   // Get Current Location Coordinates
   private async setCurrentLocation() {
-    const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
+    // TODO: need to fix
+    const coordinates: any = await this.geolocationServ.getCurrentPosition();
     if (coordinates) {
       this.latitude = coordinates.latitude;
       this.longitude = coordinates.longitude;

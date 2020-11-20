@@ -14,16 +14,16 @@
     </ion-refresher>
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
-    <div class="bakery bakery-search" *ngFor="let bakery of bakeries | async" [routerLink]="'/bakery-search/bakery'">
+    <div class="bakery bakery-search" *ngFor="let bakery of bakeries | async" (click)="openBakery(bakery.id)">
       <div class="col">
         <ion-img class="bakery__img" [src]="bakery.photo"></ion-img>
-        <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>
+<!--        <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>-->
       </div>
       <div class="col main">
         <h3 class="bakery__title">{{ 'favorites.bakery' | translate }} {{bakery.name}}</h3>
         <p class="bakery__text bakery__text_pb">{{bakery.address}}</p>
         <div class="bakery__icons-row">
-          <ion-icon class="icon" src="{{getIcon(icon)}}" *ngFor="let icon of bakery.features"></ion-icon>
+          <ion-icon class="icon" src="{{bakeryServ.getIcon(feature)}}" *ngFor="let feature of bakery.features"></ion-icon>
         </div>
         <p class="bakery__text">
           <span *ngIf="bakery.openingHours?.default[today]?.end">

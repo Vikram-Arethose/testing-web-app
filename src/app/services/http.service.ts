@@ -83,4 +83,14 @@ export class HttpService {
     return subject.asObservable();
   }
 
+  getBranchDetail(branchId: number) {
+    const subject = new Subject();
+    this.http.get(`${this.baseUrl}/branch/${branchId}`).subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
+      }
+    });
+    return subject.asObservable();
+  }
 }

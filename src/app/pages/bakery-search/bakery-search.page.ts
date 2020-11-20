@@ -8,8 +8,9 @@ import { Coordinates } from '../../models/coordinates';
 import { DayOpeningHours, HomeBranch } from '../../models/http/homeBranch';
 import { HttpService } from '../../services/http.service';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Location } from '../../models/location';
+import { BakeryService } from '../../services/bakery.service';
 
 @Component({
   selector: 'app-bakery-search',
@@ -28,6 +29,7 @@ export class BakerySearchPage implements OnInit {
   today: string;
 
   constructor(
+    public bakeryServ: BakeryService,
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
     private httpServ: HttpService,
@@ -77,24 +79,12 @@ export class BakerySearchPage implements OnInit {
     this.today = weekDays[day];
   }
 
-  getIcon(name: string) {
-    let icon: string;
-
-    switch (name) {
-      case 'seating':
-        icon = '../../../assets/icons/bakery/people-at-table.svg';
-        break;
-      case 'coffeeToGo':
-        icon = '../../../assets/icons/bakery/coffee.svg';
-        break;
-      case 'lunch':
-        icon = '../../../assets/icons/bakery/drink.svg';
-        break;
-      case 'pastry':
-        icon = '../../../assets/icons/bakery/piece-of-cake.svg';
-        break;
-    }
-
-    return icon;
+  openBakery(bakeryId: number) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        bakeryId
+      }
+    };
+    this.router.navigate(['/bakery-search/bakery'], navigationExtras);
   }
 }
