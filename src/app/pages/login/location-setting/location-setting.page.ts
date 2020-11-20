@@ -7,6 +7,7 @@ import { BranchNear } from '../../../models/http/branchesNear';
 import { HttpService } from '../../../services/http.service';
 import { Observable } from 'rxjs';
 import { Coordinates } from '../../../models/coordinates';
+import { Location } from '../../../models/location';
 
 @Component({
   selector: 'app-location-setting',
@@ -19,8 +20,8 @@ export class LocationSettingPage implements OnInit {
   useCurrLocation: boolean;
   locationSearched: boolean;
   location: string;
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lng: number;
   googleMapType = 'satellite';
 
   @ViewChild('search')
@@ -35,7 +36,12 @@ export class LocationSettingPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    if (await this.setCurrentLocation()) {
+    this.geolocationServ.currLocation.subscribe((res: Location) => {
+      this.lat = res.lat;
+      this.lng = res.lng;
+      this.logger.log('lat, lng', this.lat, this.lng);
+    });
+    if (await this.geolocationServ.getCurrentPosition()) {
       this.useCurrLocation = true;
     }
     this.getBranchesNear();
@@ -46,7 +52,8 @@ export class LocationSettingPage implements OnInit {
     if (this.useCurrLocation) {
       return false;
     }
-    if (await this.setCurrentLocation()) {
+    await this.geolocationServ.getCurrentPosition()
+    if (this.lat && this.lng) {
       this.useCurrLocation = !this.useCurrLocation;
       this.searchElementRef.nativeElement.value = '';
       this.getBranchesNear();
@@ -54,16 +61,16 @@ export class LocationSettingPage implements OnInit {
     }
   }
 
-  // Get Current Location Coordinates
-  private async setCurrentLocation() {
-    // TODO: need to fix
-    const coordinates: any = await this.geolocationServ.getCurrentPosition();
-    if (coordinates) {
-      this.latitude = coordinates.latitude;
-      this.longitude = coordinates.longitude;
-      return true;
-    }
-  }
+  // // Get Current Location Coordinates
+  // private async setCurrentLocation() {
+  //   // TODO: need to fix
+  //   const coordinates: any = await this.geolocationServ.getCurrentPosition();
+  //   if (coordinates) {
+  //     this.lat = coordinates.latitude;
+  //     this.lng = coordinates.longitude;
+  //     return true;
+  //   }
+  // }
 
   findAddress(){
     this.mapsAPILoader.load().then(() => {
@@ -74,8 +81,8 @@ export class LocationSettingPage implements OnInit {
           this.useCurrLocation = false;
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
           this.locationSearched = true;
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
           this.getBranchesNear();
         });
       });
@@ -83,8 +90,8 @@ export class LocationSettingPage implements OnInit {
   }
 
   getBranchesNear() {
-    if (this.longitude && this.latitude) {
-      this.branchesNear$ = this.httpServ.getBranchesNear(this.latitude.toString(), this.longitude.toString());
+    if (this.lng && this.lat) {
+      this.branchesNear$ = this.httpServ.getBranchesNear(this.lat.toString(), this.lng.toString());
     }
   }
 

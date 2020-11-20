@@ -17,10 +17,6 @@ const { Geolocation } = Plugins;
 })
 export class GeolocationService {
 
-  private lat: number;
-  private lng: number;
-  private address: string;
-
   private locationSource: BehaviorSubject<Location> = new BehaviorSubject<Location>(new Location());
   currLocation = this.locationSource.asObservable();
 
@@ -43,7 +39,6 @@ export class GeolocationService {
       const lng = coordinates.coords.longitude;
       await this.getAddress(lat, lng);
       return true;
-      // return coordinates.coords;
     } catch (error) {
         this.logger.warn('Geolocation.getCurrentPosition error: ', error);
         if (error.message) {

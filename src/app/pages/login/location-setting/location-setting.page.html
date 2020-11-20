@@ -18,8 +18,8 @@
                   [routerLink]="'/bakery-search'"
                   [disabled]="!useCurrLocation  && !locationSearched">{{ 'locationSet.apply' | translate }}</ion-button>
     </div>
-    <agm-map class="map" [latitude]="latitude" [longitude]="longitude" [zoom]="12">
-      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    <agm-map class="map" [latitude]="lat" [longitude]="lng" [zoom]="12">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
       <agm-marker *ngFor="let bakery of branchesNear$ | async"
                   [latitude]="+bakery.lat" [longitude]="+bakery.lng"
                   [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></agm-marker>
