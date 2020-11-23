@@ -9,6 +9,8 @@ import { MapsAPILoader } from '@agm/core';
 import { PermissionsRequestResult } from '@capacitor/core/dist/esm/definitions';
 import { Location } from '../models/location';
 import { BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
+import { newArray } from '@angular/compiler/src/util';
 
 const { Geolocation } = Plugins;
 
@@ -25,11 +27,23 @@ export class GeolocationService {
     private alertServ: AlertService,
     private nativeGeocoder: NativeGeocoder,
     private mapsApiLoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private localStorageServ: LocalStorageService
   ) { }
 
   changeLocation(location: Location) {
     this.locationSource.next(location);
+
+    let locationArr: Location[] = this.localStorageServ.get('locationArr');
+    this.logger.log('locationArr from storage', locationArr);
+    if (locationArr && locationArr.length > 0) {
+      locationArr.unshift(location);
+      locationArr.length = 3;
+    } else {
+      locationArr = newArray(1, location);
+    }
+    this.localStorageServ.setArr([{key: 'locationArr', value: locationArr}]);
+    this.logger.log('locationArr for save', locationArr);
   }
 
   async getCurrentPosition() {
