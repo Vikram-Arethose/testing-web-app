@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Product } from '../../models/http/bakeryFull';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-product-details',
@@ -8,11 +10,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class ProductDetailsComponent implements OnInit {
 
+  @Input() product: Product;
+
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private logger: LoggerService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   closeModal() {
     this.modalController.dismiss();

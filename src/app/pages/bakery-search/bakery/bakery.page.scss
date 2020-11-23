@@ -4,7 +4,7 @@
   .toolbar {
     $logoSize: 46vw;
     height: 18.47vh;
-    --background: url('../../../../assets/img/croissants.jpg') center/cover;
+    //--background: url('../../../../assets/img/croissants.jpg') center/cover;
     &__btn {
       --color: #fff;
       --icon-font-size: 35px;
@@ -187,36 +187,49 @@
     justify-content: space-between;
 }
 
-&__img {
-width: 76px;
-height: 52px;
-margin: 4px 20px 0 10px;
-object-fit: cover;
-}
+  &__img {
+    width: 76px;
+    height: 52px;
+    margin: 4px 20px 0 10px;
+    object-fit: cover;
+  }
 
-&__img-corner {
-position: absolute;
-top: 0;
-left: 0;
-}
+  &__img-corner {
+    position: absolute;
+    &_bio {
+      top: 0;
+      left: 0;
+    }
+    &_new {
+      left: 3px;
+      top: 28px;
+    }
+  }
 
-&__details-title {
-padding: 3px 0 3px;
-font: normal normal 400 10px/13px Montserrat;
-}
-&__details-text {
-font: normal normal 400 10px/13px Montserrat;
-.available-day {
-  text-transform: capitalize;
-}
-}
-&__price {
-padding: 8px 6px 23px;
-text-align: right;
-}
-&__count {
-padding: 0 6px 0;
-}
+
+
+
+  &__details-title {
+    padding: 3px 0 3px;
+    font: normal normal 400 10px/13px Montserrat;
+  }
+
+  &__details-text {
+    font: normal normal 400 10px/13px Montserrat;
+
+    .available-day {
+      text-transform: capitalize;
+    }
+  }
+
+  &__price {
+    padding: 8px 6px 23px;
+    text-align: right;
+  }
+
+  &__count {
+    padding: 0 6px 0;
+  }
 
 .count {
 width: 78px;

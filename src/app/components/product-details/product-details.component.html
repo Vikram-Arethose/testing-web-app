@@ -4,19 +4,17 @@
   </ion-button>
   <div class="product">
     <div class="product__header">
-      <img class="product__img" src="../../../assets/img/bakery/roll2.jpg">
-      <ion-label class="product__label ">Pumpkin roll</ion-label>
+      <img class="product__img" [src]="product?.photo">
+      <ion-label class="product__label ">{{product?.name}}</ion-label>
     </div>
     <div class="product__details details">
       <h2 class="details__title">Details</h2>
-      <h3 class="details__subtitle">{{ 'allergens.allergens' | translate }}</h3>
+      <h3 class="details__subtitle">{{ 'productDetails.allergens' | translate }}</h3>
       <div class="details__list list">
-        <p class="list__item">gluten</p>
-        <p class="list__item">nuts</p>
+        <p class="list__item" *ngFor="let allergen of product?.allergens">{{allergen}}</p>
       </div>
-      <h3 class="details__subtitle">{{ 'allergens.ingredients' | translate }}</h3>
-      <p class="details__text">Wheat flour, water, wheat sourdough Wheat pre-batter, iodized table salt Yeast, various
-        malt flours Wheat semolina, milk-protein.</p>
+      <h3 class="details__subtitle">{{ 'productDetails.ingredients' | translate }}</h3>
+      <p class="details__text">{{product?.ingredients}}</p>
     </div>
   </div>
 </div>

@@ -67,11 +67,13 @@
     </div>
     <div class="product-list">
       <div class="container">
-        <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal()">
+        <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal(product)">
           <div class="col-left">
-            <ion-img class="product__img" [src]="product.photo"></ion-img>
-            <ion-img class="product__img-corner" *ngIf="product.is_new || product.bio_certification"
-                     [src]="getProductImgCorner(product)"></ion-img>
+            <ion-img class="product__img" [src]="product?.photo"></ion-img>
+            <ion-img class="product__img-corner product__img-corner_bio" *ngIf="product.bio_certification"
+                     src="../../../../assets/img/bakery/bio.png"></ion-img>
+            <ion-img class="product__img-corner product__img-corner_new" *ngIf="product.is_new"
+                     src="../../../../assets/img/bakery/new.png"></ion-img>
           </div>
           <div class="col-center">
             <div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ProductsList } from '../../../core/mocks/products-list';
 import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
 import { PickUpDateComponent } from '../../../components/pick-up-date/pick-up-date.component';
@@ -43,7 +42,7 @@ export class BakeryPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(() => {
      if (this.router.getCurrentNavigation().extras.state) {
        this.bakeryId = this.router.getCurrentNavigation().extras.state.bakeryId;
      }
@@ -91,10 +90,13 @@ export class BakeryPage implements OnInit {
     return await modal.present();
   }
 
-  async presentProductDetailsModal() {
+  async presentProductDetailsModal(product: Product) {
     const modal = await this.modalController.create({
       component: ProductDetailsComponent,
-      cssClass: 'product-details-modal'
+      cssClass: 'product-details-modal',
+      componentProps: {
+        product
+      }
     });
     return await modal.present();
   }
@@ -137,11 +139,11 @@ export class BakeryPage implements OnInit {
     this.isBakeryInfoFull = !this.isBakeryInfoFull;
   }
 
-  getProductImgCorner(product: Product): string {
-    if (product.is_new) {
-      return '../../../../assets/img/bakery/neu.png';
-    } else if (product.bio_certification) {
-      return '../../../../assets/img/bakery/bio.png';
-    }
-  }
+  // getProductImgCorner(product: Product): string {
+  //   if (product.is_new) {
+  //     return '../../../../assets/img/bakery/neu.png';
+  //   } else if (product.bio_certification) {
+  //     return '../../../../assets/img/bakery/bio.png';
+  //   }
+  // }
 }
