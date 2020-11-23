@@ -103,7 +103,7 @@ export class BakeryPage implements OnInit {
 
   removeProductFromCart(product: Product, $event) {
     $event.stopPropagation();
-    // this.cartService.removeProductFromCart(product);
+    this.cartService.removeProductFromCart(product);
   }
 
   addProductToCart(product: Product, $event) {
@@ -111,12 +111,12 @@ export class BakeryPage implements OnInit {
     if (!this.dateService.date) {
       this.presentPickUpDateModal();
     } else {
-      // this.cartService.addProductToCart(product);
+      this.cartService.addProductToCart(product);
     }
   }
 
   onExit() {
-    this.cartService.cart.length = 0;
+    this.cartService.clearCart();
   }
 
   onInfo() {
@@ -139,11 +139,4 @@ export class BakeryPage implements OnInit {
     this.isBakeryInfoFull = !this.isBakeryInfoFull;
   }
 
-  // getProductImgCorner(product: Product): string {
-  //   if (product.is_new) {
-  //     return '../../../../assets/img/bakery/neu.png';
-  //   } else if (product.bio_certification) {
-  //     return '../../../../assets/img/bakery/bio.png';
-  //   }
-  // }
 }

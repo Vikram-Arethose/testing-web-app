@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up-date.component';
 import { PaymentMethodsComponent } from '../../../../components/payment-methods/payment-methods.component';
 import { Router } from '@angular/router';
+import { ProductInCart } from '../../../../models/productInCart';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -24,7 +25,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    if (this.cartService.cart.length === 0) {
+    if (this.cartService.getCart().length === 0) {
       this.router.navigateByUrl('/bakery-search');
     }
   }
@@ -46,16 +47,16 @@ export class ShoppingCartPage implements OnInit {
     return await modal.present();
   }
 
-  add(i: number) {
-    this.cartService.cart[i].count++;
+  add(product: ProductInCart) {
+    this.cartService.addProductToCart(product);
   }
 
-  reduce(i: number) {
-    this.cartService.cart[i].count--;
+  reduce(product: ProductInCart) {
+    this.cartService.removeProductFromCart(product);
   }
 
   delete(i: number) {
-    this.cartService.cart.splice(i, 1);
+    this.cartService.deleteCartProduct(i);
   }
 
 }

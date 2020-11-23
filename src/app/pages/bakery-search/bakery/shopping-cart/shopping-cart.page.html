@@ -21,7 +21,7 @@
     </div>
     <div class="product-list">
       <ion-grid class="grid">
-        <div class="item" *ngFor="let item of cartService.cart, let i = index">
+        <div class="item" *ngFor="let item of cartService.getCart(), let i = index">
           <ion-row class="grid__row">
             <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
             <ion-col class="grid__col" size="8">{{item.count}} x {{item.name}}</ion-col>
@@ -31,8 +31,8 @@
             <ion-button fill="none" size="small" (click)="delete(i)">
               <ion-icon class="controls__remove-icon" src="../../../../../assets/icons/shopping-cart/trash.svg"></ion-icon>
             </ion-button>
-            <div class="controls__btn" (click)="reduce(i)">-</div>
-            <div class="controls__btn" (click)="add(i)">+</div>
+            <div class="controls__btn" (click)="reduce(item)">-</div>
+            <div class="controls__btn" (click)="add(item)">+</div>
           </ion-row>
         </div>
         <ion-row class="grid__row grid__row_total">
@@ -45,7 +45,7 @@
     </div>
     <div class="buttons-wrapper">
       <ion-button class="buttons-wrapper__btn" expand="block"
-                  [routerLink]="'/bakery-search/bakery'"
+                  [routerLink]="'/bakery-search/bakery'" [disabled]="cartService.getCart().length > 0"
                   routerDirection="back">{{ 'shoppingCart.addMore' | translate }}</ion-button>
       <ion-button class="buttons-wrapper__btn" expand="block" (click)="presentPaymentMethodsModal()">
         {{ 'shoppingCart.checkout' | translate }}

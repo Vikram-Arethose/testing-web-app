@@ -28,7 +28,7 @@ export class GooglePayComponent implements OnInit {
       }
     };
     await this.router.navigate(['orders'], navigationExtras);
-    this.cartService.cart.length = 0;
+    this.cartService.clearCart();
     this.dateService.date = '';
   }
 

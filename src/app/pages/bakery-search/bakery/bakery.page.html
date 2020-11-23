@@ -95,7 +95,7 @@
       </div>
     </div>
   </div>
-  <div class="cart" *ngIf="cartService.cart.length > 0" tappable [routerLink]="'/bakery-search/bakery/shopping-cart'">
+  <div class="cart" *ngIf="cartService.getCart().length > 0" tappable [routerLink]="'/bakery-search/bakery/shopping-cart'">
     <div class="cart__icon-wrapper">
       <ion-icon class="cart__icon" src="../../../../assets/icons/shopping-cart/shopping-bag.svg"></ion-icon>
       <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>

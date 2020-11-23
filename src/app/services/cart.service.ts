@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product';
+// import { Product } from '../models/product';
 import { LoggerService } from './logger.service';
 import { ProductInCart } from '../models/productInCart';
+import { Product } from '../models/http/bakeryFull';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  cart: ProductInCart[] = [];
+  private cart: ProductInCart[] = [];
 
   constructor(
-    private logger: LoggerService
+    private logger: LoggerService,
+    private router: Router
   ) { }
 
   getCart(): ProductInCart[]  {
     return this.cart;
+  }
+
+  clearCart() {
+    this.cart.length = 0;
   }
 
   getProductCount(id: number): number {
@@ -25,18 +32,21 @@ export class CartService {
     return this.cart[productCartIndex].count;
   }
 
-  addProductToCart(product: Product){
+  addProductToCart(product: Product|ProductInCart){
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
-      this.cart.push({id: product.id, name: product.name, price: product.price, count: 1, limit: product.limit});
+      if ('quantity' in product) {
+        this.cart.push({id: product.id, name: product.name, price: +product.price, count: 1, limit: product.quantity});
+      }
     } else {
-      if (!this.cart[index].limit || this.cart[index].limit > this.cart[index].count) {
+      const productLimit = this.cart[index].limit;
+      if (!productLimit || productLimit === 'unlimited' || parseInt(productLimit, 10) > this.cart[index].count) {
         this.cart[index].count++;
       }
     }
   }
 
-  removeProductFromCart(product: Product) {
+  removeProductFromCart(product: Product|ProductInCart) {
     const cartProductIndex = this.cart.findIndex(item => item.id === product.id);
     if (cartProductIndex === -1) {
       return;
@@ -45,6 +55,16 @@ export class CartService {
       this.cart[cartProductIndex].count--;
     } else {
       this.cart.splice(cartProductIndex, 1);
+      if (this.cart.length === 0) {
+        this.router.navigate(['bakery-search/bakery']);
+      }
+    }
+  }
+
+  deleteCartProduct(i: number) {
+    this.cart.splice(i, 1);
+    if (this.cart.length === 0) {
+      this.router.navigate(['bakery-search/bakery']);
     }
   }
 
