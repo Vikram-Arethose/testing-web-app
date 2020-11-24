@@ -6,7 +6,6 @@
     </ion-buttons>
     <input #search class="input" [placeholder]="'locationSet.searchLocation' | translate "
            autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
-<!--    <ion-searchbar mode="ios" class="toolbar__search" searchIcon="none" [placeholder]="'locationOpt.searchCity' | translate"></ion-searchbar>-->
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +13,6 @@
   <div class="my-location block">
     <div>
       <p class="my-location__text">{{ 'locationOpt.myLocation' | translate }}</p>
-<!--      <p class="my-location__text">Nernstweg 1, 33334 Gütersloh</p>-->
       <p class="my-location__text">{{myAddress}}</p>
     </div>
     <ion-button class="my-location__btn btn" size="small" fill="none">
@@ -23,9 +21,9 @@
   </div>
   <div class="recently block">
     <p class="recently__label">{{ 'locationOpt.recently' | translate }}</p>
-    <div class="row">
+    <div class="row" *ngFor="let location of locationArr" (click)="setMyLocation(location)">
       <ion-icon class="recently__icon" src="../../../../assets/icons/clock.svg"></ion-icon>
-      <ion-label>Deciusstrasse 36, 3602 Bielefeld</ion-label>
+      <ion-label>{{location.address}}</ion-label>
     </div>
   </div>
 

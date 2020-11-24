@@ -37,8 +37,14 @@ export class GeolocationService {
     let locationArr: Location[] = this.localStorageServ.get('locationArr');
     this.logger.log('locationArr from storage', locationArr);
     if (locationArr && locationArr.length > 0) {
+      const suchLocIndexInLocArr: number = locationArr.findIndex(item => item.address === location.address);
+      if (suchLocIndexInLocArr !== -1) {
+        locationArr.splice(suchLocIndexInLocArr, 1);
+      }
       locationArr.unshift(location);
-      locationArr.length = 3;
+      if (locationArr.length > 3) {
+        locationArr.length = 3;
+      }
     } else {
       locationArr = newArray(1, location);
     }

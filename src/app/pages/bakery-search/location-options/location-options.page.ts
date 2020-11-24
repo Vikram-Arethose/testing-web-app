@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Coordinates } from '../../../models/coordinates';
 import { GeolocationService } from '../../../services/geolocation.service';
 import { Location } from '../../../models/location';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { LoggerService } from '../../../services/logger.service';
 
 @Component({
   selector: 'app-location-options',
@@ -10,17 +12,27 @@ import { Location } from '../../../models/location';
 })
 export class LocationOptionsPage implements OnInit {
 
+  locationArr: Location[];
   @ViewChild('search')
   private searchElementRef: ElementRef;
   private myAddress: string;
 
   constructor(
-    private geolocationServ: GeolocationService
+    private geolocationServ: GeolocationService,
+    private localStorageServ: LocalStorageService,
+    private logger: LoggerService,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
     this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.myAddress = res.address;
+      this.ngZone.run(() => {
+        this.locationArr = this.localStorageServ.get('locationArr');
+      });
+      // setTimeout(() => {
+      //   this.locationArr = this.localStorageServ.get('locationArr');
+      // }, 0);
     });
     // if (await this.getMyLocation()) {
     //   this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
@@ -30,6 +42,10 @@ export class LocationOptionsPage implements OnInit {
 
   ionViewDidEnter() {
     this.geolocationServ.findAddress(this.searchElementRef);
+  }
+
+  setMyLocation(location: Location) {
+    this.geolocationServ.changeLocation(location);
   }
 
   // async getInitData() {
