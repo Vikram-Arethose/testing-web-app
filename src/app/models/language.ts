@@ -1,4 +1,6 @@
 export interface Language {
-  title: string;
-  value: string;
+  code: string;
+  label: string;
+  isActive: boolean;
+  id: number;
 }

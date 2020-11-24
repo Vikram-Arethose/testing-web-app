@@ -49,7 +49,6 @@ export class AppComponent implements OnInit {
       src: './assets/icons/menu/help-circle-png.svg'
     }
   ];
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   private myAccount: string;
 
   constructor(

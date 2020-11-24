@@ -3,9 +3,9 @@
 <ion-content class="ion-content">
   <h2 class="title">{{ 'account.accountDetails' | translate }}</h2>
   <ion-list class="list">
-    <ion-item class="list__item item" mode="ios" button (click)="open('name')">
+    <ion-item class="list__item item" mode="ios" button (click)="open('first_name')">
       <ion-label class="item__label item__label_left">Name</ion-label>
-      <ion-label class="item__label item__label_purple ion-text-right">{{account?.name}}</ion-label>
+      <ion-label class="item__label item__label_purple ion-text-right">{{account?.first_name}}</ion-label>
     </ion-item>
     <ion-item class="list__item item" mode="ios" button (click)="open('email')">
       <ion-label class="item__label item__label_left">{{ 'account.email' | translate }}</ion-label>
@@ -21,7 +21,8 @@
     </ion-item>
     <ion-item class="list__item item" mode="ios" button (click)="open('language')">
       <ion-label class="item__label item__label_left">{{ 'account.language' | translate }}</ion-label>
-      <ion-label class="item__label item__label_purple ion-text-right">{{account?.language.title}}</ion-label>
+<!--      <ion-label class="item__label item__label_purple ion-text-right">{{account?.language.label}}</ion-label>-->
+      <ion-label class="item__label item__label_purple ion-text-right">{{selectedLangLabel}}</ion-label>
     </ion-item>
   </ion-list>
   <h2 class="title">{{ 'account.settings' | translate }}</h2>

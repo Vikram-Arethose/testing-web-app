@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  private account = new BehaviorSubject({name: 'Jenny', email: 'Jenny@gmail.com', country: 'Germany',
-    language: { title: 'English', value: 'en'}, });
+  private account = new BehaviorSubject(null);
   sharedAccount = this.account.asObservable();
 
   constructor(
@@ -19,5 +19,4 @@ export class AccountService {
   changeAccount(data) {
     this.account.next(data);
   }
-  
 }

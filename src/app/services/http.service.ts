@@ -9,6 +9,7 @@ import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
 import { HomeBranch, HomeBranchesRes } from '../models/http/homeBranch';
 import { ApiResponse } from '../models/http/apiResponse';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,6 +89,30 @@ export class HttpService {
     this.http.get(`${this.baseUrl}/branch/${branchId}`).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
+      }
+    });
+    return subject.asObservable();
+  }
+
+  getUserDetails() {
+    const subject = new Subject();
+    this.http.get(`${this.baseUrl}/user/details`).subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http user/details res.data: ', res.data);
+      }
+    });
+    return subject.asObservable();
+  }
+
+  updateUserDetails(data): Observable<boolean> {
+    const subject = new Subject<boolean>();
+    this.http.put(`${this.baseUrl}/user/details`, data).subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        if (Array.isArray(res.data) && res.data.length === 0) {
+          subject.next(true);
+        }
         this.logger.log('http res.data: ', res.data);
       }
     });

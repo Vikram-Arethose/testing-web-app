@@ -11,7 +11,7 @@
 <ion-content>
 
   <div [ngSwitch]="true">
-    <div *ngSwitchCase="data === 'name' || data === 'email' || data === 'phone'">
+    <div *ngSwitchCase="data === 'first_name' || data === 'email' || data === 'phone'">
       <div class="setting">
         <div class="label-wrapper">
           <h3 class="setting__label" *ngIf="data === 'phone'">{{ 'account.country'  | translate }}</h3>
@@ -19,7 +19,7 @@
         </div>
         <ion-item class="setting__item setting__item_purple item" lines="none">
           <ion-label class="item__label" *ngIf="data === 'phone'">+49</ion-label>
-          <ion-input class="item__input" [(ngModel)]="inputText" [placeholder]="placeholder"></ion-input>
+          <ion-input class="item__input" [(ngModel)]="inputText" [placeholder]="placeholder" [type]="type"></ion-input>
           <ion-button class="btn-check" slot="end" fill="none" (click)="accept()">
             <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
           </ion-button>
@@ -33,8 +33,8 @@
           <ion-radio-group class="radio-group" (ionChange)="onRadioChange($event.target.value)"
                            [value]="radioValue">
             <ion-item class="radio-group__item item" *ngFor="let item of dataForRepeat">
-              <ion-label class="item__label">{{item.title || item}}</ion-label>
-              <ion-radio mode="ios" [value]="item.value || item"></ion-radio>
+              <ion-label class="item__label">{{item.label || item}}</ion-label>
+              <ion-radio mode="ios" [value]="item.code || item"></ion-radio>
             </ion-item>
           </ion-radio-group>
           <ion-item lines="none">
@@ -50,7 +50,8 @@
         <h3 class="setting__label"></h3>
           <ion-item class="setting__item item">
             <ion-label class="item__label">{{ 'account.pushNotifications' | translate }}</ion-label>
-            <ion-toggle class="item__toggle"></ion-toggle>
+            <ion-toggle class="item__toggle" [checked]="account.notifications"
+                        (ionChange)="onNotificationChange()"></ion-toggle>
           </ion-item>
       </div>
     </div>

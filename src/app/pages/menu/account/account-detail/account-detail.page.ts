@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Language } from '../../../../models/language';
 import { AccountService } from '../../../../services/account.service';
+import { HttpService } from '../../../../services/http.service';
+import { User } from '../../../../models/user';
 
 @Component({
   selector: 'app-account-detail',
@@ -12,31 +14,29 @@ import { AccountService } from '../../../../services/account.service';
   styleUrls: ['./account-detail.page.scss'],
 })
 export class AccountDetailPage implements OnInit {
-  account;
+  account: User;
   countries: string[] = ['Germany', 'Austria', 'Switzerland'];
   country: string[];
   data: string;
   enter: string = this.translate.instant('account.enter');
   inputText: string;
   placeholder: string;
-  languages: Language[] = [
-    { title: 'English', value: 'en'},
-    { title: 'German', value: 'de'}
-  ];
   language: string;
   settingLabel: string;
   settingLabel2: string;
+  type: string;
   public title: string;
   dataForRepeat: any[];
-  // private name = 'Jenny';
   radioValue: string;
+  private selectedLang: Language;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
     private translate: TranslateService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private httpServ: HttpService
   ) {
     this.route.queryParams.subscribe( params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -46,29 +46,36 @@ export class AccountDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.sharedAccount.subscribe(res => this.account = res);
-    this.chooseDataToShow();
+    this.accountService.sharedAccount.subscribe(res => {
+      this.account = res;
+      this.selectedLang = this.account.languages.find(item => item.isActive === true);
+      this.chooseDataToShow();
+    });
   }
 
   chooseDataToShow() {
     const your: string = this.translate.instant('account.your');
     switch (this.data) {
-      case 'name':
+      case 'first_name':
         this.title = your + 'Name';
         this.settingLabel = 'Name';
-        this.inputText = this.account.name;
+        this.inputText = this.account.first_name;
+        this.type = 'text';
         break;
       case 'email':
         const email: string = this.translate.instant('account.email');
         this.title = your + email;
         this.settingLabel = email;
         this.inputText = this.account.email;
+        this.type = 'email';
         break;
       case 'phone':
         const phone: string = this.translate.instant('account.phoneNum');
         this.title = your + phone;
         this.settingLabel = phone;
+        this.inputText = this.account.phone;
         this.placeholder = this.translate.instant('account.enterYourNum');
+        this.type = 'tel';
         break;
       case 'country':
         const country: string = this.translate.instant('account.country');
@@ -81,8 +88,8 @@ export class AccountDetailPage implements OnInit {
         const language: string = this.translate.instant('account.language');
         this.title = language;
         this.settingLabel = language;
-        this.dataForRepeat = this.languages;
-        this.radioValue = this.account.language.value;
+        this.dataForRepeat = this.account.languages;
+        this.radioValue = this.selectedLang.code;
         break;
       case 'notifications':
         this.title = this.translate.instant('account.notifications');
@@ -112,19 +119,40 @@ export class AccountDetailPage implements OnInit {
 
   accept() {
     this.account[this.data] = this.inputText;
-    this.accountService.changeAccount(this.account);
+    const updateData = {
+      first_name: this.account.first_name,
+      email: this.account.email,
+      phone: this.account.phone,
+    };
+    this.updateUserDetails(updateData);
   }
 
   acceptRadio() {
-    if (this.data === 'language' && this.radioValue && this.radioValue !== this.account.language.value) {
-      const selectedLanguage = this.languages.find(item => item.value === this.radioValue);
-      this.account[this.data] = selectedLanguage;
-      this.accountService.changeAccount(this.account);
-      this.translate.use(this.radioValue);
+    if (this.data === 'language' && this.radioValue && this.radioValue !== this.selectedLang.code) {
+      const selectedLanguageIndex: number = this.account.languages.findIndex(item => item.code === this.radioValue);
+      this.account.languages.forEach(item => item.isActive = false);
+      this.account.languages[selectedLanguageIndex].isActive = true;
+      this.updateUserDetails({language_id: this.account.languages[selectedLanguageIndex].id});
     } else if (this.data === 'country' && this.radioValue !== this.account.country) {
       this.account[this.data] = this.radioValue;
-      this.accountService.changeAccount(this.account);
+      this.updateUserDetails({country: this.radioValue});
     }
+  }
+
+  updateUserDetails(updateData) {
+    this.httpServ.updateUserDetails(updateData).subscribe((res: boolean) => {
+      if (res === true) {
+        this.accountService.changeAccount(this.account);
+        if (this.data === 'language') {
+          this.translate.use(this.radioValue);
+        }
+      }
+    });
+  }
+
+  onNotificationChange() {
+    this.account.notifications = !this.account.notifications;
+    this.updateUserDetails({notifications: this.account.notifications});
   }
 
 }
