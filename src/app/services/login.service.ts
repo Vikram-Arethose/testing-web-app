@@ -38,7 +38,6 @@ export class LoginService {
         (response: any) => {
           this.logger.log('server response: ', response);
           localStorage.setItem('token', response.access_token);
-          this.localStorageServ.setArr([{key: 'user', value: response.user}]);
           this.router.navigate(['google-login']);
         });
     }
@@ -62,7 +61,6 @@ export class LoginService {
             (response: any) => {
               this.logger.log('server response: ', response);
               localStorage.setItem('token', response.access_token);
-              this.localStorageServ.setArr([{key: 'user', value: response.user}]);
               this.router.navigate(['google-login']);
             }, error => {
               this.logger.warn('server response error: ', error);
@@ -102,7 +100,6 @@ export class LoginService {
           (response: any) => {
             this.logger.log('server response: ', response);
             localStorage.setItem('token', response.access_token);
-            this.localStorageServ.setArr([{key: 'user', value: response.user}]);
             this.router.navigate(['google-login']);
           }, error => {
             this.logger.warn('server response error: ', error);

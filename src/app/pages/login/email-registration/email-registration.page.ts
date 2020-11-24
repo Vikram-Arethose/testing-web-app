@@ -54,7 +54,6 @@ export class EmailRegistrationPage implements OnInit {
       this.logger.log('server res: ', res);
       this.nextStep();
       localStorage.setItem('token', res.access_token);
-      this.localStorageServ.setArr([{key: 'user', value: res.user}]);
     },
       error => {
         this.step = 0;
@@ -69,7 +68,6 @@ export class EmailRegistrationPage implements OnInit {
       (res: AuthResponse) => {
         this.logger.log('server res: ', res);
         localStorage.setItem('token', res.access_token);
-        this.localStorageServ.setArr([{key: 'user', value: res.user}]);
         this.router.navigate(['location-setting']);
       },
       error => {
