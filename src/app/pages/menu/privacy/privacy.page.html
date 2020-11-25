@@ -2,5 +2,5 @@
 
 <ion-content>
   <div class="top-grey"></div>
-  <p class="text">Text {{data}}</p>
+  <div class="text" [innerHTML]="data | translate"></div>
 </ion-content>

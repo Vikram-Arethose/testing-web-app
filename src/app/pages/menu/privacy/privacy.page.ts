@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./privacy.page.scss'],
 })
 export class PrivacyPage implements OnInit {
-  private data: string;
+  data: string;
 
   constructor(
     private route: ActivatedRoute,
