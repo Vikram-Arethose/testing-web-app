@@ -8,6 +8,8 @@ import { Observable, Subject } from 'rxjs';
 import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
 import { HomeBranch, HomeBranchesRes } from '../models/http/homeBranch';
 import { ApiResponse } from '../models/http/apiResponse';
+import { InboxMessage } from '../models/http/inboxMessage';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -118,4 +120,27 @@ export class HttpService {
     });
     return subject.asObservable();
   }
+
+  getInboxMessages(): Observable<InboxMessage[]> {
+    const subject = new Subject<InboxMessage[]>();
+    this.http.get(this.baseUrl + '/inbox/messages').subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
+      }
+    });
+    return subject.asObservable();
+  }
+
+  deleteUserAccount() {
+    return this.http.get(this.baseUrl + '/user/delete').pipe(
+      tap((res: ApiResponse) => {
+        this.logger.log('deleteUserAccount res', res);
+        if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && !res.data) {
+          return true;
+        }
+      })
+    );
+  }
+
 }

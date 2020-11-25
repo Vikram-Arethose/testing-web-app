@@ -82,11 +82,6 @@
     "yourName": "Your Name",
     "yourEmail": "Your Email-Address"
   },
-  "inbox": {
-    "header": "Posteingang",
-    "title": "Du hast Post!",
-    "text": "Du hast soeben eine Nachricht erhalten"
-  },
   "orders": {
     "header": "Bestellungen",
     "current": "Aktuelle",

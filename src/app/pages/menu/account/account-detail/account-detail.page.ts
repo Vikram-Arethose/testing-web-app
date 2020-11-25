@@ -53,7 +53,6 @@ export class AccountDetailPage implements OnInit {
   ngOnInit() {
     this.accountService.sharedAccount.subscribe(res => {
       this.account = res;
-      this.logger.log('this.account: ', this.account);
       this.selectedLang = this.account.languages.find(item => item.isActive === true);
       this.chooseDataToShow();
     });
@@ -187,8 +186,12 @@ export class AccountDetailPage implements OnInit {
         current_password: this.changePasswordForm.get(['currentPassword']).value,
         new_password: newPassword.value});
     }
-    this.logger.log(newPassword.value);
-    this.logger.log(newPasswordConfirm.value);
+  }
+
+  deleteAccount() {
+    this.httpServ.deleteUserAccount().subscribe(res => {
+      this.logger.log('deleteAccount accDetail page res', res);
+    });
   }
 
 }

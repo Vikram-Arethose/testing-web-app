@@ -82,11 +82,6 @@
     "yourName": "Your Name",
     "yourEmail": "Your Email-Address"
   },
-  "inbox": {
-    "header": "Inbox",
-    "title": "You've got mail",
-    "text": "You have just received a message."
-  },
   "orders": {
     "header": "Orders",
     "current": "Current",

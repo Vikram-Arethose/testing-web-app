@@ -35,7 +35,6 @@ export class GeolocationService {
     this.locationSource.next(location);
 
     let locationArr: Location[] = this.localStorageServ.get('locationArr');
-    this.logger.log('locationArr from storage', locationArr);
     if (locationArr && locationArr.length > 0) {
       const suchLocIndexInLocArr: number = locationArr.findIndex(item => item.address === location.address);
       if (suchLocIndexInLocArr !== -1) {
@@ -49,7 +48,6 @@ export class GeolocationService {
       locationArr = newArray(1, location);
     }
     this.localStorageServ.setArr([{key: 'locationArr', value: locationArr}]);
-    this.logger.log('locationArr for save', locationArr);
   }
 
   async getCurrentPosition() {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../../services/http.service';
+import { InboxMessage } from '../../../models/http/inboxMessage';
 
 @Component({
   selector: 'app-inbox',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InboxPage implements OnInit {
 
-  constructor() { }
+  inboxMessagesArr: InboxMessage[];
+
+  constructor(
+    private httpServ: HttpService
+  ) { }
 
   ngOnInit() {
+    this.getInboxMessages();
+  }
+
+  onRefresh(event) {
+    this.getInboxMessages(event);
+  }
+
+  getInboxMessages(event?) {
+    this.httpServ.getInboxMessages().subscribe((res: InboxMessage[]) => {
+      this.inboxMessagesArr = res;
+      if (event) {
+        event.target.complete();
+      }
+    });
   }
 
 }

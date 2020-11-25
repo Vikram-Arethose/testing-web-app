@@ -1,14 +1,17 @@
-<app-menu-header [title]="'inbox.header' | translate "></app-menu-header>
+<app-menu-header [title]="'menu.inbox' | translate "></app-menu-header>
 
 <ion-content>
-  <div class="mail">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="mail" *ngFor="let item of inboxMessagesArr">
     <div class="left">
       <ion-icon class="mail__avatar" src="../../../assets/icons/menu/user-circle.svg"></ion-icon>
     </div>
     <div class="mail__text-block">
-      <p class="mail__date">14. Sep</p>
-      <p class="mail__title">{{ 'inbox.title' | translate }}</p>
-      <p class="mail__text">{{ 'inbox.text' | translate }}</p>
+      <p class="mail__date">{{item.updated_at | date:'d. LLL'}}</p>
+      <p class="mail__title">{{item.title}}</p>
+      <p class="mail__text">{{item.text}}</p>
     </div>
   </div>
 </ion-content>
