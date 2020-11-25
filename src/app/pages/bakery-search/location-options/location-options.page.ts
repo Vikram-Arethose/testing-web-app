@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Coordinates } from '../../../models/coordinates';
 import { GeolocationService } from '../../../services/geolocation.service';
 import { Location } from '../../../models/location';
@@ -21,18 +21,14 @@ export class LocationOptionsPage implements OnInit {
     private geolocationServ: GeolocationService,
     private localStorageServ: LocalStorageService,
     private logger: LoggerService,
-    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
     this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.myAddress = res.address;
-      this.ngZone.run(() => {
+      setTimeout(() => {
         this.locationArr = this.localStorageServ.get('locationArr');
-      });
-      // setTimeout(() => {
-      //   this.locationArr = this.localStorageServ.get('locationArr');
-      // }, 0);
+      }, 0);
     });
     // if (await this.getMyLocation()) {
     //   this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);

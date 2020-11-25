@@ -6,5 +6,5 @@ export interface User {
   phone: string;
   country: string;
   languages: Language[];
-  notifications?: boolean;
+  notifications: boolean;
 }

@@ -7,6 +7,8 @@ import { Language } from '../../../../models/language';
 import { AccountService } from '../../../../services/account.service';
 import { HttpService } from '../../../../services/http.service';
 import { User } from '../../../../models/user';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from '../../../../services/alert.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -28,15 +30,18 @@ export class AccountDetailPage implements OnInit {
   public title: string;
   dataForRepeat: any[];
   radioValue: string;
+  private changePasswordForm: FormGroup;
   private selectedLang: Language;
 
   constructor(
+    private alertServ: AlertService,
     private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
     private translate: TranslateService,
     private accountService: AccountService,
-    private httpServ: HttpService
+    private httpServ: HttpService,
+    private formBuilder: FormBuilder
   ) {
     this.route.queryParams.subscribe( params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -48,8 +53,19 @@ export class AccountDetailPage implements OnInit {
   ngOnInit() {
     this.accountService.sharedAccount.subscribe(res => {
       this.account = res;
+      this.logger.log('this.account: ', this.account);
       this.selectedLang = this.account.languages.find(item => item.isActive === true);
       this.chooseDataToShow();
+    });
+
+    this.initChangePasswordForm();
+  }
+
+  initChangePasswordForm() {
+    this.changePasswordForm = this.formBuilder.group({
+      currentPassword: ['', [Validators.required, Validators.minLength(8)]],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      newPasswordConfirm: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -145,6 +161,9 @@ export class AccountDetailPage implements OnInit {
         this.accountService.changeAccount(this.account);
         if (this.data === 'language') {
           this.translate.use(this.radioValue);
+        } else if (this.data === 'password') {
+          this.alertServ.presentToast('Success!');
+          this.changePasswordForm.reset();
         }
       }
     });
@@ -152,7 +171,24 @@ export class AccountDetailPage implements OnInit {
 
   onNotificationChange() {
     this.account.notifications = !this.account.notifications;
+    this.accountService.changeAccount(this.account);
     this.updateUserDetails({notifications: this.account.notifications});
+  }
+
+  submitChangePassword() {
+    const newPassword = this.changePasswordForm.get(['newPassword']);
+    const newPasswordConfirm = this.changePasswordForm.get(['newPasswordConfirm']);
+    if (newPassword.value !== newPasswordConfirm.value) {
+      this.alertServ.presentAlert('New password and confirm new password must be equal!');
+      newPassword.reset();
+      newPasswordConfirm.reset();
+    } else {
+      this.updateUserDetails({
+        current_password: this.changePasswordForm.get(['currentPassword']).value,
+        new_password: newPassword.value});
+    }
+    this.logger.log(newPassword.value);
+    this.logger.log(newPasswordConfirm.value);
   }
 
 }

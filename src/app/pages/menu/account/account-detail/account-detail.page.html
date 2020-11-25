@@ -50,35 +50,37 @@
         <h3 class="setting__label"></h3>
           <ion-item class="setting__item item">
             <ion-label class="item__label">{{ 'account.pushNotifications' | translate }}</ion-label>
-            <ion-toggle class="item__toggle" [checked]="account.notifications"
+            <ion-toggle class="item__toggle" [checked]="account.notifications === true"
                         (ionChange)="onNotificationChange()"></ion-toggle>
           </ion-item>
       </div>
     </div>
     <div *ngSwitchCase="data === 'password'">
-      <div class="setting">
-        <h3 class="setting__label setting__label_upper">{{ 'account.currentPass' | translate }}</h3>
-        <ion-item class="item" lines="none">
-          <ion-input class="item__input item__input_upper"
-                     [placeholder]="enter + ('account.currentPass' | translate)"></ion-input>
-        </ion-item>
-      </div>
-      <div class="setting">
-        <h3 class="setting__label setting__label_upper">{{ 'account.newPass' | translate }}</h3>
-        <ion-item class="setting__item item">
-          <ion-input class="item__input item__input_upper"
-                     [placeholder]="enter + ('account.newPass' | translate)"></ion-input>
-        </ion-item>
-        <ion-item class="setting__item item">
-          <ion-input class="item__input item__input_upper"
-                     [placeholder]="('dateChoose.confirm' | translate) + ' ' + ('account.newPass' | translate)"></ion-input>
-        </ion-item>
-        <ion-item class="setting__item" lines="none">
-          <ion-button class="btn-check" slot="end" fill="none">
-            <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </div>
+      <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePassword()">
+        <div class="setting">
+          <h3 class="setting__label setting__label_upper">{{ 'account.currentPass' | translate }}</h3>
+          <ion-item class="item" >
+            <ion-input class="item__input item__input_upper" formControlName="currentPassword" type="password"
+                       [placeholder]="enter + ('account.currentPass' | translate)"></ion-input>
+          </ion-item>
+        </div>
+        <div class="setting">
+          <h3 class="setting__label setting__label_upper">{{ 'account.newPass' | translate }}</h3>
+          <ion-item class="setting__item item">
+            <ion-input class="item__input item__input_upper" formControlName="newPassword" type="password"
+                       [placeholder]="enter + ('account.newPass' | translate)"></ion-input>
+          </ion-item>
+          <ion-item class="setting__item item">
+            <ion-input class="item__input item__input_upper" formControlName="newPasswordConfirm" type="password"
+                       [placeholder]="('dateChoose.confirm' | translate) + ' ' + ('account.newPass' | translate)"></ion-input>
+          </ion-item>
+          <ion-item class="setting__item" lines="none">
+            <ion-button class="btn-check" type="submit" slot="end" fill="none" [disabled]="changePasswordForm.invalid">
+              <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </div>
+      </form>
     </div>
     <div *ngSwitchCase="data === 'payments'">
       <div class="setting">
