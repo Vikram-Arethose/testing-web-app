@@ -22,7 +22,7 @@
 }
 
 .payment {
-  height: 12vh;
+  height: 80px;
   display: flex;
   align-items: center;
   &__img-container {
@@ -39,16 +39,5 @@
   }
   &__name {
     font: normal normal 500 20px/24px Montserrat;
-  }
-}
-
-.link-wrapper {
-  margin-top: 1vh;
-  display: flex;
-  justify-content: center;
-
-  .link {
-    color: #0E8DF1;
-    text-decoration: underline;
   }
 }

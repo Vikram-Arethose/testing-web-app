@@ -51,13 +51,19 @@ a {
 }
 
 .payment-methods-modal .modal-wrapper, .payment-methods-modal .modal-shadow {
-  height: 494px;
+  height: 70vh;
   bottom: 0;
   position: absolute;
 }
 
 .google-pay-modal .modal-wrapper, .google-pay-modal .modal-shadow {
   height: 70vh;
+  bottom: 0;
+  position: absolute;
+}
+
+.other-option-modal .modal-wrapper, .other-option-modal .modal-shadow {
+  height: 40vh;
   bottom: 0;
   position: absolute;
 }

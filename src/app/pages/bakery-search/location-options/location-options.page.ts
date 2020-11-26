@@ -30,10 +30,6 @@ export class LocationOptionsPage implements OnInit {
         this.locationArr = this.localStorageServ.get('locationArr');
       }, 0);
     });
-    // if (await this.getMyLocation()) {
-    //   this.myAddress = await this.geolocationServ.getAddress(this.lat, this.lng);
-    //   this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
-    // }
   }
 
   ionViewDidEnter() {

@@ -1,0 +1,12 @@
+<div class="container">
+  <ion-button class="close-btn" (click)="closeModal()" size="small" fill="none">
+    <ion-icon class="close-btn__icon" slot="icon-only" name="close-outline"></ion-icon>
+  </ion-button>
+  <div class="title">{{ 'menu.paymentMethods' | translate }}</div>
+  <div class="payment" tappable>
+    <div class="payment__img-container">
+      <img class="payment__img" src="assets/img/payments/p.png">
+    </div>
+    <p class="payment__name">Paypal</p>
+  </div>
+</div>

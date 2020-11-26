@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { GooglePayComponent } from './google-pay/google-pay.component';
+import { OtherOptionsComponent } from './payment-methods/other-options/other-options.component';
 
 
 
@@ -17,7 +18,8 @@ import { GooglePayComponent } from './google-pay/google-pay.component';
     PickUpDateComponent,
     ProductDetailsComponent,
     PaymentMethodsComponent,
-    GooglePayComponent
+    GooglePayComponent,
+    OtherOptionsComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { GooglePayComponent } from './google-pay/google-pay.component';
     PickUpDateComponent,
     ProductDetailsComponent,
     PaymentMethodsComponent,
-    GooglePayComponent
+    GooglePayComponent,
+    OtherOptionsComponent
   ]
 })
 export class ComponentsModule { }
