@@ -189,8 +189,11 @@ export class AccountDetailPage implements OnInit {
   }
 
   deleteAccount() {
-    this.httpServ.deleteUserAccount().subscribe(res => {
-      this.logger.log('deleteAccount accDetail page res', res);
+    this.httpServ.deleteUserAccount().subscribe((res: boolean) => {
+      if (res) {
+        this.router.navigate(['start']);
+        localStorage.clear();
+      }
     });
   }
 

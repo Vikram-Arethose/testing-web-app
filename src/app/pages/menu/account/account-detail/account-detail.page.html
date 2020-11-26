@@ -122,8 +122,8 @@
         <ion-item class="item" detail="false" button (click)="open('imprint')">
           <ion-label class="item__label">{{ 'account.imprint' | translate}}</ion-label>
         </ion-item>
-        <ion-item class="item setting__item_pd" detail="false" button>
-          <ion-label class="item__label item__label_red" (click)="deleteAccount()">{{ 'account.deleteAcc' | translate}}</ion-label>
+        <ion-item class="item setting__item_pd" (click)="deleteAccount()" detail="false" button>
+          <ion-label class="item__label item__label_red">{{ 'account.deleteAcc' | translate}}</ion-label>
         </ion-item>
       </div>
     </div>

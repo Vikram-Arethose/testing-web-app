@@ -1,6 +1,6 @@
-<app-menu-header [title]="'legal' | translate"></app-menu-header>
+<app-menu-header [title]="'menu.legal' | translate"></app-menu-header>
 
 <ion-content>
   <ion-img class="img" src="../../../assets/img/bread.png"></ion-img>
-  <p class="text">Text Legal</p>
+  <div class="text" [innerHTML]="'legal' | translate"></div>
 </ion-content>

@@ -133,14 +133,14 @@ export class HttpService {
   }
 
   deleteUserAccount() {
-    return this.http.get(this.baseUrl + '/user/delete').pipe(
-      tap((res: ApiResponse) => {
-        this.logger.log('deleteUserAccount res', res);
-        if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && !res.data) {
-          return true;
-        }
-      })
-    );
+    const subject = new Subject<boolean>();
+    this.http.delete(this.baseUrl + '/user/delete').subscribe( (res: ApiResponse) => {
+      this.logger.log('deleteUserAccount res', res);
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(true);
+      }
+    });
+    return subject.asObservable();
   }
 
 }
