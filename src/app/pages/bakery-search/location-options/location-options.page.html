@@ -21,10 +21,14 @@
   </div>
   <div class="recently block">
     <p class="recently__label">{{ 'locationOpt.recently' | translate }}</p>
-    <div class="row" *ngFor="let location of locationArr" (click)="setMyLocation(location)">
+    <ion-item class="row" *ngFor="let location of locationArr" (click)="setMyLocation(location)" button lines="none">
       <ion-icon class="recently__icon" src="../../../../assets/icons/clock.svg"></ion-icon>
       <ion-label>{{location.address}}</ion-label>
-    </div>
+    </ion-item>
+<!--    <div class="row" *ngFor="let location of locationArr" (click)="setMyLocation(location)">-->
+<!--      <ion-icon class="recently__icon" src="../../../../assets/icons/clock.svg"></ion-icon>-->
+<!--      <ion-label>{{location.address}}</ion-label>-->
+<!--    </div>-->
   </div>
 
 </ion-content>
