@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { DateService } from './date.service';
+import { Product } from '../models/http/bakeryFull';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BakeryService {
 
-  constructor() { }
+  constructor() {}
 
   getIcon(feature: string) {
     let icon: string;

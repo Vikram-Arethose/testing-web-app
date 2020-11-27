@@ -14,6 +14,7 @@ export class PickUpDateComponent implements OnInit {
   datePickerMin: string;
   date: string;
   time: string;
+  private dateGlobal: string;
 
   constructor(
     public dateService: DateService,
@@ -23,8 +24,9 @@ export class PickUpDateComponent implements OnInit {
 
   ngOnInit() {
     this.datePickerMin = this.dateService.getDatePickerMin();
-    if (this.dateService.date) {
-      this.date = this.time = this.dateService.date;
+    this.dateService.dateShared.subscribe(res => this.dateGlobal);
+    if (this.dateGlobal) {
+      this.date = this.time = this.dateGlobal;
     }
     this.logger.log('date: ', this.date);
     this.logger.log('date: ', this.time);
@@ -47,7 +49,7 @@ export class PickUpDateComponent implements OnInit {
   onConfirm() {
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
-    this.dateService.date = this.date + 'T' + this.time;
+    this.dateService.changeDate(this.date + 'T' + this.time);
     this.logger.log('date: ', this.date);
     this.logger.log('time: ', this.time);
     this.closeModal();

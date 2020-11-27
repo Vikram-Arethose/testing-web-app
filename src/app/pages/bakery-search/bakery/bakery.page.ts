@@ -19,6 +19,7 @@ import { BakeryService } from '../../../services/bakery.service';
 export class BakeryPage implements OnInit {
 
   cart: Product[] = [];
+  date: string;
   isInfoFull: boolean;
   bakeryAddress: string;
   bakeryDetails: BakeryDetails;
@@ -52,6 +53,14 @@ export class BakeryPage implements OnInit {
   ngOnInit() {
     this.selected[0] = true;
     this.getBakeryData();
+    this.dateService.dateShared.subscribe(res => {
+      if (res) {
+        this.date = res;
+        // TODO: need to set selected section index
+        // const selectedIndex = this.selected.indexOf(item => item === true);
+        this.setProductList();
+      }
+    });
   }
 
   getBakeryData() {
@@ -63,7 +72,8 @@ export class BakeryPage implements OnInit {
       this.openingHours = Object.entries(res.branchDetails.opening_hours.default);
       this.categories = res.categories;
       if (res.categories[0] && res.categories[0].products) {
-        this.productsList = res.categories[0].products;
+        // this.productsList = res.categories[0].products;
+        this.setProductList();
       }
     });
   }
@@ -71,7 +81,15 @@ export class BakeryPage implements OnInit {
   onSectionSelect(index: number) {
     this.selected.length = 0;
     this.selected[index] = !this.selected[index];
-    this.productsList = this.categories[index].products;
+    this.setProductList(index);
+    // this.productsList = this.categories[index].products;
+  }
+
+  setProductList(index?: number) {
+    if (this.categories[0] && this.categories[0].products) {
+      this.productsList = this.categories[index || 0].products;
+      this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
+    }
   }
 
   getCart() {
@@ -108,7 +126,7 @@ export class BakeryPage implements OnInit {
 
   addProductToCart(product: Product, $event) {
     $event.stopPropagation();
-    if (!this.dateService.date) {
+    if (!this.date) {
       this.presentPickUpDateModal();
     } else {
       this.cartService.addProductToCart(product);
@@ -137,6 +155,10 @@ export class BakeryPage implements OnInit {
   toggleBakeryInfo() {
     this.bakeryInfo = this.isBakeryInfoFull ? this.bakeryInfoTrim : this.bakeryInfoFull;
     this.isBakeryInfoFull = !this.isBakeryInfoFull;
+  }
+
+  getProductAvailability(product: Product) {
+    return this.dateService.getProductAvailability(product);
   }
 
 }
