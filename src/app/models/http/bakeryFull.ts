@@ -41,11 +41,13 @@ export interface Product {
   bio_certification: number;
   created_at: string;
   created_by: number;
+  count?: number;
   description: string;
   details: string;
   id: number;
   ingredients: string;
   is_new: number;
+  isUnavailable?: boolean;
   name: string;
   period_available_from: string;
   period_available_to: string;

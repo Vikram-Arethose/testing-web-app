@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ProductInCart } from '../../../../models/productInCart';
 import { Observable } from 'rxjs';
 import { LoggerService } from '../../../../services/logger.service';
+import { Product } from '../../../../models/http/bakeryFull';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -16,7 +17,7 @@ import { LoggerService } from '../../../../services/logger.service';
 })
 export class ShoppingCartPage implements OnInit {
 
-  date$: Observable<string>;
+  date: string;
 
   constructor(
     public dateService: DateService,
@@ -27,7 +28,14 @@ export class ShoppingCartPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.date$ = this.dateService.dateShared;
+    this.date = localStorage.getItem('date');
+    this.dateService.dateShared.subscribe((res: string) => {
+      if (res && res !== this.date) {
+        this.date = res;
+        localStorage.setItem('date', res);
+        this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -53,11 +61,11 @@ export class ShoppingCartPage implements OnInit {
     return await modal.present();
   }
 
-  add(product: ProductInCart) {
+  add(product: Product) {
     this.cartService.addProductToCart(product);
   }
 
-  reduce(product: ProductInCart) {
+  reduce(product: Product) {
     this.cartService.removeProductFromCart(product);
   }
 

@@ -4,19 +4,20 @@ import { LoggerService } from './logger.service';
 import { ProductInCart } from '../models/productInCart';
 import { Product } from '../models/http/bakeryFull';
 import { Router } from '@angular/router';
+import { DateService } from './date.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cart: ProductInCart[] = [];
+  private cart: Product[] = [];
 
   constructor(
     private logger: LoggerService,
-    private router: Router
+    private router: Router,
   ) { }
 
-  getCart(): ProductInCart[]  {
+  getCart(): Product[]  {
     return this.cart;
   }
 
@@ -32,21 +33,19 @@ export class CartService {
     return this.cart[productCartIndex].count;
   }
 
-  addProductToCart(product: Product|ProductInCart){
+  addProductToCart(product: Product){
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
-      if ('quantity' in product) {
-        this.cart.push({id: product.id, name: product.name, price: +product.price, count: 1, limit: product.quantity});
-      }
+      product.count = 1;
+      this.cart.push(product);
     } else {
-      const productLimit = this.cart[index].limit;
-      if (!productLimit || productLimit === 'unlimited' || parseInt(productLimit, 10) > this.cart[index].count) {
+      if (product.quantity === 'unlimited' || product.quantity_items > this.cart[index].count) {
         this.cart[index].count++;
       }
     }
   }
 
-  removeProductFromCart(product: Product|ProductInCart) {
+  removeProductFromCart(product: Product) {
     const cartProductIndex = this.cart.findIndex(item => item.id === product.id);
     if (cartProductIndex === -1) {
       return;
@@ -69,13 +68,15 @@ export class CartService {
   }
 
   getTotalCount() {
-    const reducer = (accumulator, currentValue: ProductInCart) => accumulator + currentValue.count;
+    const reducer = (accumulator, currentValue: Product) => accumulator + currentValue.count;
     const initialValue = 0;
     return this.cart.reduce(reducer, initialValue);
   }
 
   getTotalPrice() {
-    const reducer = (accumulator, currentValue: ProductInCart) => accumulator + +(currentValue.count * currentValue.price).toFixed(2);
+    const reducer = (accumulator, currentValue: Product) => {
+      return  accumulator + +(currentValue.count * Number.parseFloat(currentValue.price)).toFixed(2);
+    };
     const initialValue = 0;
     return this.cart.reduce(reducer, initialValue);
   }
