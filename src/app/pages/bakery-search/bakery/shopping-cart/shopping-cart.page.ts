@@ -7,6 +7,7 @@ import { PaymentMethodsComponent } from '../../../../components/payment-methods/
 import { Router } from '@angular/router';
 import { ProductInCart } from '../../../../models/productInCart';
 import { Observable } from 'rxjs';
+import { LoggerService } from '../../../../services/logger.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -21,7 +22,8 @@ export class ShoppingCartPage implements OnInit {
     public dateService: DateService,
     public cartService: CartService,
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
+    private logger: LoggerService
   ) { }
 
   ngOnInit() {

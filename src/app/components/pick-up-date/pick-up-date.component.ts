@@ -26,8 +26,7 @@ export class PickUpDateComponent implements OnInit {
     this.datePickerMin = this.dateService.getDatePickerMin();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
-        this.date = res.split('T')[0];
-        this.time = res.split('T')[1];
+        this.date = this.time = res;
       }
       this.dateGlobal = res;
     });
@@ -53,8 +52,6 @@ export class PickUpDateComponent implements OnInit {
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
     this.dateService.changeDate(this.date + 'T' + this.time);
-    this.logger.log('date: ', this.date);
-    this.logger.log('time: ', this.time);
     this.closeModal();
   }
 
