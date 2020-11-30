@@ -63,7 +63,8 @@
   <div class="products" *ngIf="!isInfoFull">
     <div class="sections">
       <div class="sections__item" *ngFor="let category of categories, let i = index"
-           (click)="onSectionSelect(i)" [class.sections__item_selected]="selected[i]" tappable>{{category.name}}</div>
+           (click)="onCategorySelect(i)"
+           [class.sections__item_selected]="i === selectedCategoryIndex" tappable>{{category.name}}</div>
     </div>
     <div class="product-list">
       <div class="container">

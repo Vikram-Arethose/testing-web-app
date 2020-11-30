@@ -6,6 +6,7 @@ import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up
 import { PaymentMethodsComponent } from '../../../../components/payment-methods/payment-methods.component';
 import { Router } from '@angular/router';
 import { ProductInCart } from '../../../../models/productInCart';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,6 +14,8 @@ import { ProductInCart } from '../../../../models/productInCart';
   styleUrls: ['./shopping-cart.page.scss'],
 })
 export class ShoppingCartPage implements OnInit {
+
+  date$: Observable<string>;
 
   constructor(
     public dateService: DateService,
@@ -22,6 +25,7 @@ export class ShoppingCartPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.date$ = this.dateService.dateShared;
   }
 
   ionViewWillEnter() {

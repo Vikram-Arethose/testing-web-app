@@ -24,13 +24,13 @@ export class BakeryPage implements OnInit {
   bakeryAddress: string;
   bakeryDetails: BakeryDetails;
   productsList: Product[];
-  selected: boolean[] = [];
   categories: Category[];
   openingHours: [string, any][];
   bakeryInfoFull: string;
   bakeryInfoTrim: string;
   bakeryInfo: string;
   isBakeryInfoFull: boolean;
+  selectedCategoryIndex: number;
   private bakeryId: number;
 
   constructor(
@@ -51,13 +51,10 @@ export class BakeryPage implements OnInit {
   }
 
   ngOnInit() {
-    this.selected[0] = true;
     this.getBakeryData();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
         this.date = res;
-        // TODO: need to set selected section index
-        // const selectedIndex = this.selected.indexOf(item => item === true);
         this.setProductList();
       }
     });
@@ -72,22 +69,20 @@ export class BakeryPage implements OnInit {
       this.openingHours = Object.entries(res.branchDetails.opening_hours.default);
       this.categories = res.categories;
       if (res.categories[0] && res.categories[0].products) {
-        // this.productsList = res.categories[0].products;
+        this.selectedCategoryIndex = 0;
         this.setProductList();
       }
     });
   }
 
-  onSectionSelect(index: number) {
-    this.selected.length = 0;
-    this.selected[index] = !this.selected[index];
-    this.setProductList(index);
-    // this.productsList = this.categories[index].products;
+  onCategorySelect(index: number) {
+    this.selectedCategoryIndex = index;
+    this.setProductList();
   }
 
-  setProductList(index?: number) {
+  setProductList() {
     if (this.categories[0] && this.categories[0].products) {
-      this.productsList = this.categories[index || 0].products;
+      this.productsList = this.categories[this.selectedCategoryIndex].products;
       this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
     }
   }
@@ -135,6 +130,7 @@ export class BakeryPage implements OnInit {
 
   onExit() {
     this.cartService.clearCart();
+    this.dateService.changeDate('');
   }
 
   onInfo() {
