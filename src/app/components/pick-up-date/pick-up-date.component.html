@@ -8,12 +8,14 @@
     <ion-button class="btn btn-outline" fill="outline" (click)="onToday()">{{ 'dateChoose.today' | translate }}</ion-button>
     <ion-button class="btn btn-outline" fill="outline" (click)="onTomorrow()">{{ 'dateChoose.tomorrow' | translate }}</ion-button>
     <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg" tappable (click)="dateSelector.open()"></ion-icon>
-    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [(ngModel)]="date"></ion-datetime>
+    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin"
+                  (ionChange)="onCalendarChange($event.target.value)"></ion-datetime>
+<!--    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [(ngModel)]="date"></ion-datetime>-->
   </div>
   <h2 class="title title-time">{{ 'dateChoose.time' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
     <ion-datetime class="ion-datetime" [min]="datePickerMin" (ionChange)="onTimeChange($event)"
-                  displayFormat="HH:mm" minuteValues="0,15,30,45" [attr.value]="dateService.date ? dateService.date : ''"
+                  displayFormat="HH:mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
                   ></ion-datetime>
   </ion-item>
   <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">

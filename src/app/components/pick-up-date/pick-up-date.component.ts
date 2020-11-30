@@ -24,12 +24,15 @@ export class PickUpDateComponent implements OnInit {
 
   ngOnInit() {
     this.datePickerMin = this.dateService.getDatePickerMin();
-    this.dateService.dateShared.subscribe(res => this.dateGlobal);
-    if (this.dateGlobal) {
-      this.date = this.time = this.dateGlobal;
-    }
+    this.dateService.dateShared.subscribe(res => {
+      if (res) {
+        this.date = res.split('T')[0];
+        this.time = res.split('T')[1];
+      }
+      this.dateGlobal = res;
+    });
     this.logger.log('date: ', this.date);
-    this.logger.log('date: ', this.time);
+    this.logger.log('time: ', this.time);
   }
 
   onToday() {
@@ -57,5 +60,9 @@ export class PickUpDateComponent implements OnInit {
 
   closeModal() {
     this.modalController.dismiss();
+  }
+
+  onCalendarChange(value) {
+    this.date = value;
   }
 }
