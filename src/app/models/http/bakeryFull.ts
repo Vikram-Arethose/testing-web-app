@@ -8,6 +8,7 @@ export interface BakeryFull {
 export interface BakeryDetails {
   active: number;
   bakery_id: number;
+  bakery_logo?: string;
   city: string;
   created_at: string;
   created_by: number;

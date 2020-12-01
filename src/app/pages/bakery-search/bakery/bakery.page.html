@@ -5,7 +5,7 @@
         <ion-back-button class="toolbar__btn" mode="md" defaultHref="/" (click)="onExit()"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
-    <img class="toolbar__img" src="../../../../assets/img/bakery/bakery-logo.jpg">
+    <img class="toolbar__img" *ngIf="bakeryDetails?.bakery_logo" [src]="bakeryDetails.bakery_logo">
   </div>
   <div class="info">
     <div class="info-main">
