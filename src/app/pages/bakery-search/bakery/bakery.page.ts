@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 import { CartService } from '../../../services/cart.service';
 import { HttpService } from '../../../services/http.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BakeryFull, BakeryDetails, Category, Product } from '../../../models/http/bakeryFull';
 import { BakeryService } from '../../../services/bakery.service';
 
@@ -32,6 +32,7 @@ export class BakeryPage implements OnInit {
   isBakeryInfoFull: boolean;
   selectedCategoryIndex: number;
   private bakeryId: number;
+  private minOrderValue: string;
 
   constructor(
     public bakeryServ: BakeryService,
@@ -72,6 +73,7 @@ export class BakeryPage implements OnInit {
         this.selectedCategoryIndex = 0;
         this.setProductList();
       }
+      this.minOrderValue = res.branchDetails.min_order_value;
     });
   }
 
@@ -156,6 +158,15 @@ export class BakeryPage implements OnInit {
 
   getProductAvailability(product: Product) {
     return this.dateService.getProductAvailability(product);
+  }
+
+  openShoppingCart() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        minOrderValue: this.minOrderValue
+      }
+    };
+    this.router.navigate(['/bakery-search/bakery/shopping-cart'], navigationExtras);
   }
 
 }

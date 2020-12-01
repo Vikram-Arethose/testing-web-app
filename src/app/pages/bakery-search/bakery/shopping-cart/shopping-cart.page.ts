@@ -4,11 +4,12 @@ import { CartService } from '../../../../services/cart.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up-date.component';
 import { PaymentMethodsComponent } from '../../../../components/payment-methods/payment-methods.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductInCart } from '../../../../models/productInCart';
 import { Observable } from 'rxjs';
 import { LoggerService } from '../../../../services/logger.service';
 import { Product } from '../../../../models/http/bakeryFull';
+import { AlertService } from '../../../../services/alert.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -18,15 +19,24 @@ import { Product } from '../../../../models/http/bakeryFull';
 export class ShoppingCartPage implements OnInit {
 
   date: string;
+  private minOrderValue: string;
 
   constructor(
     public dateService: DateService,
     public cartService: CartService,
+    private alertServ: AlertService,
     private alertController: AlertController,
     private modalController: ModalController,
+    private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService
-  ) { }
+  ) {
+    this.route.queryParamMap.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.minOrderValue = this.router.getCurrentNavigation().extras.state.minOrderValue;
+      }
+    });
+  }
 
   ngOnInit() {
     this.date = localStorage.getItem('date');
@@ -97,14 +107,14 @@ export class ShoppingCartPage implements OnInit {
 
   onCheckout() {
     const cart = this.cartService.getCart();
-    if (cart.length > 0) {
+    if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(this.minOrderValue)) {
       if (cart.some(item => item.isAvailable !== false)) {
         this.presentPaymentMethodsModal();
       } else {
         this.presentAlertConfirm(cart);
       }
     } else {
-        return;
+        this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger than ${this.minOrderValue} €!`);
     }
   }
 
