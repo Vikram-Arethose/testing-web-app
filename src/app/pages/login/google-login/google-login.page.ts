@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 import { LoggerService } from '../../../services/logger.service';
 import { LoginService } from '../../../services/login.service';
@@ -58,5 +58,14 @@ export class GoogleLoginPage implements OnInit {
    continue() {
      this.router.navigate(['location-setting']);
    }
+
+  open(data: string) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        data
+      }
+    };
+    this.router.navigate([`${data}`], navigationExtras);
+  }
 
 }
