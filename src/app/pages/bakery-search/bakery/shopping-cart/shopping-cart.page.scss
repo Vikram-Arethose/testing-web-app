@@ -77,6 +77,11 @@
 
     &__col {
       padding: 0;
+      .notification {
+        color: red;
+        font-size: 12px;
+        font-style: italic;
+      }
       &:last-child {
         text-align: right;
       }

@@ -71,24 +71,19 @@ export class DateService {
   }
 
   mapProductInCartAvailability(product: Product) {
-    if (product.quantity === 'unavailable') {
-      product.isUnavailable = true;
-    }
     // check availability by date
-    if (this.date) {
-      this.selectedDate = new Date(this.date);
-      const selectedDay = this.selectedDate.getDay();
-      // check days availability
-      if (product.availability.includes(this.weekDays[selectedDay])) {
-        // check product available from to
-        return this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo;
-      } else {
-        product.isUnavailable = true;
+    this.selectedDate = new Date(this.date);
+    const selectedDay = this.selectedDate.getDay();
+    // check days availability
+    if (product.availability.includes(this.weekDays[selectedDay])) {
+      // check product available from to
+      if (this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo) {
+        product.isAvailable = true;
+        return product;
       }
-    } else {
-      product.isUnavailable = fa;
     }
-    
+    product.isAvailable = false;
+    return product;
   }
 
 }

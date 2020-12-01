@@ -47,7 +47,7 @@ export interface Product {
   id: number;
   ingredients: string;
   is_new: number;
-  isUnavailable?: boolean;
+  isAvailable?: boolean;
   name: string;
   period_available_from: string;
   period_available_to: string;

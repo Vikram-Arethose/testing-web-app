@@ -25,6 +25,10 @@ export class CartService {
     this.cart.length = 0;
   }
 
+  updateCart(cart: Product[]) {
+    this.cart = cart;
+  }
+
   getProductCount(id: number): number {
     const productCartIndex = this.cart.findIndex(item => item.id === id);
     if (productCartIndex === -1) {
@@ -37,6 +41,7 @@ export class CartService {
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
       product.count = 1;
+      product.isAvailable = true;
       this.cart.push(product);
     } else {
       if (product.quantity === 'unlimited' || product.quantity_items > this.cart[index].count) {

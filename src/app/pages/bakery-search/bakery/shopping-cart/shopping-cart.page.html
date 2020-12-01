@@ -21,18 +21,21 @@
     </div>
     <div class="product-list">
       <ion-grid class="grid">
-        <div class="item" *ngFor="let item of cartService.getCart(), let i = index">
+        <div class="item" *ngFor="let product of cartService.getCart(), let i = index">
           <ion-row class="grid__row">
             <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
-            <ion-col class="grid__col" size="8">{{item.count}} x {{item.name}}</ion-col>
-            <ion-col class="grid__col">{{item.price | currency:'EUR':'symbol'}}</ion-col>
+            <ion-col class="grid__col" size="8">
+              <p>{{product.count}} x {{product.name}}</p>
+              <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
+            </ion-col>
+            <ion-col class="grid__col">{{product.price | currency:'EUR':'symbol'}}</ion-col>
           </ion-row>
           <ion-row class="grid__row controls">
             <ion-button fill="none" size="small" (click)="delete(i)">
               <ion-icon class="controls__remove-icon" src="../../../../../assets/icons/shopping-cart/trash.svg"></ion-icon>
             </ion-button>
-            <div class="controls__btn" (click)="reduce(item)">-</div>
-            <div class="controls__btn" (click)="add(item)">+</div>
+            <div class="controls__btn" (click)="reduce(product)">-</div>
+            <div class="controls__btn" (click)="add(product)">+</div>
           </ion-row>
         </div>
         <ion-row class="grid__row grid__row_total">
@@ -47,7 +50,7 @@
       <ion-button class="buttons-wrapper__btn" expand="block"
                   [routerLink]="'/bakery-search/bakery'"
                   routerDirection="back">{{ 'shoppingCart.addMore' | translate }}</ion-button>
-      <ion-button class="buttons-wrapper__btn" expand="block" (click)="presentPaymentMethodsModal()">
+      <ion-button class="buttons-wrapper__btn" expand="block" (click)="onCheckout()">
         {{ 'shoppingCart.checkout' | translate }}
         ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</ion-button>
     </div>
