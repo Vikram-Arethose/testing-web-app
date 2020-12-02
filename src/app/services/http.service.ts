@@ -12,6 +12,7 @@ import { InboxMessage } from '../models/http/inboxMessage';
 import { tap } from 'rxjs/operators';
 import { ProductForTransaction } from '../models/http/productForTransaction';
 import { DateForPayment } from '../models/http/dateForPayment';
+import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 
 
 @Injectable({
@@ -24,7 +25,8 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private alertController: AlertController,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private iab: InAppBrowser
   ) { }
 
   async presentAlert(message: string) {
@@ -159,6 +161,10 @@ export class HttpService {
       }
     });
     return subject.asObservable();
+  }
+
+  openCreditCardPayment(stxId: string, userId: number): InAppBrowserObject {
+    return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`);
   }
 
 }

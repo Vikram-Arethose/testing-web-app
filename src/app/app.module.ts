@@ -21,6 +21,7 @@ import { Interceptor } from './core/interceptors/interceptor';
 import { ErrorService } from './services/error.service';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AgmCoreModule } from '@agm/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -56,7 +57,8 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: LOCALE_ID, useValue: 'de-De'},
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorService },
-    NativeGeocoder
+    NativeGeocoder,
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })

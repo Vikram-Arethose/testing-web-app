@@ -1,9 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GooglePayComponent } from '../google-pay/google-pay.component';
 import { OtherOptionsComponent } from './other-options/other-options.component';
 import { LoggerService } from '../../services/logger.service';
 import { DateForPayment } from '../../models/http/dateForPayment';
+import { HttpService } from '../../services/http.service';
+import { InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { NavigationExtras, Router } from '@angular/router';
+import { AlertService } from '../../services/alert.service';
+import { CartService } from '../../services/cart.service';
+import { DateService } from '../../services/date.service';
 
 @Component({
   selector: 'app-payment-methods',
@@ -15,13 +21,17 @@ export class PaymentMethodsComponent implements OnInit {
   @Input() private dataForPayment: DateForPayment;
 
   constructor(
+    private alertServ: AlertService,
     private modalController: ModalController,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private httpServ: HttpService,
+    private router: Router,
+    private ngZone: NgZone,
+    private cartServ: CartService,
+    private dateServ: DateService
   ) { }
 
-  ngOnInit() {
-    this.logger.log('this.dataForPayment: ', this.dataForPayment);
-  }
+  ngOnInit() { }
 
   async onGooglePay() {
     await this.modalController.dismiss();
@@ -43,6 +53,27 @@ export class PaymentMethodsComponent implements OnInit {
       cssClass: 'other-option-modal'
     });
     return await modal.present();
+  }
+
+  creditCartPayment() {
+    const browser = this.httpServ.openCreditCardPayment(this.dataForPayment.stx_id, this.dataForPayment.user_id);
+    browser.on('loadstart').subscribe((res: InAppBrowserEvent) => {
+      if (res.url.includes('/payment/success')) {
+        this.modalController.dismiss();
+        browser.close();
+        const navigationExtras: NavigationExtras = {
+          state: {
+            isConfirm: true
+          }
+        };
+        this.ngZone.run(() => this.router.navigate(['orders'], navigationExtras));
+        this.cartServ.clearCart();
+        this.dateServ.changeDate('');
+      } else if (res.url.includes('/payment/failed')) {
+        this.alertServ.presentAlert('Payment was failed! Please try again later.');
+        browser.close();
+      }
+    });
   }
 
 }
