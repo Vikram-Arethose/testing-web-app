@@ -10,6 +10,8 @@ import { HomeBranch, HomeBranchesRes } from '../models/http/homeBranch';
 import { ApiResponse } from '../models/http/apiResponse';
 import { InboxMessage } from '../models/http/inboxMessage';
 import { tap } from 'rxjs/operators';
+import { ProductForTransaction } from '../models/http/productForTransaction';
+import { DateForPayment } from '../models/http/dateForPayment';
 
 
 @Injectable({
@@ -138,6 +140,22 @@ export class HttpService {
       this.logger.log('deleteUserAccount res', res);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(true);
+      }
+    });
+    return subject.asObservable();
+  }
+
+  createSmartTransaction(branchId: number, basketSum: number, products: ProductForTransaction[] ): Observable<DateForPayment> {
+    const body = {
+      branch_id: branchId,
+      basket_sum: basketSum,
+      products
+    };
+    const subject = new Subject<DateForPayment>();
+    this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
       }
     });
     return subject.asObservable();

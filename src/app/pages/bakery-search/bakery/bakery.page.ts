@@ -32,7 +32,6 @@ export class BakeryPage implements OnInit {
   isBakeryInfoFull: boolean;
   selectedCategoryIndex: number;
   private bakeryId: number;
-  private minOrderValue: string;
 
   constructor(
     public bakeryServ: BakeryService,
@@ -73,7 +72,6 @@ export class BakeryPage implements OnInit {
         this.selectedCategoryIndex = 0;
         this.setProductList();
       }
-      this.minOrderValue = res.branchDetails.min_order_value;
     });
   }
 
@@ -163,7 +161,10 @@ export class BakeryPage implements OnInit {
   openShoppingCart() {
     const navigationExtras: NavigationExtras = {
       state: {
-        minOrderValue: this.minOrderValue
+        data: {
+          branchId: this.bakeryDetails.bakery_id,
+          minOrderValue: this.bakeryDetails.min_order_value,
+        }
       }
     };
     this.router.navigate(['/bakery-search/bakery/shopping-cart'], navigationExtras);

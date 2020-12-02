@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 import { LoggerService } from '../../../../services/logger.service';
 import { Product } from '../../../../models/http/bakeryFull';
 import { AlertService } from '../../../../services/alert.service';
+import { HttpService } from '../../../../services/http.service';
+import { ProductForTransaction } from '../../../../models/http/productForTransaction';
+import { DateForPayment } from '../../../../models/http/dateForPayment';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,7 +22,7 @@ import { AlertService } from '../../../../services/alert.service';
 export class ShoppingCartPage implements OnInit {
 
   date: string;
-  private minOrderValue: string;
+  private branchDetails: { branchId: number, minOrderValue: string };
 
   constructor(
     public dateService: DateService,
@@ -29,11 +32,12 @@ export class ShoppingCartPage implements OnInit {
     private modalController: ModalController,
     private route: ActivatedRoute,
     private router: Router,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private httpServ: HttpService
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.minOrderValue = this.router.getCurrentNavigation().extras.state.minOrderValue;
+        this.branchDetails = this.router.getCurrentNavigation().extras.state.data;
       }
     });
   }
@@ -64,10 +68,11 @@ export class ShoppingCartPage implements OnInit {
     return await modal.present();
   }
 
-  async presentPaymentMethodsModal() {
+  async presentPaymentMethodsModal(dataForPayment: DateForPayment) {
     const modal = await this.modalController.create({
       component: PaymentMethodsComponent,
       cssClass: 'payment-methods-modal',
+      componentProps: {dataForPayment}
     });
     return await modal.present();
   }
@@ -106,15 +111,22 @@ export class ShoppingCartPage implements OnInit {
   }
 
   onCheckout() {
+    const minOrderValue = this.branchDetails.minOrderValue;
     const cart = this.cartService.getCart();
-    if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(this.minOrderValue)) {
+    if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(minOrderValue)) {
       if (cart.some(item => item.isAvailable !== false)) {
-        this.presentPaymentMethodsModal();
+        const productsForTransaction: ProductForTransaction[] = cart.map((item: Product) => ({ id: item.id, quantity: item.count }) );
+        this.httpServ.createSmartTransaction(this.branchDetails.branchId, this.cartService.getTotalPrice(), productsForTransaction)
+          .subscribe((res: DateForPayment) => {
+            if (res) {
+              this.presentPaymentMethodsModal(res);
+            }
+          });
       } else {
         this.presentAlertConfirm(cart);
       }
     } else {
-        this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger than ${this.minOrderValue} €!`);
+        this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger than ${minOrderValue} €!`);
     }
   }
 
