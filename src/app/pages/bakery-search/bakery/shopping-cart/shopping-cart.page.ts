@@ -22,6 +22,7 @@ import { DateForPayment } from '../../../../models/http/dateForPayment';
 export class ShoppingCartPage implements OnInit {
 
   date: string;
+  isLoading: boolean;
   private branchDetails: { branchId: number, minOrderValue: string };
 
   constructor(
@@ -116,8 +117,10 @@ export class ShoppingCartPage implements OnInit {
     if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(minOrderValue)) {
       if (cart.some(item => item.isAvailable !== false)) {
         const productsForTransaction: ProductForTransaction[] = cart.map((item: Product) => ({ id: item.id, quantity: item.count }) );
+        this.isLoading = true;
         this.httpServ.createSmartTransaction(this.branchDetails.branchId, this.cartService.getTotalPrice(), productsForTransaction)
           .subscribe((res: DateForPayment) => {
+            this.isLoading = false;
             if (res) {
               this.presentPaymentMethodsModal(res);
             }
