@@ -21,16 +21,8 @@ export class DateService {
   ) { }
 
   getDatePickerMin() {
-    const timeRangeMin = 15;
     const today = new Date();
-    const minutes = today.getMinutes();
-    const timeHourOffset = -(today.getTimezoneOffset() / 60);
-    if (minutes > 30 && minutes < 45) {
-      today.setMinutes(45);
-    }
-    today.setHours(today.getHours() + timeHourOffset, today.getMinutes() + timeRangeMin);
-    const datePickerMin = today.toISOString();
-    return datePickerMin;
+    return today.toISOString();
   }
 
   getDatePickerMax(): string {

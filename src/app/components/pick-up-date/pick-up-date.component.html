@@ -14,9 +14,9 @@
   </div>
   <h2 class="title title-time">{{ 'dateChoose.time' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
-    <ion-datetime class="ion-datetime" [min]="datePickerMin" (ionChange)="onTimeChange($event)"
+    <ion-datetime class="ion-datetime" [min]="timePickerMin" (ionChange)="onTimeChange($event)"
                   displayFormat="HH:mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
-                  ></ion-datetime>
+                  [disabled]="!date"></ion-datetime>
   </ion-item>
   <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
     {{ 'dateChoose.confirm' | translate }}</ion-button>
