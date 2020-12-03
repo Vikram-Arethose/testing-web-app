@@ -32,6 +32,7 @@ export class BakeryPage implements OnInit {
   isBakeryInfoFull: boolean;
   selectedCategoryIndex: number;
   private bakeryId: number;
+  private lastUsedPayment: string | undefined;
 
   constructor(
     public bakeryServ: BakeryService,
@@ -72,6 +73,7 @@ export class BakeryPage implements OnInit {
         this.selectedCategoryIndex = 0;
         this.setProductList();
       }
+      this.lastUsedPayment = res?.last_used_payment;
     });
   }
 
@@ -164,6 +166,7 @@ export class BakeryPage implements OnInit {
         data: {
           branchId: this.bakeryDetails.bakery_id,
           minOrderValue: this.bakeryDetails.min_order_value,
+          lastUsedPayment: this.lastUsedPayment
         }
       }
     };

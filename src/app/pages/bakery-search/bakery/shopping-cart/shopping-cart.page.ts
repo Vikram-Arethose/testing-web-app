@@ -13,6 +13,7 @@ import { AlertService } from '../../../../services/alert.service';
 import { HttpService } from '../../../../services/http.service';
 import { ProductForTransaction } from '../../../../models/http/productForTransaction';
 import { DateForPayment } from '../../../../models/http/dateForPayment';
+import { BranchDetailsForPayment } from '../../../../models/http/branchDetailsForPayment';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -24,7 +25,7 @@ export class ShoppingCartPage implements OnInit {
   date: string;
   isLoading: boolean;
   paymentMethod: string;
-  private branchDetails: { branchId: number, minOrderValue: string };
+  private branchDetails: BranchDetailsForPayment;
 
   constructor(
     public cartService: CartService,
@@ -45,7 +46,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.paymentMethod = 'Credit Card';
+    this.paymentMethod = this.branchDetails.lastUsedPayment;
     this.date = localStorage.getItem('date');
     this.dateService.dateShared.subscribe((res: string) => {
       if (res && res !== this.date) {

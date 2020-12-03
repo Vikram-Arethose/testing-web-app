@@ -3,6 +3,7 @@ import { OpeningHours } from './homeBranch';
 export interface BakeryFull {
   branchDetails: BakeryDetails;
   categories: Category[];
+  last_used_payment?: string;
 }
 
 export interface BakeryDetails {
