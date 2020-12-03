@@ -128,7 +128,9 @@
     "header": "Warenkorb",
     "pickUp": "Abholung",
     "addMore": "Weitere Produkte hinzufügen",
-    "checkout": "Zur Kasse"
+    "checkout": "Zur Kasse",
+    "lastPaymentMethod": "Letzte Zahlungsmethode:",
+    "chooseOtherPayment": "Wählen Sie eine andere Zahlungsmethode"
   },
   "gPay": {
     "dataProtection": "Wenn Sie fortfahren aktzeptieren Sie damit die Datenschutzhinweise und Nutzungsbedingungen von Google Payments",

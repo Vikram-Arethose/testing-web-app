@@ -23,11 +23,12 @@ export class ShoppingCartPage implements OnInit {
 
   date: string;
   isLoading: boolean;
+  paymentMethod: string;
   private branchDetails: { branchId: number, minOrderValue: string };
 
   constructor(
-    public dateService: DateService,
     public cartService: CartService,
+    public dateService: DateService,
     private alertServ: AlertService,
     private alertController: AlertController,
     private modalController: ModalController,
@@ -44,6 +45,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   ngOnInit() {
+    // this.paymentMethod = 'Credit Card';
     this.date = localStorage.getItem('date');
     this.dateService.dateShared.subscribe((res: string) => {
       if (res && res !== this.date) {
@@ -111,7 +113,7 @@ export class ShoppingCartPage implements OnInit {
     await alert.present();
   }
 
-  onCheckout() {
+  checkout() {
     const minOrderValue = this.branchDetails.minOrderValue;
     const cart = this.cartService.getCart();
     if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(minOrderValue)) {

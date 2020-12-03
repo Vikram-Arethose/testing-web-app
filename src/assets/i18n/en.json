@@ -128,7 +128,9 @@
     "header": "Shopping cart",
     "pickUp": "Pick-up",
     "addMore": "Add more products",
-    "checkout": "Checkout"
+    "checkout": "Checkout",
+    "lastPaymentMethod": "Last Payment method:",
+    "chooseOtherPayment": "Choose other payment method"
   },
   "gPay": {
     "dataProtection": "If you continue you accept it the data protection information and Terms of Use from Google Payments",

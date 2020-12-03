@@ -52,10 +52,16 @@
       <ion-button class="buttons-wrapper__btn" expand="block"
                   [routerLink]="'/bakery-search/bakery'"
                   routerDirection="back">{{ 'shoppingCart.addMore' | translate }}</ion-button>
-      <ion-button class="buttons-wrapper__btn" expand="block" (click)="onCheckout()">
-        {{ 'shoppingCart.checkout' | translate }}
-        ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})
+      <ion-button class="buttons-wrapper__btn btn" expand="block" (click)="checkout()">
+        <div>
+          <p>{{ 'shoppingCart.checkout' | translate }}
+          ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
+          <p class="btn__label" *ngIf="paymentMethod">{{ 'shoppingCart.lastPaymentMethod' | translate }}
+            {{paymentMethod}}</p>
+        </div>
       </ion-button>
+      <a class="buttons-wrapper__link" (click)="checkout()" *ngIf="paymentMethod">
+        {{ 'shoppingCart.chooseOtherPayment' | translate }}</a>
     </div>
   </div>
 </ion-content>

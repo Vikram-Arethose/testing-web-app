@@ -98,16 +98,30 @@
 
 .buttons-wrapper {
   padding: 9.85vh 5.3vw;
+  text-align: center;
   &__btn {
-    height: 7.76vh;
+    height: 10vh;
     margin: 0 0 2.22vh;
-    border-radius: 12px;
+    --border-radius: 12px;
     font: normal normal 600 18px/22px Montserrat;
+    text-transform: capitalize;
     &:first-child {
       --background: #CBCBCB;
     }
     &:last-child {
       --background: #0E8DF1;
     }
+  }
+  .btn {
+    &__label {
+      text-transform: none;
+      padding: 5px 0 0;
+      font: normal normal 400 12px/15px Montserrat;
+    }
+  }
+  &__link {
+    padding: 2vh 0 0;
+    display: inline-block;
+    text-decoration: underline;
   }
 }
