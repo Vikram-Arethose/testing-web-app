@@ -12,6 +12,7 @@ export class PickUpDateComponent implements OnInit {
   @Input() isVerify;
   today: string = new Date().toISOString();
   datePickerMin: string;
+  datePickerMax: string;
   date: string;
   time: string;
   private dateGlobal: string;
@@ -24,6 +25,7 @@ export class PickUpDateComponent implements OnInit {
 
   ngOnInit() {
     this.datePickerMin = this.dateService.getDatePickerMin();
+    this.datePickerMax = this.dateService.getDatePickerMax();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
         this.date = this.time = res;

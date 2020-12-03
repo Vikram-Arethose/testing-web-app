@@ -8,7 +8,7 @@
     <ion-button class="btn btn-outline" fill="outline" (click)="onToday()">{{ 'dateChoose.today' | translate }}</ion-button>
     <ion-button class="btn btn-outline" fill="outline" (click)="onTomorrow()">{{ 'dateChoose.tomorrow' | translate }}</ion-button>
     <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg" tappable (click)="dateSelector.open()"></ion-icon>
-    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin"
+    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [max]="datePickerMax"
                   (ionChange)="onCalendarChange($event.target.value)"></ion-datetime>
 <!--    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [(ngModel)]="date"></ion-datetime>-->
   </div>
