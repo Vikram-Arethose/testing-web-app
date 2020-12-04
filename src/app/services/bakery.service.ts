@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
 import { DateService } from './date.service';
-import { Product } from '../models/http/bakeryFull';
+import { BakeryFull, Product } from '../models/http/bakeryFull';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BakeryService {
 
+  private bakerySource: BehaviorSubject<BakeryFull> = new BehaviorSubject<BakeryFull>(null);
+  bakery: Observable<BakeryFull> = this.bakerySource.asObservable();
+
   constructor() {}
+
+  changeBakery(bakery: BakeryFull) {
+    this.bakerySource.next(bakery);
+  }
 
   getIcon(feature: string) {
     let icon: string;

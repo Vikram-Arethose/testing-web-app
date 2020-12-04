@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DateService } from '../../services/date.service';
 import { ModalController } from '@ionic/angular';
 import { LoggerService } from '../../services/logger.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-pick-up-date',
@@ -17,18 +18,20 @@ export class PickUpDateComponent implements OnInit {
   time: string;
   timePickerMin: string;
   private dateGlobal: string;
+  private timeHourOffset: number;
 
   constructor(
     public dateService: DateService,
     private modalController: ModalController,
     private logger: LoggerService,
+    private alertServ: AlertService
   ) { }
 
   ngOnInit() {
     this.dateService.dateShared.subscribe(res => {
-      this.getPickersRanges();
       if (res) {
         this.date = this.time = res;
+        this.getPickersRanges();
       }
       this.dateGlobal = res;
     });
@@ -44,13 +47,19 @@ export class PickUpDateComponent implements OnInit {
   onTomorrow() {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
+    // tomorrow.setHours(0, 0, 0, 0);
     this.date = tomorrow.toISOString();
     this.getPickersRanges();
   }
 
-  onCalendarChange(value) {
-    this.date = value;
+  onCalendarChange(value: string) {
+    if (value.split('T')[0] === this.today.split('T')[0]) {
+      this.date = this.today;
+    } else {
+      // const dateFromValue = new Date(value);
+      // dateFromValue.setHours(0, 0, 0, 0);
+      this.date = value;
+    }
     this.getPickersRanges();
   }
 
@@ -61,8 +70,17 @@ export class PickUpDateComponent implements OnInit {
   onConfirm() {
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
-    this.dateService.changeDate(this.date + 'T' + this.time);
-    this.closeModal();
+    const dateForCheck = new Date(this.date + 'T' + this.time);
+    // dateForCheck.setHours(dateForCheck.getHours());
+    if (this.dateService.checkSelectedDate(dateForCheck)) {
+      this.dateService.changeDate(this.date + 'T' + this.time);
+      this.closeModal();
+    } else {
+      this.alertServ.presentAlert('This bakery doesn\'t work at selected date/time!');
+      if (!this.isVerify) {
+        this.date = this.time = null;
+      }
+    }
   }
 
   closeModal() {
@@ -75,11 +93,14 @@ export class PickUpDateComponent implements OnInit {
     const selectedDate = new Date(this.date || this.today);
     (this.date === this.today) ? timeRangeMin = 15 : timeRangeMin = 0;
     const minutes = selectedDate.getMinutes();
-    const timeHourOffset = -(selectedDate.getTimezoneOffset() / 60);
+    this.timeHourOffset = -(selectedDate.getTimezoneOffset() / 60);
     if (minutes > 30 && minutes < 45) {
       selectedDate.setMinutes(45);
     }
-    selectedDate.setHours(selectedDate.getHours() + timeHourOffset, selectedDate.getMinutes() + timeRangeMin);
+    selectedDate.setHours(selectedDate.getHours() + this.timeHourOffset, selectedDate.getMinutes() + timeRangeMin);
+    if (this.date && this.date.split('T')[0] !== this.today.split('T')[0]) {
+      selectedDate.setHours(this.timeHourOffset, 0, 0, 0);
+    }
     this.timePickerMin = selectedDate.toISOString();
     this.logger.log('timePicker: ', this.timePickerMin);
   }

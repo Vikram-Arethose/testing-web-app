@@ -5,7 +5,7 @@ import { Bakeries } from '../../core/mocks/bakeries';
 import { LoggerService } from '../../services/logger.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Coordinates } from '../../models/coordinates';
-import { DayOpeningHours, HomeBranch } from '../../models/http/homeBranch';
+import { OpeningHoursDay, HomeBranch } from '../../models/http/homeBranch';
 import { HttpService } from '../../services/http.service';
 import { Observable } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';

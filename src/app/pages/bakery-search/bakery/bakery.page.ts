@@ -63,6 +63,7 @@ export class BakeryPage implements OnInit {
 
   getBakeryData() {
     this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
+      this.bakeryServ.changeBakery(res);
       this.bakeryDetails = res.branchDetails;
       this.bakeryAddress = `${res.branchDetails.street}, ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Product } from '../models/http/bakeryFull';
+import { BakeryFull, Product } from '../models/http/bakeryFull';
+import { BakeryService } from './bakery.service';
+import { OpeningHours, OpeningHoursDay } from '../models/http/homeBranch';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +13,21 @@ export class DateService {
   availableFrom: Date;
   availableTo: Date;
   weekDays: string[] = ['sun', 'mo', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  weekDaysFull: string[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  private bakery: BakeryFull;
   private date: string;
+  private selectedDate: Date;
   private dateSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
   dateShared: Observable<string> = this.dateSource.asObservable();
-  private selectedDate: Date;
 
   constructor(
-    private logger: LoggerService
-  ) { }
+    private logger: LoggerService,
+    private bakeryServ: BakeryService
+  ) {
+    this.bakeryServ.bakery.subscribe((res: BakeryFull) => {
+      this.bakery = res;
+    });
+  }
 
   getDatePickerMin() {
     const today = new Date();
@@ -87,6 +96,25 @@ export class DateService {
     }
     product.isAvailable = false;
     return product;
+  }
+
+  checkSelectedDate(date: Date): boolean {
+    const today = new Date();
+    const selectedDate = date;
+    this.logger.log('selectedDate', selectedDate);
+    const selectedDay = this.weekDaysFull[selectedDate.getDay()];
+    const openHoursDay: OpeningHoursDay = this.bakery.branchDetails.opening_hours.default[selectedDay];
+    if (openHoursDay.start && openHoursDay.end) {
+      return selectedDate >= getDateByTime('start') && selectedDate <= getDateByTime('end');
+    }
+    return false;
+
+    function getDateByTime(startOrEnd: string): Date {
+      const newDate = new Date(date);
+      newDate.setHours(parseInt(openHoursDay[startOrEnd].split(':')[0], 10),
+        parseInt(openHoursDay.start.split(':')[1], 10));
+      return newDate;
+    }
   }
 
 }
