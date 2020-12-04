@@ -77,7 +77,9 @@ export class PickUpDateComponent implements OnInit {
       this.closeModal();
     } else {
       this.alertServ.presentAlert('This bakery doesn\'t work at selected date/time!');
-      if (!this.isVerify) {
+      if (this.isVerify) {
+        this.dateService.dateShared.subscribe(res => this.date = this.time = res);
+      } else {
         this.date = this.time = null;
       }
     }
