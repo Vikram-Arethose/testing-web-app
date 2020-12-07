@@ -1,21 +1,24 @@
-<div class="container">
+<div class="spinner" *ngIf="isLoading">
+  <ion-spinner></ion-spinner>
+</div>
+<div class="container" *ngIf="!isLoading">
   <ion-button class="close-btn" (click)="closeModal()" size="small" fill="none">
     <ion-icon class="close-btn__icon" slot="icon-only" name="close-outline"></ion-icon>
   </ion-button>
   <div class="title">{{ 'menu.paymentMethods' | translate }}</div>
-  <div class="payment" tappable (click)="onGooglePay()">
+ <!-- <div class="payment" tappable (click)="onGooglePay()">
     <div class="payment__img-container">
       <img class="payment__img" src="assets/img/payments/g-pay.png">
     </div>
     <p class="payment__name">Google Pay</p>
-  </div>
+  </div>-->
   <div class="payment" tappable>
     <div class="payment__img-container">
       <img class="payment__img" src="../assets/img/payments/klarna_sofort.jpg">
     </div>
     <p class="payment__name">Klarna sofort</p>
   </div>
-  <div class="payment" tappable (click)="creditCartPayment()">
+  <div class="payment" tappable (click)="makePaymentBy('credit')">
     <div class="payment__img-container">
       <img class="payment__img" src="assets/icons/payments/credit-card.svg">
     </div>
@@ -27,7 +30,7 @@
     </div>
     <p class="payment__name">Lastschrift</p>
   </div>
-<!--  <div class="link-wrapper">-->
-<!--    <a class="link" (click)="onOtherOption()">Other options</a>-->
-<!--  </div>-->
+  <div class="link-wrapper">
+    <a class="link" (click)="onOtherOption()">Other options</a>
+  </div>
 </div>

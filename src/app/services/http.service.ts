@@ -11,7 +11,7 @@ import { ApiResponse } from '../models/http/apiResponse';
 import { InboxMessage } from '../models/http/inboxMessage';
 import { tap } from 'rxjs/operators';
 import { ProductForTransaction } from '../models/http/productForTransaction';
-import { DateForPayment } from '../models/http/dateForPayment';
+import { CreateStxRes } from '../models/http/createStxRes';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 
 
@@ -147,13 +147,13 @@ export class HttpService {
     return subject.asObservable();
   }
 
-  createSmartTransaction(branchId: number, basketSum: number, products: ProductForTransaction[] ): Observable<DateForPayment> {
+  createSmartTransaction(branchId: number, basketSum: number, products: ProductForTransaction[] ): Observable<CreateStxRes> {
     const body = {
       branch_id: branchId,
       basket_sum: basketSum,
       products
     };
-    const subject = new Subject<DateForPayment>();
+    const subject = new Subject<CreateStxRes>();
     this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);

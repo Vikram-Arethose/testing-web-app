@@ -3,13 +3,16 @@ import { ModalController } from '@ionic/angular';
 import { GooglePayComponent } from '../google-pay/google-pay.component';
 import { OtherOptionsComponent } from './other-options/other-options.component';
 import { LoggerService } from '../../services/logger.service';
-import { DateForPayment } from '../../models/http/dateForPayment';
+import { CreateStxRes } from '../../models/http/createStxRes';
 import { HttpService } from '../../services/http.service';
 import { InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { CartService } from '../../services/cart.service';
 import { DateService } from '../../services/date.service';
+import { ProductForTransaction } from '../../models/http/productForTransaction';
+import { BakeryService } from '../../services/bakery.service';
+import { BakeryFull } from '../../models/http/bakeryFull';
 
 @Component({
   selector: 'app-payment-methods',
@@ -18,10 +21,13 @@ import { DateService } from '../../services/date.service';
 })
 export class PaymentMethodsComponent implements OnInit {
 
-  @Input() private dataForPayment: DateForPayment;
+  @Input() private productsForTransaction: ProductForTransaction[];
+  isLoading: boolean;
+  private bakery: BakeryFull;
 
   constructor(
     private alertServ: AlertService,
+    private bakeryServ: BakeryService,
     private modalController: ModalController,
     private logger: LoggerService,
     private httpServ: HttpService,
@@ -31,7 +37,9 @@ export class PaymentMethodsComponent implements OnInit {
     private dateServ: DateService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.bakeryServ.bakery.subscribe(res => this.bakery = res);
+  }
 
   async onGooglePay() {
     await this.modalController.dismiss();
@@ -55,8 +63,24 @@ export class PaymentMethodsComponent implements OnInit {
     return await modal.present();
   }
 
-  creditCartPayment() {
-    const browser = this.httpServ.openCreditCardPayment(this.dataForPayment.stx_id, this.dataForPayment.user_id);
+  makePaymentBy(paymentType: string) {
+    switch (paymentType) {
+      case 'credit':
+        this.createSmartTransaction();
+    }
+  }
+
+  createSmartTransaction() {
+    this.isLoading = true;
+    this.httpServ.createSmartTransaction(this.bakery.branchDetails.bakery_id, this.cartServ.getTotalPrice(), this.productsForTransaction)
+      .subscribe((res: CreateStxRes) => {
+        this.isLoading = false;
+        this.creditCartPayment(res);
+      });
+  }
+
+  creditCartPayment(createStxRes: CreateStxRes) {
+    const browser = this.httpServ.openCreditCardPayment(createStxRes.stx_id, createStxRes.user_id);
     browser.on('loadstart').subscribe((res: InAppBrowserEvent) => {
       if (res.url.includes('/payment/success')) {
         this.modalController.dismiss();

@@ -12,7 +12,7 @@ import { Product } from '../../../../models/http/bakeryFull';
 import { AlertService } from '../../../../services/alert.service';
 import { HttpService } from '../../../../services/http.service';
 import { ProductForTransaction } from '../../../../models/http/productForTransaction';
-import { DateForPayment } from '../../../../models/http/dateForPayment';
+import { CreateStxRes } from '../../../../models/http/createStxRes';
 import { BranchDetailsForPayment } from '../../../../models/http/branchDetailsForPayment';
 
 @Component({
@@ -24,7 +24,7 @@ export class ShoppingCartPage implements OnInit {
 
   date: string;
   isLoading: boolean;
-  paymentMethod: string;
+  lastPaymentMethod: string;
   private branchDetails: BranchDetailsForPayment;
 
   constructor(
@@ -46,7 +46,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   ngOnInit() {
-    this.paymentMethod = this.branchDetails.lastUsedPayment;
+    this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
     this.date = localStorage.getItem('date');
     this.dateService.dateShared.subscribe((res: string) => {
       if (res && res !== this.date) {
@@ -72,11 +72,11 @@ export class ShoppingCartPage implements OnInit {
     return await modal.present();
   }
 
-  async presentPaymentMethodsModal(dataForPayment: DateForPayment) {
+  async presentPaymentMethodsModal(productsForTransaction: ProductForTransaction[]) {
     const modal = await this.modalController.create({
       component: PaymentMethodsComponent,
       cssClass: 'payment-methods-modal',
-      componentProps: {dataForPayment}
+      componentProps: {productsForTransaction}
     });
     return await modal.present();
   }
@@ -120,14 +120,17 @@ export class ShoppingCartPage implements OnInit {
     if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(minOrderValue)) {
       if (cart.some(item => item.isAvailable !== false)) {
         const productsForTransaction: ProductForTransaction[] = cart.map((item: Product) => ({ id: item.id, quantity: item.count }) );
-        this.isLoading = true;
-        this.httpServ.createSmartTransaction(this.branchDetails.branchId, this.cartService.getTotalPrice(), productsForTransaction)
-          .subscribe((res: DateForPayment) => {
-            this.isLoading = false;
-            if (res) {
-              this.presentPaymentMethodsModal(res);
-            }
-          });
+        // if (!this.lastPaymentMethod) {
+        this.presentPaymentMethodsModal(productsForTransaction);
+        // }
+        // this.isLoading = true;
+        // this.httpServ.createSmartTransaction(this.branchDetails.branchId, this.cartService.getTotalPrice(), productsForTransaction)
+        //   .subscribe((res: DateForPayment) => {
+        //     this.isLoading = false;
+        //     if (res) {
+        //       this.presentPaymentMethodsModal(res);
+        //     }
+        //   });
       } else {
         this.presentAlertConfirm(cart);
       }
