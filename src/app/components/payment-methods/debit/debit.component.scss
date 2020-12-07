@@ -1,0 +1,50 @@
+.top {
+  width: 100%;
+  height: 4vh;
+  background: #FEDE00;
+}
+
+.container {
+  height: 100%;
+  padding: 1vh 7vw 3vh;
+  overflow: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  &__title {
+    padding: 0 0 20px;
+    font-size: large;
+  }
+  &__img {
+    width: 70px;
+  }
+}
+
+.form {
+  &__item {
+    margin: 0 0 2vh;
+    --padding-start: 0;
+  }
+
+  .item {
+    &__label {}
+    &__input {
+      --padding-start: 10vw;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      font-size: large;
+    }
+  }
+
+  &__btn {
+    height: 60px;
+    margin-top: 10vh;
+    --background: #c0c0c0;
+    --border-radius: 10vw;
+    font-weight: 600;
+    font-size: 14px;
+  }
+}

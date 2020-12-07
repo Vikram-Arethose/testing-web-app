@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { GooglePayComponent } from './google-pay/google-pay.component';
 import { OtherOptionsComponent } from './payment-methods/other-options/other-options.component';
+import { DebitComponent } from './payment-methods/debit/debit.component';
 
 
 
@@ -19,7 +20,8 @@ import { OtherOptionsComponent } from './payment-methods/other-options/other-opt
     ProductDetailsComponent,
     PaymentMethodsComponent,
     GooglePayComponent,
-    OtherOptionsComponent
+    OtherOptionsComponent,
+    DebitComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { OtherOptionsComponent } from './payment-methods/other-options/other-opt
     ProductDetailsComponent,
     PaymentMethodsComponent,
     GooglePayComponent,
-    OtherOptionsComponent
+    OtherOptionsComponent,
+    DebitComponent
   ]
 })
 export class ComponentsModule { }

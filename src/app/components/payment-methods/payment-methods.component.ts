@@ -13,6 +13,7 @@ import { DateService } from '../../services/date.service';
 import { ProductForTransaction } from '../../models/http/productForTransaction';
 import { BakeryService } from '../../services/bakery.service';
 import { BakeryFull } from '../../models/http/bakeryFull';
+import { DebitComponent } from './debit/debit.component';
 
 @Component({
   selector: 'app-payment-methods',
@@ -67,6 +68,10 @@ export class PaymentMethodsComponent implements OnInit {
     switch (paymentType) {
       case 'credit':
         this.createSmartTransaction();
+        break;
+      case 'debit':
+        this.presentDebitModal();
+        break;
     }
   }
 
@@ -98,6 +103,14 @@ export class PaymentMethodsComponent implements OnInit {
         browser.close();
       }
     });
+  }
+
+  async presentDebitModal() {
+    await this.modalController.dismiss();
+    const modal = await this.modalController.create({
+      component: DebitComponent
+    });
+    return await modal.present();
   }
 
 }
