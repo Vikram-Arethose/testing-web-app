@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-debit',
@@ -8,10 +9,22 @@ import { CartService } from '../../../services/cart.service';
 })
 export class DebitComponent implements OnInit {
 
+  debitForm: FormGroup;
+
   constructor(
-    public cartServ: CartService
+    public cartServ: CartService,
+    private fb: FormBuilder
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.debitForm = this.fb.group({
+      name: ['', [Validators.required]],
+      surname: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      postcode: ['', [Validators.required]],
+      accountOwner: ['', [Validators.required]],
+      iban: ['', [Validators.required]]
+    });
+  }
 
 }

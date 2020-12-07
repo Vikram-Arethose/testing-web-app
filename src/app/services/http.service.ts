@@ -13,6 +13,7 @@ import { tap } from 'rxjs/operators';
 import { ProductForTransaction } from '../models/http/productForTransaction';
 import { CreateStxRes } from '../models/http/createStxRes';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
+import { DataForCreateStx } from '../models/http/dataForCreateStx';
 
 
 @Injectable({
@@ -147,17 +148,21 @@ export class HttpService {
     return subject.asObservable();
   }
 
-  createSmartTransaction(branchId: number, basketSum: number, products: ProductForTransaction[] ): Observable<CreateStxRes> {
+  createSmartTransaction(data: DataForCreateStx): Observable<CreateStxRes | false> {
     const body = {
-      branch_id: branchId,
-      basket_sum: basketSum,
-      products
+      branch_id: data.branchId,
+      basket_sum: data.basketSum,
+      products: data.products,
+      pickup_date: data.pickupDate,
+      payment_method: data.paymentMethod
     };
-    const subject = new Subject<CreateStxRes>();
+    const subject = new Subject<CreateStxRes | false>();
     this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
+      } else {
+        subject.next(false);
       }
     });
     return subject.asObservable();

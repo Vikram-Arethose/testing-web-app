@@ -72,11 +72,10 @@ export class ShoppingCartPage implements OnInit {
     return await modal.present();
   }
 
-  async presentPaymentMethodsModal(productsForTransaction: ProductForTransaction[]) {
+  async presentPaymentMethodsModal() {
     const modal = await this.modalController.create({
       component: PaymentMethodsComponent,
-      cssClass: 'payment-methods-modal',
-      componentProps: {productsForTransaction}
+      cssClass: 'payment-methods-modal'
     });
     return await modal.present();
   }
@@ -114,28 +113,27 @@ export class ShoppingCartPage implements OnInit {
     await alert.present();
   }
 
-  checkout() {
+  checkCart() {
     const minOrderValue = this.branchDetails.minOrderValue;
     const cart = this.cartService.getCart();
     if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(minOrderValue)) {
       if (cart.some(item => item.isAvailable !== false)) {
-        const productsForTransaction: ProductForTransaction[] = cart.map((item: Product) => ({ id: item.id, quantity: item.count }) );
-        // if (!this.lastPaymentMethod) {
-        this.presentPaymentMethodsModal(productsForTransaction);
-        // }
-        // this.isLoading = true;
-        // this.httpServ.createSmartTransaction(this.branchDetails.branchId, this.cartService.getTotalPrice(), productsForTransaction)
-        //   .subscribe((res: DateForPayment) => {
-        //     this.isLoading = false;
-        //     if (res) {
-        //       this.presentPaymentMethodsModal(res);
-        //     }
-        //   });
+        return  true;
       } else {
         this.presentAlertConfirm(cart);
       }
     } else {
-        this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger than ${minOrderValue} €!`);
+      this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger than ${minOrderValue} €!`);
+    }
+  }
+
+  checkout() {
+    if (this.checkCart()) {
+      // if (!this.lastPaymentMethod) {
+        this.presentPaymentMethodsModal();
+      // } else {
+      //   // TODO: add logic for repeat last payment type
+      // }
     }
   }
 

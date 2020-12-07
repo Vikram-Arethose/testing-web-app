@@ -10,10 +10,10 @@ import { NavigationExtras, Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { CartService } from '../../services/cart.service';
 import { DateService } from '../../services/date.service';
-import { ProductForTransaction } from '../../models/http/productForTransaction';
 import { BakeryService } from '../../services/bakery.service';
-import { BakeryFull } from '../../models/http/bakeryFull';
+import { BakeryFull, Product } from '../../models/http/bakeryFull';
 import { DebitComponent } from './debit/debit.component';
+import { DataForCreateStx } from '../../models/http/dataForCreateStx';
 
 @Component({
   selector: 'app-payment-methods',
@@ -22,24 +22,25 @@ import { DebitComponent } from './debit/debit.component';
 })
 export class PaymentMethodsComponent implements OnInit {
 
-  @Input() private productsForTransaction: ProductForTransaction[];
   isLoading: boolean;
   private bakery: BakeryFull;
+  private date: string;
 
   constructor(
     private alertServ: AlertService,
     private bakeryServ: BakeryService,
+    private cartServ: CartService,
+    private dateServ: DateService,
+    private httpServ: HttpService,
     private modalController: ModalController,
     private logger: LoggerService,
-    private httpServ: HttpService,
     private router: Router,
     private ngZone: NgZone,
-    private cartServ: CartService,
-    private dateServ: DateService
   ) { }
 
   ngOnInit() {
     this.bakeryServ.bakery.subscribe(res => this.bakery = res);
+    this.dateServ.dateShared.subscribe(res => this.date = res);
   }
 
   async onGooglePay() {
@@ -67,7 +68,7 @@ export class PaymentMethodsComponent implements OnInit {
   makePaymentBy(paymentType: string) {
     switch (paymentType) {
       case 'credit':
-        this.createSmartTransaction();
+        this.createSmartTransaction(1);
         break;
       case 'debit':
         this.presentDebitModal();
@@ -75,12 +76,23 @@ export class PaymentMethodsComponent implements OnInit {
     }
   }
 
-  createSmartTransaction() {
+  createSmartTransaction(paymentMethod: number) {
     this.isLoading = true;
-    this.httpServ.createSmartTransaction(this.bakery.branchDetails.bakery_id, this.cartServ.getTotalPrice(), this.productsForTransaction)
-      .subscribe((res: CreateStxRes) => {
+    const dataForCreateStx: DataForCreateStx = {
+      branchId: this.bakery.branchDetails.bakery_id,
+      basketSum: this.cartServ.getTotalPrice(),
+      products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
+      pickupDate: this.date.split('T')[0] + ' ' + this.date.split('T')[1].substr(0, 5),
+      paymentMethod
+    };
+    this.httpServ.createSmartTransaction(dataForCreateStx)
+      .subscribe((res: CreateStxRes | false) => {
         this.isLoading = false;
-        this.creditCartPayment(res);
+        if (res) {
+          if (paymentMethod === 1) {
+            this.creditCartPayment(res);
+          }
+        }
       });
   }
 
@@ -92,7 +104,8 @@ export class PaymentMethodsComponent implements OnInit {
         browser.close();
         const navigationExtras: NavigationExtras = {
           state: {
-            isConfirm: true
+            isConfirm: true,
+            orderId: res.url.substr(res.url.lastIndexOf('=') + 1)
           }
         };
         this.ngZone.run(() => this.router.navigate(['orders'], navigationExtras));
