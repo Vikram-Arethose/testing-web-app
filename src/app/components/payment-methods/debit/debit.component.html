@@ -13,14 +13,26 @@
       <ion-label class="item__label" position="stacked">Name</ion-label>
       <ion-input class="item__input" formControlName="surname"></ion-input>
     </ion-item>
-    <ion-item class="form__item item">
-      <ion-label class="item__label" position="stacked">Strasse & Nr.</ion-label>
-      <ion-input class="item__input" formControlName="street"></ion-input>
-    </ion-item>
-    <ion-item class="form__item item">
-      <ion-label class="item__label" position="stacked">PLZ und Ort</ion-label>
-      <ion-input class="item__input" formControlName="postcode"></ion-input>
-    </ion-item>
+    <div class="row">
+      <ion-item class="form__item form__item_big item">
+        <ion-label class="item__label" position="stacked">Strasse</ion-label>
+        <ion-input class="item__input" formControlName="street"></ion-input>
+      </ion-item>
+      <ion-item class="form__item form__item_small item item-small">
+        <ion-label class="item__label" position="stacked">Nr.</ion-label>
+        <ion-input class="item__input" formControlName="stNumber"></ion-input>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item class="form__item form__item_big item">
+        <ion-label class="item__label" position="stacked">Ort</ion-label>
+        <ion-input class="item__input" formControlName="city"></ion-input>
+      </ion-item>
+      <ion-item class="form__item form__item_small item item-small">
+        <ion-label class="item__label" position="stacked">PLZ</ion-label>
+        <ion-input class="item__input" formControlName="postcode"></ion-input>
+      </ion-item>
+    </div>
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">Kontoinhaber</ion-label>
       <ion-input class="item__input" formControlName="accountOwner"></ion-input>

@@ -24,15 +24,26 @@
 }
 
 .form {
+  .row {
+    display: flex;
+  }
+
   &__item {
     margin: 0 0 2vh;
     --padding-start: 0;
+    &_big {
+      width: 70vw;
+      margin-right: 5vw;
+    }
+    &_small {
+      width: 25vw;
+    }
   }
 
   .item {
     &__label {}
     &__input {
-      --padding-start: 10vw;
+      //--padding-start: 10vw;
       --padding-top: 0;
       --padding-bottom: 0;
       font-size: large;

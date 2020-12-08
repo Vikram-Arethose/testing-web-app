@@ -21,6 +21,8 @@ export class DebitComponent implements OnInit {
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
       street: ['', [Validators.required]],
+      stNumber: ['', [Validators.required]],
+      city: ['', [Validators.required]],
       postcode: ['', [Validators.required]],
       accountOwner: ['', [Validators.required]],
       iban: ['', [Validators.required]]
