@@ -16,6 +16,7 @@ export class GoogleLoginPage implements OnInit {
   android = this.platformService.android;
   // btnRouterLink = '/location-setting';
   continueBtnLabel: string;
+  checkbox: boolean;
   isLogin: boolean;
   loginWith: string;
   myForm: FormGroup;
@@ -66,6 +67,10 @@ export class GoogleLoginPage implements OnInit {
       }
     };
     this.router.navigate([`${data}`], navigationExtras);
+  }
+
+  toggleCheckbox() {
+    this.checkbox = !this.checkbox;
   }
 
 }

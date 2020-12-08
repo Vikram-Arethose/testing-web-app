@@ -27,4 +27,8 @@ export class DebitComponent implements OnInit {
     });
   }
 
+  buy() {
+  
+  }
+
 }

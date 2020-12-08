@@ -4,31 +4,32 @@
     <div class="header__title">Zahlung per Lastschrift</div>
     <img class="header__img" src="assets/icons/payments/sepa.png">
   </div>
-  <form class="form">
+  <form class="form" [formGroup]="debitForm" (ngSubmit)="buy()">
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">Vorname</ion-label>
-      <ion-input class="item__input"></ion-input>
+      <ion-input class="item__input" formControlName="name"></ion-input>
     </ion-item>
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">Name</ion-label>
-      <ion-input class="item__input"></ion-input>
+      <ion-input class="item__input" formControlName="surname"></ion-input>
     </ion-item>
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">Strasse & Nr.</ion-label>
-      <ion-input class="item__input"></ion-input>
+      <ion-input class="item__input" formControlName="street"></ion-input>
     </ion-item>
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">PLZ und Ort</ion-label>
-      <ion-input class="item__input"></ion-input>
+      <ion-input class="item__input" formControlName="postcode"></ion-input>
     </ion-item>
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">Kontoinhaber</ion-label>
-      <ion-input class="item__input"></ion-input>
+      <ion-input class="item__input" formControlName="accountOwner"></ion-input>
     </ion-item>
     <ion-item class="form__item item">
       <ion-label class="item__label" position="stacked">IBAN</ion-label>
-      <ion-input class="item__input"></ion-input>
+      <ion-input class="item__input" formControlName="iban"></ion-input>
     </ion-item>
-    <ion-button class="form__btn" expand="block">{{cartServ.getTotalPrice() | currency:'EUR':'symbol'}} PAY</ion-button>
+    <ion-button class="form__btn" type="submit" expand="block" [disabled]="debitForm.invalid">
+      {{cartServ.getTotalPrice() | currency:'EUR':'symbol'}} PAY</ion-button>
   </form>
 </div>

@@ -22,6 +22,7 @@ import { ErrorService } from './services/error.service';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AgmCoreModule } from '@agm/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -37,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -47,8 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ',
       libraries: ['places']
-    })
-
+    }),
   ],
   providers: [
     StatusBar,

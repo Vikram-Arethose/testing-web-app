@@ -116,14 +116,14 @@ export class ShoppingCartPage implements OnInit {
   checkCart() {
     const minOrderValue = this.branchDetails.minOrderValue;
     const cart = this.cartService.getCart();
-    if (cart.length > 0 && this.cartService.getTotalPrice() > Number.parseFloat(minOrderValue)) {
+    if (cart.length > 0 && this.cartService.getTotalPrice() >= Number.parseFloat(minOrderValue)) {
       if (cart.some(item => item.isAvailable !== false)) {
         return  true;
       } else {
         this.presentAlertConfirm(cart);
       }
     } else {
-      this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger than ${minOrderValue} €!`);
+      this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger or equal ${minOrderValue} €!`);
     }
   }
 

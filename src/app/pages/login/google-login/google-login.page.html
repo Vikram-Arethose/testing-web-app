@@ -15,12 +15,12 @@
         <ion-checkbox class="item__checkbox" formControlName="checkbox1" mode="md"></ion-checkbox>
         <ion-label class="item__label ion-text-wrap">{{ 'googleLogin.googleDsgvo' | translate }}</ion-label>
       </ion-item>
-    <ion-item class="form__item item ion-align-items-start" lines="none">
-      <input id="policyCheckbox" type="checkbox" class="item__checkbox" formControlName="checkbox2">
-      <label for="policyCheckbox" class="item__label ion-text-wrap">
+    <ion-item class="form__item item ion-align-items-start" lines="none" (click)="toggleCheckbox()">
+      <ion-checkbox class="item__checkbox" formControlName="checkbox2" [checked]="checkbox"></ion-checkbox>
+      <ion-label class="item__label ion-text-wrap">
         {{ 'googleLogin.iConfirmThe' | translate }} <a (click)="open('legal')">{{ 'googleLogin.termsOfUse' | translate }}</a>
         {{ 'googleLogin.andThe' | translate }} <a (click)="open('privacy')">{{ 'googleLogin.privacyPolicy' | translate }}</a>
-      </label>
+      </ion-label>
     </ion-item>
     <ion-button class="form__button" type="submit" expand="block" size="large"
                 [disabled]="myForm.invalid">

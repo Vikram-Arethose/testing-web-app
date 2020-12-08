@@ -96,3 +96,12 @@
 :host ::ng-deep a {
   text-decoration: underline;
 }
+
+.ion-activatable {
+  ion-label {
+    a {
+      position: relative;
+      z-index: 10;
+    }
+  }
+}
