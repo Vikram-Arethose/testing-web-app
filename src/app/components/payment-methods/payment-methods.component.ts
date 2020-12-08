@@ -76,15 +76,19 @@ export class PaymentMethodsComponent implements OnInit {
     }
   }
 
-  createSmartTransaction(paymentMethod: number) {
-    this.isLoading = true;
-    const dataForCreateStx: DataForCreateStx = {
+  getDataForCreateStx(paymentMethod: number) {
+    return {
       branchId: this.bakery.branchDetails.bakery_id,
       basketSum: this.cartServ.getTotalPrice(),
       products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
       pickupDate: this.date.split('T')[0] + ' ' + this.date.split('T')[1].substr(0, 5),
       paymentMethod
     };
+  }
+
+  createSmartTransaction(paymentMethod: number) {
+    this.isLoading = true;
+    const dataForCreateStx: DataForCreateStx = this.getDataForCreateStx(paymentMethod);
     this.httpServ.createSmartTransaction(dataForCreateStx)
       .subscribe((res: CreateStxRes | false) => {
         this.isLoading = false;
@@ -121,7 +125,10 @@ export class PaymentMethodsComponent implements OnInit {
   async presentDebitModal() {
     await this.modalController.dismiss();
     const modal = await this.modalController.create({
-      component: DebitComponent
+      component: DebitComponent,
+      componentProps: {
+        dataForCreateStx: this.getDataForCreateStx(2)
+      }
     });
     return await modal.present();
   }

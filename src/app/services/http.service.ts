@@ -14,6 +14,7 @@ import { ProductForTransaction } from '../models/http/productForTransaction';
 import { CreateStxRes } from '../models/http/createStxRes';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 import { DataForCreateStx } from '../models/http/dataForCreateStx';
+import { DebitArgs } from '../models/http/payment/debitArgs';
 
 
 @Injectable({
@@ -170,6 +171,25 @@ export class HttpService {
 
   openCreditCardPayment(stxId: string, userId: number): InAppBrowserObject {
     return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`);
+  }
+
+  debitPayment(debitArgs: DebitArgs) {
+    const body = {
+      first_name: debitArgs.first_name,
+      last_name: debitArgs.last_name,
+      street: debitArgs.street,
+      st_number: debitArgs.st_number,
+      city: debitArgs.city,
+      postal_code: debitArgs.postal_code,
+      account_owner: debitArgs.account_owner,
+      iban: debitArgs.iban,
+      branch_id: debitArgs.branchId,
+      basket_sum: debitArgs.basketSum,
+      products: debitArgs.products,
+      pickup_date: debitArgs.pickupDate,
+      payment_method: debitArgs.paymentMethod
+    };
+    return  this.http.post(this.baseUrl + '/payment/debit', body);
   }
 
 }

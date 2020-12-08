@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataForCreateStx } from '../../../models/http/dataForCreateStx';
+import { LoggerService } from '../../../services/logger.service';
+import { HttpService } from '../../../services/http.service';
+import { DebitArgs } from '../../../models/http/payment/debitArgs';
+import { ApiResponse } from '../../../models/http/apiResponse';
+import { NavigationExtras, Router } from '@angular/router';
+import { AlertService } from '../../../services/alert.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-debit',
@@ -9,15 +17,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DebitComponent implements OnInit {
 
-  debitForm: FormGroup;
+  @Input() dataForCreateStx: DataForCreateStx;
+  form: FormGroup;
+  isLoading: boolean;
 
   constructor(
     public cartServ: CartService,
-    private fb: FormBuilder
+    private alertServ: AlertService,
+    private fb: FormBuilder,
+    private logger: LoggerService,
+    private httpServ: HttpService,
+    private router: Router,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
-    this.debitForm = this.fb.group({
+   this.initDebitForm();
+  }
+
+  initDebitForm() {
+    this.form = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
       street: ['', [Validators.required]],
@@ -30,7 +49,32 @@ export class DebitComponent implements OnInit {
   }
 
   buy() {
-  
+    this.isLoading = true;
+    const debitArgs: DebitArgs = this.dataForCreateStx;
+    debitArgs.first_name = this.form.value.name;
+    debitArgs.last_name = this.form.value.surname;
+    debitArgs.street = this.form.value.street;
+    debitArgs.st_number = this.form.value.stNumber;
+    debitArgs.city = this.form.value.city;
+    debitArgs.postal_code = this.form.value.postcode;
+    debitArgs.account_owner = this.form.value.accountOwner;
+    debitArgs.iban = this.form.value.iban;
+    this.httpServ.debitPayment(debitArgs).subscribe((res: ApiResponse) => {
+      this.isLoading = false;
+      this.logger.log('http res: ', res);
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
+        const navigationExtras: NavigationExtras = {
+          state: {
+            orderId: res.data.order_id
+          }
+        };
+        this.cartServ.clearCart();
+        this.modalController.dismiss();
+        this.router.navigate(['orders'], navigationExtras);
+      } else {
+          this.alertServ.presentAlert();
+      }
+    });
   }
 
 }

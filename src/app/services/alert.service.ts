@@ -11,7 +11,10 @@ export class AlertService {
     private toastController: ToastController
   ) { }
 
-  async presentAlert(message: string) {
+  async presentAlert(message?: string) {
+    if (!message) {
+      message = 'Something went wrong! Please try again later.';
+    }
     const alert = await this.alertCtrl.create({
       header: 'Error',
       message,
