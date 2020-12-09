@@ -155,7 +155,6 @@ export class HttpService {
       basket_sum: data.basketSum,
       products: data.products,
       pickup_date: data.pickupDate,
-      payment_method: data.paymentMethod
     };
     const subject = new Subject<CreateStxRes | false>();
     this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
@@ -187,9 +186,19 @@ export class HttpService {
       basket_sum: debitArgs.basketSum,
       products: debitArgs.products,
       pickup_date: debitArgs.pickupDate,
-      payment_method: debitArgs.paymentMethod
     };
     return  this.http.post(this.baseUrl + '/payment/debit', body);
+  }
+
+  sofortPayment(data: DataForCreateStx) {
+    const body = {
+      branch_id: data.branchId,
+      basket_sum: data.basketSum,
+      products: data.products,
+      pickup_date: data.pickupDate,
+    };
+    const subject = new Subject<CreateStxRes | false>();
+    return this.http.post(this.baseUrl + '/payment/sofort', body);
   }
 
 }

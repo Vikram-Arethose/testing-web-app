@@ -5,5 +5,5 @@ export interface DataForCreateStx {
   basketSum: number;
   products: ProductForTransaction[];
   pickupDate: string;
-  paymentMethod: number;
+  // paymentMethod: number;
 }

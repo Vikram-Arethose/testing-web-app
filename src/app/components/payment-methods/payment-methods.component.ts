@@ -5,7 +5,7 @@ import { OtherOptionsComponent } from './other-options/other-options.component';
 import { LoggerService } from '../../services/logger.service';
 import { CreateStxRes } from '../../models/http/createStxRes';
 import { HttpService } from '../../services/http.service';
-import { InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { InAppBrowserEvent, InAppBrowserObject } from '@ionic-native/in-app-browser';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { CartService } from '../../services/cart.service';
@@ -14,6 +14,8 @@ import { BakeryService } from '../../services/bakery.service';
 import { BakeryFull, Product } from '../../models/http/bakeryFull';
 import { DebitComponent } from './debit/debit.component';
 import { DataForCreateStx } from '../../models/http/dataForCreateStx';
+import { ApiResponse } from '../../models/http/apiResponse';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-payment-methods',
@@ -32,6 +34,7 @@ export class PaymentMethodsComponent implements OnInit {
     private cartServ: CartService,
     private dateServ: DateService,
     private httpServ: HttpService,
+    private iab: InAppBrowser,
     private modalController: ModalController,
     private logger: LoggerService,
     private router: Router,
@@ -68,40 +71,44 @@ export class PaymentMethodsComponent implements OnInit {
   makePaymentBy(paymentType: string) {
     switch (paymentType) {
       case 'credit':
-        this.createSmartTransaction(1);
+        this.createSmartTransaction();
         break;
       case 'debit':
         this.presentDebitModal();
         break;
+      case 'sofort':
+        this.makeSofortPayment();
+        break;
     }
   }
 
-  getDataForCreateStx(paymentMethod: number) {
+  getDataForCreateStx() {
     return {
       branchId: this.bakery.branchDetails.bakery_id,
       basketSum: this.cartServ.getTotalPrice(),
       products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
       pickupDate: this.date.split('T')[0] + ' ' + this.date.split('T')[1].substr(0, 5),
-      paymentMethod
     };
   }
 
-  createSmartTransaction(paymentMethod: number) {
+  createSmartTransaction() {
     this.isLoading = true;
-    const dataForCreateStx: DataForCreateStx = this.getDataForCreateStx(paymentMethod);
+    const dataForCreateStx: DataForCreateStx = this.getDataForCreateStx();
     this.httpServ.createSmartTransaction(dataForCreateStx)
       .subscribe((res: CreateStxRes | false) => {
         this.isLoading = false;
         if (res) {
-          if (paymentMethod === 1) {
-            this.creditCartPayment(res);
-          }
+          this.creditCartPayment(res);
         }
       });
   }
 
   creditCartPayment(createStxRes: CreateStxRes) {
-    const browser = this.httpServ.openCreditCardPayment(createStxRes.stx_id, createStxRes.user_id);
+    const browser: InAppBrowserObject = this.httpServ.openCreditCardPayment(createStxRes.stx_id, createStxRes.user_id);
+    this.handleIabResult(browser);
+  }
+
+  handleIabResult(browser: InAppBrowserObject) {
     browser.on('loadstart').subscribe((res: InAppBrowserEvent) => {
       if (res.url.includes('/payment/success')) {
         this.modalController.dismiss();
@@ -122,12 +129,25 @@ export class PaymentMethodsComponent implements OnInit {
     });
   }
 
+  makeSofortPayment() {
+    this.isLoading = true;
+    this.httpServ.sofortPayment(this.getDataForCreateStx()).subscribe((res: ApiResponse) => {
+      this.isLoading = false;
+      this.logger.log('http res.data: ', res.data);
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
+        this.handleIabResult(this.iab.create(res.data.iframeUrl));
+      } else {
+        this.alertServ.presentAlert();
+      }
+    });
+  }
+
   async presentDebitModal() {
     await this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: DebitComponent,
       componentProps: {
-        dataForCreateStx: this.getDataForCreateStx(2)
+        dataForCreateStx: this.getDataForCreateStx()
       }
     });
     return await modal.present();
