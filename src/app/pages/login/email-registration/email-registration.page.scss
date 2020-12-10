@@ -29,6 +29,16 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    .items-wrapper {
+      width: 75%;
+      .item {
+        width: 100%;
+        &:first-of-type {
+          margin: 0 0 10px;
+        }
+      }
+    }
     .item { --border-color: #493735;
       width: 70%;
 

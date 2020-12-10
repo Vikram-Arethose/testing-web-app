@@ -25,14 +25,15 @@ export class LoginService {
 
   async googleLogin() {
     const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+    // this.logger.log('googleUser: ', googleUser);
     if (googleUser) {
       // prepare user info for posting on server
       this.user.email = googleUser.email;
       this.user.first_name = googleUser.givenName;
+      this.user.last_name = googleUser.familyName;
       this.user.reg_auth_type = 'google';
       this.user.reg_auth_token = googleUser.idToken;
       this.user.reg_auth_user_id = googleUser.id;
-      this.logger.log('googleUser', this.user);
       // posting on server
       this.httpService.postData('/register', this.user).subscribe(
         (response: any) => {
@@ -52,6 +53,7 @@ export class LoginService {
           // prepare user info for posting on server
           this.user.email = res.response.email;
           this.user.first_name = res.response.givenName;
+          this.user.last_name = res.familyName;
           this.user.reg_auth_type = 'apple';
           this.user.reg_auth_token = res.response.identityToken;
           this.user.reg_auth_user_id = res.response.user;
@@ -88,12 +90,13 @@ export class LoginService {
       const userIdHashed = new Md5().appendStr(result.accessToken.userId).end();
       this.user.reg_auth_token = userIdHashed;
       this.user.reg_auth_user_id = result.accessToken.userId;
-      let userInfo: any = await fetch(`https://graph.facebook.com/${this.user.reg_auth_user_id}?fields=email,first_name&access_token=${token}`);
+      let userInfo: any = await fetch(`https://graph.facebook.com/${this.user.reg_auth_user_id}?fields=email,first_name,last_name&access_token=${token}`);
       userInfo = await userInfo.json();
       this.logger.log('userInfo: ', userInfo);
       if (userInfo.email) {
         this.user.email = userInfo.email;
         this.user.first_name = userInfo.first_name;
+        this.user.last_name = userInfo.last_name;
         this.logger.log('this.user: ', this.user);
         // posting on server
         this.httpService.postData('/register', this.user).subscribe(

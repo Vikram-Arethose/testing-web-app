@@ -41,11 +41,20 @@
           <h1 class="header__item">{{ 'emailRegister.questionName' | translate }}</h1>
         </div>
         <div class="form-item__body">
-          <ion-item class="item" mode="ios">
-            <ion-label class="item__label" position="stacked">Name</ion-label>
-            <ion-input [(ngModel)]="emailRegisterData.first_name" name="first_name" #nameInput="ngModel" required></ion-input>
-          </ion-item>
-          <ion-fab-button class="form-item__btn" (click)="nextStep()" [disabled]="nameInput.invalid">
+          <div class="items-wrapper">
+            <ion-item class="item" mode="ios">
+              <ion-label class="item__label" position="stacked">Name</ion-label>
+              <ion-input [(ngModel)]="emailRegisterData.first_name" name="first_name" #nameInput="ngModel"
+                         required></ion-input>
+            </ion-item>
+            <ion-item class="item" mode="ios">
+              <ion-label class="item__label" position="stacked">{{ 'emailRegister.lastName' | translate }}</ion-label>
+              <ion-input [(ngModel)]="emailRegisterData.last_name" name="last_name" #lastNameInput="ngModel"
+                         required></ion-input>
+            </ion-item>
+          </div>
+          <ion-fab-button class="form-item__btn" (click)="nextStep()"
+                          [disabled]="nameInput.invalid || lastNameInput.invalid">
             <ion-icon src="../../../assets/icons/arrow-right.svg"></ion-icon>
           </ion-fab-button>
         </div>

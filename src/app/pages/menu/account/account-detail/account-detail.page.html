@@ -11,7 +11,7 @@
 <ion-content>
 
   <div [ngSwitch]="true">
-    <div *ngSwitchCase="data === 'first_name' || data === 'email' || data === 'phone'">
+    <div *ngSwitchCase="data === 'first_name' || data === 'last_name' || data === 'email' || data === 'phone'">
       <div class="setting">
         <div class="label-wrapper">
           <h3 class="setting__label" *ngIf="data === 'phone'">{{ 'account.country'  | translate }}</h3>

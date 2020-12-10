@@ -77,6 +77,13 @@ export class AccountDetailPage implements OnInit {
         this.inputText = this.account.first_name;
         this.type = 'text';
         break;
+      case 'last_name':
+        const lastName: string = this.translate.instant('emailRegister.lastName');
+        this.title = your + lastName;
+        this.settingLabel = lastName;
+        this.inputText = this.account.last_name;
+        this.type = 'text';
+        break;
       case 'email':
         const email: string = this.translate.instant('account.email');
         this.title = your + email;
@@ -136,6 +143,7 @@ export class AccountDetailPage implements OnInit {
     this.account[this.data] = this.inputText;
     const updateData = {
       first_name: this.account.first_name,
+      last_name: this.account.last_name,
       email: this.account.email,
       phone: this.account.phone,
     };
