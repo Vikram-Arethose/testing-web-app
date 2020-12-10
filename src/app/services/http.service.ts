@@ -15,6 +15,8 @@ import { CreateStxRes } from '../models/http/createStxRes';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 import { DataForCreateStx } from '../models/http/dataForCreateStx';
 import { DebitArgs } from '../models/http/payment/debitArgs';
+import { OrderDetails } from '../models/http/orderDetails';
+import { AlertService } from './alert.service';
 
 
 @Injectable({
@@ -25,6 +27,7 @@ export class HttpService {
   private baseUrl: string = environment.serverUrl;
 
   constructor(
+    private alertServ: AlertService,
     private http: HttpClient,
     private alertController: AlertController,
     private logger: LoggerService,
@@ -199,6 +202,19 @@ export class HttpService {
     };
     const subject = new Subject<CreateStxRes | false>();
     return this.http.post(this.baseUrl + '/payment/sofort', body);
+  }
+
+  getOrderDetails(orderId: number) {
+    const subject = new Subject<OrderDetails>();
+    this.http.get(`${this.baseUrl}/order/details/${orderId}`).subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
+      } else {
+        this.alertServ.presentAlert('Something went wrong! Please contact support!');
+      }
+    });
+    return subject.asObservable();
   }
 
 }

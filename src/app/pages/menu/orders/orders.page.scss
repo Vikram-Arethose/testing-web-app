@@ -1,5 +1,6 @@
 .container {
   padding: 0 9.33vw;
+  color: #493735;
 }
 
 .segment {
@@ -13,15 +14,34 @@
     border: 1px solid #FEDE00;
     --indicator-color: #FEDE00;
     font: normal normal 400 20px/24px Montserrat;
-    //text-transform: capitalize;
-    color: #493735;
   }
 }
 
 .title {
   margin: 3.69vh 1vw 0;
   text-align: center;
-  font: normal normal 500 20px/24px Montserrat;
+  font: normal normal 700 20px/24px Montserrat;
+  color: #493735;
+}
+
+.save {
+  margin: 3vh 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__txt {
+    font: normal normal 500 12px/15px Montserrat;
+  }
+  &__toggle {
+    &.toggle-checked {
+      --handle-background-checked: #fff;
+      --background-checked: #34DB34;
+    }
+  }
+}
+
+ion-toggle.toggle-checked {
+  --handle-box-shadow: 0 0 2px 0 #33F333;
 }
 
 .full-order {

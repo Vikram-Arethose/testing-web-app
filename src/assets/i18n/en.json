@@ -87,6 +87,7 @@
     "yourEmail": "Your Email-Address"
   },
   "orders": {
+    "confirmation": "Confirmation",
     "header": "Orders",
     "current": "Current",
     "completed": "Completed",
@@ -96,7 +97,8 @@
     "pickUpCode": "Your pick-up code is:",
     "showThisCode": "Show this code at your bakery for pick-up.",
     "note": "Note: If an item is sold-out, the bakery will offer you a replacement item.",
-    "repeatBtn": "Repeat Order"
+    "repeatBtn": "Repeat Order",
+    "save": "Save for future payments"
   },
   "favorites": {
     "header": "Favorites",

@@ -87,6 +87,7 @@
     "yourEmail": "Your Email-Address"
   },
   "orders": {
+    "confirmation": "Bestätigung",
     "header": "Bestellungen",
     "current": "Aktuelle",
     "completed": "Vergangene",
@@ -96,7 +97,8 @@
     "pickUpCode": "Dein Abhlcode lautet:",
     "showThisCode": "Zeige diesen Code bei deiner Abholung vor!",
     "note": "Hinweis: Wenn ein Artikel ausverkauft ist, bietet Ihnen die Bäckerei einen Ersatzartikel an.",
-    "repeatBtn": "Bestellung wiederholen"
+    "repeatBtn": "Bestellung wiederholen",
+    "save": "Für zukünftige Zahlungen speicher"
   },
   "favorites": {
     "header": "Favorites",
