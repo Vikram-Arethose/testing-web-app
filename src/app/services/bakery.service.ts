@@ -2,18 +2,25 @@ import { Injectable } from '@angular/core';
 import { DateService } from './date.service';
 import { BakeryFull, Product } from '../models/http/bakeryFull';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CartService } from './cart.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BakeryService {
 
+  private bakeryData: BakeryFull;
   private bakerySource: BehaviorSubject<BakeryFull> = new BehaviorSubject<BakeryFull>(null);
   bakery: Observable<BakeryFull> = this.bakerySource.asObservable();
 
-  constructor() {}
+  constructor(
+    private cartServ: CartService,
+    private router: Router
+  ) {}
 
   changeBakery(bakery: BakeryFull) {
+    this.bakeryData = bakery;
     this.bakerySource.next(bakery);
   }
 
@@ -36,6 +43,24 @@ export class BakeryService {
     }
 
     return icon;
+  }
+
+  getDataForPayment(date: string) {
+    return {
+      branch_id: this.bakeryData.branchDetails.bakery_id,
+      basket_sum: this.cartServ.getTotalPrice(),
+      products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
+      pickup_date: date.split('T')[0] + ' ' + date.split('T')[1].substr(0, 5),
+    };
+  }
+
+  openConfirmOrder(orderId: number) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        orderId
+      }
+    };
+    this.router.navigate(['orders'], navigationExtras);
   }
 
 }

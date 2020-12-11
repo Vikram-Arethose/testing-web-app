@@ -13,7 +13,7 @@ import { DateService } from '../../services/date.service';
 import { BakeryService } from '../../services/bakery.service';
 import { BakeryFull, Product } from '../../models/http/bakeryFull';
 import { DebitComponent } from './debit/debit.component';
-import { DataForCreateStx } from '../../models/http/dataForCreateStx';
+import { DataForPayment } from '../../models/http/dataForPayment';
 import { ApiResponse } from '../../models/http/apiResponse';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
@@ -82,19 +82,18 @@ export class PaymentMethodsComponent implements OnInit {
     }
   }
 
-  getDataForCreateStx() {
-    return {
-      branchId: this.bakery.branchDetails.bakery_id,
-      basketSum: this.cartServ.getTotalPrice(),
-      products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
-      pickupDate: this.date.split('T')[0] + ' ' + this.date.split('T')[1].substr(0, 5),
-    };
-  }
+  // getDataForPayment() {
+  //   return {
+  //     branch_id: this.bakery.branchDetails.bakery_id,
+  //     basket_sum: this.cartServ.getTotalPrice(),
+  //     products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
+  //     pickup_date: this.date.split('T')[0] + ' ' + this.date.split('T')[1].substr(0, 5),
+  //   };
+  // }
 
   createSmartTransaction() {
     this.isLoading = true;
-    const dataForCreateStx: DataForCreateStx = this.getDataForCreateStx();
-    this.httpServ.createSmartTransaction(dataForCreateStx)
+    this.httpServ.createSmartTransaction(this.bakeryServ.getDataForPayment(this.date))
       .subscribe((res: CreateStxRes | false) => {
         this.isLoading = false;
         if (res) {
@@ -131,7 +130,7 @@ export class PaymentMethodsComponent implements OnInit {
 
   makeSofortPayment() {
     this.isLoading = true;
-    this.httpServ.sofortPayment(this.getDataForCreateStx()).subscribe((res: ApiResponse) => {
+    this.httpServ.sofortPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
       this.isLoading = false;
       this.logger.log('http res.data: ', res.data);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
@@ -147,7 +146,7 @@ export class PaymentMethodsComponent implements OnInit {
     const modal = await this.modalController.create({
       component: DebitComponent,
       componentProps: {
-        dataForCreateStx: this.getDataForCreateStx()
+        dataForCreateStx: this.bakeryServ.getDataForPayment(this.date)
       }
     });
     return await modal.present();

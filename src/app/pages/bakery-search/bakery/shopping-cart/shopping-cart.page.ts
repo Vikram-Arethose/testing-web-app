@@ -4,7 +4,7 @@ import { CartService } from '../../../../services/cart.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up-date.component';
 import { PaymentMethodsComponent } from '../../../../components/payment-methods/payment-methods.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ProductInCart } from '../../../../models/productInCart';
 import { Observable } from 'rxjs';
 import { LoggerService } from '../../../../services/logger.service';
@@ -14,6 +14,8 @@ import { HttpService } from '../../../../services/http.service';
 import { ProductForTransaction } from '../../../../models/http/productForTransaction';
 import { CreateStxRes } from '../../../../models/http/createStxRes';
 import { BranchDetailsForPayment } from '../../../../models/http/branchDetailsForPayment';
+import { BakeryService } from '../../../../services/bakery.service';
+import { ApiResponse } from '../../../../models/http/apiResponse';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -32,6 +34,7 @@ export class ShoppingCartPage implements OnInit {
     public dateService: DateService,
     private alertServ: AlertService,
     private alertController: AlertController,
+    private bakeryServ: BakeryService,
     private modalController: ModalController,
     private route: ActivatedRoute,
     private router: Router,
@@ -129,11 +132,27 @@ export class ShoppingCartPage implements OnInit {
 
   checkout() {
     if (this.checkCart()) {
-      // if (!this.lastPaymentMethod) {
+      if (this.lastPaymentMethod) {
+        this.isLoading = true;
+        this.httpServ.useLastPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
+          this.isLoading = false;
+          this.logger.log('useLastPayment res : ', res);
+          if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
+            this.cartService.clearCart();
+            this.bakeryServ.openConfirmOrder(res.data?.order_id);
+          } else {
+            this.alertServ.presentAlert();
+          }
+        });
+      } else {
         this.presentPaymentMethodsModal();
-      // } else {
-      //   // TODO: add logic for repeat last payment type
-      // }
+      }
+    }
+  }
+
+  chooseOtherPayment() {
+    if (this.checkCart()) {
+      this.presentPaymentMethodsModal();
     }
   }
 

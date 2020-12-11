@@ -84,7 +84,7 @@ export class BakeryPage implements OnInit {
   }
 
   setProductList() {
-    if (this.categories[0] && this.categories[0].products) {
+    if (this.categories && this.categories[0] && this.categories[0].products) {
       this.productsList = this.categories[this.selectedCategoryIndex].products.slice();
       this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
       this.productsList = this.productsList.map(item => this.dateService.mapProductPrice(item));

@@ -12,10 +12,10 @@ import { HttpService } from '../../../services/http.service';
 export class OrdersPage implements OnInit {
   dataToShow = 'current';
   header: string;
-  isConfirm: boolean;
+  // isConfirm: boolean;
   ordersToShow: OrderDetails[] = [];
   isSave: boolean;
-  private orderId: number;
+  orderId: number;
 
   constructor(
     private httpServ: HttpService,
@@ -25,7 +25,7 @@ export class OrdersPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.isConfirm = this.router.getCurrentNavigation().extras.state.isConfirm;
+        // this.isConfirm = this.router.getCurrentNavigation().extras.state.isConfirm;
         this.orderId = this.router.getCurrentNavigation().extras.state.orderId;
         this.logger.log('this.orderId in orders page: ', this.orderId);
       }
@@ -33,7 +33,7 @@ export class OrdersPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isConfirm) {
+    if (this.orderId) {
       this.httpServ.getOrderDetails(this.orderId).subscribe(res => {
         this.ordersToShow.push(res);
       });

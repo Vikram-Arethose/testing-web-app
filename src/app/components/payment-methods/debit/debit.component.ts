@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataForCreateStx } from '../../../models/http/dataForCreateStx';
+import { DataForPayment } from '../../../models/http/dataForPayment';
 import { LoggerService } from '../../../services/logger.service';
 import { HttpService } from '../../../services/http.service';
 import { DebitArgs } from '../../../models/http/payment/debitArgs';
@@ -9,6 +9,7 @@ import { ApiResponse } from '../../../models/http/apiResponse';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertService } from '../../../services/alert.service';
 import { ModalController } from '@ionic/angular';
+import { BakeryService } from '../../../services/bakery.service';
 
 @Component({
   selector: 'app-debit',
@@ -17,13 +18,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class DebitComponent implements OnInit {
 
-  @Input() dataForCreateStx: DataForCreateStx;
+  @Input() dataForCreateStx: DataForPayment;
   form: FormGroup;
   isLoading: boolean;
 
   constructor(
     public cartServ: CartService,
     private alertServ: AlertService,
+    private bakeryServ: BakeryService,
     private fb: FormBuilder,
     private logger: LoggerService,
     private httpServ: HttpService,
@@ -63,14 +65,9 @@ export class DebitComponent implements OnInit {
       this.isLoading = false;
       this.logger.log('http res: ', res);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
-        const navigationExtras: NavigationExtras = {
-          state: {
-            orderId: res.data.order_id
-          }
-        };
+        this.bakeryServ.openConfirmOrder(res.data.order_id);
         this.cartServ.clearCart();
         this.modalController.dismiss();
-        this.router.navigate(['orders'], navigationExtras);
       } else {
           this.alertServ.presentAlert();
       }

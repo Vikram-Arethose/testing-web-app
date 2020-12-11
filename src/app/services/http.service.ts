@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
 import { ProductForTransaction } from '../models/http/productForTransaction';
 import { CreateStxRes } from '../models/http/createStxRes';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
-import { DataForCreateStx } from '../models/http/dataForCreateStx';
+import { DataForPayment } from '../models/http/dataForPayment';
 import { DebitArgs } from '../models/http/payment/debitArgs';
 import { OrderDetails } from '../models/http/orderDetails';
 import { AlertService } from './alert.service';
@@ -152,13 +152,17 @@ export class HttpService {
     return subject.asObservable();
   }
 
-  createSmartTransaction(data: DataForCreateStx): Observable<CreateStxRes | false> {
-    const body = {
-      branch_id: data.branchId,
-      basket_sum: data.basketSum,
+  getBodyForPayment(data: DataForPayment) {
+    return {
+      branch_id: data.branch_id,
+      basket_sum: data.basket_sum,
       products: data.products,
-      pickup_date: data.pickupDate,
+      pickup_date: data.pickup_date,
     };
+  }
+
+  createSmartTransaction(data: DataForPayment): Observable<CreateStxRes | false> {
+    const body = this.getBodyForPayment(data);
     const subject = new Subject<CreateStxRes | false>();
     this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
@@ -185,23 +189,22 @@ export class HttpService {
       postal_code: debitArgs.postal_code,
       account_owner: debitArgs.account_owner,
       iban: debitArgs.iban,
-      branch_id: debitArgs.branchId,
-      basket_sum: debitArgs.basketSum,
+      branch_id: debitArgs.branch_id,
+      basket_sum: debitArgs.basket_sum,
       products: debitArgs.products,
-      pickup_date: debitArgs.pickupDate,
+      pickup_date: debitArgs.pickup_date,
     };
     return  this.http.post(this.baseUrl + '/payment/debit', body);
   }
 
-  sofortPayment(data: DataForCreateStx) {
-    const body = {
-      branch_id: data.branchId,
-      basket_sum: data.basketSum,
-      products: data.products,
-      pickup_date: data.pickupDate,
-    };
-    const subject = new Subject<CreateStxRes | false>();
+  sofortPayment(data: DataForPayment) {
+    const body = this.getBodyForPayment(data);
     return this.http.post(this.baseUrl + '/payment/sofort', body);
+  }
+
+  useLastPayment(data: DataForPayment) {
+    const body = this.getBodyForPayment(data);
+    return this.http.post(this.baseUrl + '/payment/last-used', body);
   }
 
   getOrderDetails(orderId: number) {

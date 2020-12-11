@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'menu.support',
-      url: '/',
+      // url: '/',
       src: './assets/icons/menu/help-circle-png.svg'
     }
   ];

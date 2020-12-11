@@ -16,7 +16,7 @@
     <div class="date">
       <h2 class="date__title">{{ 'shoppingCart.pickUp' | translate }}:
         <span class="date__title_purple">
-          {{ date | date:'EEEE, d.M.yyyy,  h:mm': '':'en'}}</span></h2>
+          {{ date | date:'EEEE, d.M.yyyy,  h:mm': '':'en'}} hrs</span></h2>
       <ion-button fill="none" size="small" (click)="presentVerifyDateModal()">
         <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
       </ion-button>
@@ -61,7 +61,7 @@
             {{lastPaymentMethod}}</p>
         </div>
       </ion-button>
-      <a class="buttons-wrapper__link" (click)="checkout()" *ngIf="lastPaymentMethod">
+      <a class="buttons-wrapper__link" (click)="chooseOtherPayment()" *ngIf="lastPaymentMethod">
         {{ 'shoppingCart.chooseOtherPayment' | translate }}</a>
     </div>
   </div>

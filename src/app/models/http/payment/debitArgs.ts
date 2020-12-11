@@ -1,6 +1,6 @@
-import { DataForCreateStx } from '../dataForCreateStx';
+import { DataForPayment } from '../dataForPayment';
 
-export interface DebitArgs extends DataForCreateStx {
+export interface DebitArgs extends DataForPayment {
   first_name?: string;
   last_name?: string;
   street?: string;

@@ -1,9 +1,9 @@
-<app-menu-header *ngIf="!isConfirm" [title]="'orders.header' | translate"></app-menu-header>
-<app-menu-header *ngIf="isConfirm" [title]="'orders.confirmation' | translate"></app-menu-header>
+<app-menu-header *ngIf="!orderId" [title]="'orders.header' | translate"></app-menu-header>
+<app-menu-header *ngIf="orderId" [title]="'orders.confirmation' | translate"></app-menu-header>
 
 <ion-content>
   <div class="container">
-    <ion-segment *ngIf="!isConfirm" mode="ios" class="segment"
+    <ion-segment *ngIf="!orderId" mode="ios" class="segment"
                  (ionChange)="segmentChanged($event.target.value)" value="current">
       <ion-segment-button  class="segment__btn" value="current">
         <ion-label>{{ 'orders.current' | translate }}</ion-label>
@@ -12,7 +12,7 @@
         <ion-label>{{ 'orders.completed' | translate }}</ion-label>
       </ion-segment-button>
     </ion-segment>
-    <ng-container *ngIf="isConfirm">
+    <ng-container *ngIf="orderId">
       <h2 class="title">Thank you very much for your order!</h2>
 <!--      <div class="save">-->
 <!--        <p class="save__txt">{{ 'orders.save' | translate }}</p>-->
@@ -24,17 +24,17 @@
     <div class="order">
       <p class="order__bakery">Bakery {{order.bakery_name}}</p>
       <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
-      <p class="order__time" [class.order__time_purple]="isConfirm === true">
+      <p class="order__time" [class.order__time_purple]="orderId">
         {{getDate(order.pickup_time) | date:'EEEE, d.M.yyyy,  h:mm': '':'en'}} hrs</p>
       <ion-grid class="order__grid grid">
         <ion-row class="grid__row" *ngFor="let product of order.products, let i=index">
           <ion-col class="grid__col" size="1">{{ i + 1 }}</ion-col>
           <ion-col class="grid__col" size="8">{{product.quantity}} x {{product.product_name}}
-            <span *ngIf="!isConfirm">a {{product.price | currency:'EUR':'symbol'}}</span></ion-col>
+            <span *ngIf="!orderId">a {{product.price | currency:'EUR':'symbol'}}</span></ion-col>
           <ion-col class="grid__col">
             {{product.grand_total | currency:'EUR':'symbol'}}</ion-col>
         </ion-row>
-        <ion-row class="grid__row grid__row_total" *ngIf="!isConfirm">
+        <ion-row class="grid__row grid__row_total" *ngIf="!orderId">
           <ion-col class="grid__col" size="3">Total</ion-col>
           <ion-col class="grid__col" size="6"></ion-col>
           <ion-col class="grid__col">3,25 €</ion-col>
