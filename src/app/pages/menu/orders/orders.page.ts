@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoggerService } from '../../../services/logger.service';
 import { OrderDetails } from '../../../models/http/orderDetails';
 import { HttpService } from '../../../services/http.service';
+import { GetOrdersRes } from '../../../models/http/getOrdersRes';
 
 @Component({
   selector: 'app-orders',
@@ -10,12 +11,13 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-  dataToShow = 'current';
+  segmentValue = 'current';
   header: string;
   // isConfirm: boolean;
   ordersToShow: OrderDetails[] = [];
   isSave: boolean;
   orderId: number;
+  private orders: GetOrdersRes;
 
   constructor(
     private httpServ: HttpService,
@@ -37,7 +39,23 @@ export class OrdersPage implements OnInit {
       this.httpServ.getOrderDetails(this.orderId).subscribe(res => {
         this.ordersToShow.push(res);
       });
+    } else {
+      this.getOrders();
     }
+  }
+
+  getOrders(event?) {
+    this.httpServ.getOrders().subscribe((res: GetOrdersRes) => {
+      this.orders = res;
+      this.ordersToShow = this.orders[this.segmentValue];
+      if (event) {
+        event.target.complete();
+      }
+    });
+  }
+
+  doRefresh(event) {
+    this.getOrders(event);
   }
 
   getDate(date: string) {
@@ -45,8 +63,10 @@ export class OrdersPage implements OnInit {
   }
 
   segmentChanged(value: string) {
-    this.dataToShow = value;
-    console.log('Segment changed', value);
+    this.segmentValue = value;
+    this.ordersToShow = this.orders[value];
+    // this.dataToShow = value;
+    // console.log('Segment changed', value);
   }
 
   onSaveChange() {

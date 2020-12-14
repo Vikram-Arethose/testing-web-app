@@ -1,3 +1,5 @@
+$redLineHeight: 5px;
+
 .container {
   padding: 0 9.33vw;
   color: #493735;
@@ -51,8 +53,7 @@ ion-toggle.toggle-checked {
     display: none;
   }
   &:after {
-    padding: 6vh 0 0;
-    bottom: -4px;
+    bottom: 0;
     left: 0;
     border-bottom: 5px solid #FEDE00;
     position: absolute;
@@ -127,13 +128,12 @@ ion-toggle.toggle-checked {
       background: #F0F0F0;
       position: relative;
       &:before {
-        top: 0;
-        left: 30%;
-        border-bottom: 5px solid red;
+        top: calc(50% - #{$redLineHeight} / 2);
+        left: 25%;
+        border-bottom: $redLineHeight solid red;
         position: absolute;
         content: "";
-        width: 38%;
-        height: 50%;
+        width: 50%;
       }
     }
   }
@@ -141,10 +141,11 @@ ion-toggle.toggle-checked {
 
 .repeat-btn {
   height: 7.39vh;
-  margin: 2.46vh 0 0;
+  margin: 2.46vh 0 3vh;
   border-radius: 5px;
   --background: #3CCA88;
   padding: 0 3vw;
+  text-transform: capitalize;
   font: normal normal 400 20px/24px Montserrat;
   color: #FFFFFF;
 }
