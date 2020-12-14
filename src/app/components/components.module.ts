@@ -10,6 +10,7 @@ import { PaymentMethodsComponent } from './payment-methods/payment-methods.compo
 import { GooglePayComponent } from './google-pay/google-pay.component';
 import { OtherOptionsComponent } from './payment-methods/other-options/other-options.component';
 import { DebitComponent } from './payment-methods/debit/debit.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
@@ -21,7 +22,8 @@ import { DebitComponent } from './payment-methods/debit/debit.component';
     PaymentMethodsComponent,
     GooglePayComponent,
     OtherOptionsComponent,
-    DebitComponent
+    DebitComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { DebitComponent } from './payment-methods/debit/debit.component';
     PaymentMethodsComponent,
     GooglePayComponent,
     OtherOptionsComponent,
-    DebitComponent
+    DebitComponent,
+    SpinnerComponent
   ]
 })
 export class ComponentsModule { }
