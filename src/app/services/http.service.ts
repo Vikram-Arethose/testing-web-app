@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { EmailRegister } from '../models/emailRegister';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { LoggerService } from './logger.service';
 import { Observable, Subject } from 'rxjs';
 import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
@@ -17,6 +17,11 @@ import { DataForPayment } from '../models/http/dataForPayment';
 import { DebitArgs } from '../models/http/payment/debitArgs';
 import { OrderDetails } from '../models/http/orderDetails';
 import { AlertService } from './alert.service';
+import { InAppBrowserEvent } from '@ionic-native/in-app-browser';
+import { NavigationExtras, Router } from '@angular/router';
+import { CartService } from './cart.service';
+import { DateService } from './date.service';
+import { BakeryService } from './bakery.service';
 
 
 @Injectable({
@@ -24,15 +29,24 @@ import { AlertService } from './alert.service';
 })
 export class HttpService {
 
+  date: string;
   private baseUrl: string = environment.serverUrl;
 
   constructor(
     private alertServ: AlertService,
-    private http: HttpClient,
     private alertController: AlertController,
+    private bakeryServ: BakeryService,
+    private cartServ: CartService,
+    private dateServ: DateService,
+    private iab: InAppBrowser,
+    private http: HttpClient,
     private logger: LoggerService,
-    private iab: InAppBrowser
-  ) { }
+    private modalController: ModalController,
+    private ngZone: NgZone,
+    private router: Router,
+  ) {
+    this.dateServ.dateShared.subscribe(res => this.date = res);
+  }
 
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
@@ -197,14 +211,46 @@ export class HttpService {
     return  this.http.post(this.baseUrl + '/payment/debit', body);
   }
 
-  sofortPayment(data: DataForPayment) {
-    const body = this.getBodyForPayment(data);
-    return this.http.post(this.baseUrl + '/payment/sofort', body);
+  iabPayment(endPoint: string) {
+    const body = this.getBodyForPayment(this.bakeryServ.getDataForPayment(this.date));
+    const subject = new Subject<boolean>();
+    this.http.post(this.baseUrl + endPoint, body).subscribe((res: ApiResponse) => {
+      this.logger.log('http res.data: ', res.data);
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
+        this.handleIabResult(this.iab.create(res.data.iframeUrl));
+        subject.next(true);
+      } else {
+        this.alertServ.presentAlert();
+        subject.next(false);
+      }
+    });
+    return subject.asObservable();
   }
 
   useLastPayment(data: DataForPayment) {
     const body = this.getBodyForPayment(data);
     return this.http.post(this.baseUrl + '/payment/last-used', body);
+  }
+
+  handleIabResult(browser: InAppBrowserObject) {
+    browser.on('loadstart').subscribe((res: InAppBrowserEvent) => {
+      if (res.url.includes('/payment/success')) {
+        this.modalController.dismiss();
+        browser.close();
+        const navigationExtras: NavigationExtras = {
+          state: {
+            isConfirm: true,
+            orderId: res.url.substr(res.url.lastIndexOf('=') + 1)
+          }
+        };
+        this.ngZone.run(() => this.router.navigate(['orders'], navigationExtras));
+        this.cartServ.clearCart();
+        this.dateServ.changeDate('');
+      } else if (res.url.includes('/payment/failed')) {
+        this.alertServ.presentAlert('Payment was failed! Please try again later.');
+        browser.close();
+      }
+    });
   }
 
   getOrderDetails(orderId: number) {
@@ -215,6 +261,19 @@ export class HttpService {
         this.logger.log('http res.data: ', res.data);
       } else {
         this.alertServ.presentAlert('Something went wrong! Please contact support!');
+      }
+    });
+    return subject.asObservable();
+  }
+
+  getOrders() {
+    const subject = new Subject();
+    this.http.get(this.baseUrl + '/orders').subscribe((res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+        subject.next(res.data);
+        this.logger.log('http res.data: ', res.data);
+      } else {
+        this.alertServ.presentAlert();
       }
     });
     return subject.asObservable();

@@ -36,9 +36,6 @@ export class PaymentMethodsComponent implements OnInit {
     private httpServ: HttpService,
     private iab: InAppBrowser,
     private modalController: ModalController,
-    private logger: LoggerService,
-    private router: Router,
-    private ngZone: NgZone,
   ) { }
 
   ngOnInit() {
@@ -82,15 +79,6 @@ export class PaymentMethodsComponent implements OnInit {
     }
   }
 
-  // getDataForPayment() {
-  //   return {
-  //     branch_id: this.bakery.branchDetails.bakery_id,
-  //     basket_sum: this.cartServ.getTotalPrice(),
-  //     products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
-  //     pickup_date: this.date.split('T')[0] + ' ' + this.date.split('T')[1].substr(0, 5),
-  //   };
-  // }
-
   createSmartTransaction() {
     this.isLoading = true;
     this.httpServ.createSmartTransaction(this.bakeryServ.getDataForPayment(this.date))
@@ -104,41 +92,12 @@ export class PaymentMethodsComponent implements OnInit {
 
   creditCartPayment(createStxRes: CreateStxRes) {
     const browser: InAppBrowserObject = this.httpServ.openCreditCardPayment(createStxRes.stx_id, createStxRes.user_id);
-    this.handleIabResult(browser);
-  }
-
-  handleIabResult(browser: InAppBrowserObject) {
-    browser.on('loadstart').subscribe((res: InAppBrowserEvent) => {
-      if (res.url.includes('/payment/success')) {
-        this.modalController.dismiss();
-        browser.close();
-        const navigationExtras: NavigationExtras = {
-          state: {
-            isConfirm: true,
-            orderId: res.url.substr(res.url.lastIndexOf('=') + 1)
-          }
-        };
-        this.ngZone.run(() => this.router.navigate(['orders'], navigationExtras));
-        this.cartServ.clearCart();
-        this.dateServ.changeDate('');
-      } else if (res.url.includes('/payment/failed')) {
-        this.alertServ.presentAlert('Payment was failed! Please try again later.');
-        browser.close();
-      }
-    });
+    this.httpServ.handleIabResult(browser);
   }
 
   makeSofortPayment() {
     this.isLoading = true;
-    this.httpServ.sofortPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
-      this.isLoading = false;
-      this.logger.log('http res.data: ', res.data);
-      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
-        this.handleIabResult(this.iab.create(res.data.iframeUrl));
-      } else {
-        this.alertServ.presentAlert();
-      }
-    });
+    this.httpServ.iabPayment('/payment/sofort').subscribe((res: boolean) => this.isLoading = false);
   }
 
   async presentDebitModal() {
