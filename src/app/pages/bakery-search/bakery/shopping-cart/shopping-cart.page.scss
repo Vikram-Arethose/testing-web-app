@@ -36,7 +36,7 @@
     font: normal normal 400 20px/24px Montserrat;
 
     &_purple {
-      color: #FF68B4;
+      //color: #FF68B4;
     }
   }
 
@@ -84,6 +84,9 @@
 
     &__col {
       padding: 0;
+      .product-count {
+        width: 5px;
+      }
       .notification {
         color: red;
         font-size: 12px;

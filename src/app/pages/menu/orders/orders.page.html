@@ -27,7 +27,8 @@
     <div class="order">
       <p class="order__bakery">Bakery {{order.bakery_name}}</p>
       <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
-      <p class="order__time" [class.order__time_purple]="orderId">
+      <p class="order__time">
+<!--         [class.order__time_purple]="orderId"-->
         {{getDate(order.pickup_time) | date:'EEEE, d.M.yyyy,  h:mm': '':'en'}} hrs</p>
       <ion-grid class="order__grid grid">
         <ion-row class="grid__row" *ngFor="let product of order.products, let i=index">
@@ -53,9 +54,9 @@
           {{order.collection_code}}</div>
         <h3 class="pick-up__title">{{ 'orders.showThisCode' | translate }}</h3>
         <p class="pick-up__text" *ngIf="segmentValue === 'current'">{{ 'orders.note' | translate }}</p>
-        <ion-button class="repeat-btn" *ngIf="segmentValue === 'completed'" expand="block">
-          Repeat Order
-        </ion-button>
+<!--        <ion-button class="repeat-btn" *ngIf="segmentValue === 'completed'" expand="block">-->
+<!--          Repeat Order-->
+<!--        </ion-button>-->
       </div>
     </div>
   </div>

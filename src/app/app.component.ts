@@ -6,7 +6,6 @@ import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
-import { LoggerService } from './services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -49,7 +48,6 @@ export class AppComponent implements OnInit {
       src: './assets/icons/menu/help-circle-png.svg'
     }
   ];
-  private myAccount: string;
 
   constructor(
     private platform: Platform,
@@ -58,7 +56,6 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private menu: MenuController,
     private router: Router,
-    private logger: LoggerService,
   ) {
     this.initializeApp();
   }
@@ -67,9 +64,9 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.translate.setDefaultLang('en');
+      this.translate.setDefaultLang('de');
+      this.useLanguage();
       this.openFirstPage();
-      // this.translate.use('en');
     });
   }
 
@@ -77,6 +74,13 @@ export class AppComponent implements OnInit {
     const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    }
+  }
+
+  useLanguage() {
+    const language = localStorage.getItem('language');
+    if (language) {
+      this.translate.use(language);
     }
   }
 

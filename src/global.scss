@@ -37,6 +37,10 @@ a {
   color: inherit;
 }
 
+ion-header {
+  margin-top: var(--ion-safe-area-top);
+}
+
 .pick-up-date-modal {
   --width: 307px;
   --height: 568px;

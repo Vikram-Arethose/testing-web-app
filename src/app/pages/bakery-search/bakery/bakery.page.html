@@ -1,3 +1,4 @@
+<ion-header></ion-header>
 <ion-content>
   <div class="header">
     <ion-toolbar class="toolbar" *ngIf="bakeryDetails?.photo" [style.--background]="'url(' + bakeryDetails?.photo +') center/cover'">
@@ -67,7 +68,7 @@
            [class.sections__item_selected]="i === selectedCategoryIndex" tappable>{{category.name}}</div>
     </div>
     <div class="product-list">
-      <div class="container">
+      <div class="container product-container">
         <ng-container>
           <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal(product)">
             <div class="col-left">

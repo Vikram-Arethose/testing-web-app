@@ -19,6 +19,7 @@ export class AccountDetailPage implements OnInit {
   account: User;
   countries: string[] = ['Germany', 'Austria', 'Switzerland'];
   country: string[];
+  changePasswordForm: FormGroup;
   data: string;
   enter: string = this.translate.instant('account.enter');
   inputText: string;
@@ -30,7 +31,6 @@ export class AccountDetailPage implements OnInit {
   public title: string;
   dataForRepeat: any[];
   radioValue: string;
-  private changePasswordForm: FormGroup;
   private selectedLang: Language;
 
   constructor(
@@ -155,6 +155,7 @@ export class AccountDetailPage implements OnInit {
       const selectedLanguageIndex: number = this.account.languages.findIndex(item => item.code === this.radioValue);
       this.account.languages.forEach(item => item.isActive = false);
       this.account.languages[selectedLanguageIndex].isActive = true;
+      localStorage.setItem('language', this.radioValue);
       this.updateUserDetails({language_id: this.account.languages[selectedLanguageIndex].id});
     } else if (this.data === 'country' && this.radioValue !== this.account.country) {
       this.account[this.data] = this.radioValue;

@@ -8,6 +8,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
 import { LocalStorageService } from './local-storage.service';
+import { PushService } from './push.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,9 @@ export class LoginService {
 
   constructor(
     private alertController: AlertController,
-    private logger: LoggerService,
     private httpService: HttpService,
+    private logger: LoggerService,
+    private pushServ: PushService,
     private router: Router,
     private localStorageServ: LocalStorageService
   ) { }
@@ -40,6 +42,7 @@ export class LoginService {
           this.logger.log('server response: ', response);
           localStorage.setItem('token', response.access_token);
           this.router.navigate(['google-login']);
+          this.pushServ.initPush();
         });
     }
   }
@@ -64,6 +67,7 @@ export class LoginService {
               this.logger.log('server response: ', response);
               localStorage.setItem('token', response.access_token);
               this.router.navigate(['google-login']);
+              this.pushServ.initPush();
             }, error => {
               this.logger.warn('server response error: ', error);
             }
@@ -104,6 +108,7 @@ export class LoginService {
             this.logger.log('server response: ', response);
             localStorage.setItem('token', response.access_token);
             this.router.navigate(['google-login']);
+            this.pushServ.initPush();
           }, error => {
             this.logger.warn('server response error: ', error);
           });

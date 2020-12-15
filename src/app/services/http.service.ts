@@ -279,4 +279,20 @@ export class HttpService {
     return subject.asObservable();
   }
 
+  registerPushToken(token: string, device: string, platform: string, osVersion: string) {
+    const body = {
+      token,
+      device,
+      platform,
+      os_version: osVersion
+    };
+    this.http.post(this.baseUrl + '/pushNotification/register', body).subscribe((res: ApiResponse) => {
+      this.logger.log('http res.data: ', res.data);
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && !res.data?.error) {
+      } else {
+        this.logger.log('registerPushToken error: ', res.data.error);
+      }
+    });
+  }
+
 }

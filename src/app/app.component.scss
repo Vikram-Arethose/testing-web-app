@@ -157,6 +157,9 @@ ion-menu{
       &.md {
         bottom: 2vh;
       }
+      &.ios {
+        bottom: var(--ion-safe-area-bottom);
+      }
       &__icon {
         font-size: 30px;
       }

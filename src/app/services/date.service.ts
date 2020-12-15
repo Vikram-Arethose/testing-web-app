@@ -42,6 +42,7 @@ export class DateService {
   }
 
   changeDate(date: string) {
+    this.logger.log('date: ', date);
     this.date = date;
     this.dateSource.next(date);
   }

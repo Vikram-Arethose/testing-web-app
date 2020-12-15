@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { AuthResponse } from '../../../models/authResponse';
+import { PushService } from '../../../services/push.service';
 
 @Component({
   selector: 'app-email-registration',
@@ -20,12 +21,12 @@ export class EmailRegistrationPage implements OnInit {
   step = 0;
 
   constructor(
+    private httpService: HttpService,
+    private formBuilder: FormBuilder,
     private logger: LoggerService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private httpService: HttpService,
-    private localStorageServ: LocalStorageService
+    private pushServ: PushService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -54,6 +55,7 @@ export class EmailRegistrationPage implements OnInit {
       this.logger.log('server res: ', res);
       this.nextStep();
       localStorage.setItem('token', res.access_token);
+      this.pushServ.initPush();
     },
       error => {
         this.step = 0;
@@ -69,6 +71,7 @@ export class EmailRegistrationPage implements OnInit {
         this.logger.log('server res: ', res);
         localStorage.setItem('token', res.access_token);
         this.router.navigate(['location-setting']);
+        this.pushServ.initPush();
       },
       error => {
         this.loginForm.reset();
