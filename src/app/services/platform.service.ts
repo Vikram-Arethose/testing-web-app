@@ -17,7 +17,6 @@ export class PlatformService {
   isPlatformAndroid(): boolean {
     let result: boolean;
     result = this.platform.is('android');
-    this.logger.log('platform is android: ', result);
     return result;
   }
 

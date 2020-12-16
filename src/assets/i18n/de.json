@@ -98,7 +98,8 @@
     "showThisCode": "Zeige diesen Code bei deiner Abholung vor!",
     "note": "Hinweis: Wenn ein Artikel ausverkauft ist, bietet Ihnen die Bäckerei einen Ersatzartikel an.",
     "repeatBtn": "Bestellung wiederholen",
-    "save": "Für zukünftige Zahlungen speicher"
+    "save": "Für zukünftige Zahlungen speicher",
+    "thankForOrder": "Vielen Dank für Ihre Bestellung!"
   },
   "favorites": {
     "header": "Favorites",

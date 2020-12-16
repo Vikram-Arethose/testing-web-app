@@ -45,6 +45,7 @@ export class HttpService {
     private ngZone: NgZone,
     private router: Router,
   ) {
+    console.log('production environment: ', environment.production);
     this.dateServ.dateShared.subscribe(res => this.date = res);
   }
 

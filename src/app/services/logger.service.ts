@@ -1,6 +1,5 @@
 import { ErrorHandler, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { consoleTestResultHandler } from 'tslint/lib/test';
 
 @Injectable({
   providedIn: 'root'
