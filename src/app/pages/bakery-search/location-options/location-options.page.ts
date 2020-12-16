@@ -15,7 +15,7 @@ export class LocationOptionsPage implements OnInit {
   locationArr: Location[];
   @ViewChild('search')
   private searchElementRef: ElementRef;
-  private myAddress: string;
+  myAddress: string;
 
   constructor(
     private geolocationServ: GeolocationService,

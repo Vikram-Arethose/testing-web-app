@@ -6,9 +6,9 @@
       <h1 class="form__title">{{ 'googleLogin.welcome' | translate }}</h1>
       <h1 class="form__title">{{ 'googleLogin.youAreIn' | translate }}</h1>
       <ion-item class="form__item form__item_select item">
-        <ion-select class="item__select" [value]="'googleLogin.germany' | translate">
-          <ion-select-option value="Germany">Germany</ion-select-option>
-          <ion-select-option value="Austria">Austria</ion-select-option>
+        <ion-select class="item__select" value="Germany">
+          <ion-select-option value="Germany">{{ 'googleLogin.germany' | translate }}</ion-select-option>
+<!--          <ion-select-option value="Austria">{{'g'}}</ion-select-option>-->
         </ion-select>
       </ion-item>
     </div>
@@ -19,8 +19,10 @@
     <ion-item class="form__item item ion-align-items-start" lines="none" (click)="toggleCheckbox()">
       <ion-checkbox class="item__checkbox" formControlName="checkbox2" [checked]="checkbox"></ion-checkbox>
       <ion-label class="item__label ion-text-wrap">
-        {{ 'googleLogin.iConfirmThe' | translate }} <a (click)="open('legal')">{{ 'googleLogin.termsOfUse' | translate }}</a>
-        {{ 'googleLogin.andThe' | translate }} <a (click)="open('privacy')">{{ 'googleLogin.privacyPolicy' | translate }}</a>
+        {{ 'googleLogin.iConfirmThe' | translate }}
+        <a (click)="open('legal', $event)">{{ 'googleLogin.termsOfUse' | translate }}</a>
+        {{ 'googleLogin.andThe' | translate }}
+        <a (click)="open('privacy', $event)">{{ 'googleLogin.privacyPolicy' | translate }}</a>
       </ion-label>
     </ion-item>
     <ion-button class="form__button" type="submit" expand="block" size="large"

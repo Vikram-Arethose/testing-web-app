@@ -4,6 +4,7 @@ import { LoggerService } from '../../../services/logger.service';
 import { OrderDetails } from '../../../models/http/orderDetails';
 import { HttpService } from '../../../services/http.service';
 import { GetOrdersRes } from '../../../models/http/getOrdersRes';
+import { LocalStorageService } from '../../../services/local-storage.service';
 
 @Component({
   selector: 'app-orders',
@@ -11,16 +12,19 @@ import { GetOrdersRes } from '../../../models/http/getOrdersRes';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-  segmentValue = 'current';
+
+  dateLocale: string;
   header: string;
-  // isConfirm: boolean;
-  ordersToShow: OrderDetails[] = [];
   isSave: boolean;
   orderId: number;
+  ordersToShow: OrderDetails[] = [];
+  segmentValue = 'current';
+
   private orders: GetOrdersRes;
 
   constructor(
     private httpServ: HttpService,
+    private localStorServ: LocalStorageService,
     private logger: LoggerService,
     private route: ActivatedRoute,
     private router: Router,
@@ -35,6 +39,7 @@ export class OrdersPage implements OnInit {
   }
 
   ngOnInit() {
+    this.dateLocale = this.localStorServ.getDateLocale();
     if (this.orderId) {
       this.httpServ.getOrderDetails(this.orderId).subscribe(res => {
         this.ordersToShow.push(res);

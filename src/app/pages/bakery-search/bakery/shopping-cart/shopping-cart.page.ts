@@ -16,6 +16,8 @@ import { CreateStxRes } from '../../../../models/http/createStxRes';
 import { BranchDetailsForPayment } from '../../../../models/http/branchDetailsForPayment';
 import { BakeryService } from '../../../../services/bakery.service';
 import { ApiResponse } from '../../../../models/http/apiResponse';
+import { AccountService } from '../../../../services/account.service';
+import { LocalStorageService } from '../../../../services/local-storage.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -25,7 +27,9 @@ import { ApiResponse } from '../../../../models/http/apiResponse';
 export class ShoppingCartPage implements OnInit {
 
   date: string;
+  dateLocale: string;
   isLoading: boolean;
+  language: string;
   lastPaymentMethod: string;
   private branchDetails: BranchDetailsForPayment;
 
@@ -39,6 +43,7 @@ export class ShoppingCartPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
+    private localStorServ: LocalStorageService,
     private httpServ: HttpService
   ) {
     this.route.queryParamMap.subscribe(params => {
@@ -49,6 +54,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   ngOnInit() {
+    this.dateLocale = this.localStorServ.getDateLocale();
     this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
     this.date = localStorage.getItem('date');
     this.dateService.dateShared.subscribe((res: string) => {

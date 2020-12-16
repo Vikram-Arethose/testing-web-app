@@ -151,7 +151,8 @@ export class AccountDetailPage implements OnInit {
   }
 
   acceptRadio() {
-    if (this.data === 'language' && this.radioValue && this.radioValue !== this.selectedLang.code) {
+    if (this.data === 'language' && this.radioValue) {
+    // if (this.data === 'language' && this.radioValue && this.radioValue !== this.selectedLang.code) {
       const selectedLanguageIndex: number = this.account.languages.findIndex(item => item.code === this.radioValue);
       this.account.languages.forEach(item => item.isActive = false);
       this.account.languages[selectedLanguageIndex].isActive = true;

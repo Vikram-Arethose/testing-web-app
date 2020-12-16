@@ -4,6 +4,7 @@ export interface OrderDetails {
   pickup_time: string;
   collection_code: number;
   products: ProductInOrder[];
+  grand_total: number;
 }
 
 export interface ProductInOrder {

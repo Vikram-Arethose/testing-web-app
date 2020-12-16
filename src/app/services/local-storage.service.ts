@@ -17,4 +17,13 @@ export class LocalStorageService {
   get(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
+
+  getDateLocale(): string {
+    const lang = localStorage.getItem('language');
+    if (lang === 'en') {
+      return lang;
+    } else {
+      return '';
+    }
+  }
 }

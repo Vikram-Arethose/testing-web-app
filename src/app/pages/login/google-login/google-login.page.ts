@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { Event, NavigationExtras, Router } from '@angular/router';
 
 import { LoggerService } from '../../../services/logger.service';
 import { LoginService } from '../../../services/login.service';
@@ -60,13 +60,14 @@ export class GoogleLoginPage implements OnInit {
      this.router.navigate(['location-setting']);
    }
 
-  open(data: string) {
+  open(data: string, event) {
     const navigationExtras: NavigationExtras = {
       state: {
         data
       }
     };
     this.router.navigate([`${data}`], navigationExtras);
+    event.stopPropagation();
   }
 
   toggleCheckbox() {
