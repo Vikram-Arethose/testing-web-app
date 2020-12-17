@@ -38,7 +38,7 @@
           <ion-col class="grid__col">
             {{product.grand_total | currency:'EUR':'symbol'}}</ion-col>
         </ion-row>
-        <ion-row class="grid__row grid__row_total" *ngIf="segmentValue === 'current'">
+        <ion-row class="grid__row grid__row_total" *ngIf="segmentValue === 'current' && !orderId">
           <ion-col class="grid__col" size="3">{{ 'orders.total' | translate }}</ion-col>
           <ion-col class="grid__col" size="6"></ion-col>
           <ion-col class="grid__col">{{order.grand_total | currency:'EUR':'symbol'}}</ion-col>
