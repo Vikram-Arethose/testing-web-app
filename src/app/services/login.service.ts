@@ -120,6 +120,12 @@ export class LoginService {
     }
   }
 
+  async logout() {
+    await Plugins.FacebookLogin.logout();
+    localStorage.setItem('token', '');
+    this.router.navigate(['start']);
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Login Failed',

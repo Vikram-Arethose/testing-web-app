@@ -5,6 +5,7 @@ import { LoggerService } from '../../../services/logger.service';
 import { HttpService } from '../../../services/http.service';
 import { User } from '../../../models/user';
 import { Language } from '../../../models/language';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-account',
@@ -20,6 +21,7 @@ export class AccountPage implements OnInit {
     public accountService: AccountService,
     private router: Router,
     private logger: LoggerService,
+    private loginServ: LoginService,
     private http: HttpService
   ) { }
 
@@ -46,8 +48,7 @@ export class AccountPage implements OnInit {
   }
 
   logout() {
-    localStorage.setItem('token', '');
-    this.router.navigate(['start']);
+    this.loginServ.logout();
   }
 
 }
