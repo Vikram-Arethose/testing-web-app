@@ -47,7 +47,7 @@ export class BakeryService {
 
   getDataForPayment(date: string) {
     return {
-      branch_id: this.bakeryData.branchDetails.bakery_id,
+      branch_id: this.bakeryData.branchDetails.id,
       basket_sum: this.cartServ.getTotalPrice(),
       products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
       pickup_date: date.split('T')[0] + ' ' + date.split('T')[1].substr(0, 5),
