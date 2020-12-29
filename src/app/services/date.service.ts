@@ -56,12 +56,21 @@ export class DateService {
     // check availability by date
     if (this.date) {
       this.selectedDate = new Date(this.date);
-      const selectedDay = this.selectedDate.getDay();
+      // check pre order period
+      const minPreOrderDate = new Date();
+      this.logger.log('minPreOrderDate: ', minPreOrderDate);
+      minPreOrderDate.setSeconds(product.pre_order_period);
+      this.logger.log('minPreOrderDate: ', minPreOrderDate);
+      if (minPreOrderDate > this.selectedDate ) {
+        return false;
+      }
       // check days availability
+      const selectedDay = this.selectedDate.getDay();
       if (product.availability.includes(this.weekDays[selectedDay])) {
         // check product available from to
         return this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo;
-      } else {
+      }
+      else {
         return false;
       }
     } else {
