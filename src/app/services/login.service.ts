@@ -9,6 +9,8 @@ import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
 import { LocalStorageService } from './local-storage.service';
 import { PushService } from './push.service';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthResponse } from '../models/authResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,8 @@ export class LoginService {
     private logger: LoggerService,
     private pushServ: PushService,
     private router: Router,
-    private localStorageServ: LocalStorageService
+    private localStorageServ: LocalStorageService,
+    private translate: TranslateService
   ) { }
 
   async googleLogin() {
@@ -37,13 +40,7 @@ export class LoginService {
       this.user.reg_auth_token = googleUser.idToken;
       this.user.reg_auth_user_id = googleUser.id;
       // posting on server
-      this.httpService.postData('/register', this.user).subscribe(
-        (response: any) => {
-          this.logger.log('server response: ', response);
-          localStorage.setItem('token', response.access_token);
-          this.router.navigate(['google-login']);
-          this.pushServ.initPush();
-        });
+      this.registerOnApi();
     }
   }
 
@@ -62,16 +59,7 @@ export class LoginService {
           this.user.reg_auth_user_id = res.response.user;
           this.logger.log('this.user', this.user);
           // posting on server
-          this.httpService.postData('/register', this.user).subscribe(
-            (response: any) => {
-              this.logger.log('server response: ', response);
-              localStorage.setItem('token', response.access_token);
-              this.router.navigate(['google-login']);
-              this.pushServ.initPush();
-            }, error => {
-              this.logger.warn('server response error: ', error);
-            }
-          );
+          this.registerOnApi();
         } else {
           this.logger.warn('res.response && res.response.identityToken do not true!');
         }
@@ -103,21 +91,32 @@ export class LoginService {
         this.user.last_name = userInfo.last_name;
         this.logger.log('this.user: ', this.user);
         // posting on server
-        this.httpService.postData('/register', this.user).subscribe(
-          (response: any) => {
-            this.logger.log('server response: ', response);
-            localStorage.setItem('token', response.access_token);
-            this.router.navigate(['google-login']);
-            this.pushServ.initPush();
-          }, error => {
-            this.logger.warn('server response error: ', error);
-          });
+        this.registerOnApi();
       } else {
         this.presentAlert();
       }
     } else {
       this.presentAlert();
     }
+  }
+
+  registerOnApi() {
+    this.httpService.postData('/register', this.user).subscribe(
+      (res: AuthResponse) => {
+      this.handleRegisterRes(res);
+      this.router.navigate(['google-login']);
+    }, error => {
+      this.logger.warn('server response error: ', error);
+    });
+  }
+
+  handleRegisterRes(res: AuthResponse) {
+    this.logger.log('server res: ', res);
+    localStorage.setItem('token', res.access_token);
+    const language = res.user.language;
+    localStorage.setItem('language', language);
+    this.translate.use(language);
+    this.pushServ.initPush();
   }
 
   async logout() {

@@ -44,14 +44,14 @@ export class GoogleLoginPage implements OnInit {
   getBtnLabel() {
     switch (this.loginWith) {
       case 'google':
-        this.continueBtnLabel = this.translate.instant('start.googleBtn');
+        this.continueBtnLabel = 'start.googleBtn';
         break;
       case 'ios':
-        this.continueBtnLabel = this.translate.instant('googleLogin.createAccBtn');
+        this.continueBtnLabel = 'googleLogin.createAccBtn';
         break;
       case 'email':
       case 'facebook':
-        this.continueBtnLabel = this.translate.instant('general.continue');
+        this.continueBtnLabel = 'general.continue';
         break;
     }
   }

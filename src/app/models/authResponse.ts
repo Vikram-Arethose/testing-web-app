@@ -2,4 +2,5 @@ import { User } from './user';
 
 export interface AuthResponse {
   access_token: string;
+  user: { language: string };
 }

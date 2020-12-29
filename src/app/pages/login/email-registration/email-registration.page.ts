@@ -4,9 +4,8 @@ import { LoggerService } from '../../../services/logger.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
-import { LocalStorageService } from '../../../services/local-storage.service';
 import { AuthResponse } from '../../../models/authResponse';
-import { PushService } from '../../../services/push.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-email-registration',
@@ -24,9 +23,9 @@ export class EmailRegistrationPage implements OnInit {
     private httpService: HttpService,
     private formBuilder: FormBuilder,
     private logger: LoggerService,
+    private loginServ: LoginService,
     private route: ActivatedRoute,
     private router: Router,
-    private pushServ: PushService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -48,33 +47,28 @@ export class EmailRegistrationPage implements OnInit {
     this.step++;
   }
 
-  register() {
-    this.logger.log('emailRegister: ', this.emailRegisterData);
-    this.httpService.postData('/register', this.emailRegisterData).subscribe(
-      (res: AuthResponse)  => {
-      this.logger.log('server res: ', res);
-      this.nextStep();
-      localStorage.setItem('token', res.access_token);
-      this.pushServ.initPush();
-    },
-      error => {
-        this.step = 0;
-        this.emailRegisterData = new EmailRegister();
-      });
-
-  }
-
   login() {
     this.logger.log('this.loginForm', this.loginForm.value);
     this.httpService.postData('/login', this.loginForm.value).subscribe(
       (res: AuthResponse) => {
-        this.logger.log('server res: ', res);
-        localStorage.setItem('token', res.access_token);
+        this.loginServ.handleRegisterRes(res);
         this.router.navigate(['location-setting']);
-        this.pushServ.initPush();
       },
       error => {
         this.loginForm.reset();
+      });
+  }
+
+  register() {
+    this.logger.log('emailRegister: ', this.emailRegisterData);
+    this.httpService.postData('/register', this.emailRegisterData).subscribe(
+      (res: AuthResponse) => {
+        this.nextStep();
+        this.loginServ.handleRegisterRes(res);
+      },
+      error => {
+        this.step = 0;
+        this.emailRegisterData = new EmailRegister();
       });
   }
 
