@@ -47,9 +47,17 @@ export class DateService {
     this.dateSource.next(date);
   }
 
+  getDateFromStr(dateStr?: string) {
+    let date: Date;
+    if (dateStr) {
+      date = new Date(dateStr);
+    } else {
+      date = new Date();
+    }
+    return new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+  }
+
   getProductAvailability(product: Product): boolean {
-    this.availableFrom = new Date(product.period_available_from);
-    this.availableTo = new Date(product.period_available_to);
     if (product.quantity === 'unavailable') {
       return false;
     }
@@ -58,9 +66,7 @@ export class DateService {
       this.selectedDate = new Date(this.date);
       // check pre order period
       const minPreOrderDate = new Date();
-      this.logger.log('minPreOrderDate: ', minPreOrderDate);
       minPreOrderDate.setSeconds(product.pre_order_period);
-      this.logger.log('minPreOrderDate: ', minPreOrderDate);
       if (minPreOrderDate > this.selectedDate ) {
         return false;
       }
@@ -68,6 +74,8 @@ export class DateService {
       const selectedDay = this.selectedDate.getDay();
       if (product.availability.includes(this.weekDays[selectedDay])) {
         // check product available from to
+        this.availableFrom = this.getDateFromStr(product.period_available_from.split(' ')[0]);
+        this.availableTo = this.getDateFromStr(product.period_available_to.split(' ')[0]);
         return this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo;
       }
       else {
