@@ -25,11 +25,13 @@
 }
 
 .my-location {
+  background: #FEDE00;
   display: flex;
   align-items: center;
   padding: 5% 0 5% 25%;
   &__text {
-    font: normal normal 400 15px/19px Montserrat;
+    max-width: 200px;
+    font: normal normal 700 15px/19px Montserrat;
     color: #493735;
   }
 }
@@ -45,4 +47,14 @@
     font-size: 24px;
     padding-right: 17px;
   }
+}
+
+.btn {
+  height: 50px;
+  padding: 0 5vw;
+  margin-top: 10vh;
+  font: normal normal 700 25px/25px Montserrat;
+  color: #493735;
+  --border-radius: 30px;
+  --background: #FEDE00;
 }

@@ -15,16 +15,18 @@
       <p class="my-location__text">{{ 'locationOpt.myLocation' | translate }}</p>
       <p class="my-location__text">{{myAddress}}</p>
     </div>
-    <ion-button class="my-location__btn btn" size="small" fill="none">
+  <!--  <ion-button class="my-location__btn btn" size="small" fill="none">
       <ion-icon slot="icon-only" class="btn__icon" src="../../../../assets/icons/check.svg"></ion-icon>
-    </ion-button>
+    </ion-button>-->
   </div>
   <div class="recently block">
     <p class="recently__label">{{ 'locationOpt.recently' | translate }}</p>
-    <ion-item class="row" *ngFor="let location of locationArr" (click)="setMyLocation(location)" button lines="none">
+    <ion-item class="row" mode="md" *ngFor="let location of locationArr" (click)="setMyLocation(location)" button lines="none">
       <ion-icon class="recently__icon" src="../../../../assets/icons/clock.svg"></ion-icon>
       <ion-label>{{location.address}}</ion-label>
     </ion-item>
   </div>
+
+  <ion-button class="btn" expand="block" (click)="go()">Go!</ion-button>
 
 </ion-content>

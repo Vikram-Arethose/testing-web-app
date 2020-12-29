@@ -130,7 +130,7 @@
   },
   "shoppingCart": {
     "header": "Warenkorb",
-    "pickUp": ",Abholung:",
+    "pickUp": "Abholung",
     "addMore": "Weitere Produkte hinzufügen",
     "checkout": "Jetzt kaufen",
     "lastPaymentMethod": "Letzte Zahlungsmethode:",

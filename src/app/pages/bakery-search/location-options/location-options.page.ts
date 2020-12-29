@@ -4,6 +4,7 @@ import { GeolocationService } from '../../../services/geolocation.service';
 import { Location } from '../../../models/location';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { LoggerService } from '../../../services/logger.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-options',
@@ -21,6 +22,7 @@ export class LocationOptionsPage implements OnInit {
     private geolocationServ: GeolocationService,
     private localStorageServ: LocalStorageService,
     private logger: LoggerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,10 +42,8 @@ export class LocationOptionsPage implements OnInit {
     this.geolocationServ.changeLocation(location);
   }
 
-  // async getInitData() {
-  //   const coordinates: Coordinates = await this.geolocationServ.getCurrentPosition();
-  //   if (coordinates) {
-  //   }
-  // }
+  go() {
+    this.router.navigate(['bakery-search']);
+  }
 
 }
