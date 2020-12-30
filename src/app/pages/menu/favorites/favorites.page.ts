@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HomeBranch } from '../../../models/http/homeBranch';
 import { HttpService } from '../../../services/http.service';
 import { BakeryService } from '../../../services/bakery.service';
+import { LoggerService } from '../../../services/logger.service';
 
 @Component({
   selector: 'app-favorites',
@@ -16,19 +16,11 @@ export class FavoritesPage implements OnInit {
 
   constructor(
     public bakeryServ: BakeryService,
-    private httpServ: HttpService
+    private httpServ: HttpService,
   ) { }
 
   ngOnInit() {
     this.getFavoritesBakeries();
-    this.setToday();
-  }
-
-  setToday() {
-    const date = new Date();
-    const day = date.getDay();
-    const weekDays: string[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    this.today = weekDays[day];
   }
 
   getFavoritesBakeries() {
@@ -37,10 +29,8 @@ export class FavoritesPage implements OnInit {
     });
   }
 
-  onFavorite(bakeryId: number) {
-    this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
-      this.getFavoritesBakeries();
-    });
+  onFavorite() {
+    this.getFavoritesBakeries();
   }
 
 }

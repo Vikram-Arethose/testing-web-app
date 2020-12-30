@@ -29,7 +29,7 @@ export class BakeryItemComponent implements OnInit {
 
   onFavorite(bakeryId: number, $event) {
     this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
-      this.onFavourite.emit(bakeryId);
+      this.onFavourite.emit();
     });
     $event.stopPropagation();
   }
