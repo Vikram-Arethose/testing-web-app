@@ -33,6 +33,9 @@
     --border-color: #9AA8B5;
     font: normal normal 400 20px/24px Montserrat;
     color: #493735;
+    &_active {
+      --background: #707070;
+    }
   }
   .calendar-icon {
     font-size: 27px;

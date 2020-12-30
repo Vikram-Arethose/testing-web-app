@@ -11,7 +11,9 @@ import { AlertService } from '../../services/alert.service';
 })
 export class PickUpDateComponent implements OnInit {
   @Input() isVerify;
+  activeBtn: string;
   today: string = new Date().toISOString();
+  tomorrow: string;
   datePickerMin: string;
   datePickerMax: string;
   date: string;
@@ -28,27 +30,38 @@ export class PickUpDateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dateService.dateShared.subscribe(res => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.tomorrow = tomorrow.toISOString();
+    this.dateService.dateShared.subscribe((res: string) => {
       if (res) {
         this.date = this.time = res;
+        this.setActiveBtn(res);
         this.getPickersRanges();
       }
       this.dateGlobal = res;
     });
-    this.logger.log('date: ', this.date);
-    this.logger.log('time: ', this.time);
+  }
+
+  setActiveBtn(date: string) {
+    const receivedDate = date.split('T')[0];
+    if (receivedDate === this.today.split('T')[0]) {
+      this.activeBtn = 'today';
+    }
+    else if (receivedDate === this.tomorrow.split('T')[0]) {
+      this.activeBtn = 'tomorrow';
+    }
   }
 
   onToday() {
     this.date = this.today;
+    this.activeBtn = 'today';
     this.getPickersRanges();
   }
 
   onTomorrow() {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    // tomorrow.setHours(0, 0, 0, 0);
-    this.date = tomorrow.toISOString();
+    this.activeBtn = 'tomorrow';
+    this.date = this.tomorrow;
     this.getPickersRanges();
   }
 
@@ -56,8 +69,6 @@ export class PickUpDateComponent implements OnInit {
     if (value.split('T')[0] === this.today.split('T')[0]) {
       this.date = this.today;
     } else {
-      // const dateFromValue = new Date(value);
-      // dateFromValue.setHours(0, 0, 0, 0);
       this.date = value;
     }
     this.getPickersRanges();
@@ -71,7 +82,6 @@ export class PickUpDateComponent implements OnInit {
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
     const dateForCheck = new Date(this.date + 'T' + this.time);
-    // dateForCheck.setHours(dateForCheck.getHours());
     if (this.dateService.checkSelectedDate(dateForCheck)) {
       this.dateService.changeDate(this.date + 'T' + this.time);
       this.closeModal();
@@ -91,7 +101,6 @@ export class PickUpDateComponent implements OnInit {
 
   setTimePickerMin() {
     let timeRangeMin: number;
-    // const selectedDate = new Date(date);
     const selectedDate = new Date(this.date || this.today);
     (this.date === this.today) ? timeRangeMin = 15 : timeRangeMin = 0;
     const minutes = selectedDate.getMinutes();
