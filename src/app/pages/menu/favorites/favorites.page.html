@@ -2,7 +2,11 @@
 
 <ion-content>
   <div class="container">
-    <div class="bakery bakery-search" *ngFor="let bakery of bakeries | async">
+    <app-bakery-item class="bakery-item"
+                     *ngFor="let bakery of bakeries"
+                     [bakery]="bakery"
+                     (onFavourite)="onFavorite($event)"></app-bakery-item>
+<!--    <div class="bakery bakery-search" *ngFor="let bakery of bakeries | async">
       <div class="col">
         <ion-img class="bakery__img" [src]="bakery.photo"></ion-img>
         <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>
@@ -23,7 +27,7 @@
         <ion-icon class="icon-like" (click)="onFavorite(bakery.id, $event)" slot="icon-only"
                   src="../../../assets/icons/bakery/heart-filled.svg" tappable></ion-icon>
       </div>
-    </div>
+    </div>-->
   </div>
 
 </ion-content>

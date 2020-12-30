@@ -8,7 +8,7 @@ import { BakerySearchPageRoutingModule } from './bakery-search-routing.module';
 
 import { BakerySearchPage } from './bakery-search.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { BakeryItemComponent } from '../../components/bakery-item/bakery-item.component';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -16,11 +16,11 @@ import { BakeryItemComponent } from '../../components/bakery-item/bakery-item.co
     FormsModule,
     IonicModule,
     BakerySearchPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule,
   ],
   declarations: [
     BakerySearchPage,
-    BakeryItemComponent
   ]
 })
 export class BakerySearchPageModule {}

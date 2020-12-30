@@ -19,6 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ComponentsModule,
     TranslateModule
   ],
-  declarations: [FavoritesPage]
+  declarations: [
+    FavoritesPage,
+  ]
 })
 export class FavoritesPageModule {}

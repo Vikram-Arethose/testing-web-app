@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Bakery } from '../../models/bakery';
-import { Bakeries } from '../../core/mocks/bakeries';
 import { LoggerService } from '../../services/logger.service';
 import { GeolocationService } from '../../services/geolocation.service';
-import { Coordinates } from '../../models/coordinates';
-import { OpeningHoursDay, HomeBranch } from '../../models/http/homeBranch';
+import { HomeBranch } from '../../models/http/homeBranch';
 import { HttpService } from '../../services/http.service';
 import { Observable } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
@@ -48,7 +45,6 @@ export class BakerySearchPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    this.setToday();
     if (this.lat && this.lng) {
       this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
     }
@@ -72,19 +68,4 @@ export class BakerySearchPage implements OnInit {
     event.target.complete();
   }
 
-  setToday() {
-    const date = new Date();
-    const day = date.getDay();
-    const weekDays: string[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    this.today = weekDays[day];
-  }
-
-  openBakery(bakeryId: number) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        bakeryId
-      }
-    };
-    this.router.navigate(['/bakery-search/bakery'], navigationExtras);
-  }
 }

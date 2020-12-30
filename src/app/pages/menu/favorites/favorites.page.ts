@@ -11,7 +11,7 @@ import { BakeryService } from '../../../services/bakery.service';
 })
 export class FavoritesPage implements OnInit {
 
-  bakeries: Observable<HomeBranch[]>;
+  bakeries: HomeBranch[];
   today: string;
 
   constructor(
@@ -20,7 +20,7 @@ export class FavoritesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.bakeries = this.httpServ.getFavorites();
+    this.getFavoritesBakeries();
     this.setToday();
   }
 
@@ -31,11 +31,16 @@ export class FavoritesPage implements OnInit {
     this.today = weekDays[day];
   }
 
-  onFavorite(bakeryId: number, $event) {
-    this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
-      this.bakeries = this.httpServ.getFavorites();
+  getFavoritesBakeries() {
+    this.httpServ.getFavorites().subscribe((res: HomeBranch[]) => {
+      this.bakeries = res.map(item => ({...item, isFavourite: true}));
     });
-    $event.stopPropagation();
+  }
+
+  onFavorite(bakeryId: number) {
+    this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
+      this.getFavoritesBakeries();
+    });
   }
 
 }

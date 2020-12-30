@@ -4,8 +4,12 @@
   padding: 6.16vh 0;
 }
 
-.bakery {
+.bakery-item {
+  display: block;
   margin: 0 0 20px;
+}
+
+.bakery {
   display: flex;
   border: 1px solid #D9D9D9;
   border-radius: 5px;
