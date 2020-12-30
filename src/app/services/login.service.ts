@@ -53,7 +53,7 @@ export class LoginService {
           // prepare user info for posting on server
           this.user.email = res.response.email;
           this.user.first_name = res.response.givenName;
-          this.user.last_name = res.familyName;
+          this.user.last_name = res.response.familyName;
           this.user.reg_auth_type = 'apple';
           this.user.reg_auth_token = res.response.identityToken;
           this.user.reg_auth_user_id = res.response.user;

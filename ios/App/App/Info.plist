@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>brötchenApp</string>
+	<string>brötchenApp</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,21 +26,21 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>capacitor</string>
-                <string>fb209432110768704</string>
+				<string>fb209432110768704</string>
 			</array>
 		</dict>
 	</array>
-    <key>FacebookAppID</key>
-    <string>209432110768704</string>
-    <key>FacebookDisplayName</key>
-    <string>Brotchen app</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>fbapi</string>
-      <string>fbauth2</string>
-    </array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>209432110768704</string>
+	<key>FacebookDisplayName</key>
+	<string>Brotchen app</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
