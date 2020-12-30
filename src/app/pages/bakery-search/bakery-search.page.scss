@@ -35,7 +35,10 @@
   .col{
     &:nth-of-type(2) {
       width: 140px;
-      padding-right: 5px;
+      padding: 0 5px 5px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     &:last-child {
       align-self: flex-end;
@@ -53,6 +56,10 @@
     width: 81px;
   }
   &__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     padding: 10px 0 0;
     font: normal normal 600 12px/15px Montserrat;
   }
@@ -62,7 +69,7 @@
 
   &__icons-row {
     height: 20px;
-    margin: 21px 8px 10px;
+    margin: 0 8px 10px;
     font-size: 19px;
     .icon {
       padding: 0 10px 0 0;

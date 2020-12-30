@@ -20,16 +20,20 @@
 <!--        <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>-->
       </div>
       <div class="col main">
-        <h3 class="bakery__title">{{ 'favorites.bakery' | translate }} {{bakery.name}}</h3>
-        <p class="bakery__text bakery__text_pb">{{bakery.address}}</p>
-        <div class="bakery__icons-row">
-          <ion-icon class="icon" src="{{bakeryServ.getIcon(feature)}}" *ngFor="let feature of bakery.features"></ion-icon>
+        <div>
+          <h3 class="bakery__title">{{bakery.name}}</h3>
+          <p class="bakery__text bakery__text_pb">{{bakery.address}}</p>
         </div>
-        <p class="bakery__text">
+        <div>
+          <div class="bakery__icons-row">
+            <ion-icon class="icon" src="{{bakeryServ.getIcon(feature)}}"
+                      *ngFor="let feature of bakery.features"></ion-icon>
+          </div>
+          <p class="bakery__text">
           <span *ngIf="bakery.openingHours?.default[today]?.end">
             {{ 'favorites.openUntil' | translate }} {{bakery.openingHours?.default[today]?.end}} Uhr -
           </span>
-          {{bakery.distance | number:'1.1-1'}} km</p>
+            {{bakery.distance | number:'1.1-1'}} km</p></div>
       </div>
       <div class="col">
         <ion-icon class="icon-like" (click)="onFavorite(bakery.id, $event)" slot="icon-only"

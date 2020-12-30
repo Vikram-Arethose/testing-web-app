@@ -8,7 +8,7 @@
         <ion-img class="bakery__stars" src="../../../assets/img/bakery/stars.png"></ion-img>
       </div>
       <div class="col main">
-        <h3 class="bakery__title">{{ 'favorites.bakery' | translate }} {{bakery.name}}</h3>
+        <h3 class="bakery__title">{{bakery.name}}</h3>
         <p class="bakery__text bakery__text_pb">{{bakery.address}}</p>
         <div class="bakery__icons-row">
           <ion-icon class="icon" src="{{bakeryServ.getIcon(feature)}}" *ngFor="let feature of bakery.features"></ion-icon>

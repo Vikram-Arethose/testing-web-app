@@ -190,7 +190,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+  }
+
+  &__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   &__img {
     width: 76px;
@@ -215,7 +222,7 @@
 
 
   &__details-title {
-    padding: 3px 0 3px;
+    padding: 3px 0 0;
     font: normal normal 400 10px/13px Montserrat;
   }
 
