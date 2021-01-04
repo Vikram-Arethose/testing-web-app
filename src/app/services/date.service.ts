@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { LoggerService } from './logger.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+
+import * as moment from 'moment';
+
+import { LoggerService } from './logger.service';
 import { BakeryFull, Product } from '../models/http/bakeryFull';
 import { BakeryService } from './bakery.service';
-import { OpeningHours, OpeningHoursDay } from '../models/http/homeBranch';
+import { OpeningHoursDay } from '../models/http/homeBranch';
 
 @Injectable({
   providedIn: 'root'
@@ -133,6 +136,10 @@ export class DateService {
         parseInt(openHoursDay.start.split(':')[1], 10));
       return newDate;
     }
+  }
+
+  getIsoDateFromDateStr(stringDate: string): string {
+    return moment(stringDate).format();
   }
 
 }

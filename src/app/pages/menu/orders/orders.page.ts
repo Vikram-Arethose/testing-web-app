@@ -5,6 +5,7 @@ import { OrderDetails } from '../../../models/http/orderDetails';
 import { HttpService } from '../../../services/http.service';
 import { GetOrdersRes } from '../../../models/http/getOrdersRes';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { DateService } from '../../../services/date.service';
 
 @Component({
   selector: 'app-orders',
@@ -23,6 +24,7 @@ export class OrdersPage implements OnInit {
   private orders: GetOrdersRes;
 
   constructor(
+    private dateServ: DateService,
     private httpServ: HttpService,
     private localStorServ: LocalStorageService,
     private logger: LoggerService,
@@ -64,14 +66,12 @@ export class OrdersPage implements OnInit {
   }
 
   getDate(date: string) {
-    return new Date(date);
+    return this.dateServ.getIsoDateFromDateStr(date);
   }
 
   segmentChanged(value: string) {
     this.segmentValue = value;
     this.ordersToShow = this.orders[value];
-    // this.dataToShow = value;
-    // console.log('Segment changed', value);
   }
 
   onSaveChange() {
