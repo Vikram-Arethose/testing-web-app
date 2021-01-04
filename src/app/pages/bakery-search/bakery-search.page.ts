@@ -38,16 +38,15 @@ export class BakerySearchPage implements OnInit {
       this.myAddress = res.address;
       this.lat = res.lat;
       this.lng = res.lng;
+      this.getBakeries();
     });
     if (!await this.geolocationServ.getCurrentPosition()) {
       await this.router.navigate(['bakery-search/location-options']);
     }
   }
 
-  async ionViewWillEnter() {
-    if (this.lat && this.lng) {
-      this.bakeries = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
-    }
+  ionViewWillEnter() {
+    this.getBakeries();
   }
 
   async getBakeries() {
