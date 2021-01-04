@@ -52,6 +52,8 @@ export class BakeryPage implements OnInit {
   }
 
   ngOnInit() {
+    this.dateService.changeDate(null);
+    this.cartService.clearCart();
     this.getBakeryData();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
@@ -130,11 +132,6 @@ export class BakeryPage implements OnInit {
     } else {
       this.cartService.addProductToCart(product);
     }
-  }
-
-  onExit() {
-    this.cartService.clearCart();
-    this.dateService.changeDate('');
   }
 
   onInfo() {
