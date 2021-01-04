@@ -191,7 +191,7 @@ export class HttpService {
   }
 
   openCreditCardPayment(stxId: string, userId: number): InAppBrowserObject {
-    return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`);
+    return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`, '_blank');
   }
 
   debitPayment(debitArgs: DebitArgs) {
@@ -218,7 +218,7 @@ export class HttpService {
     this.http.post(this.baseUrl + endPoint, body).subscribe((res: ApiResponse) => {
       this.logger.log('http res.data: ', res.data);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
-        this.handleIabResult(this.iab.create(res.data.iframeUrl));
+        this.handleIabResult(this.iab.create(res.data.iframeUrl, '_blank'));
         subject.next(true);
       } else {
         this.alertServ.presentAlert();
