@@ -3,7 +3,7 @@ export interface HomeBranch {
   name: string;
   address: string;
   photo: string;
-  features: string;
+  features: string[];
   openingHours: OpeningHours;
   lat: string;
   lng: string;

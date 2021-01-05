@@ -13,7 +13,7 @@ export class BakeryItemComponent implements OnInit {
 
   @Input() bakery: HomeBranch;
   @Input() today: string;
-  @Output() onFavourite = new EventEmitter();
+  @Output() favouriteClicked = new EventEmitter();
   iconHeartOutline = '../../../assets/icons/bakery/heart-outline.svg';
   iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
 
@@ -29,7 +29,7 @@ export class BakeryItemComponent implements OnInit {
 
   onFavorite(bakeryId: number, $event) {
     this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
-      this.onFavourite.emit();
+      this.favouriteClicked.emit();
     });
     $event.stopPropagation();
   }

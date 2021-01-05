@@ -10,8 +10,7 @@
     </div>
     <div>
       <div class="bakery__icons-row">
-        <ion-icon class="icon" src="{{bakeryServ.getIcon(feature)}}"
-                  *ngFor="let feature of bakery.features"></ion-icon>
+        <img class="icon" src="{{bakeryServ.getIcon(feature)}}" *ngFor="let feature of bakery.features">
       </div>
       <p class="bakery__text">
           <span *ngIf="bakery.openingHours?.default[today]?.end">

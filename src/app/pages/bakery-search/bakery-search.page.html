@@ -17,6 +17,6 @@
     <app-bakery-item class="bakery-item"
                      *ngFor="let bakery of bakeries | async"
                      [bakery]="bakery"
-                     (onFavourite)="getBakeries()"></app-bakery-item>
+                     (favouriteClicked)="getBakeries()"></app-bakery-item>
   </div>
 </ion-content>

@@ -35,8 +35,8 @@
     <div class="info-details" *ngIf="isInfoFull">
       <div class="container">
         <div class="info-details__icons-row">
-          <ion-icon class="info-details__icons-row-icon" *ngFor="let feature of bakeryDetails?.features"
-                    [src]="bakeryServ.getIcon(feature)"></ion-icon>
+          <img class="info-details__icons-row-icon" *ngFor="let feature of bakeryDetails?.features"
+                    [src]="bakeryServ.getIcon(feature)">
         </div>
         <div class="open-hours">
           <div class="open-hours__row">
