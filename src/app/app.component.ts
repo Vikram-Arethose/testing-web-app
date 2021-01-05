@@ -63,10 +63,10 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
       this.translate.setDefaultLang('de');
       this.useLanguage();
       this.openFirstPage();
+      this.splashScreen.hide();
     });
   }
 

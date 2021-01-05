@@ -28,7 +28,6 @@
       <p class="order__bakery">{{ 'general.bakery' | translate }} {{order.bakery_name}}</p>
       <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
       <p class="order__time">
-<!--         [class.order__time_purple]="orderId"-->
         {{getDate(order.pickup_time) | date:'EEEE, d.M.yyyy,  H:mm': '': dateLocale}} hrs</p>
       <ion-grid class="order__grid grid">
         <ion-row class="grid__row" *ngFor="let product of order.products, let i=index">
