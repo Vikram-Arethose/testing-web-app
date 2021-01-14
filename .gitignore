@@ -36,6 +36,8 @@ android
 !android/app/src/main/res/values/strings.xml
 !android/app/src/main/java/com/devdactic/capalogin/MainActivity.java
 !android/app/src/main/AndroidManifest.xml
+!android/build.gradle
+!android/app/build.gradle
 
 ios
 !ios/App/App/AppDelegate.swift
