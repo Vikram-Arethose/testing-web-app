@@ -10,6 +10,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { AlertService } from '../../../services/alert.service';
 import { ModalController } from '@ionic/angular';
 import { BakeryService } from '../../../services/bakery.service';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-debit',
@@ -20,7 +21,6 @@ export class DebitComponent implements OnInit {
 
   @Input() dataForCreateStx: DataForPayment;
   form: FormGroup;
-  isLoading: boolean;
 
   constructor(
     public cartServ: CartService,
@@ -30,7 +30,8 @@ export class DebitComponent implements OnInit {
     private logger: LoggerService,
     private httpServ: HttpService,
     private router: Router,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private loadingServ: LoadingService
   ) { }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class DebitComponent implements OnInit {
   }
 
   buy() {
-    this.isLoading = true;
+    this.loadingServ.presentLoading();
     const debitArgs: DebitArgs = this.dataForCreateStx;
     debitArgs.first_name = this.form.value.name;
     debitArgs.last_name = this.form.value.surname;
@@ -62,7 +63,7 @@ export class DebitComponent implements OnInit {
     debitArgs.account_owner = this.form.value.accountOwner;
     debitArgs.iban = this.form.value.iban;
     this.httpServ.debitPayment(debitArgs).subscribe((res: ApiResponse) => {
-      this.isLoading = false;
+      this.loadingServ.dismiss();
       this.logger.log('http res: ', res);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
         this.bakeryServ.openConfirmOrder(res.data.order_id);

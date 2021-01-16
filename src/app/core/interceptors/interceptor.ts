@@ -13,6 +13,7 @@ import { catchError } from 'rxjs/operators';
 import { LoggerService } from '../../services/logger.service';
 import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { ErrorService } from '../../services/error.service';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -20,6 +21,7 @@ export class Interceptor implements HttpInterceptor {
   constructor(
     private logger: LoggerService,
     private alertController: AlertController,
+    private errorServ: ErrorService,
     private localStorageServ: LocalStorageService
   ) {  }
 

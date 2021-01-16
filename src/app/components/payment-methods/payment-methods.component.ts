@@ -16,6 +16,7 @@ import { DebitComponent } from './debit/debit.component';
 import { DataForPayment } from '../../models/http/dataForPayment';
 import { ApiResponse } from '../../models/http/apiResponse';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-payment-methods',
@@ -24,7 +25,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 })
 export class PaymentMethodsComponent implements OnInit {
 
-  isLoading: boolean;
   private bakery: BakeryFull;
   private date: string;
 
@@ -36,6 +36,7 @@ export class PaymentMethodsComponent implements OnInit {
     private httpServ: HttpService,
     private iab: InAppBrowser,
     private modalController: ModalController,
+    private loadingServ: LoadingService
   ) { }
 
   ngOnInit() {
@@ -80,10 +81,8 @@ export class PaymentMethodsComponent implements OnInit {
   }
 
   createSmartTransaction() {
-    this.isLoading = true;
     this.httpServ.createSmartTransaction(this.bakeryServ.getDataForPayment(this.date))
       .subscribe((res: CreateStxRes | false) => {
-        this.isLoading = false;
         if (res) {
           this.creditCartPayment(res);
         }
@@ -96,8 +95,7 @@ export class PaymentMethodsComponent implements OnInit {
   }
 
   makeSofortPayment() {
-    this.isLoading = true;
-    this.httpServ.iabPayment('/payment/sofort').subscribe((res: boolean) => this.isLoading = false);
+    this.httpServ.iabPayment('/payment/sofort');
   }
 
   async presentDebitModal() {

@@ -18,6 +18,7 @@ import { BakeryService } from '../../../../services/bakery.service';
 import { ApiResponse } from '../../../../models/http/apiResponse';
 import { AccountService } from '../../../../services/account.service';
 import { LocalStorageService } from '../../../../services/local-storage.service';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -28,7 +29,6 @@ export class ShoppingCartPage implements OnInit {
 
   date: string;
   dateLocale: string;
-  isLoading: boolean;
   language: string;
   lastPaymentMethod: string;
   private branchDetails: BranchDetailsForPayment;
@@ -44,6 +44,7 @@ export class ShoppingCartPage implements OnInit {
     private router: Router,
     private logger: LoggerService,
     private localStorServ: LocalStorageService,
+    private loadingServ: LoadingService,
     private httpServ: HttpService
   ) {
     this.route.queryParamMap.subscribe(params => {
@@ -139,9 +140,9 @@ export class ShoppingCartPage implements OnInit {
   checkout() {
     if (this.checkCart()) {
       if (this.lastPaymentMethod) {
-        this.isLoading = true;
+        this.loadingServ.presentLoading();
         this.httpServ.useLastPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
-          this.isLoading = false;
+          this.loadingServ.dismiss();
           this.logger.log('useLastPayment res : ', res);
           if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
             this.cartService.clearCart();

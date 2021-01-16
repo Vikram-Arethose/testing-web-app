@@ -72,4 +72,10 @@ ion-header {
   position: absolute;
 }
 
+.loading-bag.loading-translucent {
+  .loading-wrapper.ion-overlay-wrapper {
+    background: transparent;
+    backdrop-filter: none;
+  }
+}
 

@@ -15,8 +15,6 @@ import { AlertService } from '../../../services/alert.service';
 })
 export class OtherOptionsComponent implements OnInit {
 
-  isLoading: boolean;
-
   constructor(
     private httpServ: HttpService,
     private modalController: ModalController,
@@ -30,7 +28,6 @@ export class OtherOptionsComponent implements OnInit {
   }
 
   makePaypalPayment() {
-    this.isLoading = true;
-    this.httpServ.iabPayment('/payment/paypal').subscribe((res: boolean) => this.isLoading = false);
+    this.httpServ.iabPayment('/payment/paypal');
   }
 }

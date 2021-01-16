@@ -22,6 +22,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { CartService } from './cart.service';
 import { DateService } from './date.service';
 import { BakeryService } from './bakery.service';
+import { LoadingService } from './loading.service';
 
 
 @Injectable({
@@ -40,6 +41,7 @@ export class HttpService {
     private dateServ: DateService,
     private iab: InAppBrowser,
     private http: HttpClient,
+    private loadingServ: LoadingService,
     private logger: LoggerService,
     private modalController: ModalController,
     private ngZone: NgZone,
@@ -177,9 +179,11 @@ export class HttpService {
   }
 
   createSmartTransaction(data: DataForPayment): Observable<CreateStxRes | false> {
+    this.loadingServ.presentLoading();
     const body = this.getBodyForPayment(data);
     const subject = new Subject<CreateStxRes | false>();
     this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
+      this.loadingServ.dismiss();
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
@@ -213,9 +217,11 @@ export class HttpService {
   }
 
   iabPayment(endPoint: string) {
+    this.loadingServ.presentLoading();
     const body = this.getBodyForPayment(this.bakeryServ.getDataForPayment(this.date));
     const subject = new Subject<boolean>();
     this.http.post(this.baseUrl + endPoint, body).subscribe((res: ApiResponse) => {
+      this.loadingServ.dismiss();
       this.logger.log('http res.data: ', res.data);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
         this.handleIabResult(this.iab.create(res.data.iframeUrl, '_blank'));
