@@ -14,6 +14,7 @@ import { LoggerService } from '../../services/logger.service';
 import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ErrorService } from '../../services/error.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -21,8 +22,7 @@ export class Interceptor implements HttpInterceptor {
   constructor(
     private logger: LoggerService,
     private alertController: AlertController,
-    private errorServ: ErrorService,
-    private localStorageServ: LocalStorageService
+    private loadingService: LoadingService
   ) {  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -44,7 +44,7 @@ export class Interceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
-          this.logger.warn('Interceptor: Backend returned code ${error.status} An error was:', error.error.message);
+          this.logger.warn(`Interceptor: Backend returned code ${error.status} An error was:`, error.error.message);
           this.presentAlert(error.error.message);
         } else {
           // The backend returned an unsuccessful response code.
@@ -52,7 +52,7 @@ export class Interceptor implements HttpInterceptor {
           this.logger.warn('Interceptor: An error occurred: ', error);
           this.presentAlert('Something went wrong! Please try again later.');
         }
-
+        this.loadingService.dismiss();
         // If you want to return a new response:
         // return of(new HttpResponse({body: [{name: "Default value..."}]}));
 
