@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
-import { PickUpDateComponent } from '../../../components/pick-up-date/pick-up-date.component';
-import { ModalController } from '@ionic/angular';
-import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 import { CartService } from '../../../services/cart.service';
 import { HttpService } from '../../../services/http.service';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BakeryFull, BakeryDetails, Category, Product } from '../../../models/http/bakeryFull';
 import { BakeryService } from '../../../services/bakery.service';
+import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-bakery',
@@ -40,7 +38,7 @@ export class BakeryPage implements OnInit {
     private dateService: DateService,
     private httpServ: HttpService,
     private logger: LoggerService,
-    private modalController: ModalController,
+    private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -101,23 +99,12 @@ export class BakeryPage implements OnInit {
     return this.cartService.getProductCount(id);
   }
 
-  async presentPickUpDateModal() {
-    const modal = await this.modalController.create({
-      component: PickUpDateComponent,
-      cssClass: 'pick-up-date-modal'
-    });
-    return await modal.present();
+  presentPickUpDateModal() {
+    this.modalService.presentPickUpDateModal();
   }
 
-  async presentProductDetailsModal(product: Product) {
-    const modal = await this.modalController.create({
-      component: ProductDetailsComponent,
-      cssClass: 'product-details-modal',
-      componentProps: {
-        product
-      }
-    });
-    return await modal.present();
+  presentProductDetailsModal(product: Product) {
+    this.modalService.presentProductDetailsModal(product);
   }
 
   removeProductFromCart(product: Product, $event) {

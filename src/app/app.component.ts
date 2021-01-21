@@ -6,6 +6,7 @@ import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -50,12 +51,13 @@ export class AppComponent implements OnInit {
   ];
 
   constructor(
+    private menu: MenuController,
+    private modalServ: ModalService,
     private platform: Platform,
+    private router: Router,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private translate: TranslateService,
-    private menu: MenuController,
-    private router: Router,
   ) {
     this.initializeApp();
   }
@@ -67,6 +69,7 @@ export class AppComponent implements OnInit {
       this.useLanguage();
       this.openFirstPage();
       this.splashScreen.hide();
+      this.modalServ.presentPickUpDateModal();
     });
   }
 
