@@ -11,6 +11,7 @@ import { LocalStorageService } from './local-storage.service';
 import { PushService } from './push.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthResponse } from '../models/authResponse';
+import { AnalyticsService } from './analytics.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class LoginService {
 
   constructor(
     private alertController: AlertController,
+    private analyticsServ: AnalyticsService,
     private httpService: HttpService,
     private logger: LoggerService,
     private pushServ: PushService,
@@ -101,10 +103,10 @@ export class LoginService {
   }
 
   registerOnApi() {
-    this.httpService.postData('/register', this.user).subscribe(
-      (res: AuthResponse) => {
+    this.httpService.postData('/register', this.user).subscribe((res: AuthResponse) => {
       this.handleRegisterRes(res);
       this.router.navigate(['google-login']);
+      this.analyticsServ.logEvent();
     }, error => {
       this.logger.warn('server response error: ', error);
     });
@@ -113,6 +115,7 @@ export class LoginService {
   handleRegisterRes(res: AuthResponse) {
     this.logger.log('server res: ', res);
     localStorage.setItem('token', res.access_token);
+    this.analyticsServ.setUser(res.access_token);
     const language = res.user.language;
     localStorage.setItem('language', language);
     this.translate.use(language);
