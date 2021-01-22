@@ -119,27 +119,51 @@ export class DateService {
     return product;
   }
 
-  checkSelectedDate(date: Date): boolean {
-    const today = new Date();
-    const selectedDate = date;
-    this.logger.log('selectedDate', selectedDate);
-    const selectedDay = this.weekDaysFull[selectedDate.getDay()];
+  getOpeningHoursByDate(date: Date): OpeningHoursDay {
+    const selectedDay = this.weekDaysFull[date.getDay()];
     const openHoursDay: OpeningHoursDay = this.bakery.branchDetails.opening_hours.default[selectedDay];
     if (openHoursDay.start && openHoursDay.end) {
-      return selectedDate >= getDateByTime('start') && selectedDate <= getDateByTime('end');
+      return openHoursDay;
+    }
+  }
+
+  getDateByTime(date: Date, startOrEnd: string, openingHours: OpeningHoursDay): Date {
+    const newDate = new Date(date);
+    newDate.setHours(parseInt(openingHours[startOrEnd].split(':')[0], 10),
+      parseInt(openingHours.start.split(':')[1], 10));
+    return newDate;
+  }
+
+  checkSelectedDate(date: Date): boolean {
+    const openingHours: OpeningHoursDay = this.getOpeningHoursByDate(date);
+    if (openingHours) {
+      return date >= this.getDateByTime(date, 'start', openingHours) && date <= this.getDateByTime(date, 'end', openingHours);
     }
     return false;
-
-    function getDateByTime(startOrEnd: string): Date {
-      const newDate = new Date(date);
-      newDate.setHours(parseInt(openHoursDay[startOrEnd].split(':')[0], 10),
-        parseInt(openHoursDay.start.split(':')[1], 10));
-      return newDate;
-    }
   }
 
   getIsoDateFromDateStr(stringDate: string): string {
     return moment(stringDate).format();
+  }
+
+  setDefaultMinOrderDate() {
+    const momentObj = moment();
+    let minCollectionDate = momentObj.add(45 + 15 - momentObj.minutes() % 15, 'minutes').startOf('minute').toDate();
+    let openingHours = this.getOpeningHoursByDate(minCollectionDate);
+    if (openingHours) {
+      if (this.checkSelectedDate(minCollectionDate)) {
+      } else if (minCollectionDate > this.getDateByTime(minCollectionDate, 'start', openingHours)) {
+        // moment(minCollectionDate).add(1, 'day').;
+      }
+    
+      return minCollectionDate;
+    }
+    
+    // minCollectionTime = this.getIsoDateFromDateStr(minCollectionTime);
+    // if (this.checkSelectedDate())
+    // minCollectionTime = minCollectionTime.add(15 - minCollectionTime.minutes(), 'minutes').toISOString();
+    
+    this.logger.log('minCollectionTime: ', minCollectionDate);
   }
 
 }

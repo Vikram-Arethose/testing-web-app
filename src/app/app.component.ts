@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
       this.useLanguage();
       this.openFirstPage();
       this.splashScreen.hide();
-      this.modalServ.presentPickUpDateModal();
+      // this.modalServ.presentPickUpDateModal();
     });
   }
 

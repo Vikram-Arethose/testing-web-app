@@ -7,14 +7,20 @@
   align-items: center;
 
   .close-btn {
-    align-self: flex-end;
+    position: absolute;
+    top: 2%;
+    right: 3%;
+    //align-self: flex-end;
   }
 
   .title {
-    padding: 0 20px 30px;
+    padding: 20% 20px 30px;
     text-align: center;
     font: normal normal 400 20px/24px Montserrat;
     color: #493735;
+    &-date {
+      padding-top: 0;
+    }
     &-time {
       padding: 0 0 14px;
     }

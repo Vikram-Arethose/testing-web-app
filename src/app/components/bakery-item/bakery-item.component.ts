@@ -3,7 +3,6 @@ import { HomeBranch } from '../../models/http/homeBranch';
 import { NavigationExtras, Router } from '@angular/router';
 import { BakeryService } from '../../services/bakery.service';
 import { HttpService } from '../../services/http.service';
-import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-bakery-item',
@@ -21,7 +20,6 @@ export class BakeryItemComponent implements OnInit {
   constructor(
     public bakeryServ: BakeryService,
     private httpServ: HttpService,
-    private modalServ: ModalService,
     private router: Router
   ) { }
 
@@ -44,13 +42,12 @@ export class BakeryItemComponent implements OnInit {
   }
 
   openBakery(bakeryId: number) {
-    this.modalServ.presentPickUpDateModal();
-    // const navigationExtras: NavigationExtras = {
-    //   state: {
-    //     bakeryId
-    //   }
-    // };
-    // this.router.navigate(['/bakery-search/bakery'], navigationExtras);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        bakeryId
+      }
+    };
+    this.router.navigate(['/bakery-search/bakery'], navigationExtras);
   }
 
 }
