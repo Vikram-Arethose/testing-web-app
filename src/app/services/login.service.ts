@@ -45,7 +45,7 @@ export class LoginService {
       this.registerOnApi();
     }
   }
-  
+
   openAppleSignIn() {
     this.analyticsServ.logEvent('start_apple_login');
     const {SignInWithApple} = Plugins;
@@ -79,6 +79,7 @@ export class LoginService {
     const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
 
     const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    this.analyticsServ.logEvent('facebook_login_return_res', result);
     this.logger.log('login result: ', result);
     if (result && result.accessToken) {
       // prepare user info for posting on server
@@ -89,6 +90,7 @@ export class LoginService {
       this.user.reg_auth_user_id = result.accessToken.userId;
       let userInfo: any = await fetch(`https://graph.facebook.com/${this.user.reg_auth_user_id}?fields=email,first_name,last_name&access_token=${token}`);
       userInfo = await userInfo.json();
+      this.analyticsServ.logEvent('facebook_login_return_userInfo', userInfo);
       this.logger.log('userInfo: ', userInfo);
       if (userInfo.email) {
         this.user.email = userInfo.email;
@@ -107,10 +109,12 @@ export class LoginService {
 
   registerOnApi() {
     this.httpService.postData('/register', this.user).subscribe((res: AuthResponse) => {
+      this.analyticsServ.logEvent('register_on_our_api_res', res);
       this.handleRegisterRes(res);
       this.router.navigate(['google-login']);
       this.analyticsServ.logEvent('login');
     }, error => {
+      this.analyticsServ.logEvent('register_on_our_api_error', error);
       this.logger.warn('server response error: ', error);
     });
   }
@@ -129,7 +133,7 @@ export class LoginService {
     await Plugins.FacebookLogin.logout();
     localStorage.setItem('token', '');
     this.router.navigate(['start']);
-    this.analyticsServ.logout();
+    this.analyticsServ.logEvent('logout');
   }
 
   async presentAlert() {

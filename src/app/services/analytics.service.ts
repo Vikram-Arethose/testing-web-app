@@ -35,30 +35,18 @@ export class AnalyticsService {
   }
 
   logEvent(name: string, data?: any) {
-    let dataStr;
+    // prepare data
+    const params = {};
     if (data) {
-      debugger;
-      dataStr = JSON.stringify(data);
-    } else {
-      dataStr = 'data';
+      data = JSON.stringify(data).match(/.{1,100}/g);
+      data.forEach((elem, index) => {
+        params['data' + index] = elem;
+      });
     }
+    // logEvent
     FirebaseAnalytics.logEvent({
       name,
-      params: {
-        data: dataStr
-      }
-    });
-  }
-
-  logEventError() {
-    FirebaseAnalytics.logEvent({
-      name: 'Something went wrong'
-    });
-  }
-
-  logout() {
-    FirebaseAnalytics.logEvent({
-      name: 'logout'
+      params
     });
   }
 
