@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
-
 import { filter } from 'rxjs/operators';
-
 import { Plugins } from '@capacitor/core';
 const { FirebaseAnalytics } = Plugins;
-
 import { LoggerService } from './logger.service';
 
 @Injectable({
@@ -37,12 +34,31 @@ export class AnalyticsService {
     });
   }
 
-  logEvent() {
+  logEvent(name: string, data?: any) {
+    let dataStr;
+    if (data) {
+      debugger;
+      dataStr = data.JSON.stringify(data);
+    } else {
+      dataStr = 'data';
+    }
     FirebaseAnalytics.logEvent({
-      name: 'login',
+      name,
       params: {
-        method: 'facebook'
+        data: dataStr
       }
+    });
+  }
+
+  logEventError() {
+    FirebaseAnalytics.logEvent({
+      name: 'Something went wrong'
+    });
+  }
+
+  logout() {
+    FirebaseAnalytics.logEvent({
+      name: 'logout'
     });
   }
 

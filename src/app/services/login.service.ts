@@ -47,10 +47,12 @@ export class LoginService {
   }
 
   openAppleSignIn() {
+    this.analyticsServ.logEvent('start_apple_login');
     const { SignInWithApple } = Plugins;
     SignInWithApple.Authorize()
       .then(
         (res) => {
+          this.analyticsServ.logEvent('apple_login_return_res', res);
         if (res.response && res.response.identityToken) {
           // prepare user info for posting on server
           this.user.email = res.response.email;
@@ -67,6 +69,7 @@ export class LoginService {
         }
       })
       .catch((error) => {
+        this.analyticsServ.logEvent('apple_login_return_error', error);
         this.presentAlert();
       });
   }
@@ -106,7 +109,7 @@ export class LoginService {
     this.httpService.postData('/register', this.user).subscribe((res: AuthResponse) => {
       this.handleRegisterRes(res);
       this.router.navigate(['google-login']);
-      this.analyticsServ.logEvent();
+      this.analyticsServ.logEvent('login');
     }, error => {
       this.logger.warn('server response error: ', error);
     });
@@ -126,6 +129,7 @@ export class LoginService {
     await Plugins.FacebookLogin.logout();
     localStorage.setItem('token', '');
     this.router.navigate(['start']);
+    this.analyticsServ.logout();
   }
 
   async presentAlert() {
