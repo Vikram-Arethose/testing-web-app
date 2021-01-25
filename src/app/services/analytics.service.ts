@@ -38,7 +38,7 @@ export class AnalyticsService {
     let dataStr;
     if (data) {
       debugger;
-      dataStr = data.JSON.stringify(data);
+      dataStr = JSON.stringify(data);
     } else {
       dataStr = 'data';
     }

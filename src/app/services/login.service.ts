@@ -45,29 +45,29 @@ export class LoginService {
       this.registerOnApi();
     }
   }
-
+  
   openAppleSignIn() {
     this.analyticsServ.logEvent('start_apple_login');
-    const { SignInWithApple } = Plugins;
+    const {SignInWithApple} = Plugins;
     SignInWithApple.Authorize()
       .then(
         (res) => {
           this.analyticsServ.logEvent('apple_login_return_res', res);
-        if (res.response && res.response.identityToken) {
-          // prepare user info for posting on server
-          this.user.email = res.response.email;
-          this.user.first_name = res.response.givenName;
-          this.user.last_name = res.response.familyName;
-          this.user.reg_auth_type = 'apple';
-          this.user.reg_auth_token = res.response.identityToken;
-          this.user.reg_auth_user_id = res.response.user;
-          this.logger.log('this.user', this.user);
-          // posting on server
-          this.registerOnApi();
-        } else {
-          this.logger.warn('res.response && res.response.identityToken do not true!');
-        }
-      })
+          if (res.response && res.response.identityToken) {
+            // prepare user info for posting on server
+            this.user.email = res.response.email;
+            this.user.first_name = res.response.givenName;
+            this.user.last_name = res.response.familyName;
+            this.user.reg_auth_type = 'apple';
+            this.user.reg_auth_token = res.response.identityToken;
+            this.user.reg_auth_user_id = res.response.user;
+            this.logger.log('this.user', this.user);
+            // posting on server
+            this.registerOnApi();
+          } else {
+            this.logger.warn('res.response && res.response.identityToken do not true!');
+          }
+        })
       .catch((error) => {
         this.analyticsServ.logEvent('apple_login_return_error', error);
         this.presentAlert();
