@@ -19,7 +19,7 @@
         {{bakery.distance | number:'1.1-1'}} km</p></div>
   </div>
   <div class="col">
-    <ion-icon class="icon-like" (click)="onFavorite(bakery.id, $event)" slot="icon-only"
+    <ion-icon class="icon-like" *ngIf="!guest" (click)="onFavorite(bakery.id, $event)" slot="icon-only"
               [src]="bakery.isFavourite ? iconHeartFilled : iconHeartOutline" tappable></ion-icon>
   </div>
 </div>

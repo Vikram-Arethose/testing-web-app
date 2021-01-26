@@ -5,7 +5,8 @@
       <ion-content class="content">
         <ion-item class="menu-header" lines="none" detail="false" button (click)="toAccount()">
           <ion-icon class="menu-header__icon" slot="start" src="./assets/icons/menu/user-png.svg"></ion-icon>
-          <ion-label class="menu-header__label">{{ 'menu.myAcc' | translate }}</ion-label>
+          <ion-label class="menu-header__label" *ngIf="!guest">{{ 'menu.myAcc' | translate }}</ion-label>
+          <ion-label class="menu-header__label" *ngIf="guest">Gast</ion-label>
         </ion-item>
         <ion-list id="inbox-list">
 
@@ -17,6 +18,26 @@
               <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ng-container *ngIf="guest">
+            <ion-menu-toggle auto-hide="false">
+              <ion-item class="menu-item" (click)="accountServ.open('privacy')" lines="none" detail="false">
+                <ion-icon></ion-icon>
+                <ion-label>Datenprivatsphäre</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item class="menu-item" (click)="accountServ.open('imprint')" lines="none" detail="false">
+                <ion-icon></ion-icon>
+                <ion-label>Impressum</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item class="menu-item" (click)="loginServ.logout()" lines="none" detail="false">
+                <ion-icon></ion-icon>
+                <ion-label>Logout</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ng-container>
         </ion-list>
       </ion-content>
     </ion-menu>

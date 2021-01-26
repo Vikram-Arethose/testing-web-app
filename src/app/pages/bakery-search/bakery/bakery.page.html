@@ -88,7 +88,7 @@
             </div>
             <div class="col">
               <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>
-              <div class="product__count count">
+              <div class="product__count count" *ngIf="!guest">
                 <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
                 <div class="count__value">{{getProductCount(product.id)}}</div>
                 <div class="count__btn" (click)="addProductToCart(product, $event)" tappable>+</div>

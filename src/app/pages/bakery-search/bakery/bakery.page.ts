@@ -18,17 +18,18 @@ import { BakeryService } from '../../../services/bakery.service';
 })
 export class BakeryPage implements OnInit {
 
-  cart: Product[] = [];
-  date: string;
-  isInfoFull: boolean;
   bakeryAddress: string;
   bakeryDetails: BakeryDetails;
-  productsList: Product[];
-  categories: Category[];
-  openingHours: [string, any][];
   bakeryInfoFull: string;
   bakeryInfoTrim: string;
   bakeryInfo: string;
+  cart: Product[] = [];
+  categories: Category[];
+  date: string;
+  isInfoFull: boolean;
+  guest = localStorage.getItem('guest');
+  productsList: Product[];
+  openingHours: [string, any][];
   isBakeryInfoFull: boolean;
   selectedCategoryIndex: number;
   private bakeryId: number;

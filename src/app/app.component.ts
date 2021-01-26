@@ -6,6 +6,10 @@ import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { LoginService } from './services/login.service';
+import { LocalStorageService } from './services/local-storage.service';
+import { LoggerService } from './services/logger.service';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +18,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
+  public guest: boolean;
   public appPages = [
     {
       title: 'menu.inbox',
       url: '/inbox',
       src: './assets/icons/menu/mail-png.svg'
-      // icon: 'mail'
     },
     {
       title: 'menu.orders',
@@ -30,7 +34,6 @@ export class AppComponent implements OnInit {
       title: 'menu.favorites',
       url: '/favorites',
       src: './assets/icons/bakery/heart-outline.svg'
-      // icon: 'heart'
     },
     {
       title: 'menu.paymentMethods',
@@ -40,16 +43,21 @@ export class AppComponent implements OnInit {
     {
       title: 'menu.legal',
       url: '/legal',
-      src: 'assets/icons/menu/check.svg'
+      src: 'assets/icons/menu/check.svg',
+      forGuest: true
     },
     {
       title: 'menu.support',
       // url: '/',
       src: './assets/icons/menu/help-circle-png.svg'
-    }
+    },
   ];
 
   constructor(
+    public accountServ: AccountService,
+    public loginServ: LoginService,
+    private localStorageServ: LocalStorageService,
+    private logger: LoggerService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -75,6 +83,12 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+    this.accountServ.sharedGuest$.subscribe(res => {
+      this.guest = res;
+      if (this.guest) {
+        this.appPages = this.appPages.filter(item => item.forGuest);
+      }
+    });
   }
 
   useLanguage() {
@@ -85,13 +99,15 @@ export class AppComponent implements OnInit {
   }
 
   toAccount() {
-    this.router.navigate(['account']);
-    this.menu.close();
+    if (!this.guest) {
+      this.router.navigate(['account']);
+      this.menu.close();
+    }
   }
 
   openFirstPage() {
     const token = localStorage.getItem('token');
-    if (token) {
+    if (token || this.guest) {
       this.router.navigate(['bakery-search']);
     } else {
       this.router.navigate(['start']);
