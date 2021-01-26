@@ -29,7 +29,6 @@ export class DateService {
   ) {
     this.bakeryServ.bakery.subscribe((res: BakeryFull) => {
       this.bakery = res;
-      this.setDefaultMinOrderDate();
     });
   }
 
