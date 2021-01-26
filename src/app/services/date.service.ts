@@ -29,6 +29,7 @@ export class DateService {
   ) {
     this.bakeryServ.bakery.subscribe((res: BakeryFull) => {
       this.bakery = res;
+      this.setDefaultMinOrderDate();
     });
   }
 
@@ -148,22 +149,28 @@ export class DateService {
 
   setDefaultMinOrderDate() {
     const momentObj = moment();
-    let minCollectionDate = momentObj.add(45 + 15 - momentObj.minutes() % 15, 'minutes').startOf('minute').toDate();
+    const minCollectionDateMoment = momentObj.add(45 + 15 - momentObj.minutes() % 15, 'minutes').startOf('minute');
+    let minCollectionDate = minCollectionDateMoment.toDate();
     let openingHours = this.getOpeningHoursByDate(minCollectionDate);
     if (openingHours) {
       if (this.checkSelectedDate(minCollectionDate)) {
-      } else if (minCollectionDate > this.getDateByTime(minCollectionDate, 'start', openingHours)) {
-        // moment(minCollectionDate).add(1, 'day').;
+      } else if (minCollectionDate < this.getDateByTime(minCollectionDate, 'start', openingHours)) {
+        minCollectionDate = this.getDateByTime(minCollectionDate, 'start', openingHours);
+      } else {
+        openingHours = null;
+        while (!openingHours) {
+          openingHours = this.getOpeningHoursByDate(minCollectionDateMoment.add(1, 'day').toDate());
+        }
+        minCollectionDate = this.getDateByTime(minCollectionDate, 'start', openingHours);
       }
-    
+  
+      this.logger.log('minCollectionDate: ', minCollectionDate);
       return minCollectionDate;
     }
     
     // minCollectionTime = this.getIsoDateFromDateStr(minCollectionTime);
     // if (this.checkSelectedDate())
     // minCollectionTime = minCollectionTime.add(15 - minCollectionTime.minutes(), 'minutes').toISOString();
-    
-    this.logger.log('minCollectionTime: ', minCollectionDate);
   }
 
 }
