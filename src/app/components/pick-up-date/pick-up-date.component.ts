@@ -32,10 +32,11 @@ export class PickUpDateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();
+    this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
+    this.setActiveBtn();
     this.dateService.dateShared.subscribe((res: string) => {
       if (res) {
         this.date = this.time = res;
@@ -91,6 +92,7 @@ export class PickUpDateComponent implements OnInit {
       this.dateService.changeDate(this.date + 'T' + this.time);
       this.closeModal();
     } else {
+      this.activeBtn = null;
       this.alertServ.presentAlert('This bakery doesn\'t work at selected date/time!');
       if (this.isVerify) {
         this.dateService.dateShared.subscribe(res => this.date = this.time = res);

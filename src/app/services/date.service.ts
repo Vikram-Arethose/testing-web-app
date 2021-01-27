@@ -137,7 +137,8 @@ export class DateService {
   checkSelectedDate(date: Date): boolean {
     const openingHours: OpeningHoursDay = this.getOpeningHoursByDate(date);
     if (openingHours) {
-      return date >= this.getDateByTime(date, 'start', openingHours) && date <= this.getDateByTime(date, 'end', openingHours);
+      return date >= this.getDateByTime(date, 'start', openingHours) &&
+        date <= this.getDateByTime(date, 'end', openingHours) && date > new Date();
     }
     return false;
   }
@@ -147,29 +148,25 @@ export class DateService {
   }
 
   getDefaultMinOrderDate() {
-    const momentObj = moment();
-    const minCollectionDateMoment = momentObj.add(45 + 15 - momentObj.minutes() % 15, 'minutes').startOf('minute');
-    let minCollectionDate = minCollectionDateMoment.toDate();
-    let openingHours = this.getOpeningHoursByDate(minCollectionDate);
-    if (openingHours) {
-      if (this.checkSelectedDate(minCollectionDate)) {
-      } else if (minCollectionDate < this.getDateByTime(minCollectionDate, 'start', openingHours)) {
-        minCollectionDate = this.getDateByTime(minCollectionDate, 'start', openingHours);
+    const minColDateMom = moment().add(45 + 15 - moment().minutes() % 15, 'minutes').startOf('minute');
+    let minColDate: Date;
+    let openingHours = this.getOpeningHoursByDate(minColDateMom.toDate());
+    while (1) {
+      if (openingHours && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHours))) {
+        break;
       } else {
-        openingHours = null;
-        while (!openingHours) {
-          openingHours = this.getOpeningHoursByDate(minCollectionDateMoment.add(1, 'day').toDate());
-        }
-        minCollectionDate = this.getDateByTime(minCollectionDate, 'start', openingHours);
+        openingHours = this.getOpeningHoursByDate(minColDateMom.add(1, 'day').startOf('day').toDate());
       }
-  
-      this.logger.log('minCollectionDate: ', minCollectionDate);
-      return minCollectionDate;
     }
-    
-    // minCollectionTime = this.getIsoDateFromDateStr(minCollectionTime);
-    // if (this.checkSelectedDate())
-    // minCollectionTime = minCollectionTime.add(15 - minCollectionTime.minutes(), 'minutes').toISOString();
+    if (this.checkSelectedDate(minColDateMom.toDate())) {
+      minColDate = minColDateMom.toDate();
+    } else if (minColDateMom.toDate() < this.getDateByTime(minColDateMom.toDate(), 'start', openingHours)) {
+      minColDate = this.getDateByTime(minColDateMom.toDate(), 'start', openingHours);
+    }
+    this.logger.log('minColDate: ', minColDate);
+    return minColDate;
   }
+
+
 
 }
