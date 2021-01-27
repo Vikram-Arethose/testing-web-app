@@ -32,7 +32,7 @@ export class PickUpDateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dateService.setDefaultMinOrderDate();
+    // this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();

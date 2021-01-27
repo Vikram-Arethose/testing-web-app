@@ -146,7 +146,7 @@ export class DateService {
     return moment(stringDate).format();
   }
 
-  setDefaultMinOrderDate() {
+  getDefaultMinOrderDate() {
     const momentObj = moment();
     const minCollectionDateMoment = momentObj.add(45 + 15 - momentObj.minutes() % 15, 'minutes').startOf('minute');
     let minCollectionDate = minCollectionDateMoment.toDate();
