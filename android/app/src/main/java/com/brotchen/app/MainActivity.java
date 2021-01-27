@@ -1,4 +1,5 @@
 package com.brotchen.app;
+import com.getcapacitor.community.firebaseanalytics.FirebaseAnalytics;
 
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ public class MainActivity extends BridgeActivity {
       // Additional plugins you've installed go here
       add(GoogleAuth.class);
       add(com.getcapacitor.community.facebooklogin.FacebookLogin.class);
+      add(FirebaseAnalytics.class);
     }});
   }
 }
