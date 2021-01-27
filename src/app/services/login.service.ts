@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { PushService } from './push.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthResponse } from '../models/authResponse';
 import { AnalyticsService } from './analytics.service';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,12 @@ export class LoginService {
   user: any = {};
 
   constructor(
+    private accountServ: AccountService,
     private alertController: AlertController,
     private analyticsServ: AnalyticsService,
     private httpService: HttpService,
     private logger: LoggerService,
+    private ngZone: NgZone,
     private pushServ: PushService,
     private router: Router,
     private localStorageServ: LocalStorageService,
@@ -129,7 +132,9 @@ export class LoginService {
 
   async logout() {
     await Plugins.FacebookLogin.logout();
-    localStorage.setItem('token', '');
+    localStorage.removeItem('token');
+    localStorage.removeItem('guest');
+    this.accountServ.changeGuest(false);
     this.router.navigate(['start']);
     this.analyticsServ.logEvent('logout');
   }

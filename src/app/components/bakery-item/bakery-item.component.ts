@@ -16,6 +16,7 @@ export class BakeryItemComponent implements OnInit {
   @Output() favouriteClicked = new EventEmitter();
   iconHeartOutline = '../../../assets/icons/bakery/heart-outline.svg';
   iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
+  guest = localStorage.getItem('guest');
 
   constructor(
     public bakeryServ: BakeryService,

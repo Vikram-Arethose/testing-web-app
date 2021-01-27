@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlatformService } from '../../../services/platform.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
+import { AccountService } from '../../../services/account.service';
 
 @Component({
   selector: 'app-start',
@@ -14,6 +15,7 @@ export class StartPage implements OnInit {
   otherOptOn = false;
 
   constructor(
+    private accountServ: AccountService,
     private platformService: PlatformService,
     private router: Router,
     private loginService: LoginService
@@ -52,6 +54,12 @@ export class StartPage implements OnInit {
     if (this.otherOptOn) {
       this.otherOptOn = false;
     }
+  }
+
+  guestLogin() {
+    this.router.navigate(['/location-setting']);
+    localStorage.setItem('guest', 'true');
+    this.accountServ.changeGuest(true);
   }
 
 }

@@ -5,18 +5,39 @@
       <ion-content class="content">
         <ion-item class="menu-header" lines="none" detail="false" button (click)="toAccount()">
           <ion-icon class="menu-header__icon" slot="start" src="./assets/icons/menu/user-png.svg"></ion-icon>
-          <ion-label class="menu-header__label">{{ 'menu.myAcc' | translate }}</ion-label>
+          <ion-label class="menu-header__label" *ngIf="!guest">{{ 'menu.myAcc' | translate }}</ion-label>
+          <ion-label class="menu-header__label" *ngIf="guest">Gast</ion-label>
         </ion-item>
         <ion-list id="inbox-list">
-
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item class="menu-item" (click)="selectedIndex = i"
+                      *ngIf="!guest || p.forGuest"
                       [routerLink]="[p.url]" lines="none"
                       detail="false" [class.selected]="selectedIndex == i">
               <ion-icon class="menu-item__icon" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" [src]="p.src"></ion-icon>
               <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ng-container *ngIf="guest">
+            <ion-menu-toggle auto-hide="false">
+              <ion-item class="menu-item" (click)="accountServ.open('privacy')" lines="none" detail="false">
+                <ion-icon></ion-icon>
+                <ion-label>Datenprivatsphäre</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item class="menu-item" (click)="accountServ.open('imprint')" lines="none" detail="false">
+                <ion-icon></ion-icon>
+                <ion-label>Impressum</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item class="menu-item" (click)="loginServ.logout()" lines="none" detail="false">
+                <ion-icon></ion-icon>
+                <ion-label>Logout</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ng-container>
         </ion-list>
       </ion-content>
     </ion-menu>

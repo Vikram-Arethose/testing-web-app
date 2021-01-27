@@ -41,7 +41,7 @@
     <div class="hide-block" *ngIf="!otherOptOn">
       <ion-button class="controls__link" fill="clear" size="small"
                   (click)="onOtherOpt($event)">{{ 'start.otherOpt' | translate }}</ion-button>
-<!--      <ion-button class="controls__link" fill="clear" size="small">{{ 'start.guest' | translate }}</ion-button>-->
+      <ion-button class="controls__link" fill="clear" size="small" (click)="guestLogin()">{{ 'start.guest' | translate }}</ion-button>
     </div>
   </div>
 </ion-content>
