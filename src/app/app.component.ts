@@ -17,8 +17,7 @@ import { AccountService } from './services/account.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
-  public guest: boolean;
+
   public appPages = [
     {
       title: 'menu.inbox',
@@ -52,6 +51,8 @@ export class AppComponent implements OnInit {
       src: './assets/icons/menu/help-circle-png.svg'
     },
   ];
+  public guest: boolean;
+  public selectedIndex = 0;
 
   constructor(
     public accountServ: AccountService,
@@ -83,12 +84,7 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
-    this.accountServ.sharedGuest$.subscribe(res => {
-      this.guest = res;
-      if (this.guest) {
-        this.appPages = this.appPages.filter(item => item.forGuest);
-      }
-    });
+    this.accountServ.sharedGuest$.subscribe(res => this.guest = res);
   }
 
   useLanguage() {

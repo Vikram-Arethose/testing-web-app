@@ -27,7 +27,7 @@ export class AccountService {
   }
 
   changeGuest(value: boolean) {
-    this.guest.next(!this.guest);
+    this.guest.next(value);
   }
 
   open(page: string) {
