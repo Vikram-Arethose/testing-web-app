@@ -38,6 +38,7 @@ android
 !android/app/src/main/AndroidManifest.xml
 !android/build.gradle
 !android/app/build.gradle
+!android/gradle/variables.gradle
 
 ios
 !ios/App/App/AppDelegate.swift
