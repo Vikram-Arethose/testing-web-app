@@ -119,27 +119,54 @@ export class DateService {
     return product;
   }
 
-  checkSelectedDate(date: Date): boolean {
-    const today = new Date();
-    const selectedDate = date;
-    this.logger.log('selectedDate', selectedDate);
-    const selectedDay = this.weekDaysFull[selectedDate.getDay()];
+  getOpeningHoursByDate(date: Date): OpeningHoursDay {
+    const selectedDay = this.weekDaysFull[date.getDay()];
     const openHoursDay: OpeningHoursDay = this.bakery.branchDetails.opening_hours.default[selectedDay];
     if (openHoursDay.start && openHoursDay.end) {
-      return selectedDate >= getDateByTime('start') && selectedDate <= getDateByTime('end');
+      return openHoursDay;
+    }
+  }
+
+  getDateByTime(date: Date, startOrEnd: string, openingHours: OpeningHoursDay): Date {
+    const newDate = new Date(date);
+    newDate.setHours(parseInt(openingHours[startOrEnd].split(':')[0], 10),
+      parseInt(openingHours.start.split(':')[1], 10));
+    return newDate;
+  }
+
+  checkSelectedDate(date: Date): boolean {
+    const openingHours: OpeningHoursDay = this.getOpeningHoursByDate(date);
+    if (openingHours) {
+      return date >= this.getDateByTime(date, 'start', openingHours) &&
+        date <= this.getDateByTime(date, 'end', openingHours) && date > new Date();
     }
     return false;
-
-    function getDateByTime(startOrEnd: string): Date {
-      const newDate = new Date(date);
-      newDate.setHours(parseInt(openHoursDay[startOrEnd].split(':')[0], 10),
-        parseInt(openHoursDay.start.split(':')[1], 10));
-      return newDate;
-    }
   }
 
   getIsoDateFromDateStr(stringDate: string): string {
     return moment(stringDate).format();
   }
+
+  getDefaultMinOrderDate() {
+    const minColDateMom = moment().add(45 + 15 - moment().minutes() % 15, 'minutes').startOf('minute');
+    let minColDate: Date;
+    let openingHours = this.getOpeningHoursByDate(minColDateMom.toDate());
+    while (1) {
+      if (openingHours && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHours))) {
+        break;
+      } else {
+        openingHours = this.getOpeningHoursByDate(minColDateMom.add(1, 'day').startOf('day').toDate());
+      }
+    }
+    if (this.checkSelectedDate(minColDateMom.toDate())) {
+      minColDate = minColDateMom.toDate();
+    } else if (minColDateMom.toDate() < this.getDateByTime(minColDateMom.toDate(), 'start', openingHours)) {
+      minColDate = this.getDateByTime(minColDateMom.toDate(), 'start', openingHours);
+    }
+    this.logger.log('minColDate: ', minColDate);
+    return minColDate;
+  }
+
+
 
 }

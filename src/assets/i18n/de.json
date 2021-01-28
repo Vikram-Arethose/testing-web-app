@@ -117,10 +117,11 @@
   },
   "dateChoose": {
     "title": "Wann möchtest du deine Bestellung abholen?",
-    "day": "Tag",
+    "сollectionDate": "Abholtag",
     "today": "Heute",
     "tomorrow": "Morgen",
-    "time": "Uhrzeit",
+    "orChooseDate": "oder Datum auswählen",
+    "chooseTime": "Uhrzeit wählen",
     "confirm": "Bestätigen",
     "verify": "Überprüfen"
   },

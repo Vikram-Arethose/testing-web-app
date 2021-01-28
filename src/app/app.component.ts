@@ -57,7 +57,6 @@ export class AppComponent implements OnInit {
   constructor(
     public accountServ: AccountService,
     public loginServ: LoginService,
-    private localStorageServ: LocalStorageService,
     private logger: LoggerService,
     private platform: Platform,
     private splashScreen: SplashScreen,
