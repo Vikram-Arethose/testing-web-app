@@ -1,37 +1,49 @@
 .container {
   width: 307px;
-  height: 568px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 
   .close-btn {
     position: absolute;
     top: 2%;
     right: 3%;
-    //align-self: flex-end;
   }
 
-  .title {
-    padding: 20% 20px 30px;
-    text-align: center;
-    font: normal normal 400 20px/24px Montserrat;
-    color: #493735;
-    &-date {
-      padding-top: 0;
-    }
-    &-time {
-      padding: 0 0 14px;
+  .title-main {
+    padding: 9.5vh 0 7.4vh;
+    font: normal normal 600 30px/35px Montserrat;
+    letter-spacing: 0.45px;
+    @media (max-device-height: 600px) {
+      padding: 7.5vh 0 5.4vh;
     }
   }
+  .title-date {
+    padding: 0 0 1.91vh;
+    font: normal normal 600 20px/24px Montserrat;
+    &:last-of-type {
+      padding: 4.93vh 0 1.91vh;
+    }
+  }
+  .label {
+    padding: 0 0 1.23vh;
+    font: normal normal 400 18px/22px Montserrat;
+  }
+
   .row {
-    margin: 0 0 34px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 0 18.5px;
   }
 
 
   .btn {
     height: 56px;
+    display: block;
+    --border-radius: 5px;
     text-transform: capitalize;
   }
   .btn-outline {
@@ -40,7 +52,8 @@
     font: normal normal 400 20px/24px Montserrat;
     color: #493735;
     &_active {
-      --background: #707070;
+      --background: #0E8DF1;
+      color: #fff;
     }
   }
   .calendar-icon {
@@ -50,12 +63,13 @@
   .time-item {
     width: 100%;
     padding: 0 30px;
-    margin:  0 0 67px;
+    margin:  0 0 7.39vh;
+    --background: #0E8DF1;
+    color: #fff;
     --border-color: #9AA8B5;
     --border-width: 1px;
     --border-radius: 5px;
     font: normal normal 400 20px/24px Montserrat;
-    color: #493735;
     --inner-padding-bottom: 6px;
     --inner-padding-top: 6px;
     --inner-padding-end: 0;
@@ -69,6 +83,7 @@
 
   .btn-filled {
     width: 200px;
+    --border-radius: 3.2vw;
     --background: #FEDE00;
     font: normal normal 600 20px/24px Montserrat;
   }
@@ -83,6 +98,3 @@
   }
 
 }
-
-
-

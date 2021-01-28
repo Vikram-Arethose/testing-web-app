@@ -2,8 +2,8 @@
   <ion-button class="close-btn" size="small" fill="none" (click)="closeModal()">
     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
   </ion-button>
-  <h2 class="title">{{ 'dateChoose.title' | translate }}</h2>
-  <h2 class="title title-date">{{ 'dateChoose.day' | translate }}</h2>
+  <h2 class="title-main">{{ 'dateChoose.title' | translate }}</h2>
+  <h2 class="title-date">{{ 'dateChoose.сollectionDate' | translate }}</h2>
   <div class="row">
     <ion-button class="btn btn-outline" fill="outline"
                 [class.btn-outline_active]="activeBtn === 'today'"
@@ -11,15 +11,16 @@
     <ion-button class="btn btn-outline" fill="outline"
                 [class.btn-outline_active]="activeBtn === 'tomorrow'"
                 (click)="onTomorrow()">{{ 'dateChoose.tomorrow' | translate }}</ion-button>
-    <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg" tappable (click)="dateSelector.open()"></ion-icon>
-    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [max]="datePickerMax"
-                  (ionChange)="onCalendarChange($event.target.value)"></ion-datetime>
-<!--    <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [(ngModel)]="date"></ion-datetime>-->
   </div>
-  <h2 class="title title-time">{{ 'dateChoose.time' | translate }}</h2>
+  <h2 class="label">{{ 'dateChoose.orChooseDate' | translate }}</h2>
+  <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg"
+            (click)="dateSelector.open()" tappable></ion-icon>
+  <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [max]="datePickerMax"
+                (ionChange)="onCalendarChange($event.target.value)"></ion-datetime>
+  <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
     <ion-datetime class="ion-datetime" [min]="timePickerMin" (ionChange)="onTimeChange($event)"
-                  displayFormat="HH:mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
+                  displayFormat="HH : mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
                   [disabled]="!date"></ion-datetime>
   </ion-item>
   <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">

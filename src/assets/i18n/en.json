@@ -117,10 +117,11 @@
   },
   "dateChoose": {
     "title": "When would you like to pick up your rolls?",
-    "day": "Day",
+    "сollectionDate": "Collection date",
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "time": "Time",
+    "orChooseDate": "or choose a date",
+    "chooseTime": "Choose time",
     "confirm": "Confirm",
     "verify": "Verify"
   },
