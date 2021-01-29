@@ -16,12 +16,13 @@
   <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg"
             (click)="dateSelector.open()" tappable></ion-icon>
   <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [max]="datePickerMax"
-                (ionChange)="onCalendarChange($event.target.value)"></ion-datetime>
+                (ionChange)="onCalendarChange($event.target.value)"
+                [cancelText]="cancel" [doneText]="done"></ion-datetime>
   <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
     <ion-datetime class="ion-datetime" [min]="timePickerMin" (ionChange)="onTimeChange($event)"
                   displayFormat="HH : mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
-                  [disabled]="!date"></ion-datetime>
+                  [disabled]="!date" [cancelText]="cancel" [doneText]="done"></ion-datetime>
   </ion-item>
   <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
     {{ 'dateChoose.confirm' | translate }}</ion-button>

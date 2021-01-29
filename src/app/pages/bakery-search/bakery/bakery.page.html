@@ -26,9 +26,9 @@
         <p class="info__description description">
           {{bakeryInfo}}
           <span class="description__continue" *ngIf="bakeryInfoTrim !== bakeryInfoFull && !isBakeryInfoFull"
-                (click)="toggleBakeryInfo()" tappable>Continue</span>
+                (click)="toggleBakeryInfo()" tappable>{{ 'bakery.continue' | translate }}</span>
           <span class="description__continue" *ngIf="bakeryInfoTrim !== bakeryInfoFull && isBakeryInfoFull"
-                (click)="toggleBakeryInfo()" tappable>Turn</span>
+                (click)="toggleBakeryInfo()" tappable>{{ 'bakery.turn' | translate }}</span>
         </p>
       </div>
     </div>

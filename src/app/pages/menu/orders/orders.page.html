@@ -25,15 +25,16 @@
   </div>
   <div class="full-order" *ngFor="let order of ordersToShow">
     <div class="order">
-      <p class="order__bakery">{{ 'general.bakery' | translate }} {{order.bakery_name}}</p>
+      <p class="order__bakery">{{order.bakery_name}}</p>
       <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
       <p class="order__time">
-        {{getDate(order.pickup_time) | date:'EEEE, d.M.yyyy,  H:mm': '': dateLocale}} hrs</p>
+        {{getDate(order.pickup_time) | date:'EEEE, d.M.yyyy,  H:mm': '': dateLocale}}
+        {{ 'orders.uhr' | translate }}</p>
       <ion-grid class="order__grid grid">
         <ion-row class="grid__row" *ngFor="let product of order.products, let i=index">
           <ion-col class="grid__col" size="1">{{ i + 1 }}</ion-col>
           <ion-col class="grid__col" size="8">{{product.quantity}} x {{product.product_name}}
-            <span *ngIf="!orderId">a {{product.price | currency:'EUR':'symbol'}}</span></ion-col>
+            <span *ngIf="!orderId"> {{ 'orders.a' | translate }} {{product.price | currency:'EUR':'symbol'}}</span></ion-col>
           <ion-col class="grid__col">
             {{product.grand_total | currency:'EUR':'symbol'}}</ion-col>
         </ion-row>
@@ -47,7 +48,7 @@
     <div class="container">
       <div class="pick-up">
         <p class="pick-up__text">{{ 'orders.pickUpAt' | translate }}</p>
-        <p class="pick-up__text">{{ 'general.bakery' | translate }} {{order.bakery_name}} - {{order.branch_name}}</p>
+        <p class="pick-up__text">{{order.bakery_name}} - {{order.branch_name}}</p>
         <h3 class="pick-up__title">{{ 'orders.pickUpCode' | translate }}</h3>
         <div class="pick-up__code" [class.pick-up__code_completed]="segmentValue === 'completed'">
           {{order.collection_code}}</div>

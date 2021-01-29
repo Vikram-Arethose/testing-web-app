@@ -92,6 +92,8 @@
     "current": "Aktuelle",
     "completed": "Vergangene",
     "pickUpTime": "Abholzeit:",
+    "uhr": "Uhr",
+    "a": "je",
     "total": "Gesamt",
     "pickUpAt": "Abzuholen bei:",
     "pickUpCode": "Dein Abholcode lautet:",
@@ -123,7 +125,9 @@
     "orChooseDate": "oder Datum auswählen",
     "chooseTime": "Uhrzeit wählen",
     "confirm": "Bestätigen",
-    "verify": "Überprüfen"
+    "verify": "Überprüfen",
+    "cancel": "Abbrechen",
+    "done": "Fertig"
   },
   "productDetails": {
     "allergens": "Allergene:",
@@ -142,6 +146,8 @@
     "pay": "Bezahlen"
   },
   "bakery": {
+    "continue": "Weiterlesen",
+    "turn": "Weniger",
     "openHour": "Öffnungszeiten:",
     "pickUpHere": "Hole deine Bestellung hier ab:",
     "reminderTitle": "Denke bitte daran!",

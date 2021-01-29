@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { LoggerService } from '../../services/logger.service';
 import { AlertService } from '../../services/alert.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pick-up-date',
@@ -13,11 +14,14 @@ import { Router } from '@angular/router';
 export class PickUpDateComponent implements OnInit {
   @Input() isVerify;
   activeBtn: string;
-  today: string = new Date().toISOString();
-  tomorrow: string;
+  cancel: string = this.translate.instant('dateChoose.cancel');
+  customPickerOptions: any;
+  date: string;
   datePickerMin: string;
   datePickerMax: string;
-  date: string;
+  done: string = this.translate.instant('dateChoose.done');
+  today: string = new Date().toISOString();
+  tomorrow: string;
   time: string;
   timePickerMin: string;
   private dateGlobal: string;
@@ -28,8 +32,9 @@ export class PickUpDateComponent implements OnInit {
     private alertServ: AlertService,
     private logger: LoggerService,
     private modalController: ModalController,
-    private router: Router
-  ) { }
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     const tomorrow = new Date();

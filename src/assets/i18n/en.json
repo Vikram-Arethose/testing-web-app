@@ -92,6 +92,8 @@
     "current": "Current",
     "completed": "Completed",
     "pickUpTime": "Pick-up time:",
+    "uhr": "hrs",
+    "a": "a",
     "total": "Total",
     "pickUpAt": "Pick-up at:",
     "pickUpCode": "Your pick-up code is:",
@@ -123,7 +125,9 @@
     "orChooseDate": "or choose a date",
     "chooseTime": "Choose time",
     "confirm": "Confirm",
-    "verify": "Verify"
+    "verify": "Verify",
+    "cancel": "Cancel",
+    "done": "Done"
   },
   "productDetails": {
     "allergens": "Allergens:",
@@ -142,6 +146,8 @@
     "pay": "pay"
   },
   "bakery": {
+    "continue": "Continue",
+    "turn": "Turn",
     "openHour": "Opening Hours:",
     "pickUpHere": "Pick-up your order here:",
     "reminderTitle": "Remember!",
