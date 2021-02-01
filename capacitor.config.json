@@ -13,6 +13,13 @@
         "profile",
         "email"
       ],
+      "PushNotifications": {
+        "presentationOptions": [
+          "badge",
+          "sound",
+          "alert"
+        ]
+      },
       "serverClientId": "997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com",
       "forceCodeForRefreshToken": true
     }

@@ -31,7 +31,7 @@ export class PushService {
 
     PushNotifications.addListener('registration', async (token: PushNotificationToken) => {
         const info = await Device.getInfo();
-        this.logger.log('My token: ' + token);
+        this.logger.log('My token: ' + JSON.stringify(token));
         this.logger.log('info: ', info);
         this.httpServ.registerPushToken(token.value, info.model, info.platform, info.osVersion);
       }
