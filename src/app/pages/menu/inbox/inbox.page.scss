@@ -1,29 +1,31 @@
 .mail {
   margin: 3.82vh 8.27vw;
-  padding: 0 0 5.9vh;
+  padding: 0 0 1.9vh;
   border-radius: 5px;
   background: #F5F5F5;
   display: flex;
   color: #493735;
   &__avatar {
-    font-size: 15.5vw;
-    margin: 4.6vh 2.67vh 0 5.07vw;
+    width: 82px;
+    height: 88px;
+    border-radius: 50%;
+    margin: 1.85vh 2.67vh 0 3.5vw;
   }
   &__text-block {
     width: 100%;
   }
   &__date {
     text-align: right;
-    padding: 6px 4.53vw 0 0;
+    padding: 1.23vh 9.33vw 3.45vh 0;
     font: normal normal 300 14px/18px Montserrat;
   }
   &__title {
     width: 50vw;
-    padding: 0 0 25px;
+    padding: 0 0 0.86vh;
     font: normal normal 400 20px/24px Montserrat;
   }
   &__text {
-    width: 50vw;
+    width: 45vw;
     font: normal normal 300 14px/18px Montserrat;
   }
 
