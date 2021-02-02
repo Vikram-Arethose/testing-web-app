@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Capacitor, DeviceInfo, Plugins, PushNotificationToken } from '@capacitor/core';
+import {
+  Plugins,
+  PushNotification,
+  PushNotificationToken,
+  Capacitor
+} from '@capacitor/core';
 import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
 
@@ -26,6 +31,7 @@ export class PushService {
     PushNotifications.requestPermission().then((permission) => {
       if (permission.granted) {
         PushNotifications.register();
+        this.createChannel();
       }
     });
 
@@ -36,5 +42,33 @@ export class PushService {
         this.httpServ.registerPushToken(token.value, info.model, info.platform, info.osVersion);
       }
     );
+
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      async (notification: PushNotification) => {
+        this.logger.log('Push received: ' + JSON.stringify(notification));
+      }
+    );
+  }
+
+  createChannel() {
+    const channel = {
+      id: '1',
+      name: 'channel1',
+      description: 'channel for testing',
+      sound: 'sound.mp3',
+      importance: 5,
+      visibility: 1,
+      lights: true,
+      lightColor: '#008000',
+      vibration: true
+    };
+    // @ts-ignore
+    PushNotifications.createChannel(channel)
+      .then(success => {
+        this.logger.log('success createChannel', success);
+        PushNotifications.listChannels().then(res => this.logger.log('channels list: ', res));
+      })
+      .catch(error => this.logger.error(error));
   }
 }
