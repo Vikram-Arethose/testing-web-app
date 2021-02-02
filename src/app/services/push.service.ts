@@ -31,7 +31,7 @@ export class PushService {
     PushNotifications.requestPermission().then((permission) => {
       if (permission.granted) {
         PushNotifications.register();
-        this.createChannel();
+        // this.createChannel();
       }
     });
 
@@ -51,24 +51,24 @@ export class PushService {
     );
   }
 
-  createChannel() {
-    const channel = {
-      id: '1',
-      name: 'channel1',
-      description: 'channel for testing',
-      sound: 'sound.mp3',
-      importance: 5,
-      visibility: 1,
-      lights: true,
-      lightColor: '#008000',
-      vibration: true
-    };
-    // @ts-ignore
-    PushNotifications.createChannel(channel)
-      .then(success => {
-        this.logger.log('success createChannel', success);
-        PushNotifications.listChannels().then(res => this.logger.log('channels list: ', res));
-      })
-      .catch(error => this.logger.error(error));
-  }
+  // createChannel() {
+  //   const channel = {
+  //     id: '1',
+  //     name: 'channel1',
+  //     description: 'channel for testing',
+  //     sound: 'sound.mp3',
+  //     importance: 5,
+  //     visibility: 1,
+  //     lights: true,
+  //     lightColor: '#008000',
+  //     vibration: true
+  //   };
+  //   // @ts-ignore
+  //   PushNotifications.createChannel(channel)
+  //     .then(success => {
+  //       this.logger.log('success createChannel', success);
+  //       PushNotifications.listChannels().then(res => this.logger.log('channels list: ', res));
+  //     })
+  //     .catch(error => this.logger.error(error));
+  // }
 }
