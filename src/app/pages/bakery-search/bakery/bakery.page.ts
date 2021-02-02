@@ -8,6 +8,10 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BakeryFull, BakeryDetails, Category, Product } from '../../../models/http/bakeryFull';
 import { BakeryService } from '../../../services/bakery.service';
 import { ModalService } from '../../../services/modal.service';
+import { User } from '../../../models/user';
+import { AccountService } from '../../../services/account.service';
+import { AlertService } from '../../../services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bakery',
@@ -16,6 +20,7 @@ import { ModalService } from '../../../services/modal.service';
 })
 export class BakeryPage implements OnInit {
 
+  account: User;
   bakeryAddress: string;
   bakeryDetails: BakeryDetails;
   bakeryInfoFull: string;
@@ -36,12 +41,15 @@ export class BakeryPage implements OnInit {
   constructor(
     public bakeryServ: BakeryService,
     public cartService: CartService,
+    private alertServ: AlertService,
+    private accountServ: AccountService,
     private dateService: DateService,
     private httpServ: HttpService,
     private logger: LoggerService,
     private modalService: ModalService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.route.queryParams.subscribe(() => {
      if (this.router.getCurrentNavigation().extras.state) {
@@ -58,6 +66,17 @@ export class BakeryPage implements OnInit {
       if (res) {
         this.date = res;
         this.setProductList();
+      }
+    });
+    this.getUserData();
+  }
+
+  getUserData() {
+    this.accountServ.sharedAccount.subscribe(res => {
+      if (res) {
+        this.account = res;
+      } else {
+        this.httpServ.getUserDetails().subscribe(resp => this.account = resp);
       }
     });
   }
@@ -148,16 +167,21 @@ export class BakeryPage implements OnInit {
   }
 
   openShoppingCart() {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        data: {
-          branchId: this.bakeryDetails.bakery_id,
-          minOrderValue: this.bakeryDetails.min_order_value,
-          lastUsedPayment: this.lastUsedPayment
+    if (this.account.first_name && this.account.last_name && this.account.email) {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          data: {
+            branchId: this.bakeryDetails.bakery_id,
+            minOrderValue: this.bakeryDetails.min_order_value,
+            lastUsedPayment: this.lastUsedPayment
+          }
         }
-      }
-    };
-    this.router.navigate(['/bakery-search/bakery/shopping-cart'], navigationExtras);
+      };
+      this.router.navigate(['/bakery-search/bakery/shopping-cart'], navigationExtras);
+    } else {
+      this.alertServ.presentAlert(this.translate.instant('bakery.addMissedData'));
+      this.router.navigate(['account']);
+    }
   }
 
 }
