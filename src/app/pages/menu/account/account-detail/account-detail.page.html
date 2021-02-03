@@ -20,9 +20,7 @@
         <ion-item class="setting__item setting__item_purple item" lines="none">
           <ion-label class="item__label" *ngIf="data === 'phone'">+49</ion-label>
           <ion-input class="item__input" [(ngModel)]="inputText" [placeholder]="placeholder" [type]="type"></ion-input>
-          <ion-button class="btn-check" slot="end" fill="none" (click)="accept()">
-            <ion-icon slot="end" src="../../../assets/icons/checkmark.svg"></ion-icon>
-          </ion-button>
+          <ion-button class="btn-check" fill="outline" (click)="accept()">{{ 'account.save' | translate }}</ion-button>
         </ion-item>
       </div>
     </div>
@@ -38,9 +36,8 @@
             </ion-item>
           </ion-radio-group>
           <ion-item lines="none">
-            <ion-button class="btn-check" slot="end" fill="none" (click)="acceptRadio()">
-              <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
-            </ion-button>
+            <ion-button class="btn-check" slot="end" fill="outline"
+                        (click)="acceptRadio()">{{ 'account.save' | translate }}</ion-button>
           </ion-item>
         </ion-list>
       </div>
@@ -72,12 +69,13 @@
           </ion-item>
           <ion-item class="setting__item item">
             <ion-input class="item__input item__input_upper" formControlName="newPasswordConfirm" type="password"
-                       [placeholder]="('dateChoose.confirm' | translate) + ' ' + ('account.newPass' | translate)"></ion-input>
+                       [placeholder]="('dateChoose.confirm' | translate) + ' ' + ('account.newPass' | translate)">
+
+            </ion-input>
           </ion-item>
           <ion-item class="setting__item" lines="none">
-            <ion-button class="btn-check" type="submit" slot="end" fill="none" [disabled]="changePasswordForm.invalid">
-              <ion-icon slot="icon-only" src="../../../assets/icons/checkmark.svg"></ion-icon>
-            </ion-button>
+            <ion-button class="btn-check" type="submit" slot="end" fill="outline"
+                        [disabled]="changePasswordForm.invalid">{{ 'account.save' | translate }}</ion-button>
           </ion-item>
         </div>
       </form>

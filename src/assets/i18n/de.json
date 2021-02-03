@@ -80,7 +80,8 @@
     "imprint": "Impressum",
     "deleteAcc": "Account löschen",
     "logout": "Logout",
-    "your": "dein "
+    "your": "dein ",
+    "save": "Sparen"
   },
   "accDetails": {
     "yourName": "Dein Name",
