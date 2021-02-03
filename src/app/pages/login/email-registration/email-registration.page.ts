@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
 import { AuthResponse } from '../../../models/authResponse';
 import { LoginService } from '../../../services/login.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-email-registration',
@@ -22,6 +23,7 @@ export class EmailRegistrationPage implements OnInit {
   constructor(
     private httpService: HttpService,
     private formBuilder: FormBuilder,
+    private location: Location,
     private logger: LoggerService,
     private loginServ: LoginService,
     private route: ActivatedRoute,
@@ -70,6 +72,14 @@ export class EmailRegistrationPage implements OnInit {
         this.step = 0;
         this.emailRegisterData = new EmailRegister();
       });
+  }
+
+  back() {
+    if (this.step !== 0) {
+      this.step--;
+    } else {
+      this.location.back();
+    }
   }
 
 }

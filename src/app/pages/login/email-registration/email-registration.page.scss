@@ -4,14 +4,20 @@
   background: #FEDE00;
 }
 
+.arrow {
+  margin: 1.6vh 0 0 5.6vw;
+  font-size: 9vw;
+  color: #FEDE00;
+}
+
 .form-item {
   padding: 0 2vw;
   margin: 0 auto;
 
   // TODO: make header bigger for case if email is too long
   &__header {
-    height: 132px;
-    padding: 3.69vh 11vw;
+    //height: 132px;
+    padding: 2.09vh 11vw;
   }
   .header {
     text-align: center;
