@@ -23,6 +23,7 @@ import { CartService } from './cart.service';
 import { DateService } from './date.service';
 import { BakeryService } from './bakery.service';
 import { LoadingService } from './loading.service';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -124,7 +125,7 @@ export class HttpService {
   }
 
   getUserDetails() {
-    const subject = new Subject();
+    const subject = new Subject<User>();
     this.http.get(`${this.baseUrl}/user/details`).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
