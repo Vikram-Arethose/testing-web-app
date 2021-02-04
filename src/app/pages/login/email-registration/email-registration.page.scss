@@ -5,7 +5,9 @@
 }
 
 .arrow {
-  margin: 1.6vh 0 0 5.6vw;
+  position: absolute;
+  top: 4vh;
+  left: 5.6vw;
   font-size: 9vw;
   color: #FEDE00;
 }
@@ -14,20 +16,18 @@
   padding: 0 2vw;
   margin: 0 auto;
 
-  // TODO: make header bigger for case if email is too long
   &__header {
-    //height: 132px;
-    padding: 2.09vh 11vw;
+    padding: 8vh 11vw 7.14vh;
   }
   .header {
     text-align: center;
     &__item {
       font: normal normal 600 25px/30px Montserrat;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #707070;
+      //-webkit-text-stroke-width: 1px;
+      //-webkit-text-stroke-color: #707070;
       color: #493735;
-      &_purple {
-        color: #F700FF;
+      &_color {
+        color: #0E8DF1;
       }
     }
   }
@@ -35,7 +35,6 @@
   &__body {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
 
     .items-wrapper {
       width: 75%;
@@ -56,7 +55,7 @@
   }
   &__btn {
     --background: #FEDE00;
-    margin: 0 4vw;
+    margin: 2vh 4vw 0;
   }
 }
 

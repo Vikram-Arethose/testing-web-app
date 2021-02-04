@@ -43,7 +43,7 @@
     "questionName": "What's your name and last name?",
     "lastName": "Last Name",
     "choosePassword": "Please choose a Password!",
-    "password": "Password",
+    "password": "Password (min. 8 letters)",
     "welcome": "Welcome,",
     "letsStart": "Let's get started …"
   },

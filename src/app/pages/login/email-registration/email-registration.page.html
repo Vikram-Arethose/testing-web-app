@@ -1,7 +1,7 @@
 <ion-header></ion-header>
 <ion-content>
   <div class="top"></div>
-  <ion-icon class="arrow" name="arrow-back-sharp" (click)="back()"></ion-icon>
+  <ion-icon class="arrow" name="arrow-back-sharp" *ngIf="step !== 3" (click)="back()"></ion-icon>
   <div class="login" *ngIf="isLogin">
     <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item class="form__item" mode="ios">
@@ -39,7 +39,7 @@
       <div class="form-item" *ngIf="step === 1">
         <div class="form-item__header header">
           <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
-            <span class="header__item_purple">{{ emailRegisterData.email }}</span>.</h1>
+            <span class="header__item_color">{{ emailRegisterData.email }}</span>.</h1>
           <h1 class="header__item">{{ 'emailRegister.questionName' | translate }}</h1>
         </div>
         <div class="form-item__body">
@@ -64,7 +64,7 @@
       <div class="form-item" *ngIf="step === 2">
         <div class="form-item__header header">
           <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
-            <span class="header__item_purple">{{ emailRegisterData.first_name }}</span>.</h1>
+            <span class="header__item_color">{{ emailRegisterData.first_name }}</span>.</h1>
           <h1 class="header__item">{{ 'emailRegister.choosePassword' | translate }}</h1>
         </div>
         <div class="form-item__body">
@@ -81,7 +81,7 @@
       <div class="form-item" *ngIf="step === 3">
         <div class="form-item__header header">
           <h1 class="header__item">{{ 'emailRegister.welcome' | translate }}
-            <span class="header__item_purple">{{ emailRegisterData.first_name }}</span>!</h1>
+            <span class="header__item_color">{{ emailRegisterData.first_name }}</span>!</h1>
         </div>
         <p class="text">{{ 'emailRegister.letsStart' | translate }}</p>
         <div class="button-wrapper">
