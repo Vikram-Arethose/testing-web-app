@@ -22,6 +22,7 @@ export class OrdersPage implements OnInit {
   segmentValue = 'current';
 
   private orders: GetOrdersRes;
+  private timeZoneMinutesOffset: number = new Date().getTimezoneOffset();
 
   constructor(
     private dateServ: DateService,
@@ -66,7 +67,7 @@ export class OrdersPage implements OnInit {
   }
 
   getDate(date: string) {
-    return this.dateServ.getIsoDateFromDateStr(date);
+    return this.dateServ.getIsoDateFromServerDate(date, this.timeZoneMinutesOffset);
   }
 
   segmentChanged(value: string) {

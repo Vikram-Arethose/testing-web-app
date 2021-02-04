@@ -4,6 +4,7 @@ import { BakeryFull, Product } from '../models/http/bakeryFull';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartService } from './cart.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class BakeryService {
 
   constructor(
     private cartServ: CartService,
+    private logger: LoggerService,
     private router: Router
   ) {}
 
@@ -46,6 +48,7 @@ export class BakeryService {
   }
 
   getDataForPayment(date: string) {
+    date = new Date(date).toISOString();
     return {
       branch_id: this.bakeryData.branchDetails.id,
       basket_sum: this.cartServ.getTotalPrice(),

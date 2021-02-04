@@ -143,8 +143,8 @@ export class DateService {
     return false;
   }
 
-  getIsoDateFromDateStr(stringDate: string): string {
-    return moment(stringDate).format();
+  getIsoDateFromServerDate(stringDate: string, timeZoneMinutesOffset: number): string {
+    return moment(stringDate).add(-timeZoneMinutesOffset, 'minutes').format();
   }
 
   getDefaultMinOrderDate() {
@@ -166,7 +166,5 @@ export class DateService {
     this.logger.log('minColDate: ', minColDate);
     return minColDate;
   }
-
-
 
 }
