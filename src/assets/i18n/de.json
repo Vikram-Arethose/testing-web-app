@@ -1,4 +1,9 @@
 {
+  "alert": {
+    "error": "Schade!",
+    "bakeryNotWorkAtThisTime": "Diese Bäckerei hat zum ausgewählten Zeitpunkt geschlossen.",
+    "defaultErrorMessage": "Beim Laden der Daten ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
+  },
   "general": {
     "continue": "Weiter",
     "bakery" : "Bäckerei"
@@ -95,7 +100,7 @@
     "current": "Aktuelle",
     "completed": "Vergangene",
     "pickUpTime": "Abholzeit:",
-    "uhr": "Uhr",
+    "hrs": "Uhr",
     "a": "je",
     "total": "Gesamt",
     "pickUpAt": "Abzuholen bei:",
@@ -113,7 +118,8 @@
   },
   "paymentMethods": {
     "header": "Zahlungsmethoden",
-    "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an."
+    "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an.",
+    "otherOptions": "Andere Optionen"
   },
   "locationOpt": {
     "searchCity": "Nach einem Ort suchen",

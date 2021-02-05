@@ -5,17 +5,15 @@ import {
   HttpErrorResponse,
   HttpHandler,
   HttpEvent,
-  HttpResponse, HttpHeaders
+  HttpHeaders
 } from '@angular/common/http';
-
-import { Observable, EMPTY, throwError, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 import { LoggerService } from '../../services/logger.service';
-import { AlertController } from '@ionic/angular';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { ErrorService } from '../../services/error.service';
 import { LoadingService } from '../../services/loading.service';
 import { AnalyticsService } from '../../services/analytics.service';
+import { AlertService } from '../../services/alert.service';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -23,7 +21,7 @@ export class Interceptor implements HttpInterceptor {
   constructor(
     private analyticsServ: AnalyticsService,
     private logger: LoggerService,
-    private alertController: AlertController,
+    private alertServ: AlertService,
     private loadingService: LoadingService
   ) {  }
 
@@ -47,12 +45,12 @@ export class Interceptor implements HttpInterceptor {
         if (error.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
           this.logger.warn(`Interceptor: Backend returned code ${error.status} An error was:`, error.error.message);
-          this.presentAlert(error.error.message);
+          this.alertServ.presentAlert(error.error.message);
         } else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,
           this.logger.warn('Interceptor: An error occurred: ', error);
-          this.presentAlert('Something went wrong! Please try again later.');
+          this.alertServ.presentAlert();
         }
         this.analyticsServ.logEvent('interceptor_http_error_response', error);
         this.loadingService.dismiss();
@@ -66,16 +64,6 @@ export class Interceptor implements HttpInterceptor {
         // return EMPTY;
       })
     );
-  }
-
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      header: 'Error',
-      message,
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 
 }

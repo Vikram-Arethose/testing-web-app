@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,16 @@ export class AlertService {
 
   constructor(
     private alertCtrl: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { }
 
   async presentAlert(message?: string) {
     if (!message) {
-      message = 'Something went wrong! Please try again later.';
+      message = this.translate.instant('alert.defaultErrorMessage');
     }
     const alert = await this.alertCtrl.create({
-      header: 'Error',
+      header: this.translate.instant('alert.error'),
       message,
       buttons: ['OK']
     });

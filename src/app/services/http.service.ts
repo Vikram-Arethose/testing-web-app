@@ -1,16 +1,13 @@
 import { Injectable, NgZone } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { EmailRegister } from '../models/emailRegister';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { LoggerService } from './logger.service';
 import { Observable, Subject } from 'rxjs';
 import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
 import { HomeBranch, HomeBranchesRes } from '../models/http/homeBranch';
 import { ApiResponse } from '../models/http/apiResponse';
 import { InboxMessage } from '../models/http/inboxMessage';
-import { tap } from 'rxjs/operators';
-import { ProductForTransaction } from '../models/http/productForTransaction';
 import { CreateStxRes } from '../models/http/createStxRes';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 import { DataForPayment } from '../models/http/dataForPayment';
@@ -36,7 +33,6 @@ export class HttpService {
 
   constructor(
     private alertServ: AlertService,
-    private alertController: AlertController,
     private bakeryServ: BakeryService,
     private cartServ: CartService,
     private dateServ: DateService,
@@ -50,16 +46,6 @@ export class HttpService {
   ) {
     console.log('production environment: ', environment.production);
     this.dateServ.dateShared.subscribe(res => this.date = res);
-  }
-
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      header: 'Error',
-      message,
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 
   checkApiRes(res: ApiResponse) {

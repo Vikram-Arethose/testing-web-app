@@ -98,7 +98,7 @@ export class PickUpDateComponent implements OnInit {
       this.closeModal();
     } else {
       this.activeBtn = null;
-      this.alertServ.presentAlert('This bakery doesn\'t work at selected date/time!');
+      this.alertServ.presentAlert(this.translate.instant('alert.bakeryNotWorkAtThisTime'));
       if (this.isVerify) {
         this.dateService.dateShared.subscribe(res => this.date = this.time = res);
       } else {

@@ -63,7 +63,9 @@ export class OrdersPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.getOrders(event);
+    if (!this.orderId) {
+      this.getOrders(event);
+    }
   }
 
   getDate(date: string) {
@@ -78,7 +80,7 @@ export class OrdersPage implements OnInit {
   onSaveChange() {
     this.isSave = !this.isSave;
     if (this.isSave) {
-    //  TODO: make saving order
+    // TODO: make saving order
     }
   }
 

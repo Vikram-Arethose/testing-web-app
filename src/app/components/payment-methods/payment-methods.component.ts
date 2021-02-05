@@ -1,20 +1,16 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GooglePayComponent } from '../google-pay/google-pay.component';
 import { OtherOptionsComponent } from './other-options/other-options.component';
-import { LoggerService } from '../../services/logger.service';
 import { CreateStxRes } from '../../models/http/createStxRes';
 import { HttpService } from '../../services/http.service';
-import { InAppBrowserEvent, InAppBrowserObject } from '@ionic-native/in-app-browser';
-import { NavigationExtras, Router } from '@angular/router';
+import { InAppBrowserObject } from '@ionic-native/in-app-browser';
 import { AlertService } from '../../services/alert.service';
 import { CartService } from '../../services/cart.service';
 import { DateService } from '../../services/date.service';
 import { BakeryService } from '../../services/bakery.service';
-import { BakeryFull, Product } from '../../models/http/bakeryFull';
+import { BakeryFull } from '../../models/http/bakeryFull';
 import { DebitComponent } from './debit/debit.component';
-import { DataForPayment } from '../../models/http/dataForPayment';
-import { ApiResponse } from '../../models/http/apiResponse';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LoadingService } from '../../services/loading.service';
 
@@ -36,7 +32,6 @@ export class PaymentMethodsComponent implements OnInit {
     private httpServ: HttpService,
     private iab: InAppBrowser,
     private modalController: ModalController,
-    private loadingServ: LoadingService
   ) { }
 
   ngOnInit() {
