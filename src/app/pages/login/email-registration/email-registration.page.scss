@@ -60,7 +60,8 @@
 }
 
 .text {
-  padding: 3vh 9vw 15vh;
+  padding: 3vh 9vw 0;
+  text-align: center;
   font: normal normal 600 25px/30px Montserrat;
   color: #493735;
 }
@@ -71,21 +72,20 @@
   &__btn {
     width: 74vw;
     height: 7.39vh;
+    margin-top: 12vh;
     --background: #FEDE00;
     --border-radius: 5px;
-    text-transform: uppercase;
-    font: normal normal 500 20px/24px Montserrat;
+    color: #493735;
+    font: normal normal 700 22px/27px Montserrat;
+    text-transform: capitalize;
   }
 }
 
 .login {
   .form {
-    padding: 50px 20px 0 0;
-    &__item {
+    padding: 12vh 20px 0 0;
+    &__item:first-of-type {
       margin-bottom: 20px;
-    }
-    .button-wrapper {
-      padding-top: 50px;
     }
   }
 }

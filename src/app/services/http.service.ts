@@ -62,8 +62,28 @@ export class HttpService {
     await alert.present();
   }
 
+  checkApiRes(res: ApiResponse) {
+    this.logger.log('API response: ', res);
+    if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+      return true;
+    } else {
+      this.alertServ.presentAlert();
+      return false;
+    }
+  }
+
   postData(endPoint: string, data) {
     return this.http.post(this.baseUrl + endPoint, data);
+  }
+
+  checkEmail(email: string) {
+    const subject = new Subject();
+    this.http.get(`${this.baseUrl}/check/email?email=${email}`).subscribe((res: ApiResponse) => {
+      if (this.checkApiRes(res)) {
+        subject.next(res.data);
+      }
+    });
+    return subject.asObservable();
   }
 
   getBranchesNear(lat: string, lng: string) {

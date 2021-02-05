@@ -45,7 +45,9 @@
     "choosePassword": "Please choose a Password!",
     "password": "Password (min. 8 letters)",
     "welcome": "Welcome,",
-    "letsStart": "Let's get started …"
+    "letsStart": "Let's get started …",
+    "emailIsAlreadyRegistered": "This Email-Address is already registered.",
+    "pleaseDoLogin": "Please do Login."
   },
   "menu": {
     "myAcc": "My Account",

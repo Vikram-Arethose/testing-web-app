@@ -88,6 +88,17 @@
           <ion-button class="button-wrapper__btn" [routerLink]="'/google-login'">{{ 'general.continue' | translate }}</ion-button>
         </div>
       </div>
+      <div class="form-item" *ngIf="step === -1">
+        <div class="form-item__header header">
+          <h1 class="header__item">{{ 'emailRegister.hello' | translate }}
+            <span class="header__item_color">{{ emailRegisterData.email }}</span>.</h1>
+        </div>
+        <p class="text ion-text-center">{{ 'emailRegister.emailIsAlreadyRegistered' | translate }}</p>
+        <p class="text ion-text-center">{{ 'emailRegister.pleaseDoLogin' | translate }}</p>
+        <div class="button-wrapper">
+          <ion-button class="button-wrapper__btn" (click)="openLogin()">{{ 'emailRegister.login' | translate }}</ion-button>
+        </div>
+      </div>
     </form>
   </div>
 </ion-content>

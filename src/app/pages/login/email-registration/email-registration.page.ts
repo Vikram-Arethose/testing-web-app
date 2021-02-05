@@ -7,6 +7,7 @@ import { HttpService } from '../../../services/http.service';
 import { AuthResponse } from '../../../models/authResponse';
 import { LoginService } from '../../../services/login.service';
 import { Location } from '@angular/common';
+import { ApiResponse } from '../../../models/http/apiResponse';
 
 @Component({
   selector: 'app-email-registration',
@@ -37,16 +38,31 @@ export class EmailRegistrationPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isLogin) {
+    // if (this.isLogin) {
       this.loginForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
         password: ['', [Validators.required, Validators.minLength(8)]]
       });
-    }
+    // }
   }
 
   nextStep() {
-    this.step++;
+    if (this.step === 0) {
+      this.httpService.checkEmail(this.emailRegisterData.email).subscribe((res: boolean) => {
+        if (res) {
+          this.step = -1;
+        } else {
+          this.step++;
+        }
+      });
+    } else {
+      this.step++;
+    }
+  }
+
+  openLogin() {
+    this.step = null;
+    this.isLogin = true;
   }
 
   login() {
@@ -75,10 +91,13 @@ export class EmailRegistrationPage implements OnInit {
   }
 
   back() {
-    if (this.step !== 0) {
+    if (this.step > 0) {
       this.step--;
-    } else {
+    } else if (this.step === 0 || this.isLogin) {
       this.location.back();
+    } else if (this.step === -1) {
+      this.step = 0;
+      this.emailRegisterData = new EmailRegister();
     }
   }
 
