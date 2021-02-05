@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">brötchenApp</string>
-    <string name="title_activity_main">brötchenApp</string>
+    <string name="app_name">BrötchenApp</string>
+    <string name="title_activity_main">BrötchenApp</string>
     <string name="package_name">com.brotchen.app</string>
     <string name="custom_url_scheme">com.brotchen.app</string>
     <string name="server_client_id">997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com</string>

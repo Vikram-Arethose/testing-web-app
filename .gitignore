@@ -43,4 +43,5 @@ android
 ios
 !ios/App/App/AppDelegate.swift
 !ios/App/App/info.plist
+!ios/App/App/capacitor.config.json
 
