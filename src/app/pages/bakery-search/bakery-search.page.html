@@ -14,6 +14,9 @@
     </ion-refresher>
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
+    <div class="suggest-bakery">
+      <p class="suggest-bakery__text">There is no bakery in your area yet. But that will change soon.</p>
+    </div>
     <app-bakery-item class="bakery-item"
                      *ngFor="let bakery of bakeries | async"
                      [bakery]="bakery"
