@@ -6,11 +6,11 @@ import { LoggerService } from '../../../services/logger.service';
 import { HttpService } from '../../../services/http.service';
 import { DebitArgs } from '../../../models/http/payment/debitArgs';
 import { ApiResponse } from '../../../models/http/apiResponse';
-import { NavigationExtras, Router } from '@angular/router';
 import { AlertService } from '../../../services/alert.service';
 import { ModalController } from '@ionic/angular';
 import { BakeryService } from '../../../services/bakery.service';
 import { LoadingService } from '../../../services/loading.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-debit',
@@ -27,11 +27,11 @@ export class DebitComponent implements OnInit {
     private alertServ: AlertService,
     private bakeryServ: BakeryService,
     private fb: FormBuilder,
-    private logger: LoggerService,
     private httpServ: HttpService,
-    private router: Router,
+    private loadingServ: LoadingService,
+    private location: Location,
+    private logger: LoggerService,
     private modalController: ModalController,
-    private loadingServ: LoadingService
   ) { }
 
   ngOnInit() {
@@ -73,6 +73,10 @@ export class DebitComponent implements OnInit {
           this.alertServ.presentAlert();
       }
     });
+  }
+
+  back() {
+    this.modalController.dismiss();
   }
 
 }

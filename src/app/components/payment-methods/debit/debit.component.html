@@ -1,50 +1,49 @@
-<ng-container>
-  <div class="top"></div>
-  <div class="container">
-    <div class="header">
-      <div class="header__title">Zahlung per Lastschrift</div>
-      <img class="header__img" src="assets/icons/payments/sepa.png">
-    </div>
-    <form class="form" [formGroup]="form" (ngSubmit)="buy()">
-      <ion-item class="form__item item">
-        <ion-label class="item__label" position="stacked">Vorname</ion-label>
-        <ion-input class="item__input" formControlName="name"></ion-input>
-      </ion-item>
-      <ion-item class="form__item item">
-        <ion-label class="item__label" position="stacked">Name</ion-label>
-        <ion-input class="item__input" formControlName="surname"></ion-input>
-      </ion-item>
-      <div class="row">
-        <ion-item class="form__item form__item_big item">
-          <ion-label class="item__label" position="stacked">Strasse</ion-label>
-          <ion-input class="item__input" formControlName="street"></ion-input>
-        </ion-item>
-        <ion-item class="form__item form__item_small item item-small">
-          <ion-label class="item__label" position="stacked">Nr.</ion-label>
-          <ion-input class="item__input" formControlName="stNumber"></ion-input>
-        </ion-item>
-      </div>
-      <div class="row">
-        <ion-item class="form__item form__item_big item">
-          <ion-label class="item__label" position="stacked">Ort</ion-label>
-          <ion-input class="item__input" formControlName="city"></ion-input>
-        </ion-item>
-        <ion-item class="form__item form__item_small item item-small">
-          <ion-label class="item__label" position="stacked">PLZ</ion-label>
-          <ion-input class="item__input" formControlName="postcode"></ion-input>
-        </ion-item>
-      </div>
-      <ion-item class="form__item item">
-        <ion-label class="item__label" position="stacked">Kontoinhaber</ion-label>
-        <ion-input class="item__input" formControlName="accountOwner"></ion-input>
-      </ion-item>
-      <ion-item class="form__item item">
-        <ion-label class="item__label" position="stacked">IBAN</ion-label>
-        <ion-input class="item__input" formControlName="iban"></ion-input>
-      </ion-item>
-      <ion-button class="form__btn" type="submit" expand="block" [disabled]="form.invalid">
-        {{cartServ.getTotalPrice() | currency:'EUR':'symbol'}} PAY
-      </ion-button>
-    </form>
+<div class="top"></div>
+<ion-icon class="arrow" name="arrow-back-sharp" (click)="back()"></ion-icon>
+<div class="container">
+  <div class="header">
+    <div class="header__title">Zahlung per Lastschrift</div>
+    <img class="header__img" src="assets/icons/payments/sepa.png">
   </div>
-</ng-container>
+  <form class="form" [formGroup]="form" (ngSubmit)="buy()">
+    <ion-item class="form__item item">
+      <ion-label class="item__label" position="stacked">Vorname</ion-label>
+      <ion-input class="item__input" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item class="form__item item">
+      <ion-label class="item__label" position="stacked">Name</ion-label>
+      <ion-input class="item__input" formControlName="surname"></ion-input>
+    </ion-item>
+    <div class="row">
+      <ion-item class="form__item form__item_big item">
+        <ion-label class="item__label" position="stacked">Strasse</ion-label>
+        <ion-input class="item__input" formControlName="street"></ion-input>
+      </ion-item>
+      <ion-item class="form__item form__item_small item item-small">
+        <ion-label class="item__label" position="stacked">Nr.</ion-label>
+        <ion-input class="item__input" formControlName="stNumber"></ion-input>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item class="form__item form__item_big item">
+        <ion-label class="item__label" position="stacked">Ort</ion-label>
+        <ion-input class="item__input" formControlName="city"></ion-input>
+      </ion-item>
+      <ion-item class="form__item form__item_small item item-small">
+        <ion-label class="item__label" position="stacked">PLZ</ion-label>
+        <ion-input class="item__input" formControlName="postcode"></ion-input>
+      </ion-item>
+    </div>
+    <ion-item class="form__item item">
+      <ion-label class="item__label" position="stacked">Kontoinhaber</ion-label>
+      <ion-input class="item__input" formControlName="accountOwner"></ion-input>
+    </ion-item>
+    <ion-item class="form__item item">
+      <ion-label class="item__label" position="stacked">IBAN</ion-label>
+      <ion-input class="item__input" formControlName="iban"></ion-input>
+    </ion-item>
+    <ion-button class="form__btn" type="submit" expand="block" [disabled]="form.invalid">
+      {{cartServ.getTotalPrice() | currency:'EUR':'symbol'}} PAY
+    </ion-button>
+  </form>
+</div>
