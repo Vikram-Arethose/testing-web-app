@@ -14,7 +14,7 @@
     </ion-refresher>
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
-    <div class="suggest-bakery">
+    <div class="suggest-bakery" *ngIf="!(bakeries | async) || (bakeries | async).length === 0">
       <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
       <p class="suggest-bakery__text">{{ 'bakerySearch.lookAgainOrSuggest' | translate }}</p>
       <ion-button class="suggest-bakery__btn">{{ 'bakerySearch.suggestBakery' | translate }}</ion-button>
