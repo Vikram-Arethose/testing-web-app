@@ -28,7 +28,10 @@
     padding: 0 0 3vh;
   }
   &__btn {
-    margin: 2vh 0;
+    margin: 5vh 0;
+    --background: #0E8DF1;
+    --border-radius: 5px;
+    font: normal normal 300 20px/28px Source Sans Pro;
   }
 }
 

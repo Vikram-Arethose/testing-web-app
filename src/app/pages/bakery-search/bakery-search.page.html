@@ -14,14 +14,17 @@
     </ion-refresher>
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
-    <div class="suggest-bakery" *ngIf="!(bakeries | async) || (bakeries | async).length === 0">
-      <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
-      <p class="suggest-bakery__text">{{ 'bakerySearch.lookAgainOrSuggest' | translate }}</p>
-      <ion-button class="suggest-bakery__btn">{{ 'bakerySearch.suggestBakery' | translate }}</ion-button>
-    </div>
-    <app-bakery-item class="bakery-item"
-                     *ngFor="let bakery of bakeries | async"
-                     [bakery]="bakery"
-                     (favouriteClicked)="getBakeries()"></app-bakery-item>
+    <ng-container *ngIf="(bakeries$ | async) as bakeries">
+      <app-bakery-item class="bakery-item"
+                       *ngFor="let bakery of bakeries"
+                       [bakery]="bakery"
+                       (favouriteClicked)="getBakeries()"></app-bakery-item>
+      <div class="suggest-bakery" *ngIf="bakeries?.length === 0">
+        <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
+        <p class="suggest-bakery__text">{{ 'bakerySearch.lookAgainOrSuggest' | translate }}</p>
+        <ion-button class="suggest-bakery__btn" (click)="openSuggestBakeryUrl()"
+                    expand="block" size="large">{{ 'bakerySearch.suggestBakery' | translate }}</ion-button>
+      </div>
+    </ng-container>
   </div>
 </ion-content>
