@@ -123,7 +123,8 @@
   },
   "bakerySearch": {
     "thereIsNoBakery": "There is no bakery in your area yet. But that will change soon.",
-
+    "lookAgainOrSuggest": "Have a look again or suggest your favorite bakery to us!",
+    "suggestBakery": ""
   },
   "locationOpt": {
     "searchCity": "Search City",

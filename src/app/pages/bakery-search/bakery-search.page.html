@@ -15,7 +15,9 @@
   <ion-img src="../../../assets/img/bread.png"></ion-img>
   <div class="container">
     <div class="suggest-bakery">
-      <p class="suggest-bakery__text">There is no bakery in your area yet. But that will change soon.</p>
+      <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
+      <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
+      <ion-button class="suggest-bakery__btn"></ion-button>
     </div>
     <app-bakery-item class="bakery-item"
                      *ngFor="let bakery of bakeries | async"
