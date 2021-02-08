@@ -10,6 +10,7 @@ import { LoginService } from './services/login.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { LoggerService } from './services/logger.service';
 import { AccountService } from './services/account.service';
+import { PushService } from './services/push.service';
 
 @Component({
   selector: 'app-root',
@@ -58,12 +59,13 @@ export class AppComponent implements OnInit {
     public accountServ: AccountService,
     public loginServ: LoginService,
     private logger: LoggerService,
+    private menu: MenuController,
     private platform: Platform,
+    private pushServ: PushService,
+    private router: Router,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private translate: TranslateService,
-    private menu: MenuController,
-    private router: Router,
   ) {
     this.initializeApp();
   }
@@ -75,6 +77,7 @@ export class AppComponent implements OnInit {
       this.useLanguage();
       this.openFirstPage();
       this.splashScreen.hide();
+      this.pushServ.resetBadgeCount();
     });
   }
 
