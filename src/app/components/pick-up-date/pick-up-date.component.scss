@@ -1,19 +1,22 @@
 .container {
   width: 307px;
-  margin: 0 auto;
+  margin: var(--ion-safe-area-top) auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 
+  .btn-wrapper {
+    position: relative;
+  }
+
   .close-btn {
-    position: absolute;
-    top: 2%;
-    right: 3%;
+    margin: 2vh -5vw 0;
+    align-self: flex-end;
   }
 
   .title-main {
-    padding: 9.5vh 0 7.4vh;
+    padding: 5.5vh 0 7.4vh;
     font: normal normal 600 30px/35px Montserrat;
     letter-spacing: 0.45px;
     @media (max-device-height: 600px) {

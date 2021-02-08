@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
       this.useLanguage();
       this.openFirstPage();
       this.splashScreen.hide();
-      this.pushServ.resetBadgeCount();
+      this.pushServ.setResetPushBadgeCount();
     });
   }
 

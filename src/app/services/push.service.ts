@@ -8,8 +8,7 @@ import {
 import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
 
-const { PushNotifications } = Plugins;
-const { Device } = Plugins;
+const { App, Device, PushNotifications } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +50,13 @@ export class PushService {
     );
   }
 
-  resetBadgeCount() {
+  setResetPushBadgeCount() {
     PushNotifications.removeAllDeliveredNotifications();
+    App.addListener('appStateChange', (state) => {
+      if (state.isActive) {
+        PushNotifications.removeAllDeliveredNotifications();
+      }
+    });
   }
 
 }
