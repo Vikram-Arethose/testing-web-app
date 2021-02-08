@@ -22,6 +22,16 @@
   padding: 4.43vh 0;
 }
 
+.suggest-bakery {
+  text-align: center;
+  &__text {
+    padding: 0 0 3vh;
+  }
+  &__btn {
+    margin: 2vh 0;
+  }
+}
+
 .bakery-item {
   display: block;
   margin: 0 0 1.23vh;

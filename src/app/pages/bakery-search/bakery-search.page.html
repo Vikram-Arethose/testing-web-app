@@ -16,8 +16,8 @@
   <div class="container">
     <div class="suggest-bakery">
       <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
-      <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
-      <ion-button class="suggest-bakery__btn"></ion-button>
+      <p class="suggest-bakery__text">{{ 'bakerySearch.lookAgainOrSuggest' | translate }}</p>
+      <ion-button class="suggest-bakery__btn">{{ 'bakerySearch.suggestBakery' | translate }}</ion-button>
     </div>
     <app-bakery-item class="bakery-item"
                      *ngFor="let bakery of bakeries | async"
