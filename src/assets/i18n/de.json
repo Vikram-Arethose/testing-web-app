@@ -2,7 +2,8 @@
   "alert": {
     "error": "Schade!",
     "bakeryNotWorkAtThisTime": "Diese Bäckerei hat zum ausgewählten Zeitpunkt geschlossen.",
-    "defaultErrorMessage": "Beim Laden der Daten ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
+    "defaultErrorMessage": "Beim Laden der Daten ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
+    "paymentWasFailed": "Die Bezahlung wurde abgebrochen."
   },
   "general": {
     "continue": "Weiter",

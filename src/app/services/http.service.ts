@@ -21,6 +21,7 @@ import { DateService } from './date.service';
 import { BakeryService } from './bakery.service';
 import { LoadingService } from './loading.service';
 import { User } from '../models/user';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable({
@@ -43,6 +44,7 @@ export class HttpService {
     private modalController: ModalController,
     private ngZone: NgZone,
     private router: Router,
+    private translate: TranslateService
   ) {
     console.log('production environment: ', environment.production);
     this.dateServ.dateShared.subscribe(res => this.date = res);
@@ -261,7 +263,7 @@ export class HttpService {
         this.cartServ.clearCart();
         this.dateServ.changeDate('');
       } else if (res.url.includes('/payment/failed')) {
-        this.alertServ.presentAlert('Payment was failed! Please try again later.');
+        this.alertServ.presentAlert(this.translate.instant('alert.paymentWasFailed'));
         browser.close();
       }
     });
