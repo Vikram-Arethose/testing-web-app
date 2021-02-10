@@ -12,6 +12,7 @@ import { OtherOptionsComponent } from './payment-methods/other-options/other-opt
 import { DebitComponent } from './payment-methods/debit/debit.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { BakeryItemComponent } from './bakery-item/bakery-item.component';
+import { ProductItemComponent } from './product-item/product-item.component';
 
 
 
@@ -25,7 +26,8 @@ import { BakeryItemComponent } from './bakery-item/bakery-item.component';
     OtherOptionsComponent,
     DebitComponent,
     SpinnerComponent,
-    BakeryItemComponent
+    BakeryItemComponent,
+    ProductItemComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { BakeryItemComponent } from './bakery-item/bakery-item.component';
     OtherOptionsComponent,
     DebitComponent,
     SpinnerComponent,
-    BakeryItemComponent
+    BakeryItemComponent,
+    ProductItemComponent
   ]
 })
 export class ComponentsModule { }

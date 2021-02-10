@@ -94,10 +94,10 @@ export class DateService {
     if (this.date && product.special_price) {
       if (product.special_price_from && product.special_price_to) {
         if (this.selectedDate > new Date(product.special_price_from) && this.selectedDate < new Date(product.special_price_to)) {
-          product.price = product.special_price;
+          product.isSpecialPrice = true;
         }
       } else {
-        product.price = product.special_price;
+        product.isSpecialPrice = true;
       }
     }
     return product;

@@ -106,7 +106,8 @@ export class AppComponent implements OnInit {
   openFirstPage() {
     const token = localStorage.getItem('token');
     if (token || this.guest) {
-      this.router.navigate(['bakery-search']);
+      // this.router.navigate(['bakery-search']);
+      this.router.navigate(['bakery-search/bakery']);
     } else {
       this.router.navigate(['start']);
     }

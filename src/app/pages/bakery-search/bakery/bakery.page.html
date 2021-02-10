@@ -67,36 +67,42 @@
            (click)="onCategorySelect(i)"
            [class.sections__item_selected]="i === selectedCategoryIndex" tappable>{{category.name}}</div>
     </div>
-    <div class="product-list">
-      <div class="container product-container">
-        <ng-container>
-          <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal(product)">
-            <div class="col-left">
-              <ion-img class="product__img" [src]="product?.photo"></ion-img>
-              <ion-img class="product__img-corner product__img-corner_bio" *ngIf="product.bio_certification"
-                       src="../../../../assets/img/bakery/bio.png"></ion-img>
-              <ion-img class="product__img-corner product__img-corner_new" *ngIf="product.is_new"
-                       src="../../../../assets/img/bakery/new.png"></ion-img>
-            </div>
-            <div class="col-center">
-              <div>
-                <p class="product__name">{{product.name}}</p>
-                <p class="product__details-title">Details</p>
-              </div>
-              <p class="product__details-text"><span *ngIf="product.availability">Only </span>
-                <span class="available-day" *ngFor="let day of product.availability">{{day}}, </span></p>
-            </div>
-            <div class="col">
-              <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>
-              <div class="product__count count" *ngIf="!guest">
-                <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
-                <div class="count__value">{{getProductCount(product.id)}}</div>
-                <div class="count__btn" (click)="addProductToCart(product, $event)" tappable>+</div>
-              </div>
-            </div>
-          </div>
-        </ng-container>
+    <div class="date-container">
+      <div class="date">
+        <p class="date__text">Abholung: Sonntag 14.05.21, 10:45 Uhr</p>
+        <ion-button class="date__btn btn" size="small" fill="clear">
+          <ion-icon class="btn__icon" slot="icon-only"
+                    src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
+        </ion-button>
       </div>
+    </div>
+    <div class="product-list">
+      <app-product-item *ngFor="let product of productsList" [date]="date" [product]="product"></app-product-item>
+      <!--          <div class="product" *ngFor="let product of productsList" (click)="presentProductDetailsModal(product)">
+                  <div class="col-left">
+                    <ion-img class="product__img" [src]="product?.photo"></ion-img>
+                    <ion-img class="product__img-corner product__img-corner_bio" *ngIf="product.bio_certification"
+                             src="../../../../assets/img/bakery/bio.png"></ion-img>
+                    <ion-img class="product__img-corner product__img-corner_new" *ngIf="product.is_new"
+                             src="../../../../assets/img/bakery/new.png"></ion-img>
+                  </div>
+                  <div class="col-center">
+                    <div>
+                      <p class="product__name">{{product.name}}</p>
+                      <p class="product__details-title">Details</p>
+                    </div>
+                    <p class="product__details-text"><span *ngIf="product.availability">Only </span>
+                      <span class="available-day" *ngFor="let day of product.availability">{{day}}, </span></p>
+                  </div>
+                  <div class="col">
+                    <p class="product__price">{{product.price | currency:'EUR':'symbol'}}</p>
+                    <div class="product__count count" *ngIf="!guest">
+                      <div class="count__btn" (click)="removeProductFromCart(product, $event)" tappable>-</div>
+                      <div class="count__value">{{getProductCount(product.id)}}</div>
+                      <div class="count__btn" (click)="addProductToCart(product, $event)" tappable>+</div>
+                    </div>
+                  </div>
+                </div>-->
     </div>
   </div>
   <div class="cart" *ngIf="cartService.getCart().length > 0" tappable (click)="openShoppingCart()">

@@ -30,7 +30,7 @@ export class BakeryPage implements OnInit {
   categories: Category[];
   date: string;
   isInfoFull: boolean;
-  guest = localStorage.getItem('guest');
+  // guest = localStorage.getItem('guest');
   productsList: Product[];
   openingHours: [string, any][];
   isBakeryInfoFull: boolean;
@@ -56,6 +56,8 @@ export class BakeryPage implements OnInit {
        this.bakeryId = this.router.getCurrentNavigation().extras.state.bakeryId;
      }
     });
+    // TODO: remove below
+    this.bakeryId = 1;
   }
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class BakeryPage implements OnInit {
   getBakeryData() {
     this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
       this.bakeryServ.changeBakery(res);
-      this.presentPickUpDateModal();
+      // this.presentPickUpDateModal();
       this.bakeryDetails = res.branchDetails;
       this.bakeryAddress = `${res.branchDetails.street}, ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
@@ -116,9 +118,9 @@ export class BakeryPage implements OnInit {
     this.cartService.getCart();
   }
 
-  getProductCount(id: number): number {
+ /* getProductCount(id: number): number {
     return this.cartService.getProductCount(id);
-  }
+  }*/
 
   presentPickUpDateModal() {
     this.modalService.presentPickUpDateModal();
@@ -128,7 +130,7 @@ export class BakeryPage implements OnInit {
     this.modalService.presentProductDetailsModal(product);
   }
 
-  removeProductFromCart(product: Product, $event) {
+ /* removeProductFromCart(product: Product, $event) {
     $event.stopPropagation();
     this.cartService.removeProductFromCart(product);
   }
@@ -140,7 +142,7 @@ export class BakeryPage implements OnInit {
     } else {
       this.cartService.addProductToCart(product);
     }
-  }
+  }*/
 
   onInfo() {
     this.isInfoFull = !this.isInfoFull;

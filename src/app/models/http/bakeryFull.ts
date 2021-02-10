@@ -64,6 +64,7 @@ export interface Product {
   special_price: string;
   special_price_from: string;
   special_price_to: string;
+  isSpecialPrice?: boolean;
   updated_at: string;
   updated_by: number;
   vat: number;

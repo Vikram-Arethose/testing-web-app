@@ -9,6 +9,7 @@
       --color: #fff;
       --icon-font-size: 35px;
     }
+
     &__img {
       width: $logoSize;
       height: $logoSize;
@@ -29,24 +30,30 @@
 .container {
   padding: 0 8.27vw;
 }
+
 .product-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
 }
 
 .info {
   padding: 13.8vh 0 2.83vh;
   font: normal normal 400 12px/15px Montserrat;
   color: #493735;
+
   .row {
     display: flex;
     justify-content: space-between;
   }
+
   &__title {
     font: normal normal 400 20px/24px Montserrat;
   }
-  &__text {}
+
+  &__text {
+  }
+
   &__icon {
     --color: #000;
     font-size: 24px;
@@ -55,9 +62,11 @@
   &__rate {
     padding: 1.97vh 0;
   }
+
   .rate {
     display: flex;
     align-items: center;
+
     &__img {
       width: 81px;
       margin: 0 8px 0 0;
@@ -67,6 +76,7 @@
   &__description {
     padding: 0 6vw 0 0;
   }
+
   .description {
     &__continue {
       padding: 0 0 0 3px;
@@ -80,8 +90,10 @@
 .info-details {
   font: normal normal 400 12px/15px Montserrat;
   color: #493735;
+
   &__icons-row {
     padding: 3.94vh 0 2.09vh;
+
     &-icon {
       width: 27px;
       margin: 0 4.8vw 0 0;
@@ -93,13 +105,16 @@
       display: flex;
       align-items: flex-end;
     }
+
     &__icon {
       margin: 0 15px 0 0;
       font-size: 24px;
     }
+
     &__list {
       padding: 11px 0 16px 75px;
     }
+
     .list {
       &__item {
         width: 115px;
@@ -107,6 +122,7 @@
         //justify-content: space-between;
         text-transform: capitalize;
       }
+
       &__item-day {
         width: 30px;
         margin-right: 5px;
@@ -118,9 +134,11 @@
     padding: 17px 33px 25px;
     border-top: 1px solid #707070;
     border-bottom: 1px solid #707070;
+
     &__title {
       padding: 0 0 11px;
     }
+
     &__text {
       width: 150px;
     }
@@ -130,8 +148,12 @@
     padding: 0 3vw 0 8.27vw;
     margin: 15px 0 11px;
     font: normal normal 400 15px/19px Montserrat;
-    &__title {}
-    &__txt {}
+
+    &__title {
+    }
+
+    &__txt {
+    }
   }
 
 }
@@ -140,19 +162,21 @@
   width: 100%;
   height: 45px;
   padding: 0 0 0 8.27vw;
-  margin: 0 0 5.42vh;
+  //margin: 0 0 5.42vh;
   display: flex;
   position: sticky;
   top: 0;
   z-index: 1;
   overflow-x: scroll;
   background: #F6F6F6;
+
   &__item {
     display: flex;
     align-items: center;
     padding: 0 5.87vw;
     font: normal normal 400 15px/19px Montserrat;
     color: #493735;
+
     &_selected {
       background: #FEDE00;
       border: 1px solid #FEDE00;
@@ -163,16 +187,28 @@
   }
 }
 
-.product-list{
-  margin: 0 0 30%;
+
+.date-container {
+  width: 90vw;
+  margin: 2vh auto;
+  display: flex;
+  border: 1px solid #CBCBCB;
+
+}
+
+.product-list {
+  padding: 0 0 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media (max-width: 320px) {
-    .container{
+    .container {
       padding: 0 3px;
     }
   }
 }
 
-.product {
+/*.product {
   width: 313px;
   height: 77px;
   margin: 0 0 1.11vh;
@@ -181,9 +217,11 @@
   border-radius: 5px;
   font: normal normal 400 12px/15px Montserrat;
   color: #493735;
+
   .col-left {
     position: relative;
   }
+
   .col-center {
     width: 127px;
     padding: 4px 0 4px;
@@ -208,17 +246,17 @@
 
   &__img-corner {
     position: absolute;
+
     &_bio {
       top: 0;
       left: 0;
     }
+
     &_new {
       left: 3px;
       top: 28px;
     }
   }
-
-
 
 
   &__details-title {
@@ -243,59 +281,63 @@
     padding: 0 6px 0;
   }
 
-.count {
-width: 78px;
-display: flex;
-text-align: center;
-&__btn{
-  width: 22px;
-  border: 1px solid #CBCBCB;
-}
-&__value {
-  width: 42px;
-  height: 18px;
-  border-top: 1px solid #CBCBCB;
-  border-bottom: 1px solid #CBCBCB;
-}
-}
-}
+  .count {
+    width: 78px;
+    display: flex;
+    text-align: center;
+
+    &__btn {
+      width: 22px;
+      border: 1px solid #CBCBCB;
+    }
+
+    &__value {
+      width: 42px;
+      height: 18px;
+      border-top: 1px solid #CBCBCB;
+      border-bottom: 1px solid #CBCBCB;
+    }
+  }
+}*/
 
 .cart {
-width: 100%;
-height: 63px;
-position: fixed;
-bottom: 5.17vh;
-display: flex;
-align-items: center;
-background: #0E8DF1;
-border: 1px solid #FEDE00;
+  width: 100%;
+  height: 63px;
+  position: fixed;
+  bottom: 5.17vh;
+  display: flex;
+  align-items: center;
+  background: #0E8DF1;
+  border: 1px solid #FEDE00;
 
-&__icon-wrapper {
-margin: 0 11vw 0 5vw;
-position: relative;
-@media (max-width: 320px) {
-  margin: 0 5vw 0 3vw;
-}
-}
-&__icon {
-font-size: 36px;
-}
-&__icon-badge {
-width: 25px;
-height: 25px;
-position: absolute;
-bottom: -3px;
-right: -15px;
-border-radius: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
-background: #FEDE00;
-font: normal normal 400 12px/15px Montserrat;
-}
+  &__icon-wrapper {
+    margin: 0 11vw 0 5vw;
+    position: relative;
+    @media (max-width: 320px) {
+      margin: 0 5vw 0 3vw;
+    }
+  }
 
-&__text{
-font: normal normal 400 20px/24px Montserrat;
-color: #FFFFFF;
-}
+  &__icon {
+    font-size: 36px;
+  }
+
+  &__icon-badge {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: -3px;
+    right: -15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FEDE00;
+    font: normal normal 400 12px/15px Montserrat;
+  }
+
+  &__text {
+    font: normal normal 400 20px/24px Montserrat;
+    color: #FFFFFF;
+  }
 }
