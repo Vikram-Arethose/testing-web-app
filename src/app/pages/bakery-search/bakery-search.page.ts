@@ -16,7 +16,7 @@ import { BakeryService } from '../../services/bakery.service';
 })
 export class BakerySearchPage implements OnInit {
 
-  bakeries: Observable<HomeBranch[]>;
+  bakeries$: Observable<HomeBranch[]>;
   currLocation: Observable<Location>;
   iconHeartOutline = '../../../assets/icons/bakery/heart-outline.svg';
   iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
@@ -49,22 +49,24 @@ export class BakerySearchPage implements OnInit {
     this.getBakeries();
   }
 
-  async getBakeries() {
+  getBakeries() {
     if (this.lat && this.lng) {
-      this.bakeries = await this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
+      this.bakeries$ = this.httpServ.getHomeBranches(this.lat.toString(), this.lng.toString());
     }
   }
 
   onFavorite(bakeryId: number, $event) {
-    this.httpServ.removeAddToFavorites(bakeryId).subscribe(res => {
-      this.getBakeries();
-    });
+    this.httpServ.removeAddToFavorites(bakeryId).subscribe(() => this.getBakeries() );
     $event.stopPropagation();
   }
 
-  async doRefresh(event) {
-    await this.getBakeries();
-    event.target.complete();
+   doRefresh(event) {
+     this.getBakeries();
+     event.target.complete();
+   }
+
+  openSuggestBakeryUrl() {
+    this.httpServ.openIabUrl('https://broetchen.app/einen-baecker-empfehlen/');
   }
 
 }

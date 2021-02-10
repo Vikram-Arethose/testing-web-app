@@ -311,4 +311,8 @@ export class HttpService {
     });
   }
 
+  openIabUrl(url: string) {
+    this.iab.create(url, '_blank');
+  }
+
 }

@@ -122,6 +122,11 @@
     "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an.",
     "otherOptions": "Andere Optionen"
   },
+  "bakerySearch": {
+    "thereIsNoBakery": "In deiner Umgebung nimmt noch keine Bäckerei teil. Aber das ändert sich bestimmt bald.",
+    "lookAgainOrSuggest": "Schau wieder rein oder schlage uns deine Lieblingsbäckerei vor!",
+    "suggestBakery": "Bäckerei vorschlagen"
+  },
   "locationOpt": {
     "searchCity": "Nach einem Ort suchen",
     "myLocation": "Mein Standort:",
