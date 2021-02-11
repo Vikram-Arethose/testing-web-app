@@ -38,7 +38,7 @@ export class ShoppingCartPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private logger: LoggerService,
-    private localStorServ: LocalStorageService,
+    private locStorageServ: LocalStorageService,
     private loadingServ: LoadingService,
     private httpServ: HttpService
   ) {
@@ -50,7 +50,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   ngOnInit() {
-    this.dateLocale = this.localStorServ.getDateLocale();
+    this.dateLocale = this.locStorageServ.getDateLocale();
     this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
     this.date = localStorage.getItem('date');
     this.dateService.dateShared.subscribe((res: string) => {

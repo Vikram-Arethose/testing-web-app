@@ -2,16 +2,19 @@
   <ion-button class="ion-float-right close-btn" size="small" fill="none" (click)="closeModal()">
     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
   </ion-button>
+  <div class="header">
+    <img class="header__img" [src]="product?.photo">
+    <ion-label class="header__name">{{product?.name}}</ion-label>
+    <ion-label class="header__available">{{product?.name}}</ion-label>
+  </div>
   <div class="product">
-    <div class="product__header">
-      <img class="product__img" [src]="product?.photo">
-      <ion-label class="product__label ">{{product?.name}}</ion-label>
-    </div>
     <div class="product__details details">
       <h2 class="details__title">Details</h2>
       <h3 class="details__subtitle">{{ 'productDetails.allergens' | translate }}</h3>
       <div class="details__list list">
-        <p class="list__item" *ngFor="let allergen of product?.allergens">{{allergen}}</p>
+        <span class="list__item" *ngFor="let allergen of product?.allergens, let i = index">
+          {{allergen}}<ng-container *ngIf="i !== product?.allergens.length - 1">, </ng-container>
+        </span>
       </div>
       <h3 class="details__subtitle">{{ 'productDetails.ingredients' | translate }}</h3>
       <p class="details__text">{{product?.ingredients}}</p>

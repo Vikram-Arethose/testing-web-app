@@ -3,8 +3,7 @@
 
   .toolbar {
     $logoSize: 46vw;
-    height: 18.47vh;
-    //--background: url('../../../../assets/img/croissants.jpg') center/cover;
+    height: 22.47vh;
     &__btn {
       --color: #fff;
       --icon-font-size: 35px;
@@ -13,10 +12,11 @@
     &__img {
       width: $logoSize;
       height: $logoSize;
-      border-radius: 50%;
       position: absolute;
-      bottom: -80%;
+      bottom: -50%;
       left: calc((100% - #{$logoSize}) / 2);
+      border: 3px solid #F36133;
+      border-radius: 50%;
       z-index: 10;
     }
   }
@@ -29,12 +29,6 @@
 
 .container {
   padding: 0 8.27vw;
-}
-
-.product-container {
-  //display: flex;
-  //flex-direction: column;
-  //align-items: center;
 }
 
 .info {
@@ -119,7 +113,6 @@
       &__item {
         width: 115px;
         display: flex;
-        //justify-content: space-between;
         text-transform: capitalize;
       }
 
@@ -162,7 +155,6 @@
   width: 100%;
   height: 45px;
   padding: 0 0 0 8.27vw;
-  //margin: 0 0 5.42vh;
   display: flex;
   position: sticky;
   top: 0;
@@ -187,118 +179,32 @@
   }
 }
 
-
-.date-container {
+.products-container {
   width: 90vw;
-  margin: 2vh auto;
+  padding: 0 0 2vh;
+  margin: 0 auto;
+}
+
+
+.date {
+  height: 43px;
+  margin: 20px 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #CBCBCB;
 
-}
-
-.product-list {
-  padding: 0 0 2vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (max-width: 320px) {
-    .container {
-      padding: 0 3px;
+  &__text {
+    text-decoration: underline;
+    font: normal normal 400 12px/15px Montserrat;
+  }
+  &__btn {}
+  .btn {
+    &__icon {
+      font-size: 14px;
     }
   }
 }
-
-/*.product {
-  width: 313px;
-  height: 77px;
-  margin: 0 0 1.11vh;
-  display: flex;
-  border: 1px solid #D9D9D9;
-  border-radius: 5px;
-  font: normal normal 400 12px/15px Montserrat;
-  color: #493735;
-
-  .col-left {
-    position: relative;
-  }
-
-  .col-center {
-    width: 127px;
-    padding: 4px 0 4px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  &__name {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  &__img {
-    width: 76px;
-    height: 52px;
-    margin: 4px 20px 0 10px;
-    object-fit: cover;
-  }
-
-  &__img-corner {
-    position: absolute;
-
-    &_bio {
-      top: 0;
-      left: 0;
-    }
-
-    &_new {
-      left: 3px;
-      top: 28px;
-    }
-  }
-
-
-  &__details-title {
-    padding: 3px 0 0;
-    font: normal normal 400 10px/13px Montserrat;
-  }
-
-  &__details-text {
-    font: normal normal 400 10px/13px Montserrat;
-
-    .available-day {
-      text-transform: capitalize;
-    }
-  }
-
-  &__price {
-    padding: 8px 6px 23px;
-    text-align: right;
-  }
-
-  &__count {
-    padding: 0 6px 0;
-  }
-
-  .count {
-    width: 78px;
-    display: flex;
-    text-align: center;
-
-    &__btn {
-      width: 22px;
-      border: 1px solid #CBCBCB;
-    }
-
-    &__value {
-      width: 42px;
-      height: 18px;
-      border-top: 1px solid #CBCBCB;
-      border-bottom: 1px solid #CBCBCB;
-    }
-  }
-}*/
 
 .cart {
   width: 100%;

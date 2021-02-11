@@ -12,6 +12,7 @@ import { User } from '../../../models/user';
 import { AccountService } from '../../../services/account.service';
 import { AlertService } from '../../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from '../../../services/local-storage.service';
 
 @Component({
   selector: 'app-bakery',
@@ -29,8 +30,8 @@ export class BakeryPage implements OnInit {
   cart: Product[] = [];
   categories: Category[];
   date: string;
+  dateLocale: string;
   isInfoFull: boolean;
-  // guest = localStorage.getItem('guest');
   productsList: Product[];
   openingHours: [string, any][];
   isBakeryInfoFull: boolean;
@@ -45,6 +46,7 @@ export class BakeryPage implements OnInit {
     private accountServ: AccountService,
     private dateService: DateService,
     private httpServ: HttpService,
+    private locStorageServ: LocalStorageService,
     private logger: LoggerService,
     private modalService: ModalService,
     private route: ActivatedRoute,
@@ -52,12 +54,12 @@ export class BakeryPage implements OnInit {
     private translate: TranslateService
   ) {
     this.route.queryParams.subscribe(() => {
-     if (this.router.getCurrentNavigation().extras.state) {
-       this.bakeryId = this.router.getCurrentNavigation().extras.state.bakeryId;
-     }
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.bakeryId = this.router.getCurrentNavigation().extras.state.bakeryId;
+      }
     });
     // TODO: remove below
-    this.bakeryId = 1;
+    this.bakeryId =1;
   }
 
   ngOnInit() {
@@ -71,6 +73,7 @@ export class BakeryPage implements OnInit {
       }
     });
     this.getUserData();
+    this.dateLocale = this.locStorageServ.getDateLocale();
   }
 
   getUserData() {
@@ -86,6 +89,7 @@ export class BakeryPage implements OnInit {
   getBakeryData() {
     this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
       this.bakeryServ.changeBakery(res);
+      // TODO: remove below
       // this.presentPickUpDateModal();
       this.bakeryDetails = res.branchDetails;
       this.bakeryAddress = `${res.branchDetails.street}, ${res.branchDetails.number}, ${res.branchDetails.city}`;
@@ -118,31 +122,9 @@ export class BakeryPage implements OnInit {
     this.cartService.getCart();
   }
 
- /* getProductCount(id: number): number {
-    return this.cartService.getProductCount(id);
-  }*/
-
   presentPickUpDateModal() {
     this.modalService.presentPickUpDateModal();
   }
-
-  presentProductDetailsModal(product: Product) {
-    this.modalService.presentProductDetailsModal(product);
-  }
-
- /* removeProductFromCart(product: Product, $event) {
-    $event.stopPropagation();
-    this.cartService.removeProductFromCart(product);
-  }
-
-  addProductToCart(product: Product, $event) {
-    $event.stopPropagation();
-    if (!this.date) {
-      this.presentPickUpDateModal();
-    } else {
-      this.cartService.addProductToCart(product);
-    }
-  }*/
 
   onInfo() {
     this.isInfoFull = !this.isInfoFull;

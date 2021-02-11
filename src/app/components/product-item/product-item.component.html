@@ -10,18 +10,20 @@
     <div class="row">
       <div>
         <p class="product__name">{{product.name}}</p>
-        <ion-button class="details" size="small" fill="clear">Details</ion-button>
+        <ion-button class="details" (click)="presentProductDetailsModal()" size="small" fill="clear">Details</ion-button>
         <p ></p>
       </div>
       <div>
-        <p class="product__price" [class.product__price_crossed-out]="product?.isSpecialPrice">{{product.price | currency:'EUR':'symbol'}}</p>
-        <p class="product__special-price" *ngIf="product?.isSpecialPrice">{{product.special_price | currency:'EUR':'symbol'}}</p>
+        <p class="product__price" [class.product__price_crossed-out]="product?.isSpecialPrice">
+          {{product.price | currency:'EUR':'symbol'}}</p>
+        <p class="product__special-price" *ngIf="product?.isSpecialPrice">
+          {{product.special_price | currency:'EUR':'symbol'}}</p>
       </div>
     </div>
     <div class="product__count count" *ngIf="!guest">
-      <ion-button class="count__btn" size="small">-</ion-button>
+      <ion-button class="count__btn" size="small" (click)="removeProductFromCart()">-</ion-button>
       <div class="count__value">{{getProductCount(product.id)}}</div>
-      <ion-button class="count__btn" size="small">+</ion-button>
+      <ion-button class="count__btn" size="small" (click)="addProductToCart()">+</ion-button>
     </div>
   </div>
 </div>

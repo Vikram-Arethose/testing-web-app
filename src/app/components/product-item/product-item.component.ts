@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/http/bakeryFull';
 import { CartService } from '../../services/cart.service';
 import { ModalService } from '../../services/modal.service';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-product-item',
@@ -16,31 +17,36 @@ export class ProductItemComponent implements OnInit {
 
   constructor(
     private cartServ: CartService,
+    private logger: LoggerService,
     private modalServ: ModalService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.presentProductDetailsModal();
+  }
 
   getProductCount(id: number): number {
     return this.cartServ.getProductCount(id);
   }
 
-  removeProductFromCart(product: Product, $event) {
-    $event.stopPropagation();
-    this.cartServ.removeProductFromCart(product);
+  removeProductFromCart() {
+    this.cartServ.removeProductFromCart(this.product);
   }
 
-  addProductToCart(product: Product, $event) {
-    $event.stopPropagation();
+  addProductToCart() {
     if (!this.date) {
       this.presentPickUpDateModal();
     } else {
-      this.cartServ.addProductToCart(product);
+      this.cartServ.addProductToCart(this.product);
     }
   }
 
   presentPickUpDateModal() {
     this.modalServ.presentPickUpDateModal();
+  }
+
+  presentProductDetailsModal() {
+    this.modalServ.presentProductDetailsModal(this.product);
   }
 
 }
