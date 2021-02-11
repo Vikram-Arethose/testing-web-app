@@ -18,12 +18,10 @@ export class ProductItemComponent implements OnInit {
   constructor(
     private cartServ: CartService,
     private logger: LoggerService,
-    private modalServ: ModalService
+    private modalServ: ModalService,
   ) { }
 
-  ngOnInit() {
-    this.presentProductDetailsModal();
-  }
+  ngOnInit() {}
 
   getProductCount(id: number): number {
     return this.cartServ.getProductCount(id);

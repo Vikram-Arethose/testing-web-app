@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Product } from '../../models/http/bakeryFull';
 import { LoggerService } from '../../services/logger.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
@@ -12,9 +13,19 @@ export class ProductDetailsComponent implements OnInit {
 
   @Input() product: Product;
 
+  get availability(): string {
+    if (this.product.availability.length === 7) {
+      return this.translate.instant('productDetails.availableEveryDay');
+    } else {
+      const capitalizeArr = this.product.availability.map(day => day[0].toUpperCase() + day.slice(1));
+      return this.translate.instant('productDetails.only') + ' ' + capitalizeArr.join(', ');
+    }
+  }
+
   constructor(
     private modalController: ModalController,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {

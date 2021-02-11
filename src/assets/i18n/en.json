@@ -146,7 +146,9 @@
   },
   "productDetails": {
     "allergens": "Allergens:",
-    "ingredients": "Ingredients:"
+    "ingredients": "Ingredients:",
+    "availableEveryDay": "Available every day",
+    "only": "Only"
   },
   "shoppingCart": {
     "header": "Shopping cart",
