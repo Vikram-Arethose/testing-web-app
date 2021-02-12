@@ -89,7 +89,7 @@ export class BakeryPage implements OnInit {
       this.bakeryServ.changeBakery(res);
       this.presentPickUpDateModal();
       this.bakeryDetails = res.branchDetails;
-      this.bakeryAddress = `${res.branchDetails.street}, ${res.branchDetails.number}, ${res.branchDetails.city}`;
+      this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
       this.bakeryInfo = this.trimBakeryInfo();
       this.openingHours = Object.entries(res.branchDetails.opening_hours.default);
