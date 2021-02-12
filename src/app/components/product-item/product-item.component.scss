@@ -3,7 +3,7 @@ $darkBrown: #493735;
 .product {
   width: 90vw;
   height: 95px;
-  margin: 0 0 1.11vh;
+  margin: 0 0 1.23vh;
   display: flex;
   border: 1px solid #D9D9D9;
   border-radius: 5px;
@@ -29,7 +29,7 @@ $darkBrown: #493735;
   &__name {
     font: normal normal 500 14px/18px Montserrat;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -38,6 +38,9 @@ $darkBrown: #493735;
     width: 26.67vw;
     height: 100%;
     object-fit: cover;
+    &::part(image) {
+      border-radius: 5px 0 0 5px;
+    }
   }
 
   &__img-corner {
@@ -56,8 +59,10 @@ $darkBrown: #493735;
 
 
   .details {
+    margin: 0;
     --padding-start: 0;
     font: italic normal 300 12px/15px Montserrat;
+    text-transform: capitalize;
     color: $darkBrown;
   }
 
@@ -83,7 +88,6 @@ $darkBrown: #493735;
       color: inherit;
       --background: #F9F9F9;
       --border-radius: 5px;
-      font: normal normal 300 25px/0px Montserrat;
     }
 
     &__value {
