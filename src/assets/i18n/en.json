@@ -7,7 +7,8 @@
   },
   "general": {
     "continue": "continue",
-    "bakery" : "Bakery"
+    "bakery" : "Bakery",
+    "back": "back"
   },
   "start": {
     "header": "simply. pre-order.",

@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { LoggerService } from './logger.service';
 import { Observable, Subject } from 'rxjs';
 import { BranchesNearResponse, BranchNear } from '../models/http/branchesNear';
@@ -43,6 +43,7 @@ export class HttpService {
     private logger: LoggerService,
     private modalController: ModalController,
     private ngZone: NgZone,
+    private platform: Platform,
     private router: Router,
     private translate: TranslateService
   ) {
@@ -204,7 +205,17 @@ export class HttpService {
   }
 
   openCreditCardPayment(stxId: string, userId: number): InAppBrowserObject {
-    return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`, '_blank');
+    return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`, '_blank', this.getIabOptions());
+  }
+
+  openIabUrl(url: string) {
+    this.iab.create(url, '_blank', this.getIabOptions());
+  }
+
+  getIabOptions(): string {
+    if (this.platform.is('ios')) {
+      return `closebuttoncaption=${this.translate.instant('general.back')}`;
+    }
   }
 
   debitPayment(debitArgs: DebitArgs) {
@@ -309,10 +320,6 @@ export class HttpService {
         this.logger.log('registerPushToken error: ', res.data.error);
       }
     });
-  }
-
-  openIabUrl(url: string) {
-    this.iab.create(url, '_blank');
   }
 
 }
