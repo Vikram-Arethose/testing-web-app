@@ -47,6 +47,12 @@ export class AppComponent implements OnInit {
       forGuest: true
     },
     {
+      title: 'menu.maps',
+      url: '/location-setting',
+      src: 'assets/icons/menu/check.svg',
+      forGuest: true
+    },
+    {
       title: 'menu.support',
       // url: '/',
       src: './assets/icons/menu/help-circle-png.svg'
