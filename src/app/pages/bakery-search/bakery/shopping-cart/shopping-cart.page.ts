@@ -14,6 +14,7 @@ import { BakeryService } from '../../../../services/bakery.service';
 import { ApiResponse } from '../../../../models/http/apiResponse';
 import { LocalStorageService } from '../../../../services/local-storage.service';
 import { LoadingService } from '../../../../services/loading.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -34,13 +35,14 @@ export class ShoppingCartPage implements OnInit {
     private alertServ: AlertService,
     private alertController: AlertController,
     private bakeryServ: BakeryService,
+    private httpServ: HttpService,
+    private loadingServ: LoadingService,
+    private locStorageServ: LocalStorageService,
+    private logger: LoggerService,
     private modalController: ModalController,
     private route: ActivatedRoute,
     private router: Router,
-    private logger: LoggerService,
-    private locStorageServ: LocalStorageService,
-    private loadingServ: LoadingService,
-    private httpServ: HttpService
+    private translate: TranslateService
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -128,7 +130,7 @@ export class ShoppingCartPage implements OnInit {
         this.presentAlertConfirm(cart);
       }
     } else {
-      this.alertServ.presentAlert(`Min order total cost for this bakery should be bigger or equal ${minOrderValue} €!`);
+      this.alertServ.presentAlert(`${this.translate.instant('alert.minOrderCost')} ${minOrderValue} €!`);
     }
   }
 

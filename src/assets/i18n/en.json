@@ -3,7 +3,8 @@
     "error": "Error",
     "bakeryNotWorkAtThisTime": "This bakery doesn't work at selected date/time!",
     "defaultErrorMessage": "Something went wrong! Please try again later.",
-    "paymentWasFailed": "Payment was failed! Please try again later."
+    "paymentWasFailed": "Payment was failed! Please try again later.",
+    "minOrderCost": "Min order total cost for this bakery should be bigger or equal"
   },
   "general": {
     "continue": "continue",
