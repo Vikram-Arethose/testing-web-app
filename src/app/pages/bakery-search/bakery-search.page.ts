@@ -66,7 +66,7 @@ export class BakerySearchPage implements OnInit {
    }
 
   openSuggestBakeryUrl() {
-    this.httpServ.openIabUrl('https://broetchen.app/einen-baecker-empfehlen/');
+    this.httpServ.getIab('https://broetchen.app/einen-baecker-empfehlen/');
   }
 
 }

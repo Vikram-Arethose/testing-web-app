@@ -208,8 +208,8 @@ export class HttpService {
     return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`, '_blank', this.getIabOptions());
   }
 
-  openIabUrl(url: string) {
-    this.iab.create(url, '_blank', this.getIabOptions());
+  getIab(url: string) {
+    return this.iab.create(url, '_blank', this.getIabOptions());
   }
 
   getIabOptions(): string {
@@ -244,7 +244,7 @@ export class HttpService {
       this.loadingServ.dismiss();
       this.logger.log('http res.data: ', res.data);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
-        this.handleIabResult(this.iab.create(res.data.iframeUrl, '_blank'));
+        this.handleIabResult(this.getIab(res.data.iframeUrl));
         subject.next(true);
       } else {
         this.alertServ.presentAlert();
