@@ -1,0 +1,31 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80vw;
+}
+
+.close-btn {
+  position: absolute;
+  top: 2vh;
+  right: 0;
+  --padding-start: 0;
+  font-size: 21px;
+  color: #555;
+}
+
+.title {
+  padding: 0 30px 3vh;
+  font: 20px/24px Montserrat;
+  text-align: center;
+  color: #707070;
+}
+
+.main-btn {
+  --border-radius: 36px;
+  --border-color: #707070;
+  text-transform: uppercase;
+  color: #493735;
+}

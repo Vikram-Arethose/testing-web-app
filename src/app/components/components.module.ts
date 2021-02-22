@@ -13,6 +13,7 @@ import { DebitComponent } from './payment-methods/debit/debit.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { BakeryItemComponent } from './bakery-item/bakery-item.component';
 import { ProductItemComponent } from './product-item/product-item.component';
+import { LoginFirstComponent } from './login-first/login-first.component';
 
 
 
@@ -27,14 +28,15 @@ import { ProductItemComponent } from './product-item/product-item.component';
     DebitComponent,
     SpinnerComponent,
     BakeryItemComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    LoginFirstComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     MenuHeaderComponent,
@@ -46,7 +48,8 @@ import { ProductItemComponent } from './product-item/product-item.component';
     DebitComponent,
     SpinnerComponent,
     BakeryItemComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    LoginFirstComponent
   ]
 })
 export class ComponentsModule { }

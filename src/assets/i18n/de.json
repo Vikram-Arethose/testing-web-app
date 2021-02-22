@@ -11,6 +11,10 @@
     "bakery" : "Bäckerei",
     "back": "zurück"
   },
+  "modal": {
+    "pleaseLoginFirst": "Bitte registriere oder logge dich ein um zu bestellen.",
+    "goToLogin": "Zum Login"
+  },
   "start": {
     "header": "einfach. vorbestellen.",
     "googleBtn": "Weiter mit Google",

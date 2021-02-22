@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login-first',
@@ -7,8 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFirstComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController,
+    private router: Router
+  ) { }
 
   ngOnInit() {}
+
+  close() {
+    this.modalCtrl.dismiss();
+  }
+
+  toLogin() {
+    this.router.navigate(['start'], { replaceUrl: true });
+    this.close();
+  }
 
 }

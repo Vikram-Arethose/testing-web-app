@@ -73,9 +73,16 @@ ion-header {
 }
 
 .login-first-modal .modal-wrapper, .login-first-modal .modal-shadow {
-  height: 40vh;
+  height: 30vh;
   bottom: 0;
   position: absolute;
+}
+
+.login-first-modal {
+  --border-style: solid;
+  --border-width: 1px 0 0 0;
+  --border-color: #707070;
+  --border-radius: 12px 12px 0 0;
 }
 
 .loading-bag.loading-translucent {

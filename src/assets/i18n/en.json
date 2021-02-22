@@ -11,6 +11,10 @@
     "bakery" : "Bakery",
     "back": "back"
   },
+  "modal": {
+    "pleaseLoginFirst": "Please register or login for ordering.",
+    "goToLogin": "Go to login"
+  },
   "start": {
     "header": "simply. pre-order.",
     "googleBtn": "continue with google",
