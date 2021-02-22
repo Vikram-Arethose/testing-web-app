@@ -36,11 +36,8 @@ export class ProductItemComponent implements OnInit {
   }
 
   addProductToCart() {
-    if (!this.date) {
-      this.presentPickUpDateModal();
-    } else if (this.guest) {
-      // TODO: present modal
-      this.logger.log('You should login first!');
+    if (this.guest) {
+      this.modalServ.presentLoginFirstModal();
     } else {
       this.cartServ.addProductToCart(this.product);
     }

@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { PickUpDateComponent } from '../components/pick-up-date/pick-up-date.component';
 import { Product } from '../models/http/bakeryFull';
 import { ProductDetailsComponent } from '../components/product-details/product-details.component';
+import { LoginFirstComponent } from '../components/login-first/login-first.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,14 @@ export class ModalService {
       componentProps: {
         product
       }
+    });
+    return await modal.present();
+  }
+
+  async presentLoginFirstModal() {
+    const modal = await this.modalController.create({
+      component: LoginFirstComponent,
+      cssClass: 'login-first-modal'
     });
     return await modal.present();
   }

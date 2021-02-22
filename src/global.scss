@@ -72,6 +72,12 @@ ion-header {
   position: absolute;
 }
 
+.login-first-modal .modal-wrapper, .login-first-modal .modal-shadow {
+  height: 40vh;
+  bottom: 0;
+  position: absolute;
+}
+
 .loading-bag.loading-translucent {
   .loading-wrapper.ion-overlay-wrapper {
     background: transparent;

@@ -66,6 +66,7 @@ export class BakeryPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.dateService.changeDate(null);
     this.cartService.clearCart();
+    this.getUserData();
     this.getBakeryData();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
@@ -73,7 +74,6 @@ export class BakeryPage implements OnInit, OnDestroy {
         this.setProductList();
       }
     });
-    this.getUserData();
     this.dateLocale = this.locStorageServ.getDateLocale();
   }
 
