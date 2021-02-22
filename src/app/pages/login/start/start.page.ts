@@ -58,7 +58,6 @@ export class StartPage implements OnInit {
 
   guestLogin() {
     this.router.navigate(['/location-setting']);
-    localStorage.setItem('guest', 'true');
     this.accountServ.changeGuest(true);
   }
 

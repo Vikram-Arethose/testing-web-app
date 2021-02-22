@@ -68,7 +68,7 @@
            [class.sections__item_selected]="i === selectedCategoryIndex" tappable>{{category.name}}</div>
     </div>
     <div class="products-container">
-      <div class="date">
+      <div class="date" *ngIf="!guest">
         <p class="date__text">{{ 'bakery.collection' | translate }}:
           {{ date | date:'EEEE, dd.MM.yy,  HH:mm': '' : dateLocale}}
           {{ 'orders.hrs' | translate }}</p>

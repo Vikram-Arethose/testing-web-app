@@ -18,7 +18,7 @@ export class AccountService {
     private translate: TranslateService,
     private router: Router
   ) {
-    this.guest = new BehaviorSubject<boolean>(JSON.parse(localStorage.getItem('guest')));
+    this.guest = new BehaviorSubject<boolean>(false);
     this.sharedGuest$ = this.guest.asObservable();
   }
 

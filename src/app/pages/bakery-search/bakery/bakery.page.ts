@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
@@ -13,13 +13,14 @@ import { AccountService } from '../../../services/account.service';
 import { AlertService } from '../../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bakery',
   templateUrl: './bakery.page.html',
   styleUrls: ['./bakery.page.scss'],
 })
-export class BakeryPage implements OnInit {
+export class BakeryPage implements OnInit, OnDestroy {
 
   account: User;
   bakeryAddress: string;
@@ -32,18 +33,20 @@ export class BakeryPage implements OnInit {
   date: string;
   dateLocale: string;
   isInfoFull: boolean;
+  guest: boolean;
   productsList: Product[];
   openingHours: [string, any][];
   isBakeryInfoFull: boolean;
   selectedCategoryIndex: number;
   private bakeryId: number;
   private lastUsedPayment: string | undefined;
+  private subscription: Subscription;
 
   constructor(
     public bakeryServ: BakeryService,
     public cartService: CartService,
-    private alertServ: AlertService,
     private accountServ: AccountService,
+    private alertServ: AlertService,
     private dateService: DateService,
     private httpServ: HttpService,
     private locStorageServ: LocalStorageService,
@@ -75,11 +78,17 @@ export class BakeryPage implements OnInit {
   }
 
   getUserData() {
-    this.accountServ.sharedAccount.subscribe(res => {
-      if (res) {
-        this.account = res;
+    this.subscription = this.accountServ.sharedGuest$.subscribe(isGuest => {
+      if (isGuest) {
+        this.guest = isGuest;
       } else {
-        this.httpServ.getUserDetails().subscribe(resp => this.account = resp);
+        this.accountServ.sharedAccount.subscribe(res => {
+          if (res) {
+            this.account = res;
+          } else {
+            this.httpServ.getUserDetails().subscribe(resp => this.account = resp);
+          }
+        });
       }
     });
   }
@@ -87,7 +96,9 @@ export class BakeryPage implements OnInit {
   getBakeryData() {
     this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
       this.bakeryServ.changeBakery(res);
-      this.presentPickUpDateModal();
+      if (!this.guest) {
+        this.presentPickUpDateModal();
+      }
       this.bakeryDetails = res.branchDetails;
       this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
@@ -163,6 +174,10 @@ export class BakeryPage implements OnInit {
       this.alertServ.presentAlert(this.translate.instant('bakery.addMissedData'));
       this.router.navigate(['account']);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -3,6 +3,8 @@ import { HomeBranch } from '../../models/http/homeBranch';
 import { NavigationExtras, Router } from '@angular/router';
 import { BakeryService } from '../../services/bakery.service';
 import { HttpService } from '../../services/http.service';
+import { AccountService } from '../../services/account.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-bakery-item',
@@ -16,9 +18,10 @@ export class BakeryItemComponent implements OnInit {
   @Output() favouriteClicked = new EventEmitter();
   iconHeartOutline = '../../../assets/icons/bakery/heart-outline.svg';
   iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
-  guest = localStorage.getItem('guest');
+  $guest: Observable<boolean> = this.accountServ.sharedGuest$;
 
   constructor(
+    public accountServ: AccountService,
     public bakeryServ: BakeryService,
     private httpServ: HttpService,
     private router: Router

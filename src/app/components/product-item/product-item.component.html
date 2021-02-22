@@ -20,7 +20,7 @@
           {{product.special_price | currency:'EUR':'symbol'}}</p>
       </div>
     </div>
-    <div class="product__count count" *ngIf="!guest">
+    <div class="product__count count">
       <ion-button class="count__btn" size="small" (click)="removeProductFromCart()">-</ion-button>
       <div class="count__value">{{getProductCount(product.id)}}</div>
       <ion-button class="count__btn" size="small" (click)="addProductToCart()">+</ion-button>
