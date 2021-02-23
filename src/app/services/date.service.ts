@@ -60,6 +60,21 @@ export class DateService {
     return new Date(date.getTime() + date.getTimezoneOffset() * 60000);
   }
 
+  getDaysAvailability(product: Product): boolean {
+    // check days availability
+    const selectedDay = this.selectedDate.getDay();
+    if (product.availability.includes(this.weekDays[selectedDay])) {
+      // check product available from to
+      if (product?.period_available_from && product?.period_available_to) {
+        this.availableFrom = this.getDateFromStr(product.period_available_from.split(' ')[0]);
+        this.availableTo = this.getDateFromStr(product.period_available_to.split(' ')[0]);
+        return this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo;
+      }
+    } else {
+      return false;
+    }
+  }
+
   getProductAvailability(product: Product): boolean {
     if (product.quantity === 'unavailable') {
       return false;
@@ -73,17 +88,7 @@ export class DateService {
       if (minPreOrderDate > this.selectedDate ) {
         return false;
       }
-      // check days availability
-      const selectedDay = this.selectedDate.getDay();
-      if (product.availability.includes(this.weekDays[selectedDay])) {
-        // check product available from to
-        this.availableFrom = this.getDateFromStr(product.period_available_from.split(' ')[0]);
-        this.availableTo = this.getDateFromStr(product.period_available_to.split(' ')[0]);
-        return this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo;
-      }
-      else {
-        return false;
-      }
+      return this.getDaysAvailability(product);
     } else {
       return true;
     }
@@ -104,18 +109,12 @@ export class DateService {
   }
 
   mapProductInCartAvailability(product: Product) {
-    // check availability by date
     this.selectedDate = new Date(this.date);
-    const selectedDay = this.selectedDate.getDay();
-    // check days availability
-    if (product.availability.includes(this.weekDays[selectedDay])) {
-      // check product available from to
-      if (this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo) {
-        product.isAvailable = true;
-        return product;
-      }
+    if (this.getDaysAvailability(product)) {
+      product.isAvailable = true;
+    } else {
+      product.isAvailable = false;
     }
-    product.isAvailable = false;
     return product;
   }
 
