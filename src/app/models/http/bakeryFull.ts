@@ -68,4 +68,10 @@ export interface Product {
   updated_at: string;
   updated_by: number;
   vat: number;
+  availability_new: AvailableDay[];
+}
+
+export interface AvailableDay {
+  day: string;
+  label: string;
 }

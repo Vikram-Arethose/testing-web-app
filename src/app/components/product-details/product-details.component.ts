@@ -14,11 +14,11 @@ export class ProductDetailsComponent implements OnInit {
   @Input() product: Product;
 
   get availability(): string {
-    if (this.product.availability.length === 7) {
+    if (this.product.availability_new.length === 7) {
       return this.translate.instant('productDetails.availableEveryDay');
     } else {
-      const capitalizeArr = this.product.availability.map(day => day[0].toUpperCase() + day.slice(1));
-      return this.translate.instant('productDetails.only') + ' ' + capitalizeArr.join(', ');
+      const availableDaysLabels = this.product.availability_new.map(item => item.label);
+      return this.translate.instant('productDetails.only') + ' ' + availableDaysLabels.join(', ');
     }
   }
 

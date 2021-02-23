@@ -63,7 +63,7 @@ export class DateService {
   getDaysAvailability(product: Product): boolean {
     // check days availability
     const selectedDay = this.selectedDate.getDay();
-    if (product.availability.includes(this.weekDays[selectedDay])) {
+    if (product.availability_new.some(item => item.day === this.weekDays[selectedDay])) {
       // check product available from to
       if (product?.period_available_from && product?.period_available_to) {
         this.availableFrom = this.getDateFromStr(product.period_available_from.split(' ')[0]);
