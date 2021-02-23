@@ -77,6 +77,10 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.dateLocale = this.locStorageServ.getDateLocale();
   }
 
+  getShortDayName(dayName: string) {
+    return this.translate.instant(`days.${dayName.slice(0, 3)}`);
+  }
+
   getUserData() {
     this.subscription = this.accountServ.sharedGuest$.subscribe(isGuest => {
       if (isGuest) {

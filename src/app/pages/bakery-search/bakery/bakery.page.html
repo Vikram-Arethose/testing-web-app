@@ -45,7 +45,7 @@
           </div>
           <div class="open-hours__list list">
             <div class="list__item" *ngFor="let item of openingHours">
-              <span class="list__item-day">{{item[0].substr(0, 3)}}</span>
+              <span class="list__item-day">{{ getShortDayName(item[0]) }}</span>
               <span>{{item[1].start}} - {{item[1].end}}</span>
             </div>
           </div>
