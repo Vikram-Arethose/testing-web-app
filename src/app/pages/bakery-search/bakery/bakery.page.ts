@@ -13,7 +13,7 @@ import { AccountService } from '../../../services/account.service';
 import { AlertService } from '../../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bakery',
@@ -64,9 +64,9 @@ export class BakeryPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getUserData();
     this.dateService.changeDate(null);
     this.cartService.clearCart();
-    this.getUserData();
     this.getBakeryData();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
@@ -85,7 +85,7 @@ export class BakeryPage implements OnInit, OnDestroy {
         this.accountServ.sharedAccount.subscribe(res => {
           if (res) {
             this.account = res;
-          } else {
+          } else if (localStorage.getItem('token')) {
             this.httpServ.getUserDetails().subscribe(resp => this.account = resp);
           }
         });

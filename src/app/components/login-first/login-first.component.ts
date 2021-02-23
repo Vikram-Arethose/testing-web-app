@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login-first',
@@ -11,7 +11,7 @@ export class LoginFirstComponent implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private router: Router
+    private loginServ: LoginService
   ) { }
 
   ngOnInit() {}
@@ -20,8 +20,8 @@ export class LoginFirstComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  toLogin() {
-    this.router.navigate(['start'], { replaceUrl: true });
+  async toLogin() {
+    await this.loginServ.logout();
     this.close();
   }
 

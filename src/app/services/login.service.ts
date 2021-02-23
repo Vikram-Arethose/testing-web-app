@@ -132,10 +132,10 @@ export class LoginService {
 
   async logout() {
     await Plugins.FacebookLogin.logout();
+    await this.router.navigate(['start']);
     localStorage.removeItem('token');
-    this.router.navigate(['start']);
-    this.accountServ.changeGuest(false);
     this.analyticsServ.logEvent('logout');
+    this.accountServ.changeGuest(false);
   }
 
   async presentAlert() {
