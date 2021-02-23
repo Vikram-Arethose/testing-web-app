@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Event, NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 import { LoggerService } from '../../../services/logger.service';
-import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-google-login',
@@ -14,7 +13,6 @@ import { LoginService } from '../../../services/login.service';
 })
 export class GoogleLoginPage implements OnInit {
   android = this.platformService.android;
-  // btnRouterLink = '/location-setting';
   continueBtnLabel: string;
   checkbox: boolean;
   isLogin: boolean;
@@ -28,7 +26,6 @@ export class GoogleLoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private logger: LoggerService,
     private router: Router,
-    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -36,9 +33,12 @@ export class GoogleLoginPage implements OnInit {
     this.getBtnLabel();
     this.myForm = this.formBuilder.group({
       country: ['Germany'],
-      checkbox1: [false, [Validators.required]],
+      checkbox1: [true, [Validators.requiredTrue]],
       checkbox2: [false, [Validators.requiredTrue]],
     });
+    if (this.android) {
+      this.myForm.patchValue({checkbox1: false});
+    }
   }
 
   getBtnLabel() {
