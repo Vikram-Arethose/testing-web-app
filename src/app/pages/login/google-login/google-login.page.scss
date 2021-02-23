@@ -79,10 +79,15 @@
     height: 7.39vh;
     padding: 0 0 0 0.63vw;
     margin: 10.34vh 0 0;
-    --background: #d9d9d9;
     --border-radius: 36px;
     text-transform: uppercase;
     font: normal normal 500 16px/19px Montserrat;
+    --background: #FFD700;
+    color: #493735;
+    &.button-disabled {
+      --background: #d9d9d9;
+      color: #fff;
+    }
     @media (max-device-height: 667px) {
       margin: 5vh 0 0 0;
     }
