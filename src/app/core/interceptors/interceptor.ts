@@ -14,6 +14,7 @@ import { LoggerService } from '../../services/logger.service';
 import { LoadingService } from '../../services/loading.service';
 import { AnalyticsService } from '../../services/analytics.service';
 import { AlertService } from '../../services/alert.service';
+import { LoginService } from '../../services/login.service';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -22,7 +23,8 @@ export class Interceptor implements HttpInterceptor {
     private analyticsServ: AnalyticsService,
     private logger: LoggerService,
     private alertServ: AlertService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private loginServ: LoginService
   ) {  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -44,11 +46,14 @@ export class Interceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
-          this.logger.warn(`Interceptor: Backend returned code ${error.status} An error was:`, error.error.message);
+          this.logger.warn(`Interceptor: A client-side or network error occurred. An error message:`, error.error.message);
           this.alertServ.presentAlert(error.error.message);
         } else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,
+          if (error.status === 401) {
+            this.loginServ.logout();
+          }
           this.logger.warn('Interceptor: An error occurred: ', error);
           this.alertServ.presentAlert();
         }
