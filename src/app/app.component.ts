@@ -49,7 +49,8 @@ export class AppComponent implements OnInit {
     {
       title: 'menu.maps',
       url: '/location-setting',
-      src: 'assets/icons/menu/check.svg',
+      src: 'assets/icons/menu/location.svg',
+      // icon: 'location',
       forGuest: true
     },
     {
@@ -112,7 +113,8 @@ export class AppComponent implements OnInit {
   openFirstPage() {
     const token = localStorage.getItem('token');
     if (token || this.guest) {
-      this.router.navigate(['bakery-search']);
+      // this.router.navigate(['bakery-search']);
+      this.router.navigate(['location-setting']);
     } else {
       this.router.navigate(['start']);
     }

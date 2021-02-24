@@ -1,15 +1,25 @@
-<ion-header></ion-header>
+<app-menu-header [title]="'Maps'"></app-menu-header>
 <ion-content>
   <div class="content">
     <div class="header">
       <h1 class="header__title">{{ 'locationSet.title' | translate }}</h1>
     </div>
+    <agm-map class="map" [latitude]="lat" [longitude]="lng" [zoom]="12">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <agm-marker *ngFor="let bakery of branchesNear$ | async"
+                  [latitude]="+bakery.lat" [longitude]="+bakery.lng"
+                  [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></agm-marker>
+    </agm-map>
     <div class="btn-wrapper">
-      <ion-button class="btn-wrapper__btn btn" fill="outline" [class.selected]="useCurrLocation"
+      <ion-item class="item" lines="none" (click)="onUseCurrLocation()" detail="false" button>
+        <ion-icon slot="start" class="item__icon" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
+        <ion-label>{{ 'locationSet.useCurrLocation' | translate}}</ion-label>
+      </ion-item>
+<!--      <ion-button class="btn-wrapper__btn btn" mode="ios" [class.selected]="useCurrLocation"
                   (click)="onUseCurrLocation()"
-                  expand="block">{{ 'locationSet.useCurrLocation' | translate }}
-        <ion-icon slot="start" class="btn__icon" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
-      </ion-button>
+                  expand="block" fill="outline">{{ 'locationSet.useCurrLocation' | translate }}
+        <ion-icon slot="start"  class="btn__icon ion-float-left" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
+      </ion-button>-->
       <ion-item class="item" lines="none">
         <input #search class="item__input" [placeholder]="'locationSet.searchLocation' | translate "
                    autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
@@ -19,11 +29,5 @@
                   [routerLink]="'/bakery-search'"
                   [disabled]="!useCurrLocation  && !locationSearched">{{ 'locationSet.apply' | translate }}</ion-button>
     </div>
-    <agm-map class="map" [latitude]="lat" [longitude]="lng" [zoom]="12">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      <agm-marker *ngFor="let bakery of branchesNear$ | async"
-                  [latitude]="+bakery.lat" [longitude]="+bakery.lng"
-                  [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></agm-marker>
-    </agm-map>
   </div>
 </ion-content>
