@@ -15,11 +15,6 @@
         <ion-icon slot="start" class="item__icon" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
         <ion-label>{{ 'locationSet.useCurrLocation' | translate}}</ion-label>
       </ion-item>
-<!--      <ion-button class="btn-wrapper__btn btn" mode="ios" [class.selected]="useCurrLocation"
-                  (click)="onUseCurrLocation()"
-                  expand="block" fill="outline">{{ 'locationSet.useCurrLocation' | translate }}
-        <ion-icon slot="start"  class="btn__icon ion-float-left" src="../../../assets/icons/map-location-arrow.svg"></ion-icon>
-      </ion-button>-->
       <ion-item class="item" lines="none">
         <input #search class="item__input" [placeholder]="'locationSet.searchLocation' | translate "
                    autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
@@ -27,7 +22,8 @@
       </ion-item>
       <ion-button class="btn-wrapper__btn btn" size="block"
                   [routerLink]="'/bakery-search'"
-                  [disabled]="!useCurrLocation  && !locationSearched">{{ 'locationSet.apply' | translate }}</ion-button>
+                  [disabled]="!useCurrLocation  && !locationSearched">
+        {{ 'locationSet.' + (locationSearched ? 'useThisLocation' : 'go') | translate }}</ion-button>
     </div>
   </div>
 </ion-content>

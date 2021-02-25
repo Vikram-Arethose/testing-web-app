@@ -35,7 +35,8 @@
     "title": "Standort wählen, um deine Bäckerei zu finden",
     "useCurrLocation": "Aktuellen Standort nutzen",
     "searchLocation": "Nach einem Ort suchen",
-    "apply": "ANWENDEN"
+    "useThisLocation": "Diesen Standort nehmen",
+    "go": "GEHEN!"
   },
   "appleRegister": {
     "title": "Erstelle einen Account für die Brötchen.app mit deiner Apple ID \"name@iclooud.com\"",

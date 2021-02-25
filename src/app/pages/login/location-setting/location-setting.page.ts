@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 
 import { MapsAPILoader } from '@agm/core';
 import { LoggerService } from '../../../services/logger.service';
@@ -6,13 +6,12 @@ import { GeolocationService } from '../../../services/geolocation.service';
 import { BranchNear } from '../../../models/http/branchesNear';
 import { HttpService } from '../../../services/http.service';
 import { Observable } from 'rxjs';
-import { Coordinates } from '../../../models/coordinates';
 import { Location } from '../../../models/location';
 
 @Component({
   selector: 'app-location-setting',
   templateUrl: './location-setting.page.html',
-  styleUrls: ['./location-setting.page.scss'],
+  styleUrls: ['./location-setting.page.scss']
 })
 export class LocationSettingPage implements OnInit {
 
@@ -32,7 +31,7 @@ export class LocationSettingPage implements OnInit {
     private ngZone: NgZone,
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
-    private httpServ: HttpService
+    private httpServ: HttpService,
   ) { }
 
   async ngOnInit() {
@@ -52,7 +51,7 @@ export class LocationSettingPage implements OnInit {
     if (this.useCurrLocation) {
       return false;
     }
-    await this.geolocationServ.getCurrentPosition()
+    await this.geolocationServ.getCurrentPosition();
     if (this.lat && this.lng) {
       this.useCurrLocation = !this.useCurrLocation;
       this.searchElementRef.nativeElement.value = '';
@@ -60,17 +59,6 @@ export class LocationSettingPage implements OnInit {
       this.locationSearched = false;
     }
   }
-
-  // // Get Current Location Coordinates
-  // private async setCurrentLocation() {
-  //   // TODO: need to fix
-  //   const coordinates: any = await this.geolocationServ.getCurrentPosition();
-  //   if (coordinates) {
-  //     this.lat = coordinates.latitude;
-  //     this.lng = coordinates.longitude;
-  //     return true;
-  //   }
-  // }
 
   findAddress(){
     this.mapsAPILoader.load().then(() => {
