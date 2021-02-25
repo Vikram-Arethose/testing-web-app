@@ -50,25 +50,15 @@ export class DateService {
     this.dateSource.next(date);
   }
 
-  getDateFromStr(dateStr?: string) {
-    let date: Date;
-    if (dateStr) {
-      date = new Date(dateStr);
-    } else {
-      date = new Date();
-    }
-    return new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-  }
-
   getDaysAvailability(product: Product): boolean {
     // check days availability
     const selectedDay = this.selectedDate.getDay();
     if (product.availability_new.some(item => item.day === this.weekDays[selectedDay])) {
       // check product available from to
       if (product?.period_available_from && product?.period_available_to) {
-        this.availableFrom = this.getDateFromStr(product.period_available_from.split(' ')[0]);
-        this.availableTo = this.getDateFromStr(product.period_available_to.split(' ')[0]);
-        return this.selectedDate > this.availableFrom && this.selectedDate < this.availableTo;
+        this.availableFrom = this.getLocalFromServerDate(product.period_available_from);
+        this.availableTo = this.getLocalFromServerDate(product.period_available_to);
+        return this.selectedDate >= this.availableFrom && this.selectedDate <= this.availableTo;
       }
     } else {
       return false;
@@ -144,6 +134,10 @@ export class DateService {
 
   getIsoDateFromServerDate(stringDate: string, timeZoneMinutesOffset: number): string {
     return moment(stringDate).add(-timeZoneMinutesOffset, 'minutes').format();
+  }
+
+  getLocalFromServerDate(serverDate: string): Date {
+    return moment.utc(serverDate).local().toDate();
   }
 
   getDefaultMinOrderDate() {
