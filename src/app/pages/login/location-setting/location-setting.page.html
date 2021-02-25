@@ -9,6 +9,7 @@
       <agm-marker *ngFor="let bakery of branchesNear$ | async"
                   [latitude]="+bakery.lat" [longitude]="+bakery.lng"
                   [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></agm-marker>
+      <agm-circle [latitude]="lat" [longitude]="lng" [radius]="3000" fillColor="red"></agm-circle>
     </agm-map>
     <div class="btn-wrapper">
       <ion-item class="item" lines="none" (click)="onUseCurrLocation()" detail="false" button>
