@@ -7,7 +7,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
-import { LocalStorageService } from './services/local-storage.service';
 import { LoggerService } from './services/logger.service';
 import { AccountService } from './services/account.service';
 import { PushService } from './services/push.service';
@@ -113,8 +112,7 @@ export class AppComponent implements OnInit {
   openFirstPage() {
     const token = localStorage.getItem('token');
     if (token || this.guest) {
-      // this.router.navigate(['bakery-search']);
-      this.router.navigate(['location-setting']);
+      this.router.navigate(['bakery-search']);
     } else {
       this.router.navigate(['start']);
     }
