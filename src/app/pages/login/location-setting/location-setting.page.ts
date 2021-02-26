@@ -5,7 +5,7 @@ import { LoggerService } from '../../../services/logger.service';
 import { GeolocationService } from '../../../services/geolocation.service';
 import { BranchNear } from '../../../models/http/branchesNear';
 import { HttpService } from '../../../services/http.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Location } from '../../../models/location';
 
 @Component({
@@ -22,6 +22,7 @@ export class LocationSettingPage implements OnInit {
   lat: number;
   lng: number;
   googleMapType = 'satellite';
+  private subscription: Subscription;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -34,37 +35,37 @@ export class LocationSettingPage implements OnInit {
     private httpServ: HttpService,
   ) { }
 
-  async ngOnInit() {
-    this.geolocationServ.currLocation.subscribe((res: Location) => {
+  ngOnInit() {}
+
+  async ionViewWillEnter() {
+    this.subscription = this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.lat = res.lat;
       this.lng = res.lng;
       this.logger.log('lat, lng', this.lat, this.lng);
     });
     if (await this.geolocationServ.getCurrentPosition()) {
       this.useCurrLocation = true;
+    } else {
+      this.geolocationServ.changeLocation();
     }
     this.getBranchesNear();
-    this.findAddress();
   }
 
-  async onUseCurrLocation() {
-    if (this.useCurrLocation) {
-      return false;
-    }
-    await this.geolocationServ.getCurrentPosition();
-    if (this.lat && this.lng) {
-      this.useCurrLocation = !this.useCurrLocation;
-      this.getBranchesNear();
-      this.resetSearchField();
-    }
-  }
-
-  findAddress(){
+  ionViewDidEnter() {
     this.geolocationServ.findAddress(this.searchElementRef).then(() => {
       this.getBranchesNear();
       this.useCurrLocation = false;
       this.locationSearched = true;
     });
+  }
+
+  async onUseCurrLocation() {
+    await this.geolocationServ.getCurrentPosition();
+    if (this.lat && this.lng) {
+      this.useCurrLocation = true;
+      this.getBranchesNear();
+      this.resetSearchField();
+    }
   }
 
   getBranchesNear() {
@@ -80,6 +81,7 @@ export class LocationSettingPage implements OnInit {
 
   ionViewDidLeave() {
     this.resetSearchField();
+    this.subscription.unsubscribe();
   }
 
 }

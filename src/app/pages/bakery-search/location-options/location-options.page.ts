@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Coordinates } from '../../../models/coordinates';
 import { GeolocationService } from '../../../services/geolocation.service';
 import { Location } from '../../../models/location';
 import { LocalStorageService } from '../../../services/local-storage.service';

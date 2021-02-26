@@ -21,6 +21,11 @@ export class GeolocationService {
 
   private locationSource: BehaviorSubject<Location> = new BehaviorSubject<Location>(new Location());
   currLocation = this.locationSource.asObservable();
+  defaultLocation: Location = {
+    lat: 51.165691,
+    lng: 10.451526,
+    address: 'Deutschland'
+  };
 
   constructor(
     private logger: LoggerService,
@@ -31,9 +36,12 @@ export class GeolocationService {
     private localStorageServ: LocalStorageService
   ) { }
 
-  changeLocation(location: Location) {
+  changeLocation(location?: Location) {
+    if (!location) {
+      location = this.defaultLocation;
+    }
     this.locationSource.next(location);
-
+    // save to local storage
     let locationArr: Location[] = this.localStorageServ.get('locationArr');
     if (locationArr && locationArr.length > 0) {
       const suchLocIndexInLocArr: number = locationArr.findIndex(item => item.address === location.address);
