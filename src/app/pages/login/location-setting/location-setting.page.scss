@@ -22,7 +22,7 @@
   width: 90vw;
   margin: 3vh auto;
   @media (max-height: 670px) {
-    margin: 1.5vh auto;
+    margin: 1vh auto;
   }
 
   &__btn {
@@ -33,7 +33,7 @@
     --color: #493735;
     //text-transform: capitalize;
     @media (max-height: 620px) {
-      height: 40px;
+      //height: 40px;
     }
   }
 
@@ -45,8 +45,8 @@
   margin: 0 0 1.85vh;
   font: 16px/19px Montserrat;
   @media (max-height: 650px) {
-    --min-height: 40px;
-    margin: 0 0 1vh;
+    //--min-height: 40px;
+    margin: 0 0 0.5vh;
   }
   &__input {
     width: 100%;

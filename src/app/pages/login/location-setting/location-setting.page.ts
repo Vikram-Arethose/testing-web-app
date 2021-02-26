@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 
 import { MapsAPILoader } from '@agm/core';
 import { LoggerService } from '../../../services/logger.service';
@@ -54,26 +54,16 @@ export class LocationSettingPage implements OnInit {
     await this.geolocationServ.getCurrentPosition();
     if (this.lat && this.lng) {
       this.useCurrLocation = !this.useCurrLocation;
-      this.searchElementRef.nativeElement.value = '';
       this.getBranchesNear();
-      this.locationSearched = false;
+      this.resetSearchField();
     }
   }
 
   findAddress(){
-    this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // some details
-          this.useCurrLocation = false;
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.locationSearched = true;
-          this.lat = place.geometry.location.lat();
-          this.lng = place.geometry.location.lng();
-          this.getBranchesNear();
-        });
-      });
+    this.geolocationServ.findAddress(this.searchElementRef).then(() => {
+      this.getBranchesNear();
+      this.useCurrLocation = false;
+      this.locationSearched = true;
     });
   }
 
@@ -81,6 +71,15 @@ export class LocationSettingPage implements OnInit {
     if (this.lng && this.lat) {
       this.branchesNear$ = this.httpServ.getBranchesNear(this.lat.toString(), this.lng.toString());
     }
+  }
+
+  resetSearchField() {
+    this.searchElementRef.nativeElement.value = '';
+    this.locationSearched = false;
+  }
+
+  ionViewDidLeave() {
+    this.resetSearchField();
   }
 
 }
