@@ -8,7 +8,7 @@ import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@io
 import { MapsAPILoader } from '@agm/core';
 import { PermissionsRequestResult } from '@capacitor/core/dist/esm/definitions';
 import { Location } from '../models/location';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { newArray } from '@angular/compiler/src/util';
 
@@ -21,6 +21,11 @@ export class GeolocationService {
 
   private locationSource: BehaviorSubject<Location> = new BehaviorSubject<Location>(new Location());
   currLocation = this.locationSource.asObservable();
+  defaultLocation: Location = {
+    lat: 51.165691,
+    lng: 10.451526,
+    address: 'Deutschland'
+  };
 
   constructor(
     private logger: LoggerService,
@@ -31,9 +36,12 @@ export class GeolocationService {
     private localStorageServ: LocalStorageService
   ) { }
 
-  changeLocation(location: Location) {
+  changeLocation(location?: Location) {
+    if (!location) {
+      location = this.defaultLocation;
+    }
     this.locationSource.next(location);
-
+    // save to local storage
     let locationArr: Location[] = this.localStorageServ.get('locationArr');
     if (locationArr && locationArr.length > 0) {
       const suchLocIndexInLocArr: number = locationArr.findIndex(item => item.address === location.address);
@@ -60,7 +68,6 @@ export class GeolocationService {
     } catch (error) {
         this.logger.warn('Geolocation.getCurrentPosition error: ', error);
         if (error.message) {
-          // this.alertServ.presentAlert(error.message + ' You can go to app settings and enable geolocation permission.');
         }
     }
   }
@@ -82,20 +89,22 @@ export class GeolocationService {
     }
   }
 
-  findAddress(elementRef: ElementRef) {
-    this.mapsApiLoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(elementRef.nativeElement);
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.logger.log('find address: ', place);
-          const address = place.formatted_address;
-          const lat = place.geometry.location.lat();
-          const lng = place.geometry.location.lng();
-          this.changeLocation({lat, lng, address});
+  findAddress(elementRef: ElementRef): Promise<void> {
+    return new Promise(resolve => {
+      this.mapsApiLoader.load().then(() => {
+        const autocomplete = new google.maps.places.Autocomplete(elementRef.nativeElement);
+        autocomplete.addListener('place_changed', () => {
+          this.ngZone.run(() => {
+            const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+            this.logger.log('find address: ', place);
+            const address = place.formatted_address;
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+            resolve();
+            this.changeLocation({lat, lng, address});
+          });
         });
       });
     });
   }
-
 }

@@ -4,72 +4,64 @@
 }
 
 .header {
-  background: #F3F3F3;
 
   &__title {
     width: 290px;
     margin: 0 auto;
-    padding: 3.57vh 0;
-
+    padding: 3vh 0;
     text-align: center;
-    font: normal normal 500 25px/30px Montserrat;
+    font: normal normal 600 20px/24px Montserrat;
     color: #493735;
+    @media (max-height: 670px) {
+      padding: 1.5vh 0;
+    }
   }
 }
 
 .btn-wrapper {
-  width: 84.5vw;
-  margin: 4.3vh auto;
+  width: 90vw;
+  margin: 3vh auto;
+  @media (max-height: 670px) {
+    margin: 1vh auto;
+  }
 
   &__btn {
-    height: 60px;
-    margin: 0 0 1.85vh;
-    --border-color: #707070;
-    --border-width: 1px;
+    height: 50px;
+    --border-radius: 20px;
+    --background: #FEDE00;
+    font: 20px/24px Montserrat;
     --color: #493735;
-    @media (max-height: 811px) {
-      height: 50px;
-    }
-    &:nth-child(1) {
-      font: normal normal 300 16px/19px Montserrat;
-    }
-    &:nth-child(2) {
-      font: italic normal 100 14px/18px Montserrat;
-    }
-    &:nth-child(3) {
-      margin: 0;
-      --background: #35B2A5;
-      font: normal normal 500 20px/24px Montserrat;
-      text-transform: uppercase;
-      --color: #fff;
+    //text-transform: capitalize;
+    @media (max-height: 620px) {
+      //height: 40px;
     }
   }
-  .btn {
-    height: 60px;
-    --border-radius: 36px;
 
-    &__icon {
-      //position: absolute;
-      left: 3.5vw;
-      font-size: 31px;
-      color: #000;
-    }
-  }
 }
 
 .item {
-  --min-height: 60px;
-  --border-color: #707070;
-  --border-width: 1px;
-  --border-radius: 36px;
+  --min-height: 50px;
+  --border-radius: 20px;
   margin: 0 0 1.85vh;
-  @media (max-height: 811px) {
-    --min-height: 50px;
+  font: 16px/19px Montserrat;
+  @media (max-height: 650px) {
+    //--min-height: 40px;
+    margin: 0 0 0.5vh;
   }
   &__input {
-    background: #fff;
+    width: 100%;
+    background: #F0F1F3;
     border: none;
     outline: none;
+  }
+  &:nth-of-type(2) {
+    --background: #F0F1F3;
+    font-weight: 300;
+  }
+
+  &__icon {
+    font-size: 25px;
+    color: #5C5B5B;
   }
 }
 
@@ -79,6 +71,6 @@
 
 .map {
   width: 100%;
-  height: 48vh;
+  height: 50vh;
   align-self: flex-end;
 }

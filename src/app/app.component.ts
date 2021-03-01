@@ -7,7 +7,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
-import { LocalStorageService } from './services/local-storage.service';
 import { LoggerService } from './services/logger.service';
 import { AccountService } from './services/account.service';
 import { PushService } from './services/push.service';
@@ -44,6 +43,13 @@ export class AppComponent implements OnInit {
       title: 'menu.legal',
       url: '/legal',
       src: 'assets/icons/menu/check.svg',
+      forGuest: true
+    },
+    {
+      title: 'menu.maps',
+      url: '/location-setting',
+      src: 'assets/icons/menu/location.svg',
+      // icon: 'location',
       forGuest: true
     },
     {

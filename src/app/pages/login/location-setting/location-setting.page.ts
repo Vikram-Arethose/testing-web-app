@@ -5,14 +5,13 @@ import { LoggerService } from '../../../services/logger.service';
 import { GeolocationService } from '../../../services/geolocation.service';
 import { BranchNear } from '../../../models/http/branchesNear';
 import { HttpService } from '../../../services/http.service';
-import { Observable } from 'rxjs';
-import { Coordinates } from '../../../models/coordinates';
+import { Observable, Subscription } from 'rxjs';
 import { Location } from '../../../models/location';
 
 @Component({
   selector: 'app-location-setting',
   templateUrl: './location-setting.page.html',
-  styleUrls: ['./location-setting.page.scss'],
+  styleUrls: ['./location-setting.page.scss']
 })
 export class LocationSettingPage implements OnInit {
 
@@ -23,6 +22,7 @@ export class LocationSettingPage implements OnInit {
   lat: number;
   lng: number;
   googleMapType = 'satellite';
+  private subscription: Subscription;
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -32,67 +32,56 @@ export class LocationSettingPage implements OnInit {
     private ngZone: NgZone,
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
-    private httpServ: HttpService
+    private httpServ: HttpService,
   ) { }
 
-  async ngOnInit() {
-    this.geolocationServ.currLocation.subscribe((res: Location) => {
+  ngOnInit() {}
+
+  async ionViewWillEnter() {
+    this.subscription = this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.lat = res.lat;
       this.lng = res.lng;
       this.logger.log('lat, lng', this.lat, this.lng);
     });
     if (await this.geolocationServ.getCurrentPosition()) {
       this.useCurrLocation = true;
+    } else {
+      this.geolocationServ.changeLocation();
     }
     this.getBranchesNear();
-    this.findAddress();
+  }
+
+  ionViewDidEnter() {
+    this.geolocationServ.findAddress(this.searchElementRef).then(() => {
+      this.getBranchesNear();
+      this.useCurrLocation = false;
+      this.locationSearched = true;
+    });
   }
 
   async onUseCurrLocation() {
-    if (this.useCurrLocation) {
-      return false;
-    }
-    await this.geolocationServ.getCurrentPosition()
+    await this.geolocationServ.getCurrentPosition();
     if (this.lat && this.lng) {
-      this.useCurrLocation = !this.useCurrLocation;
-      this.searchElementRef.nativeElement.value = '';
+      this.useCurrLocation = true;
       this.getBranchesNear();
-      this.locationSearched = false;
+      this.resetSearchField();
     }
-  }
-
-  // // Get Current Location Coordinates
-  // private async setCurrentLocation() {
-  //   // TODO: need to fix
-  //   const coordinates: any = await this.geolocationServ.getCurrentPosition();
-  //   if (coordinates) {
-  //     this.lat = coordinates.latitude;
-  //     this.lng = coordinates.longitude;
-  //     return true;
-  //   }
-  // }
-
-  findAddress(){
-    this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // some details
-          this.useCurrLocation = false;
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.locationSearched = true;
-          this.lat = place.geometry.location.lat();
-          this.lng = place.geometry.location.lng();
-          this.getBranchesNear();
-        });
-      });
-    });
   }
 
   getBranchesNear() {
     if (this.lng && this.lat) {
       this.branchesNear$ = this.httpServ.getBranchesNear(this.lat.toString(), this.lng.toString());
     }
+  }
+
+  resetSearchField() {
+    this.searchElementRef.nativeElement.value = '';
+    this.locationSearched = false;
+  }
+
+  ionViewDidLeave() {
+    this.resetSearchField();
+    this.subscription.unsubscribe();
   }
 
 }

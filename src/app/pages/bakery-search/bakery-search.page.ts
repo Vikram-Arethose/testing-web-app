@@ -5,7 +5,7 @@ import { GeolocationService } from '../../services/geolocation.service';
 import { HomeBranch } from '../../models/http/homeBranch';
 import { HttpService } from '../../services/http.service';
 import { Observable } from 'rxjs';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Location } from '../../models/location';
 import { BakeryService } from '../../services/bakery.service';
 
@@ -33,16 +33,20 @@ export class BakerySearchPage implements OnInit {
     private router: Router
   ) { }
 
-  async ngOnInit() {
-    this.geolocationServ.currLocation.subscribe((res: Location) => {
-      this.myAddress = res.address;
-      this.lat = res.lat;
-      this.lng = res.lng;
+  ngOnInit() {
+    this.geolocationServ.currLocation.subscribe(async (res: Location) => {
+      if (res.lat && res.lng) {
+        this.myAddress = res.address;
+        this.lat = res.lat;
+        this.lng = res.lng;
+      } else {
+        if (!await this.geolocationServ.getCurrentPosition()) {
+          await this.router.navigate(['bakery-search/location-options']);
+          return;
+        }
+      }
       this.getBakeries();
     });
-    if (!await this.geolocationServ.getCurrentPosition()) {
-      await this.router.navigate(['bakery-search/location-options']);
-    }
   }
 
   ionViewWillEnter() {

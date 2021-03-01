@@ -40,7 +40,7 @@
     "title": "Select your location to find your bakery",
     "useCurrLocation": "Use current location",
     "searchLocation": "Search for a location",
-    "apply": "apply"
+    "useThisLocation": "Use this location"
   },
   "appleRegister": {
     "title": "Create an account for Brötchen.app with your Apple ID \"name@iclooud.com\"",
@@ -68,6 +68,7 @@
     "favorites": "Favorites",
     "paymentMethods": "Payment Methods",
     "legal": "Legal",
+    "maps": "Maps",
     "support": "Support"
   },
   "account": {
