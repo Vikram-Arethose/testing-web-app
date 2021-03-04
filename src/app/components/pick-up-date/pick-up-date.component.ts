@@ -102,7 +102,7 @@ export class PickUpDateComponent implements OnInit {
       if (this.isVerify) {
         this.dateService.dateShared.subscribe(res => this.date = this.time = res);
       } else {
-        this.date = this.time = null;
+        this.dateService.changeDate(this.dateService.getDefaultMinOrderDate().toISOString());
       }
     }
   }
