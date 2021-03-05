@@ -108,12 +108,11 @@ export class DateService {
     return product;
   }
 
-  getOpeningHoursByDate(date: Date): OpeningHoursDay {
+  getOpeningHoursByDate(date: Date): OpeningHoursDay[] {
     const selectedDay = this.weekDaysFull[date.getDay()];
-    const openHoursDay: OpeningHoursDay = this.bakery.branchDetails.opening_hours.default[selectedDay];
-    if (openHoursDay.start && openHoursDay.end) {
-      return openHoursDay;
-    }
+    let openHoursDayArr: OpeningHoursDay[] = this.bakery.branchDetails.opening_hours.default[selectedDay];
+    openHoursDayArr = openHoursDayArr.filter(item => item.start && item.end);
+    return openHoursDayArr;
   }
 
   getDateByTime(date: Date, startOrEnd: string, openingHours: OpeningHoursDay): Date {
@@ -124,12 +123,12 @@ export class DateService {
   }
 
   checkSelectedDate(date: Date): boolean {
-    const openingHours: OpeningHoursDay = this.getOpeningHoursByDate(date);
-    if (openingHours) {
-      return date >= this.getDateByTime(date, 'start', openingHours) &&
-        date <= this.getDateByTime(date, 'end', openingHours) && date > new Date();
-    }
-    return false;
+    const openingHoursArr: OpeningHoursDay[] = this.getOpeningHoursByDate(date);
+    // if (openingHoursArr) {
+    return openingHoursArr.some(item => date >= this.getDateByTime(date, 'start', item) &&
+        date <= this.getDateByTime(date, 'end', item) && date > new Date());
+    // }
+    // return false;
   }
 
   getIsoDateFromServerDate(stringDate: string, timeZoneMinutesOffset: number): string {
@@ -143,18 +142,26 @@ export class DateService {
   getDefaultMinOrderDate() {
     const minColDateMom = moment().add(45 + 15 - moment().minutes() % 15, 'minutes').startOf('minute');
     let minColDate: Date;
-    let openingHours = this.getOpeningHoursByDate(minColDateMom.toDate());
-    while (1) {
-      if (openingHours && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHours))) {
+    let openingHoursArr: OpeningHoursDay[] = this.getOpeningHoursByDate(minColDateMom.toDate());
+    for (let i = 0; i < 7; i++) {
+      // tslint:disable-next-line:max-line-length
+      if (openingHoursArr.length !== 0 && (minColDateMom.toDate() <=
+        this.getDateByTime(minColDateMom.toDate(), 'end', openingHoursArr[openingHoursArr.length - 1]))) {
         break;
       } else {
-        openingHours = this.getOpeningHoursByDate(minColDateMom.add(1, 'day').startOf('day').toDate());
+        openingHoursArr = this.getOpeningHoursByDate(minColDateMom.add(1, 'day').startOf('day').toDate());
       }
     }
     if (this.checkSelectedDate(minColDateMom.toDate())) {
       minColDate = minColDateMom.toDate();
-    } else if (minColDateMom.toDate() < this.getDateByTime(minColDateMom.toDate(), 'start', openingHours)) {
-      minColDate = this.getDateByTime(minColDateMom.toDate(), 'start', openingHours);
+    } else {
+      // tslint:disable-next-line:max-line-length
+      const rightOpeningTimeIndex = openingHoursArr.findIndex(item => {
+        return minColDateMom.toDate() < this.getDateByTime(minColDateMom.toDate(), 'start', item);
+      });
+      if (rightOpeningTimeIndex !== -1) {
+        minColDate = this.getDateByTime(minColDateMom.toDate(), 'start', openingHoursArr[rightOpeningTimeIndex]);
+      }
     }
     this.logger.log('minColDate: ', minColDate);
     return minColDate;

@@ -18,13 +18,13 @@ export interface HomeBranchesRes {
 }
 export interface OpeningHours {
   default?: {
-    friday: OpeningHoursDay;
-    monday: OpeningHoursDay;
-    saturday: OpeningHoursDay;
-    sunday: OpeningHoursDay;
-    thursday: OpeningHoursDay;
-    tuesday: OpeningHoursDay;
-    wednesday: OpeningHoursDay;
+    friday: OpeningHoursDay[];
+    monday: OpeningHoursDay[];
+    saturday: OpeningHoursDay[];
+    sunday: OpeningHoursDay[];
+    thursday: OpeningHoursDay[];
+    tuesday: OpeningHoursDay[];
+    wednesday: OpeningHoursDay[];
   };
 }
 
