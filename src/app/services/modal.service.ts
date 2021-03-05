@@ -14,10 +14,13 @@ export class ModalService {
     private modalController: ModalController,
   ) { }
 
-  async presentPickUpDateModal() {
+  async presentPickUpDateModal(isVerify?: boolean) {
     const modal = await this.modalController.create({
       component: PickUpDateComponent,
-      cssClass: 'pick-up-date-modal'
+      cssClass: 'pick-up-date-modal',
+      componentProps: {
+        isVerify
+      }
     });
     return await modal.present();
   }

@@ -72,7 +72,7 @@
         <p class="date__text">{{ 'bakery.collection' | translate }}:
           {{ date | date:'EEEE, dd.MM.yy,  HH:mm': '' : dateLocale}}
           {{ 'orders.hrs' | translate }}</p>
-        <ion-button class="date__btn btn" size="small" fill="clear" (click)="presentPickUpDateModal()">
+        <ion-button class="date__btn btn" size="small" fill="clear" (click)="presentPickUpDateModal(true)">
           <ion-icon class="btn__icon" slot="icon-only"
                     src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
         </ion-button>

@@ -134,8 +134,8 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.cartService.getCart();
   }
 
-  presentPickUpDateModal() {
-    this.modalService.presentPickUpDateModal();
+  presentPickUpDateModal(isVerify?: boolean) {
+    this.modalService.presentPickUpDateModal(isVerify);
   }
 
   onInfo() {

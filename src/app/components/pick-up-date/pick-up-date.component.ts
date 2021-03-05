@@ -100,7 +100,10 @@ export class PickUpDateComponent implements OnInit {
       this.activeBtn = null;
       this.alertServ.presentAlert(this.translate.instant('alert.bakeryNotWorkAtThisTime'));
       if (this.isVerify) {
-        this.dateService.dateShared.subscribe(res => this.date = this.time = res);
+        this.dateService.dateShared.subscribe(res => {
+          this.date = this.time = res;
+          this.setActiveBtn();
+        });
       } else {
         this.dateService.changeDate(this.dateService.getDefaultMinOrderDate().toISOString());
       }
