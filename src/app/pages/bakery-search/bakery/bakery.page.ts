@@ -109,7 +109,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
       this.bakeryInfo = this.trimBakeryInfo();
-      this.setOpeningHours(res.branchDetails.opening_hours);
+      this.setOpeningHours(res.branchDetails.opening_hours_new);
       this.categories = res.categories;
       if (res.categories[0] && res.categories[0].products) {
         this.selectedCategoryIndex = 0;
@@ -128,7 +128,6 @@ export class BakeryPage implements OnInit, OnDestroy {
       }
     }
     this.openingHours = Object.entries(this.openingHours);
-    this.logger.log('this.openingHours: ', this.openingHours);
   }
 
   onCategorySelect(index: number) {

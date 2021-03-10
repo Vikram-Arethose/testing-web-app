@@ -21,7 +21,7 @@ export interface BakeryDetails {
   min_order_value: string;
   name: string;
   number: string;
-  opening_hours: OpeningHours;
+  opening_hours_new: OpeningHours;
   photo: string;
   street: string;
   updated_at: string;

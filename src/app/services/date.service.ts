@@ -110,7 +110,7 @@ export class DateService {
 
   getOpeningHoursByDate(date: Date): OpeningHoursDay[] {
     const selectedDay = this.weekDaysFull[date.getDay()];
-    let openHoursDayArr: OpeningHoursDay[] = this.bakery.branchDetails.opening_hours.default[selectedDay];
+    let openHoursDayArr: OpeningHoursDay[] = this.bakery.branchDetails.opening_hours_new.default[selectedDay];
     openHoursDayArr = openHoursDayArr.filter(item => item.start && item.end);
     return openHoursDayArr;
   }
