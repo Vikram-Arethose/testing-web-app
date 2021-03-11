@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '../../models/location';
 import { BakeryService } from '../../services/bakery.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-bakery-search',
@@ -30,7 +31,8 @@ export class BakerySearchPage implements OnInit {
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
     private httpServ: HttpService,
-    private router: Router
+    private router: Router,
+    private modalServ: ModalService
   ) { }
 
   ngOnInit() {
@@ -51,6 +53,8 @@ export class BakerySearchPage implements OnInit {
 
   ionViewWillEnter() {
     this.getBakeries();
+    // TODO: need cancel
+    this.modalServ.presentPaymentMethodsModal();
   }
 
   getBakeries() {
