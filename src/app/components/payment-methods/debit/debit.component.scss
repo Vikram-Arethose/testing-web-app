@@ -1,8 +1,5 @@
-.spinner {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.top-wrapper {
+  position: relative;
 }
 
 .top {
@@ -13,7 +10,7 @@
 
 .arrow {
   position: absolute;
-  top: 5vh;
+  top: 4vh;
   left: 5.6vw;
   font-size: 9vw;
   color: #FEDE00;
@@ -21,7 +18,7 @@
 
 .container {
   height: 100%;
-  padding: 1vh 7vw 3vh;
+  padding: 4vh 7vw;
   overflow: auto;
 }
 
@@ -32,9 +29,6 @@
   &__title {
     padding: 0 0 20px;
     font-size: large;
-  }
-  &__img {
-    width: 70px;
   }
 }
 
@@ -58,7 +52,6 @@
   .item {
     &__label {}
     &__input {
-      //--padding-start: 10vw;
       --padding-top: 0;
       --padding-bottom: 0;
       font-size: large;
