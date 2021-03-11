@@ -3,17 +3,25 @@
 <ion-content>
   <div class="container">
     <h2 class="title">{{ 'paymentMethods.title' | translate }}</h2>
-    <div class="row">
-      <img width="79px" src="../../../../assets/icons/payments/paypal.png">
-      <img src="../../../../assets/icons/payments/apple-pay-google@3x.png">
-      <img width="48px" src="../../../../assets/icons/payments/mastercard.svg">
+    <div class="icons-block">
+      <div class="icons-block__row">
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/mastercard.svg"></ion-icon>
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/maestro.svg"></ion-icon>
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/visa.svg"></ion-icon>
+      </div>
+      <div class="icons-block__row">
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/sepa.svg"></ion-icon>
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/paypal.svg"></ion-icon>
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/klarna.svg"></ion-icon>
+      </div>
     </div>
-    <div class="row">
-      <img width="89px" src="../../../../assets/icons/payments/maestro.svg">
-      <img width="75px" src="../../../../assets/icons/payments/visa.svg">
-    </div>
-    <div class="row">
-      <img width="75px" src="../../../../assets/icons/payments/sepa.png">
+    <h2 class="title">{{ 'paymentMethods.comingSoon' | translate }}</h2>
+    <div class="icons-block">
+      <div class="icons-block__row">
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/google-pay.svg"></ion-icon>
+        <ion-icon class="icons-block__icon" src="../../../../assets/icons/payments/apple-pay.svg"></ion-icon>
+        <ion-icon class="icons-block__icon"></ion-icon>
+      </div>
     </div>
   </div>
 </ion-content>

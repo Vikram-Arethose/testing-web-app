@@ -127,6 +127,7 @@
   "paymentMethods": {
     "header": "Payment Methods",
     "title": "We offer the following payment methods in our order process.",
+    "comingSoon": "Coming soon!",
     "otherOptions": "Other options"
   },
   "bakerySearch": {

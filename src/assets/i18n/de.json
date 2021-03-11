@@ -127,6 +127,7 @@
   "paymentMethods": {
     "header": "Zahlungsmethoden",
     "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an.",
+    "comingSoon": "Kommt bald!",
     "otherOptions": "Andere Optionen"
   },
   "bakerySearch": {
