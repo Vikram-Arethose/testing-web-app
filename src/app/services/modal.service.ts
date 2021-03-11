@@ -7,6 +7,7 @@ import { LoginFirstComponent } from '../components/login-first/login-first.compo
 import { LoggerService } from './logger.service';
 import { DateService } from './date.service';
 import { Router } from '@angular/router';
+import { PaymentMethodsComponent } from '../components/payment-methods/payment-methods.component';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,14 @@ export class ModalService {
     const modal = await this.modalController.create({
       component: LoginFirstComponent,
       cssClass: 'login-first-modal'
+    });
+    return await modal.present();
+  }
+
+  async presentPaymentMethodsModal() {
+    const modal = await this.modalController.create({
+      component: PaymentMethodsComponent,
+      cssClass: 'payment-methods-modal'
     });
     return await modal.present();
   }

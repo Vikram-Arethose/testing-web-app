@@ -3,7 +3,6 @@ import { DateService } from '../../../../services/date.service';
 import { CartService } from '../../../../services/cart.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { PickUpDateComponent } from '../../../../components/pick-up-date/pick-up-date.component';
-import { PaymentMethodsComponent } from '../../../../components/payment-methods/payment-methods.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoggerService } from '../../../../services/logger.service';
 import { Product } from '../../../../models/http/bakeryFull';
@@ -15,6 +14,7 @@ import { ApiResponse } from '../../../../models/http/apiResponse';
 import { LocalStorageService } from '../../../../services/local-storage.service';
 import { LoadingService } from '../../../../services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ModalService } from '../../../../services/modal.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -40,6 +40,7 @@ export class ShoppingCartPage implements OnInit {
     private locStorageServ: LocalStorageService,
     private logger: LoggerService,
     private modalController: ModalController,
+    private modalServ: ModalService,
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService
@@ -75,14 +76,6 @@ export class ShoppingCartPage implements OnInit {
       component: PickUpDateComponent,
       cssClass: 'pick-up-date-modal',
       componentProps: {isVerify: true}
-    });
-    return await modal.present();
-  }
-
-  async presentPaymentMethodsModal() {
-    const modal = await this.modalController.create({
-      component: PaymentMethodsComponent,
-      cssClass: 'payment-methods-modal'
     });
     return await modal.present();
   }
@@ -149,14 +142,14 @@ export class ShoppingCartPage implements OnInit {
           }
         });
       } else {
-        this.presentPaymentMethodsModal();
+        this.modalServ.presentPaymentMethodsModal();
       }
     }
   }
 
   chooseOtherPayment() {
     if (this.checkCart()) {
-      this.presentPaymentMethodsModal();
+      this.modalServ.presentPaymentMethodsModal();
     }
   }
 
