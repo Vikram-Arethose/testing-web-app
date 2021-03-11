@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HomeBranch } from '../../models/http/homeBranch';
+import { HomeBranch, OpeningHoursDay } from '../../models/http/homeBranch';
 import { NavigationExtras, Router } from '@angular/router';
 import { BakeryService } from '../../services/bakery.service';
 import { HttpService } from '../../services/http.service';
 import { AccountService } from '../../services/account.service';
 import { Observable } from 'rxjs';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'app-bakery-item',
@@ -20,10 +21,21 @@ export class BakeryItemComponent implements OnInit {
   iconHeartFilled = '../../../assets/icons/bakery/heart-filled.svg';
   $guest: Observable<boolean> = this.accountServ.sharedGuest$;
 
+  get openUntil(): string {
+    let todayOpeningHours: OpeningHoursDay[] = this.bakery.openingHours?.default[this.today];
+    if (Array.isArray(todayOpeningHours)) {
+      todayOpeningHours = todayOpeningHours.filter((item: OpeningHoursDay) => item.start && item.end);
+      if (todayOpeningHours.length > 0) {
+        return todayOpeningHours[todayOpeningHours.length - 1]?.end;
+      }
+    }
+  }
+
   constructor(
     public accountServ: AccountService,
     public bakeryServ: BakeryService,
     private httpServ: HttpService,
+    private logger: LoggerService,
     private router: Router
   ) { }
 

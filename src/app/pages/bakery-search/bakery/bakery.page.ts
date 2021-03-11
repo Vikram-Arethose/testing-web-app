@@ -14,6 +14,8 @@ import { AlertService } from '../../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { Subscription } from 'rxjs';
+import { OpeningHours, OpeningHoursDay } from '../../../models/http/homeBranch';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-bakery',
@@ -107,7 +109,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
       this.bakeryInfo = this.trimBakeryInfo();
-      this.openingHours = Object.entries(res.branchDetails.opening_hours.default);
+      this.setOpeningHours(res.branchDetails.opening_hours_new);
       this.categories = res.categories;
       if (res.categories[0] && res.categories[0].products) {
         this.selectedCategoryIndex = 0;
@@ -115,6 +117,17 @@ export class BakeryPage implements OnInit, OnDestroy {
       }
       this.lastUsedPayment = res?.last_used_payment;
     });
+  }
+
+  setOpeningHours(openingHours: OpeningHours) {
+    this.openingHours = JSON.parse(JSON.stringify(openingHours.default));
+    for (const day in this.openingHours) {
+      if (this.openingHours.hasOwnProperty(day)) {
+        // @ts-ignore
+        this.openingHours[day] = this.openingHours[day].filter((item: OpeningHoursDay) => item.start && item.end);
+      }
+    }
+    this.openingHours = Object.entries(this.openingHours);
   }
 
   onCategorySelect(index: number) {

@@ -40,15 +40,25 @@
         </div>
         <div class="open-hours">
           <div class="open-hours__row">
-            <ion-icon class="open-hours__icon" src="../../../../assets/icons/bakery/calendar&clock.svg"></ion-icon>
-            <p>{{ 'bakery.openHour' | translate }}</p>
-          </div>
-          <div class="open-hours__list list">
-            <div class="list__item" *ngFor="let item of openingHours">
-              <span class="list__item-day">{{ getShortDayName(item[0]) }}</span>
-              <span>{{item[1].start}} - {{item[1].end}}</span>
+            <div>
+              <ion-icon class="open-hours__icon" src="../../../../assets/icons/bakery/calendar&clock.svg"></ion-icon>
             </div>
+            <div class="open-hours__list list">
+              <p class="list__title">{{ 'bakery.openHour' | translate }}</p>
+              <div class="list__item" *ngFor="let item of openingHours">
+                <span class="list__item-day">{{ getShortDayName(item[0]) }}</span>
+                <span *ngIf="item[1].length > 0; else dash">{{item[1][0].start}} - {{item[1][item[1].length - 1].end}}</span>
+              </div>
+            </div>
+            <div class="open-hours__list list">
+              <p class="list__title">{{ 'bakery.lunchBreak' | translate }}:</p>
+              <div class="list__item" *ngFor="let item of openingHours">
+                <span *ngIf="item[1].length > 1; else dash">{{item[1][0].end}} - {{item[1][item[1].length - 1].start}}</span>
+              </div>
+            </div>
+            <ng-template #dash>-</ng-template>
           </div>
+
         </div>
       </div>
       <div class="pick-up-place">

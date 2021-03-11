@@ -96,19 +96,20 @@
   .open-hours {
     &__row {
       display: flex;
-      align-items: flex-end;
     }
 
     &__icon {
-      margin: 0 15px 0 0;
       font-size: 24px;
     }
 
     &__list {
-      padding: 11px 0 16px 75px;
+      padding: 11px 0 16px 4vw;
     }
 
     .list {
+      &__title {
+        padding: 0 0 1.35vh;
+      }
       &__item {
         width: 115px;
         display: flex;

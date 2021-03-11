@@ -13,10 +13,10 @@
         <img class="icon" src="{{bakeryServ.getIcon(feature)}}" *ngFor="let feature of bakery.features">
       </div>
       <p class="bakery__text">
-          <span *ngIf="bakery.openingHours?.default[today]?.end">
-            {{ 'favorites.openUntil' | translate }} {{bakery.openingHours?.default[today]?.end}} Uhr -
-          </span>
-        {{bakery.distance | number:'1.1-1'}} km</p></div>
+        <span *ngIf="openUntil">{{ 'favorites.openUntil' | translate }} {{ openUntil }} Uhr -</span>
+        <span *ngIf="bakery.distance">{{bakery.distance | number:'1.1-1'}} km</span>
+      </p>
+    </div>
   </div>
   <div class="col">
     <ion-icon class="icon-like" *ngIf="!($guest | async)" (click)="onFavorite(bakery.id, $event)" slot="icon-only"

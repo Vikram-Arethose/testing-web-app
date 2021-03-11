@@ -4,15 +4,25 @@ import { PickUpDateComponent } from '../components/pick-up-date/pick-up-date.com
 import { Product } from '../models/http/bakeryFull';
 import { ProductDetailsComponent } from '../components/product-details/product-details.component';
 import { LoginFirstComponent } from '../components/login-first/login-first.component';
+import { LoggerService } from './logger.service';
+import { DateService } from './date.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
 
+  date: string;
+
   constructor(
+    private dateServ: DateService,
     private modalController: ModalController,
-  ) { }
+    private loggerServ: LoggerService,
+    private router: Router
+  ) {
+    this.dateServ.dateShared.subscribe(res => this.date = res);
+  }
 
   async presentPickUpDateModal(isVerify?: boolean) {
     const modal = await this.modalController.create({
@@ -22,6 +32,13 @@ export class ModalService {
         isVerify
       }
     });
+
+    modal.onDidDismiss().then((res) => {
+      if (!this.date) {
+        this.router.navigate(['bakery-search']);
+      }
+    });
+
     return await modal.present();
   }
 
