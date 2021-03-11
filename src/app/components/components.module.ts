@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { GooglePayComponent } from './google-pay/google-pay.component';
-import { OtherOptionsComponent } from './payment-methods/other-options/other-options.component';
 import { DebitComponent } from './payment-methods/debit/debit.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { BakeryItemComponent } from './bakery-item/bakery-item.component';
@@ -24,7 +23,6 @@ import { LoginFirstComponent } from './login-first/login-first.component';
     ProductDetailsComponent,
     PaymentMethodsComponent,
     GooglePayComponent,
-    OtherOptionsComponent,
     DebitComponent,
     SpinnerComponent,
     BakeryItemComponent,
@@ -44,7 +42,6 @@ import { LoginFirstComponent } from './login-first/login-first.component';
     ProductDetailsComponent,
     PaymentMethodsComponent,
     GooglePayComponent,
-    OtherOptionsComponent,
     DebitComponent,
     SpinnerComponent,
     BakeryItemComponent,

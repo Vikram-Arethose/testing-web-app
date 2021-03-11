@@ -4,42 +4,25 @@
 <div class="container">
   <div class="title">{{ 'menu.paymentMethods' | translate }}</div>
   <div class="payments">
-    <div class="payments__item item">
-      <ion-icon class="item__icon" src="../../../assets/icons/payments/apple-pay.svg"></ion-icon>
+    <div class="payments__item item" (click)="makePaymentBy('credit')" tappable>
+      <ion-icon class="item__icon" src="../../../assets/icons/payments/credit-card.svg"></ion-icon>
       <p class="item__label">Kreditkarte</p>
     </div>
-    <div class="payments__item item">
-      <ion-icon class="item__icon" src="../../../assets/icons/payments/apple-pay.svg"></ion-icon>
-      <p class="item__label">Klarna sofort</p>
+    <div class="payments__item item" (click)="makePaymentBy('sofort')" tappable>
+      <ion-icon *ngIf="isAndroid; else iosIcon"
+                class="item__icon" src="../../../assets/icons/payments/klarna.svg"></ion-icon>
+      <ng-template #iosIcon>
+        <ion-icon class="item__icon" src="../../../assets/icons/payments/klarna2.svg"></ion-icon>
+      </ng-template>
+      <p class="item__label">sofort.</p>
     </div>
-    <div class="payments__item item">
-      <ion-icon class="item__icon" src="../../../assets/icons/payments/apple-pay.svg"></ion-icon>
-      <p class="item__label">Klarna sofort</p>
+    <div class="payments__item item" (click)="makePaymentBy('paypal')" tappable>
+      <ion-icon class="item__icon" src="../../../assets/icons/payments/paypal.svg"></ion-icon>
+      <p class="item__label">PayPal</p>
     </div>
-    <div class="payments__item item">
-      <ion-icon class="item__icon" src="../../../assets/icons/payments/apple-pay.svg"></ion-icon>
-      <p class="item__label">Klarna sofort</p>
+    <div class="payments__item item" (click)="makePaymentBy('debit')" tappable>
+      <ion-icon class="item__icon" src="../../../assets/icons/payments/sepa.svg"></ion-icon>
+      <p class="item__label">Sepa Lastschrift</p>
     </div>
   </div>
- <!-- <div class="payment" tappable (click)="makePaymentBy('sofort')">
-    <div class="payment__img-container">
-      <img class="payment__img" src="../assets/img/payments/klarna_sofort.jpg">
-    </div>
-    <p class="payment__name">Klarna sofort</p>
-  </div>
-  <div class="payment" tappable (click)="makePaymentBy('credit')">
-    <div class="payment__img-container">
-      <img class="payment__img" src="assets/icons/payments/credit-card.svg">
-    </div>
-    <p class="payment__name">Kreditkarte</p>
-  </div>
-  <div class="payment" tappable (click)="makePaymentBy('debit')">
-    <div class="payment__img-container">
-      <img class="payment__img payment__img_sepa" src="assets/icons/payments/sepa.png">
-    </div>
-    <p class="payment__name">Lastschrift</p>
-  </div>-->
- <!-- <div class="link-wrapper">
-    <a class="link" (click)="onOtherOption()">{{ 'paymentMethods.otherOptions' | translate }}</a>
-  </div>-->
 </div>

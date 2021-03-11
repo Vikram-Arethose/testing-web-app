@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { GooglePayComponent } from '../google-pay/google-pay.component';
-import { OtherOptionsComponent } from './other-options/other-options.component';
 import { CreateStxRes } from '../../models/http/createStxRes';
 import { HttpService } from '../../services/http.service';
 import { InAppBrowserObject } from '@ionic-native/in-app-browser';
@@ -12,7 +11,6 @@ import { BakeryService } from '../../services/bakery.service';
 import { BakeryFull } from '../../models/http/bakeryFull';
 import { DebitComponent } from './debit/debit.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-payment-methods',
@@ -21,6 +19,7 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class PaymentMethodsComponent implements OnInit {
 
+  isAndroid: boolean = this.platform.is('android');
   private bakery: BakeryFull;
   private date: string;
 
@@ -32,6 +31,7 @@ export class PaymentMethodsComponent implements OnInit {
     private httpServ: HttpService,
     private iab: InAppBrowser,
     private modalController: ModalController,
+    private platform: Platform
   ) { }
 
   ngOnInit() {
@@ -52,15 +52,6 @@ export class PaymentMethodsComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  async onOtherOption() {
-    await this.modalController.dismiss();
-    const modal = await this.modalController.create({
-      component: OtherOptionsComponent,
-      cssClass: 'other-option-modal'
-    });
-    return await modal.present();
-  }
-
   makePaymentBy(paymentType: string) {
     switch (paymentType) {
       case 'credit':
@@ -70,7 +61,10 @@ export class PaymentMethodsComponent implements OnInit {
         this.presentDebitModal();
         break;
       case 'sofort':
-        this.makeSofortPayment();
+        this.makeIabPayment('/payment/sofort');
+        break;
+      case 'paypal':
+        this.makeIabPayment('/payment/paypal');
         break;
     }
   }
@@ -89,8 +83,8 @@ export class PaymentMethodsComponent implements OnInit {
     this.httpServ.handleIabResult(browser);
   }
 
-  makeSofortPayment() {
-    this.httpServ.iabPayment('/payment/sofort');
+  makeIabPayment(url: string) {
+    this.httpServ.iabPayment(url);
   }
 
   async presentDebitModal() {
