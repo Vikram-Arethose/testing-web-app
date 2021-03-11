@@ -17,7 +17,7 @@
           <h3 class="setting__label" *ngIf="data === 'phone'">{{ 'account.country'  | translate }}</h3>
           <h3 class="setting__label">{{settingLabel}}</h3>
         </div>
-        <ion-item class="setting__item setting__item_purple item" lines="none">
+        <ion-item class="setting__item item" lines="none">
           <ion-label class="item__label" *ngIf="data === 'phone'">+49</ion-label>
           <ion-input class="item__input" [(ngModel)]="inputText" [placeholder]="placeholder" [type]="type"></ion-input>
           <ion-button class="btn-check" fill="outline" (click)="accept()">{{ 'account.save' | translate }}</ion-button>
