@@ -79,9 +79,7 @@ export class OrdersPage implements OnInit {
 
   onSaveChange() {
     this.isSave = !this.isSave;
-    if (this.isSave) {
-    // TODO: make saving order
-    }
+    if (this.isSave) {}
   }
 
 }
