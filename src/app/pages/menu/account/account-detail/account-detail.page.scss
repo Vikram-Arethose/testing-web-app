@@ -11,6 +11,10 @@
   }
 }
 
+ion-content {
+  --background: #F5F5F5;
+}
+
 .setting {
   background: #F5F5F5;
   .label-wrapper {
@@ -31,6 +35,9 @@
     }
     &:last-child {
       padding: 0 0 11.2vh;
+    }
+    &_push:last-child {
+      padding-bottom: 0;
     }
   }
 
@@ -105,4 +112,20 @@
 .top-grey {
   height: 32px;
   background: #F5F5F5;
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    width: 70vw;
+    padding: 7.39vh 0;
+    font-size: 4vw;
+    text-align: center;
+    color: #493735;
+  }
+  &__img::part(image) {
+    border-radius: 8vw;
+  }
 }

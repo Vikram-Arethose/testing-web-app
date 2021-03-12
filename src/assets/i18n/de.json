@@ -80,6 +80,7 @@
     "language": "Sprache",
     "settings": "Einstellungen",
     "notifications": "Benachrichtigungen",
+    "pushExplanation": "Erhalte eine Nachricht sobald deine Brötchen abholbereit sind!",
     "pushNotifications": "Push-Benachrichtigungen",
     "changePass": "Passwort ändern",
     "currentPass": "Aktuelles Passwort",

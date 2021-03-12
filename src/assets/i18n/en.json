@@ -81,6 +81,7 @@
     "settings": "Settings",
     "notifications": "Notifications",
     "pushNotifications": "Push-Notifications",
+    "pushExplanation": "Receive a message as soon as your order is ready to be picked up",
     "changePass": "Change Password",
     "currentPass": "current password",
     "newPass": "new password",

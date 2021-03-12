@@ -8,7 +8,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="ion-content">
 
   <div [ngSwitch]="true">
     <div *ngSwitchCase="data === 'first_name' || data === 'last_name' || data === 'email' || data === 'phone'">
@@ -45,11 +45,15 @@
     <div *ngSwitchCase="data === 'notifications'">
       <div class="setting">
         <h3 class="setting__label"></h3>
-          <ion-item class="setting__item item">
+          <ion-item class="setting__item setting__item_push item">
             <ion-label class="item__label">{{ 'account.pushNotifications' | translate }}</ion-label>
             <ion-toggle class="item__toggle" [checked]="account.notifications === true"
                         (ionChange)="onNotificationChange()"></ion-toggle>
           </ion-item>
+      </div>
+      <div class="example">
+        <p class="example__title">{{ 'account.pushExplanation' | translate }}</p>
+        <ion-img class="example__img" src="../../../../../assets/img/push.jpg"></ion-img>
       </div>
     </div>
     <div *ngSwitchCase="data === 'password'">
