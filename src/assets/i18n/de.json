@@ -108,6 +108,8 @@
     "header": "Bestellungen",
     "current": "Aktuelle",
     "completed": "Vergangene",
+    "noOrdersTitle": "Keine aktuellen Bestellungen",
+    "noOrdersDescription": "Hier werden dir deine aktuellen Bestellungen angezeigt.",
     "pickUpTime": "Abholzeit:",
     "hrs": "Uhr",
     "a": "je",

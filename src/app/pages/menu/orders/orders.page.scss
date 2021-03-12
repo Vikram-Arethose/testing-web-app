@@ -149,3 +149,17 @@ ion-toggle.toggle-checked {
   font: normal normal 400 20px/24px Montserrat;
   color: #FFFFFF;
 }
+
+.no-orders {
+  text-align: center;
+  color: #493735;
+  &__img {
+    padding: 3.69vh;
+  }
+  &__title {
+    font: 500 5.33vw/initial Montserrat;
+  }
+  &__text {
+    font-size: 4vw;
+  }
+}

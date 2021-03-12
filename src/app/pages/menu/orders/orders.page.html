@@ -23,6 +23,11 @@
 <!--      </div>-->
     </ng-container>
   </div>
+  <div class="no-orders">
+    <ion-img class="no-orders__img" src="../../../../assets/img/girl-centred.jpg"></ion-img>
+    <h2 class="no-orders__title">{{ 'orders.noOrdersTitle' | translate }}</h2>
+    <p class="no-orders__text">{{ 'orders.noOrdersDescription' | translate }}</p>
+  </div>
   <div class="full-order" *ngFor="let order of ordersToShow">
     <div class="order">
       <p class="order__bakery">{{order.bakery_name}}</p>

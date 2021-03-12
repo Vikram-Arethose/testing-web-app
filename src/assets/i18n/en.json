@@ -108,6 +108,8 @@
     "header": "Orders",
     "current": "Current",
     "completed": "Completed",
+    "noOrdersTitle": "No current orders",
+    "noOrdersDescription": "Your current orders are displayed here.",
     "pickUpTime": "Pick-up time:",
     "hrs": "hrs",
     "a": "a",
