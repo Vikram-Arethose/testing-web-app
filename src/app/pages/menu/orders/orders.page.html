@@ -23,7 +23,7 @@
 <!--      </div>-->
     </ng-container>
   </div>
-  <div class="no-orders">
+  <div class="no-orders" *ngIf="ordersToShow.length === 0 && segmentValue === 'current'">
     <ion-img class="no-orders__img" src="../../../../assets/img/girl-centred.jpg"></ion-img>
     <h2 class="no-orders__title">{{ 'orders.noOrdersTitle' | translate }}</h2>
     <p class="no-orders__text">{{ 'orders.noOrdersDescription' | translate }}</p>

@@ -154,9 +154,10 @@ ion-toggle.toggle-checked {
   text-align: center;
   color: #493735;
   &__img {
-    padding: 3.69vh;
+    padding: 3.69vh 0;
   }
   &__title {
+    padding: 0 0 2.46vh;
     font: 500 5.33vw/initial Montserrat;
   }
   &__text {
