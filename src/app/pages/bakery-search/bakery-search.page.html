@@ -21,6 +21,8 @@
                        (favouriteClicked)="getBakeries()"></app-bakery-item>
       <div class="suggest-bakery" *ngIf="bakeries?.length === 0">
         <p class="suggest-bakery__text">{{ 'bakerySearch.thereIsNoBakery' | translate }}</p>
+        <ion-button class="suggest-bakery__btn" [routerLink]="'location-options'"
+                    expand="block" size="large">{{ 'bakerySearch.changeLocation' | translate }}</ion-button>
         <p class="suggest-bakery__text">{{ 'bakerySearch.lookAgainOrSuggest' | translate }}</p>
         <ion-button class="suggest-bakery__btn" (click)="openSuggestBakeryUrl()"
                     expand="block" size="large">{{ 'bakerySearch.suggestBakery' | translate }}</ion-button>

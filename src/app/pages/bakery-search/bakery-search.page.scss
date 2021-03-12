@@ -24,15 +24,12 @@
 
 .suggest-bakery {
   text-align: center;
-  &__text {
-    padding: 0 0 3vh;
-  }
+  &__text { }
   &__btn {
     margin: 5vh 0;
     --background: #FEDE00;
     --border-radius: 5px;
     font: normal normal 400 20px/24px Montserrat;
-    text-transform: capitalize;
     color: #493735;
   }
 }
