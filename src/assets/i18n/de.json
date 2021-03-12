@@ -160,7 +160,8 @@
     "allergens": "Allergene:",
     "ingredients": "Inhaltsstoffe:",
     "availableEveryDay": "Jeden Tag verfügbar",
-    "only": "Nur"
+    "only": "Nur",
+    "description": "Beschreibung"
   },
   "shoppingCart": {
     "header": "Warenkorb",

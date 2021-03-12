@@ -10,6 +10,14 @@
   <div class="product">
     <div class="product__details details">
       <h2 class="details__title">Details</h2>
+      <ng-container *ngIf="product?.description">
+        <h3 class="details__subtitle">{{ 'productDetails.description' | translate }}</h3>
+        <p class="details__text">{{product.description}}</p>
+      </ng-container>
+      <ng-container *ngIf="product?.details">
+        <h3 class="details__subtitle">Details</h3>
+        <p class="details__text">{{product.details}}</p>
+      </ng-container>
       <h3 class="details__subtitle">{{ 'productDetails.allergens' | translate }}</h3>
       <div class="details__list list">
         <span class="list__item" *ngFor="let allergen of product?.allergens, let i = index">

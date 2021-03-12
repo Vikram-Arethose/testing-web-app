@@ -160,7 +160,8 @@
     "allergens": "Allergens:",
     "ingredients": "Ingredients:",
     "availableEveryDay": "Available every day",
-    "only": "Only"
+    "only": "Only",
+    "description": "Description"
   },
   "shoppingCart": {
     "header": "Shopping cart",
