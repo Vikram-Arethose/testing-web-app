@@ -111,6 +111,9 @@ export class DateService {
   getOpeningHoursByDate(date: Date): OpeningHoursDay[] {
     const selectedDay = this.weekDaysFull[date.getDay()];
     let openHoursDayArr: OpeningHoursDay[] = this.bakery.branchDetails.opening_hours_new.default[selectedDay];
+    if (openHoursDayArr.length === 3) {
+      return [];
+    }
     openHoursDayArr = openHoursDayArr.filter(item => item.start && item.end);
     return openHoursDayArr;
   }
@@ -122,13 +125,19 @@ export class DateService {
     return newDate;
   }
 
+  checkAllWeek(): boolean {
+    if (this.bakery.branchDetails.opening_hours_new.allWeek) {
+      return true;
+    }
+  }
+
   checkSelectedDate(date: Date): boolean {
+    if (this.checkAllWeek()) {
+      return true;
+    }
     const openingHoursArr: OpeningHoursDay[] = this.getOpeningHoursByDate(date);
-    // if (openingHoursArr) {
     return openingHoursArr.some(item => date >= this.getDateByTime(date, 'start', item) &&
         date <= this.getDateByTime(date, 'end', item) && date > new Date());
-    // }
-    // return false;
   }
 
   getIsoDateFromServerDate(stringDate: string, timeZoneMinutesOffset: number): string {
@@ -139,9 +148,12 @@ export class DateService {
     return moment.utc(serverDate).local().toDate();
   }
 
-  getDefaultMinOrderDate() {
+  getDefaultMinOrderDate(): Date {
     const minColDateMom = moment().add(45 + 15 - moment().minutes() % 15, 'minutes').startOf('minute');
     let minColDate: Date;
+    if (this.checkAllWeek()) {
+      return minColDateMom.toDate();
+    }
     let openingHoursArr: OpeningHoursDay[] = this.getOpeningHoursByDate(minColDateMom.toDate());
     for (let i = 0; i < 7; i++) {
       // tslint:disable-next-line:max-line-length

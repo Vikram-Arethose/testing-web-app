@@ -44,13 +44,16 @@
               <ion-icon class="open-hours__icon" src="../../../../assets/icons/bakery/calendar&clock.svg"></ion-icon>
             </div>
             <div class="open-hours__list list">
-              <p class="list__title">{{ 'bakery.openHour' | translate }}</p>
-              <div class="list__item" *ngFor="let item of openingHours">
-                <span class="list__item-day">{{ getShortDayName(item[0]) }}</span>
-                <span *ngIf="item[1].length > 0; else dash">{{item[1][0].start}} - {{item[1][item[1].length - 1].end}}</span>
-              </div>
+              <p class="list__title">{{ 'bakery.openHour' | translate }} <span *ngIf="allWeek">24/7</span></p>
+              <ng-container *ngIf="!allWeek">
+                <div class="list__item" *ngFor="let item of openingHours">
+                  <span class="list__item-day">{{ getShortDayName(item[0]) }}</span>
+                  <span *ngIf="item[1].length > 0; else dash">{{item[1][0].start}}
+                    - {{item[1][item[1].length - 1].end}}</span>
+                </div>
+              </ng-container>
             </div>
-            <div class="open-hours__list list">
+            <div class="open-hours__list list" *ngIf="!allWeek">
               <p class="list__title">{{ 'bakery.lunchBreak' | translate }}:</p>
               <div class="list__item" *ngFor="let item of openingHours">
                 <span *ngIf="item[1].length > 1; else dash">{{item[1][0].end}} - {{item[1][item[1].length - 1].start}}</span>

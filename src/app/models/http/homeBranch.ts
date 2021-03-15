@@ -17,6 +17,7 @@ export interface HomeBranchesRes {
   data: HomeBranch[];
 }
 export interface OpeningHours {
+  allWeek?: boolean;
   default?: {
     friday: OpeningHoursDay[];
     monday: OpeningHoursDay[];

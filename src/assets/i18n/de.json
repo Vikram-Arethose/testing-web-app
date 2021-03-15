@@ -124,7 +124,8 @@
   },
   "favorites": {
     "header": "Favoriten",
-    "openUntil": "Geöffnet bis",
+    "open": "Geöffnet",
+    "until": "bis",
     "bakery": "Bäckerei"
   },
   "paymentMethods": {

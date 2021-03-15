@@ -13,8 +13,10 @@
         <img class="icon" src="{{bakeryServ.getIcon(feature)}}" *ngFor="let feature of bakery.features">
       </div>
       <p class="bakery__text">
-        <span *ngIf="openUntil">{{ 'favorites.openUntil' | translate }} {{ openUntil }} Uhr -</span>
-        <span *ngIf="bakery.distance">{{bakery.distance | number:'1.1-1'}} km</span>
+        <span *ngIf="allWeek || openUntil">{{ 'favorites.open' | translate }}</span> <span *ngIf="allWeek"> 24/7 </span>
+        <span *ngIf="!allWeek && openUntil"> {{ 'favorites.until' | translate }} {{ openUntil }} Uhr</span>
+        <span *ngIf="(allWeek || openUntil) && bakery.distance"> - </span>
+        <span *ngIf="bakery.distance"> {{bakery.distance | number:'1.1-1'}} km</span>
       </p>
     </div>
   </div>

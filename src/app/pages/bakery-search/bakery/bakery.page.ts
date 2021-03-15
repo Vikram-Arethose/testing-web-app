@@ -25,6 +25,7 @@ import { newArray } from '@angular/compiler/src/util';
 export class BakeryPage implements OnInit, OnDestroy {
 
   account: User;
+  allWeek: boolean;
   bakeryAddress: string;
   bakeryDetails: BakeryDetails;
   bakeryInfoFull: string;
@@ -105,6 +106,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       if (!this.guest) {
         this.presentPickUpDateModal();
       }
+      this.allWeek = res.branchDetails.opening_hours_new.allWeek;
       this.bakeryDetails = res.branchDetails;
       this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
@@ -120,14 +122,16 @@ export class BakeryPage implements OnInit, OnDestroy {
   }
 
   setOpeningHours(openingHours: OpeningHours) {
-    this.openingHours = JSON.parse(JSON.stringify(openingHours.default));
-    for (const day in this.openingHours) {
-      if (this.openingHours.hasOwnProperty(day)) {
-        // @ts-ignore
-        this.openingHours[day] = this.openingHours[day].filter((item: OpeningHoursDay) => item.start && item.end);
+    const openingHoursCopy = JSON.parse(JSON.stringify(openingHours.default));
+    for (const day in openingHoursCopy) {
+      if (openingHoursCopy.hasOwnProperty(day)) {
+        if (openingHoursCopy[day]?.length === 3) {
+          openingHoursCopy[day] = [];
+        }
+        openingHoursCopy[day] = openingHoursCopy[day].filter((item: OpeningHoursDay) => item.start && item.end);
       }
     }
-    this.openingHours = Object.entries(this.openingHours);
+    this.openingHours = Object.entries(openingHoursCopy);
   }
 
   onCategorySelect(index: number) {

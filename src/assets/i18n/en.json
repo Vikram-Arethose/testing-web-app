@@ -124,7 +124,8 @@
   },
   "favorites": {
     "header": "Favorites",
-    "openUntil": "Open until",
+    "open": "Open",
+    "until": "until",
     "bakery": "Bakery"
   },
   "paymentMethods": {
