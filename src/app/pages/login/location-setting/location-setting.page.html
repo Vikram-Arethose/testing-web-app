@@ -22,7 +22,7 @@
                    autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
         <ion-icon slot="start" class="item__icon" src="../../../assets/icons/search.svg"></ion-icon>
       </ion-item>
-      <ion-button class="btn-wrapper__btn btn" size="block"
+      <ion-button class="btn-wrapper__btn btn" size="block" mode="ios"
                   [routerLink]="'/bakery-search'"
                   [disabled]="!useCurrLocation  && !locationSearched">
         {{ locationSearched ? ('locationSet.useThisLocation' | translate) : 'GO!' }}</ion-button>
