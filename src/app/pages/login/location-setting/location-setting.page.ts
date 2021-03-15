@@ -22,6 +22,7 @@ export class LocationSettingPage implements OnInit {
   lat: number;
   lng: number;
   googleMapType = 'satellite';
+  showMap: boolean;
   private subscription: Subscription;
 
   @ViewChild('search')
@@ -35,9 +36,19 @@ export class LocationSettingPage implements OnInit {
     private httpServ: HttpService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.makeInit();
+  }
 
-  async ionViewWillEnter() {
+  ionViewDidEnter() {
+    this.geolocationServ.findAddress(this.searchElementRef).then(() => {
+      this.getBranchesNear();
+      this.useCurrLocation = false;
+      this.locationSearched = true;
+    });
+  }
+
+  async makeInit() {
     this.subscription = this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.lat = res.lat;
       this.lng = res.lng;
@@ -48,15 +59,8 @@ export class LocationSettingPage implements OnInit {
     } else {
       this.geolocationServ.changeLocation();
     }
+    this.showMap = true;
     this.getBranchesNear();
-  }
-
-  ionViewDidEnter() {
-    this.geolocationServ.findAddress(this.searchElementRef).then(() => {
-      this.getBranchesNear();
-      this.useCurrLocation = false;
-      this.locationSearched = true;
-    });
   }
 
   async onUseCurrLocation() {
@@ -82,6 +86,7 @@ export class LocationSettingPage implements OnInit {
   ionViewDidLeave() {
     this.resetSearchField();
     this.subscription.unsubscribe();
+    this.showMap = false;
   }
 
 }
