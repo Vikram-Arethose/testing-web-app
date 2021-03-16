@@ -37,6 +37,10 @@ _<meta name="google-signin-client_id" content="REPLACEME.apps.googleusercontent.
 import '@codetrix-studio/capacitor-google-auth'; <br>
 import { Plugins } from '@capacitor/core';  <br>
  const googleUser = await Plugins.GoogleAuth.signIn(null) as any;  
+17. Console commands for production building project:      
+    ionic cap run ios --prod
+    ionic cap run android --prod
+
     
 
  
