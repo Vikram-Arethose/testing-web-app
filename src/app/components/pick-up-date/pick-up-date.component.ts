@@ -41,6 +41,7 @@ export class PickUpDateComponent implements OnInit {
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();
     this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
+    console.log('this.date', this.date);
     this.setActiveBtn();
     this.dateService.dateShared.subscribe((res: string) => {
       if (res) {
