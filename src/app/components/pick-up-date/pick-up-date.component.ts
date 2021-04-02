@@ -41,7 +41,6 @@ export class PickUpDateComponent implements OnInit {
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();
     this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
-    console.log('this.date', this.date);
     this.setActiveBtn();
     this.dateService.dateShared.subscribe((res: string) => {
       if (res) {
@@ -91,6 +90,7 @@ export class PickUpDateComponent implements OnInit {
   }
 
   onConfirm() {
+    
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
     const dateForCheck = new Date(this.date + 'T' + this.time);

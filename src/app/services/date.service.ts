@@ -45,7 +45,7 @@ export class DateService {
   }
 
   changeDate(date: string) {
-    this.logger.log('date: ', date);
+    // this.logger.log('date: ', date);
     this.date = date;
     this.dateSource.next(date);
   }
@@ -144,18 +144,20 @@ export class DateService {
 
   checkSelectedDate(date: Date): boolean {
     const specDate: any = this.getSpecialDateByDate(date);
-    console.log('specDate', specDate, date);
     // // tslint:disable-next-line:max-line-length
-    // console.log('NULLL', specDate !== undefined && !specDate.closed && ((specDate.start_am != null && specDate.end_am != null && specDate.start_pm != null && specDate.end_pm != null) || (specDate.start_am != null && specDate.end_am != null)));
-    if (specDate !== undefined && specDate.closed) {
+    if (specDate !== undefined) {
+      if (!specDate.closed){
+        const openingH: any = [{start: specDate.start_am, end: specDate.end_am}, {start: specDate.start_pm, end: specDate.end_pm}];
+        return openingH.some(item => date >= this.getDateByTime(date, 'start', item) &&
+          date <= this.getDateByTime(date, 'end', item) && date > new Date());
+      }
       return false;
     }
 
     if (this.checkAllWeek()) {
       return true;
     }
-
-    // console.log('7777777');
+    
     const openingHoursArr: OpeningHoursDay[] = this.getOpeningHoursByDate(date);
     return openingHoursArr.some(item => date >= this.getDateByTime(date, 'start', item) &&
         date <= this.getDateByTime(date, 'end', item) && date > new Date());
@@ -182,32 +184,23 @@ export class DateService {
     for (let i = 0; i < 7; i++) {
       // tslint:disable-next-line:max-line-length
       specDate = this.getSpecialDateByDate(minColDateMom.toDate());
-      if (
-        (specDate !== undefined && !specDate.closed) ||
-        // tslint:disable-next-line:max-line-length
-        openingHoursArr.length !== 0 && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHoursArr[openingHoursArr.length - 1]))
-      ) {
-        console.log('555555', minColDateMom.toDate());
-        if (specDate !== undefined && !specDate.closed){
-          selDate = minColDateMom.toDate();
-        }
-        
+  
+      if (specDate !== undefined && !specDate.closed){
+        selDate = minColDateMom.toDate();
         break;
+      }
+      
+      if (((specDate !== undefined && !specDate.closed) || specDate === undefined ) && openingHoursArr.length !== 0 && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHoursArr[openingHoursArr.length - 1]))
+      ) {
+          break;
       } else {
         openingHoursArr = this.getOpeningHoursByDate(minColDateMom.add(1, 'day').startOf('day').toDate());
       }
     }
-    // if (){
-    
-    console.log('minColDateMom.toDate()', selDate);
-    
-    
     if (specDate !== undefined && !specDate.closed){
-      console.log('specDate', specDate)
       selDate.setHours(parseInt((specDate.start_am).split(':')[0], 10),
         parseInt((specDate.start_am).split(':')[1], 10));
       minColDate = selDate;
-      console.log('selDate', selDate);
     } else if (this.checkSelectedDate(minColDateMom.toDate())) {
       minColDate = minColDateMom.toDate();
     } else {
@@ -219,7 +212,7 @@ export class DateService {
         minColDate = this.getDateByTime(minColDateMom.toDate(), 'start', openingHoursArr[rightOpeningTimeIndex]);
       }
     }
-    this.logger.log('minColDate: ', minColDate);
+    // this.logger.log('minColDate: ', minColDate);
     return minColDate;
   }
 
