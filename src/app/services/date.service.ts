@@ -78,6 +78,15 @@ export class DateService {
       if (minPreOrderDate > this.selectedDate ) {
         return false;
       }
+  
+      if (product.pre_order_time && product.pre_order_time !== 86400 ) {
+        const zeroStartTime = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), this.selectedDate.getDate(), 0, 0, 0, 0);
+        zeroStartTime.setSeconds(product.pre_order_time);
+        if (this.selectedDate > zeroStartTime){
+          return false;
+        }
+      }
+      
       return this.getDaysAvailability(product);
     } else {
       return true;
