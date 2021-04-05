@@ -75,11 +75,12 @@ export class DateService {
       // check pre order period
       const minPreOrderDate = new Date();
       minPreOrderDate.setSeconds(product.pre_order_period);
-      if (minPreOrderDate > this.selectedDate ) {
-        return false;
-      }
-  
-      if (product.pre_order_time && product.pre_order_time !== 86400 ) {
+      
+      if (!product.pre_order_time || (product.pre_order_time && product.pre_order_time === 86400)) {
+        if (minPreOrderDate > this.selectedDate ) {
+          return false;
+        }
+      }else {
         const zeroStartTime = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), this.selectedDate.getDate(), 0, 0, 0, 0);
         zeroStartTime.setSeconds(product.pre_order_time);
         if (this.selectedDate > zeroStartTime){
