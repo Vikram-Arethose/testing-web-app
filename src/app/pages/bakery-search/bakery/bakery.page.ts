@@ -176,9 +176,9 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.isBakeryInfoFull = !this.isBakeryInfoFull;
   }
 
-  getProductAvailability(product: Product) {
-    return this.dateService.getProductAvailability(product);
-  }
+  // getProductAvailability(product: Product) {
+  //   return this.dateService.getProductAvailability(product);
+  // }
 
   openShoppingCart() {
     if (this.account.first_name && this.account.last_name && this.account.email) {
