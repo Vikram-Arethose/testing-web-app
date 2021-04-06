@@ -64,6 +64,12 @@ export class DateService {
       return false;
     }
   }
+  
+  datesAreOnSameDay(today, selected) {
+    return today.getFullYear() === selected.getFullYear() &&
+           today.getMonth() === selected.getMonth() &&
+           today.getDate() === selected.getDate();
+  }
 
   getProductAvailability(product: Product): boolean {
     if (product.quantity === 'unavailable') {
@@ -83,7 +89,7 @@ export class DateService {
       }else {
         const zeroStartTime = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), this.selectedDate.getDate(), 0, 0, 0, 0);
         zeroStartTime.setSeconds(product.pre_order_time);
-        if (this.selectedDate > zeroStartTime){
+        if (this.datesAreOnSameDay(new Date(), this.selectedDate) && this.selectedDate > zeroStartTime ){
           return false;
         }
       }
