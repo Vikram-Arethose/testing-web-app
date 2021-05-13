@@ -147,8 +147,8 @@ ion-menu{
   ion-list {
     height: 90%;
   }
-  ion-menu-toggle:last-child {
-    .menu-item {
+
+    .menu-item-last-child {
       position: absolute;
       bottom: 0;
       left: 1vw;
@@ -165,6 +165,5 @@ ion-menu{
         color: #2b2e32;
       }
     }
-  }
 }
 

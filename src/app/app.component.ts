@@ -10,6 +10,7 @@ import { LoginService } from './services/login.service';
 import { LoggerService } from './services/logger.service';
 import { AccountService } from './services/account.service';
 import { PushService } from './services/push.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-root',
@@ -52,14 +53,15 @@ export class AppComponent implements OnInit {
       // icon: 'location',
       forGuest: true
     },
-    {
-      title: 'menu.support',
-      // url: '/',
-      src: './assets/icons/menu/help-circle-png.svg'
-    },
+    // {
+    //   title: 'menu.support',
+    //    url: 'https://broetchen.app/faq/',
+    //   src: './assets/icons/menu/help-circle-png.svg'
+    // },
   ];
   public guest: boolean;
   public selectedIndex = 0;
+  browser: any;
 
   constructor(
     public accountServ: AccountService,
@@ -72,6 +74,7 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private translate: TranslateService,
+    private iab: InAppBrowser
   ) {
     this.initializeApp();
   }
@@ -116,5 +119,9 @@ export class AppComponent implements OnInit {
     } else {
       this.router.navigate(['start']);
     }
+  }
+  openSupportPage(url) {
+    this.browser = this.iab.create(url, '_self');
+    this.browser.on('loadstop').subscribe(event => {});
   }
 }

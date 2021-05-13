@@ -18,6 +18,15 @@
               <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-item class="menu-item-last-child"
+                    (click)="openSupportPage('https://broetchen.app/faq/')"
+                    *ngIf="!guest"
+                    lines="none"
+                    detail="false" >
+            <ion-icon class="menu-item-last-child__icon" slot="start"  src="./assets/icons/menu/help-circle-png.svg"></ion-icon>
+            <ion-label>{{ 'menu.support' | translate }}</ion-label>
+
+          </ion-item>
           <ng-container *ngIf="guest">
             <ion-menu-toggle auto-hide="false">
               <ion-item class="menu-item" (click)="accountServ.open('privacy')" lines="none" detail="false">
