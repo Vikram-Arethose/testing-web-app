@@ -53,11 +53,6 @@ export class AppComponent implements OnInit {
       // icon: 'location',
       forGuest: true
     },
-    // {
-    //   title: 'menu.support',
-    //    url: 'https://broetchen.app/faq/',
-    //   src: './assets/icons/menu/help-circle-png.svg'
-    // },
   ];
   public guest: boolean;
   public selectedIndex = 0;
@@ -122,6 +117,7 @@ export class AppComponent implements OnInit {
   }
   openSupportPage(url) {
     this.browser = this.iab.create(url, '_self');
-    this.browser.on('loadstop').subscribe(event => {});
+    this.browser.on('loadstop').subscribe(event => {
+    });
   }
 }

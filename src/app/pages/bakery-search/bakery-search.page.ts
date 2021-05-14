@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '../../models/location';
 import { BakeryService } from '../../services/bakery.service';
+import { PushService } from '../../services/push.service';
 
 @Component({
   selector: 'app-bakery-search',
@@ -31,6 +32,7 @@ export class BakerySearchPage implements OnInit {
     private geolocationServ: GeolocationService,
     private httpServ: HttpService,
     private router: Router,
+    private pushServ: PushService
   ) { }
 
   ngOnInit() {

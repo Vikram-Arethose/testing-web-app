@@ -3,10 +3,11 @@ import {
   Plugins,
   PushNotification,
   PushNotificationToken,
-  Capacitor
+  Capacitor, PushNotificationActionPerformed
 } from '@capacitor/core';
 import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 const { App, Device, PushNotifications } = Plugins;
 
@@ -17,8 +18,11 @@ export class PushService {
 
   constructor(
     private logger: LoggerService,
-    private httpServ: HttpService
-  ) { }
+    private httpServ: HttpService,
+    private router: Router
+  ) {
+    this.actionForPushTouch();
+  }
 
   initPush() {
     if (Capacitor.platform !== 'web') {
@@ -57,6 +61,22 @@ export class PushService {
         PushNotifications.removeAllDeliveredNotifications();
       }
     });
+  }
+  actionForPushTouch() {
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      async (notification: PushNotificationActionPerformed) => {
+        const order_id = notification.notification.data.order_id;
+        const navigationExtras: NavigationExtras = {
+          state: {
+            order_id
+          }
+        };
+        console.log('notif object', notification);
+        this.router.navigateByUrl(`/orders/${order_id}`);
+        // this.router.navigate(['orders'], navigationExtras);
+      }
+    );
   }
 
 }
