@@ -66,15 +66,18 @@ export class PushService {
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
-        const order_id = notification.notification.data.order_id;
+        console.log('data from firebase order_id', notification.notification.data.order_id);
+        console.log('data from firebase', notification);
+        const  orderId = notification.notification.data.order_id;
+        const isPush = false;
         const navigationExtras: NavigationExtras = {
           state: {
-            order_id
+            isPush,
+            orderId
           }
         };
-        console.log('notif object', notification);
-        this.router.navigateByUrl(`/orders/${order_id}`);
-        // this.router.navigate(['orders'], navigationExtras);
+        console.log('notif object', orderId);
+        this.router.navigate(['orders'], navigationExtras);
       }
     );
   }

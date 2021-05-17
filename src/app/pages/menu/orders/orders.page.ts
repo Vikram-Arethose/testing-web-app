@@ -6,6 +6,7 @@ import { HttpService } from '../../../services/http.service';
 import { GetOrdersRes } from '../../../models/http/getOrdersRes';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { DateService } from '../../../services/date.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -18,8 +19,10 @@ export class OrdersPage implements OnInit {
   header: string;
   isSave: boolean;
   orderId: number;
+  currentOrderId: any;
   ordersToShow: OrderDetails[] = [];
   segmentValue = 'current';
+  isPush = false;
 
   private orders: GetOrdersRes;
   private timeZoneMinutesOffset: number = new Date().getTimezoneOffset();
@@ -31,17 +34,24 @@ export class OrdersPage implements OnInit {
     private logger: LoggerService,
     private route: ActivatedRoute,
     private router: Router,
+    private  vps: ViewportScroller
   ) {
     this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
+      if (this.router.getCurrentNavigation().extras.state.orderId) {
         // this.isConfirm = this.router.getCurrentNavigation().extras.state.isConfirm;
         this.orderId = this.router.getCurrentNavigation().extras.state.orderId;
+        this.isPush = this.router.getCurrentNavigation().extras.state.isPush;
         this.logger.log('this.orderId in orders page: ', this.orderId);
       }
+      // if (this.router.getCurrentNavigation().extras.state.currentOrderId) {
+      //   this.currentOrderId = this.router.getCurrentNavigation().extras.state.currentOrderId;
+      //   this.logger.log('currentOrderId in orders page: ', this.currentOrderId);
+      // }
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+  ionViewWillEnter() {
     this.dateLocale = this.localStorServ.getDateLocale();
     if (this.orderId) {
       this.httpServ.getOrderDetails(this.orderId).subscribe(res => {
@@ -50,12 +60,13 @@ export class OrdersPage implements OnInit {
     } else {
       this.getOrders();
     }
+    // this.vps.scrollToAnchor('679');
   }
-
   getOrders(event?) {
     this.httpServ.getOrders().subscribe((res: GetOrdersRes) => {
       this.orders = res;
       this.ordersToShow = this.orders[this.segmentValue];
+      console.log('orders to show', this.ordersToShow);
       if (event) {
         event.target.complete();
       }
@@ -81,5 +92,7 @@ export class OrdersPage implements OnInit {
     this.isSave = !this.isSave;
     if (this.isSave) {}
   }
-
+  // scrollToOrder() {
+  //   this.vps.scrollToAnchor(`${this.currentOrderId}` );
+  // }
 }

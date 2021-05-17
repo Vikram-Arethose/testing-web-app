@@ -3,7 +3,7 @@
 
 <ion-content>
   <div class="container">
-    <ion-segment *ngIf="!orderId" mode="ios" class="segment"
+    <ion-segment *ngIf="!orderId && isPush" mode="ios" class="segment"
                  (ionChange)="segmentChanged($event.target.value)" [value]="segmentValue">
       <ion-segment-button  class="segment__btn" value="current">
         <ion-label>{{ 'orders.current' | translate }}</ion-label>
@@ -28,18 +28,19 @@
     <h2 class="no-orders__title">{{ 'orders.noOrdersTitle' | translate }}</h2>
     <p class="no-orders__text">{{ 'orders.noOrdersDescription' | translate }}</p>
   </div>
-  <div class="full-order" *ngFor="let order of ordersToShow">
-    <div class="order">
+  <div class="full-order" *ngFor="let order of ordersToShow" >
+    <div class="order" >
       <p class="order__bakery">{{order.bakery_name}}</p>
       <p class="order__time-title">{{ 'orders.pickUpTime' | translate }}</p>
       <p class="order__time">
         {{getDate(order.pickup_time) | date:'EEEE, d.M.yyyy,  H:mm': '': dateLocale}}
         {{ 'orders.hrs' | translate }}</p>
-      <ion-grid class="order__grid grid">
+      <ion-grid class="order__grid ">
         <ion-row class="grid__row" *ngFor="let product of order.products, let i=index">
-          <ion-col class="grid__col" size="1">{{ i + 1 }}</ion-col>
-          <ion-col class="grid__col" size="8">{{product.quantity}} x {{product.product_name}}
-            <span *ngIf="!orderId"> {{ 'orders.a' | translate }} {{product.price | currency:'EUR':'symbol'}}</span></ion-col>
+          <ion-col class="grid__col grid " size="1">{{ i + 1 }}</ion-col>
+          <ion-col id="{{product.order_id}}" class="grid__col" size="8">{{product.quantity}} x {{product.product_name}}
+
+            <span *ngIf="!orderId && isPush"> {{ 'orders.a' | translate }} {{product.price | currency:'EUR':'symbol'}}</span></ion-col>
           <ion-col class="grid__col">
             {{product.grand_total | currency:'EUR':'symbol'}}</ion-col>
         </ion-row>

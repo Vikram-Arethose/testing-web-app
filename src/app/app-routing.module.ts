@@ -63,15 +63,14 @@ const routes: Routes = [
     path: 'bakery',
     loadChildren: () => import('./pages/bakery-search/bakery/bakery.module').then(m => m.BakeryPageModule)
   },
-  {
-    path: 'orders/:order_id',
-    loadChildren: () => import('./pages/menu/orders/orders.module').then(m => m.OrdersPageModule)
-  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+      anchorScrolling: 'enabled'
+    })
   ],
   exports: [RouterModule]
 })
