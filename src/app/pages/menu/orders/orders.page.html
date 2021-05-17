@@ -1,9 +1,9 @@
-<app-menu-header *ngIf="!orderId" [title]="'orders.header' | translate"></app-menu-header>
-<app-menu-header *ngIf="orderId" [title]="'orders.confirmation' | translate"></app-menu-header>
+<app-menu-header *ngIf="!orderId " [title]="'orders.header' | translate"></app-menu-header>
+<app-menu-header *ngIf="orderId && isPush " [title]="'orders.confirmation' | translate"></app-menu-header>
 
 <ion-content>
   <div class="container">
-    <ion-segment *ngIf="!orderId && isPush" mode="ios" class="segment"
+    <ion-segment *ngIf="!orderId " mode="ios" class="segment"
                  (ionChange)="segmentChanged($event.target.value)" [value]="segmentValue">
       <ion-segment-button  class="segment__btn" value="current">
         <ion-label>{{ 'orders.current' | translate }}</ion-label>
@@ -15,7 +15,7 @@
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ng-container *ngIf="orderId">
+    <ng-container *ngIf="orderId && isPush">
       <h2 class="title">{{ 'orders.thankForOrder' | translate }}</h2>
 <!--      <div class="save">-->
 <!--        <p class="save__txt">{{ 'orders.save' | translate }}</p>-->

@@ -69,14 +69,11 @@ export class PushService {
         console.log('data from firebase order_id', notification.notification.data.order_id);
         console.log('data from firebase', notification);
         const  orderId = notification.notification.data.order_id;
-        const isPush = false;
         const navigationExtras: NavigationExtras = {
           state: {
-            isPush,
             orderId
           }
         };
-        console.log('notif object', orderId);
         this.router.navigate(['orders'], navigationExtras);
       }
     );

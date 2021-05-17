@@ -22,7 +22,7 @@ export class OrdersPage implements OnInit {
   currentOrderId: any;
   ordersToShow: OrderDetails[] = [];
   segmentValue = 'current';
-  isPush = false;
+  isPush = true;
 
   private orders: GetOrdersRes;
   private timeZoneMinutesOffset: number = new Date().getTimezoneOffset();
@@ -40,13 +40,9 @@ export class OrdersPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state.orderId) {
         // this.isConfirm = this.router.getCurrentNavigation().extras.state.isConfirm;
         this.orderId = this.router.getCurrentNavigation().extras.state.orderId;
-        this.isPush = this.router.getCurrentNavigation().extras.state.isPush;
+        this.isPush = false;
         this.logger.log('this.orderId in orders page: ', this.orderId);
       }
-      // if (this.router.getCurrentNavigation().extras.state.currentOrderId) {
-      //   this.currentOrderId = this.router.getCurrentNavigation().extras.state.currentOrderId;
-      //   this.logger.log('currentOrderId in orders page: ', this.currentOrderId);
-      // }
     });
   }
 
@@ -60,7 +56,6 @@ export class OrdersPage implements OnInit {
     } else {
       this.getOrders();
     }
-    // this.vps.scrollToAnchor('679');
   }
   getOrders(event?) {
     this.httpServ.getOrders().subscribe((res: GetOrdersRes) => {
@@ -92,7 +87,4 @@ export class OrdersPage implements OnInit {
     this.isSave = !this.isSave;
     if (this.isSave) {}
   }
-  // scrollToOrder() {
-  //   this.vps.scrollToAnchor(`${this.currentOrderId}` );
-  // }
 }
