@@ -116,8 +116,7 @@ export class AppComponent implements OnInit {
     }
   }
   openSupportPage(url) {
-    this.browser = this.iab.create(url, '_self');
-    this.browser.on('loadstop').subscribe(event => {
-    });
+    this.browser = this.iab.create(url, '_blank');
+    
   }
 }
