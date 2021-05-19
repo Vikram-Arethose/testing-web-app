@@ -66,9 +66,13 @@ export class PushService {
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
-        console.log('data from firebase order_id', notification.notification.data.order_id);
-        console.log('data from firebase', notification);
-        const  orderId = notification.notification.data.order_id;
+        let  orderId: any;
+        const deviceInfo = await Device.getInfo();
+        if (deviceInfo.platform === 'ios') {
+          orderId = notification.notification.data.data.order_id;
+        }else {
+          orderId = notification.notification.data.order_id;
+        }
         const navigationExtras: NavigationExtras = {
           state: {
             orderId

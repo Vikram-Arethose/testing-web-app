@@ -1,5 +1,5 @@
 <app-menu-header *ngIf="!orderId " [title]="'orders.header' | translate"></app-menu-header>
-<app-menu-header *ngIf="orderId && isPush " [title]="'orders.confirmation' | translate"></app-menu-header>
+<app-menu-header *ngIf="orderId && !isPush " [title]="'orders.confirmation' | translate"></app-menu-header>
 
 <ion-content>
   <div class="container">
