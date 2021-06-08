@@ -248,3 +248,13 @@
     color: #FFFFFF;
   }
 }
+.no-items {
+  height: 30vh;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #CBCBCB;
+  padding: 0 4vh;
+
+}

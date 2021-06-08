@@ -185,7 +185,8 @@
     "reminderTitle": "Remember!",
     "reminderTxt": "In order to pick up your order you need the Pick-up Code!",
     "addMissedData": "For continue shopping we need your name, surname and email. Please add missed data.",
-    "collection": "Collection"
+    "collection": "Collection",
+    "noItems": "No data to display. Please try again later"
   },
   "days": {
     "mon": "Mon",

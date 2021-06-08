@@ -185,7 +185,8 @@
     "reminderTitle": "Denke bitte daran!",
     "reminderTxt": " Um deine Bestellung abzuholen, musst du den Abholcode vorzeigen!",
     "addMissedData": "Für den weiteren Einkauf benötigen wir Ihren Vor- und Nachnamen sowie Ihre E-Mail-Adresse. Bitte fügen Sie fehlende Daten hinzu.",
-    "collection": "Abholung"
+    "collection": "Abholung",
+    "noItems": "Keine Daten zum Anzeigen. Bitte versuchen Sie es später noch einmal"
   },
   "days": {
     "mon": "Mo",
