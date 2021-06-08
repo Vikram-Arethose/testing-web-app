@@ -23,7 +23,8 @@
     "emailBtn": "registration by email",
     "emailBtnLogin": "login by email",
     "otherOpt": "other options",
-    "guest": "continue as guest"
+    "guest": "continue as guest",
+    "updateApp": "Your version of the application is out of date. An update is required"
   },
   "googleLogin": {
     "welcome": "Welcome!",

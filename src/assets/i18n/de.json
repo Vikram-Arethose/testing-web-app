@@ -23,7 +23,8 @@
     "emailBtn": "Registrierung per Email",
     "emailBtnLogin": "Login per Email",
     "otherOpt": "Weitere Optionen",
-    "guest": "Ohne Anmeldung"
+    "guest": "Ohne Anmeldung",
+    "updateApp": "Ihre Version der Anwendung ist veraltet. Ein Update ist erforderlich"
   },
   "googleLogin": {
     "welcome": "Willkommen!",

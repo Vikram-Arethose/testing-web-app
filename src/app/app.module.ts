@@ -23,6 +23,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AgmCoreModule } from '@agm/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Market } from '@ionic-native/market/ngx';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -59,7 +61,9 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorService },
     NativeGeocoder,
-    InAppBrowser
+    InAppBrowser,
+    AppVersion,
+    Market
   ],
   bootstrap: [AppComponent]
 })
