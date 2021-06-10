@@ -98,7 +98,8 @@
     "deleteAcc": "Account löschen",
     "logout": "Logout",
     "your": "dein ",
-    "save": "Speichern"
+    "save": "Speichern",
+    "appVersion": "Anwendungsversion"
   },
   "accDetails": {
     "yourName": "Dein Name",

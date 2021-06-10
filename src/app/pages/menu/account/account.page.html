@@ -42,6 +42,10 @@
     <ion-item class="list__item item" mode="ios" button (click)="open('privacy')">
       <ion-label class="item__label item__label_left">{{ 'account.privacy&' | translate }}</ion-label>
     </ion-item>
+    <ion-item class="list__item item" mode="ios">
+      <ion-label class="item__label item__label_left">{{ 'account.appVersion' | translate }}: </ion-label>
+      <span class="version"> {{version}}</span>
+    </ion-item>
   </ion-list>
   <div class="logout" tappable (click)="logout()">
     <p class="logout__text">{{ 'account.logout' | translate }}</p>

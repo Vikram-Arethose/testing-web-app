@@ -20,7 +20,12 @@
     }
   }
 }
-
+.version {
+  position: relative;
+  bottom: 2.6vh;
+  left: 72%;
+  font-size: 1.8vh;
+}
 .controls {
   padding: 6vh 8.53vw 0;
   display: flex;

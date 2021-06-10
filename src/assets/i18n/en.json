@@ -98,7 +98,8 @@
     "deleteAcc": "Delete account",
     "logout": "Logout",
     "your": "Your ",
-    "save": "Save"
+    "save": "Save",
+    "appVersion": "Application version"
   },
   "accDetails": {
     "yourName": "Your Name",

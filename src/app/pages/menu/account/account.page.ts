@@ -16,6 +16,7 @@ export class AccountPage implements OnInit {
   account: User;
   language: Language;
   selectedLangLabel: string;
+  version: string;
 
   constructor(
     public accountService: AccountService,
@@ -31,6 +32,7 @@ export class AccountPage implements OnInit {
         this.account = res;
         this.selectedLangLabel = res.languages.find((item: Language) => item.isActive === true).label;
       }
+      this.version = localStorage.getItem('appVersion');
     });
 
     this.http.getUserDetails().subscribe((res: User) => {

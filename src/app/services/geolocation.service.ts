@@ -6,7 +6,6 @@ import { Coordinates } from '../models/coordinates';
 
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { MapsAPILoader } from '@agm/core';
-import { PermissionsRequestResult } from '@capacitor/core/dist/esm/definitions';
 import { Location } from '../models/location';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';

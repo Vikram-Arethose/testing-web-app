@@ -305,6 +305,23 @@ export class HttpService {
     });
     return subject.asObservable();
   }
+  // async getVersionFromDB() {
+  //   let version: any;
+  //   await this.http.get(this.baseUrl + '/check/version').subscribe((res: ApiResponse) => {
+  //     if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+  //       version = res.app_data;
+  //       console.log('version in http service', version);
+  //     } else {
+  //       this.alertServ.presentAlert();
+  //     }
+  //   });
+  //   return version;
+  // }
+  getVersionFromDB() {
+    let result: any;
+    result = this.http.get(this.baseUrl + '/check/version').toPromise();
+    return result;
+  }
 
   registerPushToken(token: string, device: string, platform: string, osVersion: string) {
     const body = {

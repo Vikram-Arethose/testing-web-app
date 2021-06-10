@@ -11,6 +11,9 @@ import { LoggerService } from './services/logger.service';
 import { AccountService } from './services/account.service';
 import { PushService } from './services/push.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { AlertController } from '@ionic/angular';
+import { CheckVersion } from './services/checkVersion.service';
+
 
 @Component({
   selector: 'app-root',
@@ -57,6 +60,9 @@ export class AppComponent implements OnInit {
   public guest: boolean;
   public selectedIndex = 0;
   browser: any;
+  userVersion: any;
+  appLastVersion: any;
+  versionResponse: any;
 
   constructor(
     public accountServ: AccountService,
@@ -69,7 +75,9 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private translate: TranslateService,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    public alertController: AlertController,
+    public checkVersion: CheckVersion,
   ) {
     this.initializeApp();
   }
@@ -82,8 +90,13 @@ export class AppComponent implements OnInit {
       this.openFirstPage();
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
+      this.checkVersion.checkReleaseVersion();
+      this.platform.resume.subscribe(() => {
+        this.checkVersion.checkReleaseVersion();
+      });
     });
   }
+  
 
   ngOnInit() {
     const path = window.location.pathname.split('folder/')[1];
@@ -92,7 +105,6 @@ export class AppComponent implements OnInit {
     }
     this.accountServ.sharedGuest$.subscribe(res => this.guest = res);
   }
-
   useLanguage() {
     const language = localStorage.getItem('language');
     if (language) {
@@ -117,6 +129,6 @@ export class AppComponent implements OnInit {
   }
   openSupportPage(url) {
     this.browser = this.iab.create(url, '_blank');
-    
   }
+  
 }
