@@ -55,6 +55,7 @@ export interface Product {
   period_available_to: string;
   photo: string;
   pre_order_period: number;
+  pre_order_time: number;
   price: string;
   product_category_id: number;
   product_group_id: number;

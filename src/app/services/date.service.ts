@@ -74,8 +74,12 @@ export class DateService {
       this.selectedDate = new Date(this.date);
       // check pre order period
       const minPreOrderDate = new Date();
+      const minPreOrderTime = (Date.now() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000;
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (minPreOrderDate > this.selectedDate ) {
+        return false;
+      }
+      if (minPreOrderTime > product.pre_order_time ) {
         return false;
       }
       return this.getDaysAvailability(product);
