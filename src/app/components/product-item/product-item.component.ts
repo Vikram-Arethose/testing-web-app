@@ -15,7 +15,8 @@ export class ProductItemComponent implements OnInit {
   @Input() date: string;
   @Input() product: Product;
   guest: boolean;
-
+  // this field added to img when product has limited counter
+  // counter = 12;
   constructor(
     private accountServ: AccountService,
     private cartServ: CartService,

@@ -12,6 +12,19 @@ $darkBrown: #493735;
 
   .col-left {
     position: relative;
+    .quantity {
+      position: absolute;
+      bottom: 1vh;
+      left: 1vh;
+      padding: .5vh;
+      background-color: yellow;
+      border-radius: 0.5vh;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4vh;
+    }
   }
 
   .col-center {

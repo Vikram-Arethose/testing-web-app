@@ -5,6 +5,10 @@
              src="../../../../assets/img/bakery/bio.png"></ion-img>
     <ion-img class="product__img-corner product__img-corner_new" *ngIf="product.is_new"
              src="../../../../assets/img/bakery/new.png"></ion-img>
+
+<!-- If product has limited counter in response then add this field into ngIf -->
+    <!--    <div *ngIf="" class="quantity">{{counter}} items left to order</div>-->
+
   </div>
   <div class="col-center">
     <div class="row">

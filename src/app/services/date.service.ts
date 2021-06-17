@@ -22,6 +22,10 @@ export class DateService {
   private selectedDate: Date;
   private dateSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
   dateShared: Observable<string> = this.dateSource.asObservable();
+  specificTime = {
+    start: null,
+    end: null
+  };
 
   constructor(
     private logger: LoggerService,
@@ -72,16 +76,36 @@ export class DateService {
     // check availability by date
     if (this.date) {
       this.selectedDate = new Date(this.date);
-      // check pre order period
+      // check pre order period and pre_order_time
       const minPreOrderDate = new Date();
-      const minPreOrderTime = (Date.now() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000;
+
+    // --------This code segment compare current date and specified time or available time for product and show or hide--------
+      // const currentTime = (Date.now() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 ;
+      // const orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 ;
+      // //   this.specificTime.start && this.specificTime.end REPLACE. Use equivalent strings in product.specificTime start & end
+      // if (this.specificTime.start && this.specificTime.end) {
+      //   console.log('product', product);
+      //   console.log('selected date', this.selectedDate);
+      //   console.log('specificTime.start ', this.specificTime.start);
+      //   console.log('current time in sec from 00:00 ', orderTime );
+      //   console.log('specificTime.end ', this.specificTime.end);
+      //   if (orderTime >= this.specificTime.start && orderTime <= this.specificTime.end) {
+      //     return false;
+      //   }
+      // }
+    // --------End of code segment --------
+
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (minPreOrderDate > this.selectedDate ) {
         return false;
       }
-      if (minPreOrderTime > product.pre_order_time ) {
-        return false;
-      }
+
+
+      // if (currentTime > product.pre_order_time ) {
+      //   return false;
+      // }
+
+
       return this.getDaysAvailability(product);
     } else {
       return true;
