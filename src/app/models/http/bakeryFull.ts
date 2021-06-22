@@ -70,6 +70,8 @@ export interface Product {
   updated_by: number;
   vat: number;
   availability_new: AvailableDay[];
+  branch_product: [];
+  specific_time: number;
 }
 
 export interface AvailableDay {

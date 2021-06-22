@@ -22,10 +22,10 @@ export class DateService {
   private selectedDate: Date;
   private dateSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
   dateShared: Observable<string> = this.dateSource.asObservable();
-  specificTime = {
-    start: null,
-    end: null
-  };
+  specificTime = 61200;
+  private timeHourOffset: number;
+  fullDay = 86400;
+  orderTime: number;
 
   constructor(
     private logger: LoggerService,
@@ -68,49 +68,68 @@ export class DateService {
       return false;
     }
   }
-
+  checkSpecificTime(time) {
+    console.log('check time', time);
+    console.log('specificTime', this.specificTime);
+    if (time >= this.specificTime) {
+      console.log('time >= this.specificTime', time >= this.specificTime);
+      return true;
+    }
+    if (time < this.specificTime ) {
+      console.log('time < this.specificTime', time < this.specificTime);
+      return false;
+    }
+  }
   getProductAvailability(product: Product): boolean {
+    // if (product.branch_product.length > 0) {
+    //  const braSpecTime =  product.branch_product.filter(item => item.branch_id === product.bakery_id).specific_time;
+    //  console.log('branch_product specific time', braSpecTime);
+    // }
+    // this.specificTime = product.specific_time;
+    // console.log('specific time', this.specificTime);
+    // console.log('product', product);
     if (product.quantity === 'unavailable') {
       return false;
     }
     // check availability by date
     if (this.date) {
       this.selectedDate = new Date(this.date);
+      this.timeHourOffset = -this.selectedDate.getTimezoneOffset() * 60 ;
       // check pre order period and pre_order_time
       const minPreOrderDate = new Date();
-
-    // --------This code segment compare current date and specified time or available time for product and show or hide--------
-      // const currentTime = (Date.now() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 ;
-      // const orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 ;
-      // //   this.specificTime.start && this.specificTime.end REPLACE. Use equivalent strings in product.specificTime start & end
-      // if (this.specificTime.start && this.specificTime.end) {
-      //   console.log('product', product);
-      //   console.log('selected date', this.selectedDate);
-      //   console.log('specificTime.start ', this.specificTime.start);
-      //   console.log('current time in sec from 00:00 ', orderTime );
-      //   console.log('specificTime.end ', this.specificTime.end);
-      //   if (orderTime >= this.specificTime.start && orderTime <= this.specificTime.end) {
-      //     return false;
-      //   }
-      // }
-    // --------End of code segment --------
+      this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
 
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (minPreOrderDate > this.selectedDate ) {
         return false;
       }
-
-
-      // if (currentTime > product.pre_order_time ) {
-      //   return false;
+      // if (product.specific_time === 0) {
+      //   if (this.orderTime > product.pre_order_time  && this.orderTime < this.fullDay) {
+      //     return false;
+      //   }
+      //   if (this.orderTime < product.pre_order_time  && this.orderTime < this.fullDay) {
+      //     return true;
+      //   }
       // }
 
+      if (product.specific_time === 0) {
+        if (this.orderTime < this.fullDay) {
+          console.log('today', this.orderTime);
+          return this.checkSpecificTime(this.orderTime);
+        }
+        if (this.orderTime > this.fullDay) {
+          console.log('tomorrow', this.orderTime);
+          const notTodayOrderTime = this.orderTime - this.fullDay * Math.trunc(this.orderTime / this.fullDay) ;
+          return this.checkSpecificTime(notTodayOrderTime);
+        }
+      }
 
       return this.getDaysAvailability(product);
     } else {
       return true;
     }
   }
+  
 
   mapProductPrice(product: Product): Product {
     // check if there is special_price and if true change price for the product
