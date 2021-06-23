@@ -20,7 +20,7 @@
                 [cancelText]="cancel" [doneText]="done"></ion-datetime>
   <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
-    <ion-datetime class="ion-datetime" [min]="timePickerMin" (ionChange)="onTimeChange($event)"
+    <ion-datetime class="ion-datetime"  (ionChange)="onTimeChange($event)"
                   displayFormat="HH : mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
                   [disabled]="!date" [cancelText]="cancel" [doneText]="done"></ion-datetime>
   </ion-item>

@@ -22,7 +22,7 @@ export class DateService {
   private selectedDate: Date;
   private dateSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
   dateShared: Observable<string> = this.dateSource.asObservable();
-  specificTime = 61200;
+  specificTime: any;
   private timeHourOffset: number;
   fullDay = 86400;
   orderTime: number;
@@ -69,25 +69,16 @@ export class DateService {
     }
   }
   checkSpecificTime(time) {
-    console.log('check time', time);
-    console.log('specificTime', this.specificTime);
     if (time >= this.specificTime) {
-      console.log('time >= this.specificTime', time >= this.specificTime);
       return true;
     }
     if (time < this.specificTime ) {
-      console.log('time < this.specificTime', time < this.specificTime);
       return false;
     }
   }
   getProductAvailability(product: Product): boolean {
-    // if (product.branch_product.length > 0) {
-    //  const braSpecTime =  product.branch_product.filter(item => item.branch_id === product.bakery_id).specific_time;
-    //  console.log('branch_product specific time', braSpecTime);
-    // }
-    // this.specificTime = product.specific_time;
-    // console.log('specific time', this.specificTime);
-    // console.log('product', product);
+    console.log('PRODUCT', product);
+    this.specificTime = product.specific_time;
     if (product.quantity === 'unavailable') {
       return false;
     }
@@ -98,27 +89,28 @@ export class DateService {
       // check pre order period and pre_order_time
       const minPreOrderDate = new Date();
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
-
       minPreOrderDate.setSeconds(product.pre_order_period);
-      if (minPreOrderDate > this.selectedDate ) {
-        return false;
+      if (this.specificTime === 0) {
+        if (this.orderTime > product.pre_order_time  && this.orderTime < this.fullDay) {
+          return false;
+        }
+        if (this.orderTime < product.pre_order_time  && this.orderTime < this.fullDay) {
+          return true;
+        }
+        if (product.pre_order_time === this.fullDay) {
+          if (minPreOrderDate > this.selectedDate ) {
+            return false;
+          }else {
+            return true;
+          }
+        }
       }
-      // if (product.specific_time === 0) {
-      //   if (this.orderTime > product.pre_order_time  && this.orderTime < this.fullDay) {
-      //     return false;
-      //   }
-      //   if (this.orderTime < product.pre_order_time  && this.orderTime < this.fullDay) {
-      //     return true;
-      //   }
-      // }
 
-      if (product.specific_time === 0) {
+      if (this.specificTime > 0) {
         if (this.orderTime < this.fullDay) {
-          console.log('today', this.orderTime);
           return this.checkSpecificTime(this.orderTime);
         }
         if (this.orderTime > this.fullDay) {
-          console.log('tomorrow', this.orderTime);
           const notTodayOrderTime = this.orderTime - this.fullDay * Math.trunc(this.orderTime / this.fullDay) ;
           return this.checkSpecificTime(notTodayOrderTime);
         }
@@ -129,7 +121,6 @@ export class DateService {
       return true;
     }
   }
-  
 
   mapProductPrice(product: Product): Product {
     // check if there is special_price and if true change price for the product
