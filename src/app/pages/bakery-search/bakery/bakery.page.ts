@@ -15,7 +15,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { Subscription } from 'rxjs';
 import { OpeningHours, OpeningHoursDay } from '../../../models/http/homeBranch';
-import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-bakery',

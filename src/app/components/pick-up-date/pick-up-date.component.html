@@ -24,8 +24,16 @@
                   displayFormat="HH : mm" minuteValues="0,15,30,45" [attr.value]="time ? time : ''"
                   [disabled]="!date" [cancelText]="cancel" [doneText]="done"></ion-datetime>
   </ion-item>
-  <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
-    {{ 'dateChoose.confirm' | translate }}</ion-button>
-  <ion-button class="btn btn-filled verify" *ngIf="isVerify" expand="block" (click)="onConfirm()"
-              [disabled]="!date || !time">{{ 'dateChoose.verify' | translate }}</ion-button>
+  <div *ngIf="repeatOrder; else main">
+    <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="redirectToPay()" [disabled]="!date || !time">
+     test</ion-button>
+
+  </div>
+  <ng-template #main>
+    <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
+      {{ 'dateChoose.confirm' | translate }}</ion-button>
+    <ion-button class="btn btn-filled verify" *ngIf="isVerify" expand="block" (click)="onConfirm()"
+                [disabled]="!date || !time">{{ 'dateChoose.verify' | translate }}</ion-button>
+  </ng-template>
+
 </div>

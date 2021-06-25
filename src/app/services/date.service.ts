@@ -26,6 +26,7 @@ export class DateService {
   private timeHourOffset: number;
   fullDay = 86400;
   orderTime: number;
+  preOrderTime: number;
 
   constructor(
     private logger: LoggerService,
@@ -78,6 +79,7 @@ export class DateService {
   }
   getProductAvailability(product: Product): boolean {
     console.log('PRODUCT', product);
+    console.log('product', product.pre_order_time);
     this.specificTime = product.specific_time;
     if (product.quantity === 'unavailable') {
       return false;
@@ -91,13 +93,21 @@ export class DateService {
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (this.specificTime === 0) {
-        if (this.orderTime > product.pre_order_time  && this.orderTime < this.fullDay) {
+        console.log('order time', this.orderTime);
+        
+        if (product.pre_order_time > this.fullDay) {
+          this.preOrderTime = product.pre_order_time - this.fullDay;
+        }
+        if (product.pre_order_time <= this.fullDay) {
+          this.preOrderTime = product.pre_order_time;
+        }
+        if (this.orderTime > this.preOrderTime  ) {
           return false;
         }
-        if (this.orderTime < product.pre_order_time  && this.orderTime < this.fullDay) {
+        if (this.orderTime < this.preOrderTime ) {
           return true;
         }
-        if (product.pre_order_time === this.fullDay) {
+        if (this.preOrderTime === this.fullDay) {
           if (minPreOrderDate > this.selectedDate ) {
             return false;
           }else {

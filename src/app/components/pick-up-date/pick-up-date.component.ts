@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class PickUpDateComponent implements OnInit {
   @Input() isVerify;
+  @Input() repeatOrder;
   activeBtn: string;
   cancel: string = this.translate.instant('dateChoose.cancel');
   customPickerOptions: any;
@@ -41,7 +42,7 @@ export class PickUpDateComponent implements OnInit {
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();
     this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
-    this.setActiveBtn();
+    this.setActiveBtn(this.tomorrow);
     this.dateService.dateShared.subscribe((res: string) => {
       if (res) {
         this.date = this.time = res;
@@ -109,7 +110,10 @@ export class PickUpDateComponent implements OnInit {
       }
     }
   }
-
+  redirectToPay() {
+    this.onConfirm();
+    this.router.navigate(['bakery-search/bakery/shopping-cart']);
+  }
   closeModal() {
     if (!this.dateGlobal) {
       this.router.navigate(['bakery-search']);

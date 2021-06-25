@@ -60,9 +60,9 @@
           {{order.collection_code}}</div>
         <h3 class="pick-up__title">{{ 'orders.showThisCode' | translate }}</h3>
         <p class="pick-up__text" *ngIf="segmentValue === 'current'">{{ 'orders.note' | translate }}</p>
-<!--        <ion-button class="repeat-btn" *ngIf="segmentValue === 'completed'" expand="block">-->
-<!--          Repeat Order-->
-<!--        </ion-button>-->
+        <ion-button class="repeat-btn" *ngIf="segmentValue === 'completed'" expand="block" (click)="repeatOrder(order.products[0].order_id, order.bakery_id)">
+          Repeat Order
+        </ion-button>
       </div>
     </div>
   </div>

@@ -8,6 +8,7 @@ import { LoggerService } from './logger.service';
 import { DateService } from './date.service';
 import { Router } from '@angular/router';
 import { PaymentMethodsComponent } from '../components/payment-methods/payment-methods.component';
+import { repeat } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import { PaymentMethodsComponent } from '../components/payment-methods/payment-m
 export class ModalService {
 
   date: string;
+  
 
   constructor(
     private dateServ: DateService,
@@ -25,12 +27,13 @@ export class ModalService {
     this.dateServ.dateShared.subscribe(res => this.date = res);
   }
 
-  async presentPickUpDateModal(isVerify?: boolean) {
+  async presentPickUpDateModal(isVerify?: boolean, repeatOrder?: boolean) {
     const modal = await this.modalController.create({
       component: PickUpDateComponent,
       cssClass: 'pick-up-date-modal',
       componentProps: {
-        isVerify
+        isVerify,
+        repeatOrder
       }
     });
 

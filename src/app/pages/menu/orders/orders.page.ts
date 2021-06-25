@@ -7,6 +7,10 @@ import { GetOrdersRes } from '../../../models/http/getOrdersRes';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { DateService } from '../../../services/date.service';
 import { ViewportScroller } from '@angular/common';
+import { ModalService } from '../../../services/modal.service';
+import { BakeryDetails, BakeryFull } from '../../../models/http/bakeryFull';
+import { OpeningHours, OpeningHoursDay } from '../../../models/http/homeBranch';
+import { BakeryService } from '../../../services/bakery.service';
 
 @Component({
   selector: 'app-orders',
@@ -23,6 +27,15 @@ export class OrdersPage implements OnInit {
   ordersToShow: OrderDetails[] = [];
   segmentValue = 'current';
   isPush = true;
+  private bakeryId: number;
+  allWeek: boolean;
+  bakeryAddress: string;
+  bakeryDetails: BakeryDetails;
+  bakeryInfoFull: string;
+  bakeryInfoTrim: string;
+  bakeryInfo: string;
+  openingHours: [string, any][];
+  private lastUsedPayment: string | undefined;
 
   private orders: GetOrdersRes;
   private timeZoneMinutesOffset: number = new Date().getTimezoneOffset();
@@ -34,7 +47,10 @@ export class OrdersPage implements OnInit {
     private logger: LoggerService,
     private route: ActivatedRoute,
     private router: Router,
+    private modalService: ModalService,
+    public bakeryServ: BakeryService,
     private  vps: ViewportScroller
+
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state.orderId) {
@@ -46,7 +62,9 @@ export class OrdersPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
   ionViewWillEnter() {
     this.dateLocale = this.localStorServ.getDateLocale();
     if (this.orderId) {
@@ -86,5 +104,39 @@ export class OrdersPage implements OnInit {
   onSaveChange() {
     this.isSave = !this.isSave;
     if (this.isSave) {}
+  }
+
+  repeatOrder(order, bakeryId) {
+    this.orderId = order;
+    this.bakeryId = bakeryId;
+    this.getBakeryData();
+  }
+  presentPickUpDateModal(isVerify?: boolean, repeatOrder?: boolean) {
+    this.modalService.presentPickUpDateModal(false, true);
+  }
+  getBakeryData() {
+    this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
+      this.bakeryServ.changeBakery(res);
+      this.presentPickUpDateModal();
+      this.allWeek = res.branchDetails.opening_hours_new.allWeek;
+      this.bakeryDetails = res.branchDetails;
+      this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
+      this.bakeryInfoFull = res.branchDetails.description;
+      this.setOpeningHours(res.branchDetails.opening_hours_new);
+      this.lastUsedPayment = res?.last_used_payment;
+    });
+  }
+
+  setOpeningHours(openingHours: OpeningHours) {
+    const openingHoursCopy = JSON.parse(JSON.stringify(openingHours.default));
+    for (const day in openingHoursCopy) {
+      if (openingHoursCopy.hasOwnProperty(day)) {
+        if (openingHoursCopy[day]?.length === 3) {
+          openingHoursCopy[day] = [];
+        }
+        openingHoursCopy[day] = openingHoursCopy[day].filter((item: OpeningHoursDay) => item.start && item.end);
+      }
+    }
+    this.openingHours = Object.entries(openingHoursCopy);
   }
 }
