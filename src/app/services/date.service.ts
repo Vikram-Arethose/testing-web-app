@@ -23,6 +23,7 @@ export class DateService {
   private dateSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
   dateShared: Observable<string> = this.dateSource.asObservable();
   specificTime: any;
+  preOrderTime: any;
   private timeHourOffset: number;
   fullDay = 86400;
   orderTime: number;
@@ -76,9 +77,19 @@ export class DateService {
       return false;
     }
   }
+  checkPreOrderTime(time) {
+    if (time <= this.preOrderTime ) {
+      return true;
+    }
+    if (time > this.preOrderTime ) {
+      return false;
+    }
+  }
   getProductAvailability(product: Product): boolean {
-    console.log('PRODUCT', product);
     this.specificTime = product.specific_time;
+    this.preOrderTime = product.pre_order_time;
+    console.log('Preorder time', this.preOrderTime);
+    console.log('Specific time', this.specificTime);
     if (product.quantity === 'unavailable') {
       return false;
     }
@@ -89,14 +100,29 @@ export class DateService {
       // check pre order period and pre_order_time
       const minPreOrderDate = new Date();
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
+      console.log('Order time', this.orderTime);
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (this.specificTime === 0) {
-        if (this.orderTime > product.pre_order_time  && this.orderTime < this.fullDay) {
-          return false;
+        if (this.orderTime > this.fullDay * 2 ) {
+          console.log('more than 2 days');
+          const notTodayTime = this.orderTime - this.fullDay * Math.trunc(this.orderTime / this.fullDay) ;
+          console.log('notTodayOrder', notTodayTime);
+          if (product.pre_order_time > this.fullDay) {
+            this.preOrderTime = product.pre_order_time - this.fullDay;
+            return this.checkPreOrderTime(notTodayTime);
+          }
+          if (product.pre_order_time <= this.fullDay) {
+            this.preOrderTime = product.pre_order_time;
+            return this.checkPreOrderTime(notTodayTime);
+          }
         }
-        if (this.orderTime < product.pre_order_time  && this.orderTime < this.fullDay) {
-          return true;
+        if (product.pre_order_time < this.fullDay && this.orderTime < this.fullDay ) {
+           return this.checkPreOrderTime(this.orderTime);
         }
+        if (product.pre_order_time > this.fullDay) {
+          return this.checkPreOrderTime(this.orderTime);
+        }
+
         if (product.pre_order_time === this.fullDay) {
           if (minPreOrderDate > this.selectedDate ) {
             return false;
