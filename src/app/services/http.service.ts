@@ -326,5 +326,7 @@ export class HttpService {
       }
     });
   }
-
+  getReorderData(orderId: number) {
+    return this.http.post(`${this.baseUrl}/order/repeat/${orderId}`, null);
+  }
 }

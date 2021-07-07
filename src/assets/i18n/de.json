@@ -122,7 +122,8 @@
     "note": "Hinweis: Sollte ein Artikel nicht verfügbar sein, bietet dir die Bäckerei einen Ersatzartikel an.",
     "repeatBtn": "Bestellung wiederholen",
     "save": "Für zukünftige Zahlungen speichern",
-    "thankForOrder": "Vielen Dank für deine Bestellung!"
+    "thankForOrder": "Vielen Dank für deine Bestellung!",
+    "notAvailable": "Dieses Produkt ist nicht verfügbar"
   },
   "favorites": {
     "header": "Favoriten",

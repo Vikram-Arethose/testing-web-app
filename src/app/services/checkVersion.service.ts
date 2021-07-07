@@ -56,7 +56,7 @@ async getUserVersion() {
         version: '3.0'
       }
     };
-   console.log('Release version', appLastVersion);
+   
    this.checkPlatform(userVersion, appLastVersion);
 }
   checkPlatform(userVersion, appLastVersion) {
@@ -72,12 +72,8 @@ async getUserVersion() {
     }
   }
   compareVersions(userAppVersion, appVersion, platform) {
-    console.log('platform', platform);
-    console.log('userApp version', userAppVersion);
-    console.log('App version', appVersion);
     if (userAppVersion.length === appVersion.length) {
       if (+userAppVersion.replace(/[\s.,%]/g, '') < +appVersion.replace(/[\s.,%]/g, '')) {
-        console.log('app is old');
         this.updateAppAlert(platform);
       }
     }

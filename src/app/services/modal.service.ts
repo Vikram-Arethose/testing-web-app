@@ -27,13 +27,14 @@ export class ModalService {
     this.dateServ.dateShared.subscribe(res => this.date = res);
   }
 
-  async presentPickUpDateModal(isVerify?: boolean, repeatOrder?: boolean) {
+  async presentPickUpDateModal(isVerify?: boolean, repeatOrder?: boolean, reorderData?: any) {
     const modal = await this.modalController.create({
       component: PickUpDateComponent,
       cssClass: 'pick-up-date-modal',
       componentProps: {
         isVerify,
-        repeatOrder
+        repeatOrder,
+        reorderData
       }
     });
 

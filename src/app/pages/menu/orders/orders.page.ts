@@ -11,6 +11,9 @@ import { ModalService } from '../../../services/modal.service';
 import { BakeryDetails, BakeryFull } from '../../../models/http/bakeryFull';
 import { OpeningHours, OpeningHoursDay } from '../../../models/http/homeBranch';
 import { BakeryService } from '../../../services/bakery.service';
+import { CartService } from '../../../services/cart.service';
+import { ApiResponse } from '../../../models/http/apiResponse';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-orders',
@@ -35,10 +38,14 @@ export class OrdersPage implements OnInit {
   bakeryInfoTrim: string;
   bakeryInfo: string;
   openingHours: [string, any][];
+  reOrderDataArray: any;
   private lastUsedPayment: string | undefined;
+  absentProducts = [];
+  reorderProducts: any;
 
   private orders: GetOrdersRes;
   private timeZoneMinutesOffset: number = new Date().getTimezoneOffset();
+
 
   constructor(
     private dateServ: DateService,
@@ -49,7 +56,9 @@ export class OrdersPage implements OnInit {
     private router: Router,
     private modalService: ModalService,
     public bakeryServ: BakeryService,
-    private  vps: ViewportScroller
+    private cartServ: CartService,
+    private  vps: ViewportScroller,
+    public alertServ: AlertService,
 
   ) {
     this.route.queryParams.subscribe(params => {
@@ -63,7 +72,6 @@ export class OrdersPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
   ionViewWillEnter() {
     this.dateLocale = this.localStorServ.getDateLocale();
@@ -79,7 +87,6 @@ export class OrdersPage implements OnInit {
     this.httpServ.getOrders().subscribe((res: GetOrdersRes) => {
       this.orders = res;
       this.ordersToShow = this.orders[this.segmentValue];
-      console.log('orders to show', this.ordersToShow);
       if (event) {
         event.target.complete();
       }
@@ -106,24 +113,61 @@ export class OrdersPage implements OnInit {
     if (this.isSave) {}
   }
 
-  repeatOrder(order, bakeryId) {
+   repeatOrder(order, bakeryId, orderList) {
     this.orderId = order;
     this.bakeryId = bakeryId;
-    this.getBakeryData();
+    this.cartServ.clearCart();
+    this.httpServ.getReorderData(this.orderId).subscribe( (res: ApiResponse) => {
+      if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
+              if (res.products_for_repeat.length === 0) {
+                let alertMsg = 'Alle Produkte in Ihrer Bestellung fehlen. Versuchen Sie, eine neue Bestellung aufzugeben';
+                if (localStorage.getItem('language') === 'en') {
+                  alertMsg = 'All products in your order are absent. Try to make a new order';
+                }
+                this.alertServ.presentAlert(alertMsg);
+                this.router.navigate(['orders']);
+             }else {
+               if (res.unavailabile_products.length > 0) {
+                 for (let i = 0; i <= res.unavailabile_products.length - 1; i++ ) {
+                   this.createNotAvailableProducts(res.unavailabile_products[i], orderList);
+                 }
+                 this.cartServ.addAbsentCart(this.absentProducts);
+                 console.log('res', res);
+               }
+               this.reorderProducts = res.products_for_repeat;
+               this.reorderProducts.map( product => {
+                 product.quantity = 'reorder';
+                 this.cartServ.addReorderToCart(product, product.count);
+                 const cart = this.cartServ.getCart();
+               });
+               setTimeout(() => {
+                  this.router.navigate(['bakery-search']);
+                }, 1000);
+               this.getBakeryData();
+             }
+            } else {
+              this.alertServ.presentAlert(`Something went wrong! Please contact support!`);
+            }
+    });
   }
-  presentPickUpDateModal(isVerify?: boolean, repeatOrder?: boolean) {
-    this.modalService.presentPickUpDateModal(false, true);
+  createNotAvailableProducts(id, orderListProducts) {
+    const index = orderListProducts.findIndex( product => product.product_id === id );
+    const currentProduct = orderListProducts[index];
+    this.absentProducts.push(currentProduct);
+    console.log('ABSENT ARRAY', this.absentProducts);
   }
   getBakeryData() {
     this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
       this.bakeryServ.changeBakery(res);
-      this.presentPickUpDateModal();
       this.allWeek = res.branchDetails.opening_hours_new.allWeek;
       this.bakeryDetails = res.branchDetails;
       this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
       this.setOpeningHours(res.branchDetails.opening_hours_new);
       this.lastUsedPayment = res?.last_used_payment;
+      console.log(this.lastUsedPayment);
+      this.reOrderDataArray = {orderId: this.orderId, bakeryId: this.bakeryId, lastUsedPayment: this.lastUsedPayment, reorder: true};
+      this.modalService.presentPickUpDateModal(false, true, this.reOrderDataArray);
     });
   }
 

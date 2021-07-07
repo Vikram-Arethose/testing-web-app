@@ -27,6 +27,8 @@ export class ShoppingCartPage implements OnInit {
   dateLocale: string;
   language: string;
   lastPaymentMethod: string;
+  reorder: boolean;
+  absentProducts: any;
   private branchDetails: BranchDetailsForPayment;
 
   constructor(
@@ -49,6 +51,11 @@ export class ShoppingCartPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.branchDetails = this.router.getCurrentNavigation().extras.state.data;
       }
+      if (this.router.getCurrentNavigation().extras.state.data?.reorder) {
+        this.reorder = true;
+      }else {
+        this.reorder = false;
+      }
     });
   }
 
@@ -63,6 +70,7 @@ export class ShoppingCartPage implements OnInit {
         this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
       }
     });
+    this.absentProducts = this.cartService.getAbsentCart();
   }
 
   ionViewWillEnter() {
@@ -133,9 +141,12 @@ export class ShoppingCartPage implements OnInit {
         this.loadingServ.presentLoading();
         this.httpServ.useLastPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
           this.loadingServ.dismiss();
+          console.log('res after pay', res);
           this.logger.log('useLastPayment res : ', res);
           if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
+            console.log('res data', res.data);
             this.cartService.clearCart();
+            this.cartService.clearAbsentCart();
             this.bakeryServ.openConfirmOrder(res.data?.order_id);
           } else {
             this.alertServ.presentAlert();
@@ -152,5 +163,10 @@ export class ShoppingCartPage implements OnInit {
       this.modalServ.presentPaymentMethodsModal();
     }
   }
-
+  
+  redirectToMain() {
+    this.cartService.clearCart();
+    this.cartService.clearAbsentCart();
+    this.router.navigate(['/bakery-search']);
+  }
 }

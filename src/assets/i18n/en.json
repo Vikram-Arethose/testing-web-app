@@ -122,7 +122,8 @@
     "note": "Note: If an item is sold-out, the bakery will offer you a replacement item.",
     "repeatBtn": "Repeat Order",
     "save": "Save for future payments",
-    "thankForOrder": "Thank you very much for your order!"
+    "thankForOrder": "Thank you very much for your order!",
+    "notAvailable": "This product not available"
   },
   "favorites": {
     "header": "Favorites",

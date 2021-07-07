@@ -3,7 +3,7 @@ import { DateService } from '../../services/date.service';
 import { ModalController } from '@ionic/angular';
 import { LoggerService } from '../../services/logger.service';
 import { AlertService } from '../../services/alert.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class PickUpDateComponent implements OnInit {
   @Input() isVerify;
   @Input() repeatOrder;
+  @Input() reorderData;
   activeBtn: string;
   cancel: string = this.translate.instant('dateChoose.cancel');
   customPickerOptions: any;
@@ -51,6 +52,7 @@ export class PickUpDateComponent implements OnInit {
       }
       this.dateGlobal = res;
     });
+    console.log('reorderData', this.reorderData);
   }
 
   setActiveBtn(date?: string) {
@@ -112,7 +114,17 @@ export class PickUpDateComponent implements OnInit {
   }
   redirectToPay() {
     this.onConfirm();
-    this.router.navigate(['bakery-search/bakery/shopping-cart']);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        data: {
+          branchId: this.reorderData.bakeryId,
+          minOrderValue: 1,
+          lastUsedPayment: this.reorderData.lastUsedPayment,
+          reorder: true
+        }
+      }
+    };
+    this.router.navigate(['bakery-search/bakery/shopping-cart'], navigationExtras);
   }
   closeModal() {
     if (!this.dateGlobal) {

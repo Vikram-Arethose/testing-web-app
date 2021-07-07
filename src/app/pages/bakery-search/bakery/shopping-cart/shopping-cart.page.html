@@ -1,11 +1,24 @@
 <ion-header>
-  <ion-toolbar mode="ios" class="toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button class="toolbar__button"
-                       [icon]="'close-outline'" mode="md" defaultHref="/bakery-search/bakery"></ion-back-button>
-    </ion-buttons>
-    <h1 class="toolbar__title ion-text-left">{{ 'shoppingCart.header' | translate }}</h1>
-  </ion-toolbar>
+  <div *ngIf="reorder === false; else reorder">
+    <ion-toolbar mode="ios" class="toolbar">
+      <ion-buttons slot="start" >
+        <ion-back-button  class="toolbar__button"
+                          [icon]="'close-outline'" mode="md" defaultHref="/bakery-search/bakery"></ion-back-button>
+      </ion-buttons>
+
+      <h1 class="toolbar__title ion-text-left">{{ 'shoppingCart.header' | translate }}</h1>
+    </ion-toolbar>
+  </div>
+  <ng-template #reorder>
+    <ion-toolbar mode="ios" class="toolbar">
+      <ion-buttons slot="start" >
+        <ion-back-button  class="toolbar__button"
+                          [icon]="'close-outline'" mode="md"  (click)="redirectToMain()"></ion-back-button>
+      </ion-buttons>
+      <h1 class="toolbar__title ion-text-left">{{ 'shoppingCart.header' | translate }}</h1>
+    </ion-toolbar>
+  </ng-template>
+
 </ion-header>
 
 <ion-content>
@@ -25,7 +38,7 @@
           <ion-row class="grid__row">
             <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
             <ion-col class="grid__col" size="8">
-              <p><span class="product-count">{{product.count}}</span> x {{product.name}}</p>
+              <p><span class="product-count">{{product.count}}</span> x {{product.name}} </p>
               <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
             </ion-col>
             <ion-col class="grid__col">{{product.price | currency:'EUR':'symbol'}}</ion-col>
@@ -38,6 +51,15 @@
             <div class="controls__btn" (click)="reduce(product)">-</div>
             <div class="controls__btn" (click)="add(product)">+</div>
           </ion-row>
+
+        </div>
+
+        <div class="absent-product"  *ngIf="reorder">
+          <ion-row class="grid__row" *ngFor="let item of cartService.getAbsentCart(), let i = index" >
+            <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
+            <ion-col class="grid__col line-through" size="4">{{item[i].product_name}}</ion-col>
+            <ion-col class="info-message"><span>{{ 'orders.notAvailable' | translate }}</span></ion-col>
+          </ion-row>
         </div>
         <ion-row class="grid__row grid__row_total">
           <ion-col class="grid__col" size="1"></ion-col>
@@ -47,11 +69,14 @@
         </ion-row>
       </ion-grid>
     </div>
+
     <div class="buttons-wrapper">
       <ion-button class="buttons-wrapper__btn" expand="block"
                   [routerLink]="'/bakery-search/bakery'"
-                  routerDirection="back">{{ 'shoppingCart.addMore' | translate }}</ion-button>
-      <ion-button class="buttons-wrapper__btn btn" expand="block" (click)="checkout()">
+                  routerDirection="back"
+                  *ngIf="reorder === false"
+                  >{{ 'shoppingCart.addMore' | translate }}</ion-button>
+      <ion-button class="buttons-wrapper__btn btn" color="primary" expand="block" (click)="checkout()">
         <div>
           <p>{{ 'shoppingCart.checkout' | translate }}
           ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>

@@ -26,7 +26,7 @@
   </ion-item>
   <div *ngIf="repeatOrder; else main">
     <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="redirectToPay()" [disabled]="!date || !time">
-     test</ion-button>
+      {{ 'dateChoose.confirm' | translate }}</ion-button>
 
   </div>
   <ng-template #main>

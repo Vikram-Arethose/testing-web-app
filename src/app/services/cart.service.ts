@@ -11,6 +11,7 @@ import { DateService } from './date.service';
 })
 export class CartService {
   private cart: Product[] = [];
+  private absentProductsCart = [];
 
   constructor(
     private logger: LoggerService,
@@ -38,6 +39,7 @@ export class CartService {
   }
 
   addProductToCart(product: Product){
+    console.log('product.count', product);
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
       product.count = 1;
@@ -47,9 +49,29 @@ export class CartService {
       if (product.quantity === 'unlimited' || product.quantity_items > this.cart[index].count) {
         this.cart[index].count++;
       }
+      if (product.quantity === 'reorder') {
+          this.cart[index].count++;
+          console.log(' count +');
+      }
     }
   }
-
+  addReorderToCart(product, count) {
+    const index = this.cart.findIndex(item => item.id === product.id);
+    if (index === -1) {
+      product.count = count;
+      product.isAvailable = true;
+      this.cart.push(product);
+    }
+  }
+  addAbsentCart(products) {
+    this.absentProductsCart.push(products);
+  }
+  getAbsentCart() {
+    return this.absentProductsCart;
+  }
+  clearAbsentCart() {
+    this.absentProductsCart.length = 0;
+  }
   removeProductFromCart(product: Product) {
     const cartProductIndex = this.cart.findIndex(item => item.id === product.id);
     if (cartProductIndex === -1) {

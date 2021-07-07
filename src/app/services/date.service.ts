@@ -78,8 +78,6 @@ export class DateService {
     }
   }
   getProductAvailability(product: Product): boolean {
-    console.log('PRODUCT', product);
-    console.log('product', product.pre_order_time);
     this.specificTime = product.specific_time;
     if (product.quantity === 'unavailable') {
       return false;
@@ -93,7 +91,6 @@ export class DateService {
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (this.specificTime === 0) {
-        console.log('order time', this.orderTime);
         
         if (product.pre_order_time > this.fullDay) {
           this.preOrderTime = product.pre_order_time - this.fullDay;
