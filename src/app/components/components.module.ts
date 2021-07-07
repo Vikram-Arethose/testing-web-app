@@ -13,6 +13,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { BakeryItemComponent } from './bakery-item/bakery-item.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { LoginFirstComponent } from './login-first/login-first.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -27,7 +28,8 @@ import { LoginFirstComponent } from './login-first/login-first.component';
     SpinnerComponent,
     BakeryItemComponent,
     ProductItemComponent,
-    LoginFirstComponent
+    LoginFirstComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { LoginFirstComponent } from './login-first/login-first.component';
     SpinnerComponent,
     BakeryItemComponent,
     ProductItemComponent,
-    LoginFirstComponent
+    LoginFirstComponent,
+    ReactiveFormsModule
   ]
 })
 export class ComponentsModule { }

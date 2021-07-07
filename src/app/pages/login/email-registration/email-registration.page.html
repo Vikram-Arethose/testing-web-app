@@ -16,6 +16,7 @@
         <ion-button class="button-wrapper__btn" type="submit" [disabled]="loginForm.invalid">
           {{ 'emailRegister.login' | translate }}</ion-button>
       </div>
+      <div class="forgot-password-btn" (click)="goToChangePassword()" ><span>{{ 'emailRegister.forgot_password' | translate }}</span></div>
     </form>
   </div>
   <div class="registration" *ngIf="!isLogin">

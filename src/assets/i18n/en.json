@@ -60,7 +60,8 @@
     "welcome": "Welcome,",
     "letsStart": "Let's get started …",
     "emailIsAlreadyRegistered": "This Email-Address is already registered.",
-    "pleaseDoLogin": "Please do Login."
+    "pleaseDoLogin": "Please do Login.",
+    "forgot_password": "Forgot password"
   },
   "menu": {
     "myAcc": "My Account",

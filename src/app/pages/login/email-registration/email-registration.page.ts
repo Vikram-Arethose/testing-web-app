@@ -100,5 +100,8 @@ export class EmailRegistrationPage implements OnInit {
       this.emailRegisterData = new EmailRegister();
     }
   }
-
+  
+  goToChangePassword() {
+    this.router.navigate(['email-registration/change-password']);
+  }
 }
