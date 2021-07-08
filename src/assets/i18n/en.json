@@ -61,7 +61,13 @@
     "letsStart": "Let's get started …",
     "emailIsAlreadyRegistered": "This Email-Address is already registered.",
     "pleaseDoLogin": "Please do Login.",
-    "forgot_password": "Forgot password"
+    "forgot_password": "Forgot password",
+    "changePassword": "Change password",
+    "confirmPassword": "Confirm Password",
+    "comparePasswordError": "Passwords do not match. Check the entered data.",
+    "verificationCode": "Insert your verification code",
+    "sendCode": "Send code",
+    "sendCodeInfoSpam": "You have pressed the send button many times in a short time. The button will be locked. Try to return in 10 minutes"
   },
   "menu": {
     "myAcc": "My Account",

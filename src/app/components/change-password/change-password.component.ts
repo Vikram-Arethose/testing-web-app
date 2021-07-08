@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from '../../services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -8,22 +11,44 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ChangePasswordComponent implements OnInit {
   updatePassword: FormGroup;
-  user = {
-    email: null,
-    password: null
-  };
-  constructor() {
+  email: null;
+  password: null;
+  compareError = false;
+  constructor(
+    public toast: AlertService,
+    private translate: TranslateService,
+    private router: Router
+  ) {
+    
     this.updatePassword = new FormGroup({
       emailVal: new FormControl('', [Validators.required, Validators.email]),
-      passwordVal: new FormControl('', [Validators.required, Validators.minLength(8)])
+      passwordVal: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmPasswordVal: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
+  comparePassword() {
+    if (this.updatePassword.controls.passwordVal.value === this.updatePassword.controls.confirmPasswordVal.value) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 sendNewPassword() {
   console.log('updatePassword', this.updatePassword);
-  this.user.email = this.updatePassword.controls.emailVal.value;
-  this.user.password = this.updatePassword.controls.passwordVal.value;
-  console.log('user', this.user);
+  const compareRes = this.comparePassword();
+  if (compareRes) {
+    this.email = this.updatePassword.controls.emailVal.value;
+    this.password = this.updatePassword.controls.passwordVal.value;
+    console.log('user', this.email, this.password);
+    const newPasswordSend = true;
+    localStorage.setItem('ConfirmStatusCode', newPasswordSend.toString());
+    this.router.navigate(['email-registration/confirm-code']);
+  } else {
+    const message = this.translate.instant('emailRegister.comparePasswordError');
+    this.toast.comparePasswordToast(message);
+  }
 }
+
 }

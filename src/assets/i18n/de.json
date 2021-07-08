@@ -61,7 +61,13 @@
     "letsStart": "Jetzt kann es losgehen …",
     "emailIsAlreadyRegistered": "Diese Email-Adresse ist bereits registriert.",
     "pleaseDoLogin": "Bitte logge dich ein.",
-    "forgot_password": "Passwort vergessen"
+    "forgot_password": "Passwort vergessen",
+    "changePassword": "Passwort ändern",
+    "confirmPassword": "Kennwort bestätigen",
+    "comparePasswordError": "Passwörter stimmen nicht überein. Überprüfen Sie die eingegebenen Daten.",
+    "verificationCode": "Geben Sie Ihren Bestätigungscode ein",
+    "sendCode": "Code senden",
+    "sendCodeInfoSpam": "Sie haben die Sendetaste in kurzer Zeit mehrmals gedrückt. Die Schaltfläche wird gesperrt. Versuchen Sie, in 10 Minuten zurückzukehren"
   },
   "menu": {
     "myAcc": "Mein Account",

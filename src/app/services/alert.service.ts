@@ -33,5 +33,13 @@ export class AlertService {
     });
     toast.present();
   }
+  async comparePasswordToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
+  }
 
 }

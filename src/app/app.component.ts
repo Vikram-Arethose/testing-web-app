@@ -91,13 +91,13 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
       this.checkVersion.checkReleaseVersion();
+      this.changePasswordCheck();
       this.platform.resume.subscribe(() => {
         this.checkVersion.checkReleaseVersion();
+        this.changePasswordCheck();
       });
     });
   }
-  
-
   ngOnInit() {
     const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
@@ -122,13 +122,23 @@ export class AppComponent implements OnInit {
   openFirstPage() {
     const token = localStorage.getItem('token');
     if (token) {
-      this.router.navigate(['bakery-search']);
-    } else {
-      this.router.navigate(['start']);
-    }
+        this.router.navigate(['bakery-search']);
+      } else {
+        this.router.navigate(['start']);
+      }
   }
   openSupportPage(url) {
     this.browser = this.iab.create(url, '_blank');
   }
-  
+  changePasswordCheck() {
+    const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
+    console.log('redirectToEnterCode', redirectToEnterCode);
+    if (redirectToEnterCode === 'true') {
+      setTimeout(() => {
+        this.router.navigate(['email-registration/confirm-code']);
+      }, 1000);
+    } else {
+      this.router.navigate([this.router.url]);
+    }
+  }
 }

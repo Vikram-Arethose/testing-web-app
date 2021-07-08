@@ -1,0 +1,14 @@
+<ion-header></ion-header>
+<ion-content>
+  <div class="top"></div>
+  <div class="code-container" >
+    <h2>{{ 'emailRegister.verificationCode' | translate }}</h2>
+    <ion-item class="" mode="ios">
+      <ion-input type="text" name="confirmCode" [value]="confirmCode" (ionChange)="getConfirmCode($event.target.value)"></ion-input>
+    </ion-item>
+    <div class="button-wrapper">
+      <ion-button class="button-wrapper__btn" (click)="sendCode()" [disabled]="activeButton">
+        {{ 'emailRegister.sendCode' | translate }}</ion-button>
+    </div>
+  </div>
+</ion-content>

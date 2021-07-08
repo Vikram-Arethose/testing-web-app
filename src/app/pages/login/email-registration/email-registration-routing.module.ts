@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { EmailRegistrationPage } from './email-registration.page';
 import { ChangePasswordComponent } from '../../../components/change-password/change-password.component';
+import { ConfirmCodeComponent } from '../../../components/confirm-code/confirm-code.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'change-password',
     component: ChangePasswordComponent
+  },
+  {
+    path: 'confirm-code',
+    component: ConfirmCodeComponent
   }
 ];
 
