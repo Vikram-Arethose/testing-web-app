@@ -1,5 +1,5 @@
 <ion-header>
-  <div *ngIf="reorder === false; else reorder">
+  <div *ngIf="!reorder; else reorder">
     <ion-toolbar mode="ios" class="toolbar">
       <ion-buttons slot="start" >
         <ion-back-button  class="toolbar__button"
@@ -74,7 +74,7 @@
       <ion-button class="buttons-wrapper__btn" expand="block"
                   [routerLink]="'/bakery-search/bakery'"
                   routerDirection="back"
-                  *ngIf="reorder === false"
+                  *ngIf="!reorder"
                   >{{ 'shoppingCart.addMore' | translate }}</ion-button>
       <ion-button class="buttons-wrapper__btn btn" color="primary" expand="block" (click)="checkout()">
         <div>

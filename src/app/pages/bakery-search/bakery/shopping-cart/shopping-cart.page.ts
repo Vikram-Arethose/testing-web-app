@@ -27,7 +27,7 @@ export class ShoppingCartPage implements OnInit {
   dateLocale: string;
   language: string;
   lastPaymentMethod: string;
-  reorder: boolean;
+  reorder = false;
   absentProducts: any;
   private branchDetails: BranchDetailsForPayment;
 
