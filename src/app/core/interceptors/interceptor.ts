@@ -15,16 +15,18 @@ import { LoadingService } from '../../services/loading.service';
 import { AnalyticsService } from '../../services/analytics.service';
 import { AlertService } from '../../services/alert.service';
 import { LoginService } from '../../services/login.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
-
+  message = '';
   constructor(
     private analyticsServ: AnalyticsService,
     private logger: LoggerService,
     private alertServ: AlertService,
     private loadingService: LoadingService,
-    private loginServ: LoginService
+    private loginServ: LoginService,
+    private translate: TranslateService,
   ) {  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -49,13 +51,26 @@ export class Interceptor implements HttpInterceptor {
           this.logger.warn(`Interceptor: A client-side or network error occurred. An error message:`, error.error.message);
           this.alertServ.presentAlert(error.error.message);
         } else {
+          if (error.error.unregisterd_by_form) {
+            this.logger.warn(`Interceptor: A client-side or network error occurred. An error message:`, error.error.message);
+            this.message = this.translate.instant('emailRegister.unregisteredByForm');
+          }
+          if (error.error.wrong_code) {
+            console.log('-------------');
+            this.logger.warn(`Interceptor: A client-side or network error occurred. An error message:`, error.error.message);
+            this.message = this.translate.instant('emailRegister.wrongCode');
+          }
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,
           if (error.status === 401) {
             this.loginServ.logout();
           }
           this.logger.warn('Interceptor: An error occurred: ', error);
-          this.alertServ.presentAlert();
+          if (this.message === '') {
+            this.alertServ.presentAlert();
+          }else {
+            this.alertServ.presentAlert(this.message);
+          }
         }
         this.analyticsServ.logEvent('interceptor_http_error_response', error);
         this.loadingService.dismiss();

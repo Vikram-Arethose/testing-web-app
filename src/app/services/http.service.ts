@@ -329,4 +329,10 @@ export class HttpService {
   getReorderData(orderId: number) {
     return this.http.post(`${this.baseUrl}/order/repeat/${orderId}`, null);
   }
+  sendPassword(email, password, status) {
+    return this.http.get(this.baseUrl + `/forgott-password/${email}/${password}/${status}`);
+  }
+  sendConfirmationCode(code) {
+    return this.http.get(this.baseUrl + `/check-code/${code}`);
+  }
 }

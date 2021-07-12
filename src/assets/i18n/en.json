@@ -67,7 +67,13 @@
     "comparePasswordError": "Passwords do not match. Check the entered data.",
     "verificationCode": "Insert your verification code",
     "sendCode": "Send code",
-    "sendCodeInfoSpam": "You have pressed the send button many times in a short time. The button will be locked. Try to return in 10 minutes"
+    "sendCodeInfoSpam": "You have pressed the send button many times in a short time. The button will be locked. Try to return in 10 minutes",
+    "notConfirmedEmail": "You entered an unregistered email. Please enter a correct email and try again.",
+    "resendCode": "Resend code",
+    "unregisteredByForm": "User register type was not a form",
+    "wrongCode": "You have entered an incorrect code. Please try again",
+    "successCode": "Password changed",
+    "reResendCode": "You can re-request the code via"
   },
   "menu": {
     "myAcc": "My Account",
@@ -130,7 +136,8 @@
     "repeatBtn": "Repeat Order",
     "save": "Save for future payments",
     "thankForOrder": "Thank you very much for your order!",
-    "notAvailable": "This product not available"
+    "notAvailable": "This product not available",
+    "repeat": "Repeat order"
   },
   "favorites": {
     "header": "Favorites",

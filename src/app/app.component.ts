@@ -88,10 +88,10 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang('de');
       this.useLanguage();
       this.openFirstPage();
+      this.changePasswordCheck();
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
       this.checkVersion.checkReleaseVersion();
-      this.changePasswordCheck();
       this.platform.resume.subscribe(() => {
         this.checkVersion.checkReleaseVersion();
         this.changePasswordCheck();
@@ -136,7 +136,7 @@ export class AppComponent implements OnInit {
     if (redirectToEnterCode === 'true') {
       setTimeout(() => {
         this.router.navigate(['email-registration/confirm-code']);
-      }, 1000);
+      }, 1200);
     } else {
       this.router.navigate([this.router.url]);
     }

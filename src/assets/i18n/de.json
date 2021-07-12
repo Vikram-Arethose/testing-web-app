@@ -67,7 +67,13 @@
     "comparePasswordError": "Passwörter stimmen nicht überein. Überprüfen Sie die eingegebenen Daten.",
     "verificationCode": "Geben Sie Ihren Bestätigungscode ein",
     "sendCode": "Code senden",
-    "sendCodeInfoSpam": "Sie haben die Sendetaste in kurzer Zeit mehrmals gedrückt. Die Schaltfläche wird gesperrt. Versuchen Sie, in 10 Minuten zurückzukehren"
+    "sendCodeInfoSpam": "Sie haben die Sendetaste in kurzer Zeit mehrmals gedrückt. Die Schaltfläche wird gesperrt. Versuchen Sie, in 10 Minuten zurückzukehren",
+    "notConfirmedEmail": "Sie haben eine unregistrierte E-Mail eingegeben. Geben Sie eine korrekte E-Mail-Adresse ein und versuchen Sie es erneut.",
+    "resendCode": "Code erneut senden",
+    "unregisteredByForm": "Benutzerregistrierungstyp war kein Formular",
+    "wrongCode": "Sie haben einen falschen Code eingegeben. Bitte versuche es erneut.",
+    "successCode": "Passwort geändert",
+    "reResendCode": "Sie können den Code erneut anfordern über"
   },
   "menu": {
     "myAcc": "Mein Account",
@@ -130,7 +136,8 @@
     "repeatBtn": "Bestellung wiederholen",
     "save": "Für zukünftige Zahlungen speichern",
     "thankForOrder": "Vielen Dank für deine Bestellung!",
-    "notAvailable": "Dieses Produkt ist nicht verfügbar"
+    "notAvailable": "Dieses Produkt ist nicht verfügbar",
+    "repeat": "Bestellung wiederholen"
   },
   "favorites": {
     "header": "Favoriten",

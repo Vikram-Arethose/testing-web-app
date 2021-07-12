@@ -1,6 +1,7 @@
 <ion-header></ion-header>
 <ion-content>
   <div class="top"></div>
+  <ion-icon (click)="returnToStartPage()" class="arrow" name="arrow-back-sharp" ></ion-icon>
   <div class="code-container" >
     <h2>{{ 'emailRegister.verificationCode' | translate }}</h2>
     <ion-item class="" mode="ios">
@@ -10,5 +11,15 @@
       <ion-button class="button-wrapper__btn" (click)="sendCode()" [disabled]="activeButton">
         {{ 'emailRegister.sendCode' | translate }}</ion-button>
     </div>
+    <div class="forgot-password-btn" *ngIf="!disabled;else timerBlock" (click)="resendCode()">
+      <span>{{ 'emailRegister.resendCode' | translate }}</span>
+    </div>
+    <ng-template #timerBlock>
+      <div class="timer-block">
+        <p>{{'emailRegister.reResendCode' | translate}}</p>
+        <span class="timer text">{{timer}} sec</span>
+      </div>
+
+    </ng-template>
   </div>
 </ion-content>

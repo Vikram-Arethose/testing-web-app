@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { ChangePasswordService } from '../../services/changePassword.service';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-change-password',
@@ -17,9 +19,11 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     public toast: AlertService,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private changePassword: ChangePasswordService,
+    private http: HttpService,
   ) {
-    
+
     this.updatePassword = new FormGroup({
       emailVal: new FormControl('', [Validators.required, Validators.email]),
       passwordVal: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -36,15 +40,26 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 sendNewPassword() {
-  console.log('updatePassword', this.updatePassword);
   const compareRes = this.comparePassword();
   if (compareRes) {
     this.email = this.updatePassword.controls.emailVal.value;
     this.password = this.updatePassword.controls.passwordVal.value;
-    console.log('user', this.email, this.password);
-    const newPasswordSend = true;
-    localStorage.setItem('ConfirmStatusCode', newPasswordSend.toString());
-    this.router.navigate(['email-registration/confirm-code']);
+    this.http.checkEmail(this.email).subscribe( res => {
+      if (res) {
+        const status = 0;
+        localStorage.setItem('changeDataEmail', this.email);
+        this.http.sendPassword(this.email, this.password, status).subscribe( (response: any) => {
+          if ( response.apiCode === 'SUCCESS') {
+             this.router.navigate(['email-registration/confirm-code']);
+             localStorage.setItem('ConfirmStatusCode', 'true');
+          }
+        });
+      }else {
+        const message = this.translate.instant('emailRegister.notConfirmedEmail');
+        this.toast.presentAlert(message);
+        this.updatePassword.reset();
+      }
+    });
   } else {
     const message = this.translate.instant('emailRegister.comparePasswordError');
     this.toast.comparePasswordToast(message);

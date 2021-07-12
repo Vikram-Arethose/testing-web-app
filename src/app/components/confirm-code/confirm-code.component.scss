@@ -11,7 +11,13 @@
   height: 18px;
   background: #FEDE00;
 }
-
+.arrow {
+  position: absolute;
+  top: 4vh;
+  left: 5.6vw;
+  font-size: 9vw;
+  color: #FEDE00;
+}
 
 
 
@@ -36,6 +42,29 @@
     font: normal normal 700 22px/27px Montserrat;
     text-transform: capitalize;
   }
+  .hide {
+    display: none;
+  }
+}
+.forgot-password-btn, .timer-block {
+  --background: transparent;
+  width: 74vw;
+  height: 7.39vh;
+  margin: 2vh auto;
+  --color: black;
+  text-align: center;
+}
+.forgot-password-btn {
+  text-decoration: underline;
+}
+.timer-block {
+  p {
+    font-size: 2.4vh;
+  }
+}
+
+ion-item.ion-invalid.ion-touched {
+  --border-color: var(--ion-color-danger);
 }
 .forgot-password-btn {
   --background: transparent;
@@ -45,8 +74,5 @@
   --color: black;
   text-align: center;
   text-decoration: underline;
-}
 
-ion-item.ion-invalid.ion-touched {
-  --border-color: var(--ion-color-danger);
 }
