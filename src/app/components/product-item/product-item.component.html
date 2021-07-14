@@ -1,5 +1,6 @@
 <div class="product">
   <div class="col-left" (click)="presentProductDetailsModal()">
+    <ion-img class="discount-img" src="../../../../assets/icons/discount.png"></ion-img>
     <ion-img class="product__img" [src]="product?.photo"></ion-img>
     <ion-img class="product__img-corner product__img-corner_bio" *ngIf="product.bio_certification"
              src="../../../../assets/img/bakery/bio.png"></ion-img>
