@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 1.5vh;
+  .text {
+    display: flex;
+    margin-top: 1.3vh;
+    margin-bottom: 4vh;
+    span {
+      display: flex;
+      align-items: flex-end;
+      font-size: 1.5vh;
+    }
+    img {
+      width: 5.6vh;
+      height: 3.5vh;
+      max-width: 50px;
+      max-width: 50px;
+      padding-left: 2vh;
+    }
+  }
+  .buttons-wrapper {
+    padding: 0 2vh;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    ion-button {
+      width: 10.2vh;
+      height: 6.3vh;
+      font-size: 1.6vh;
+      color: #1e2023;
+      font-weight: 600;
+    }
+    .green-btn {
+      --background: #3BC786;
+    }
+    .red-btn {
+      --background: #F88962;
+    }
+  }
+}

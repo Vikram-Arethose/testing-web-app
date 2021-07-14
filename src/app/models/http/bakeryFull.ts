@@ -35,6 +35,7 @@ export interface Category {
   products: Product[];
 }
 export interface Product {
+  sliced: number;
   reorder: boolean;
   active: number;
   all_branches: number;

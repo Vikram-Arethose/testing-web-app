@@ -37,10 +37,20 @@ export class ProductItemComponent implements OnInit {
   }
 
   addProductToCart() {
+    console.log('product', this.product);
     if (this.guest) {
       this.modalServ.presentLoginFirstModal();
     } else {
-      this.cartServ.addProductToCart(this.product);
+      if (this.product.product_category_id === 2) {
+        const checkBasketCount = this.cartServ.getCart().findIndex( item => item.id === this.product.id);
+        if (checkBasketCount === -1 ) {
+          this.modalServ.presentSlicedModal(this.product);
+        }else {
+          this.cartServ.addProductToCart(this.product);
+        }
+      }else {
+        this.cartServ.addProductToCart(this.product);
+      }
     }
   }
 

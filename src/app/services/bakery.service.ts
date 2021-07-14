@@ -52,7 +52,8 @@ export class BakeryService {
     return {
       branch_id: this.bakeryData.branchDetails.id,
       basket_sum: this.cartServ.getTotalPrice(),
-      products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count })),
+      // tslint:disable-next-line:max-line-length
+      products: this.cartServ.getCart().map((item: Product) => ({ id: item.id, quantity: item.count, sliced: (!item.sliced ? 0 : item.sliced) })),
       pickup_date: date.split('T')[0] + ' ' + date.split('T')[1].substr(0, 5),
     };
   }

@@ -13,8 +13,11 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { BakeryItemComponent } from './bakery-item/bakery-item.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { LoginFirstComponent } from './login-first/login-first.component';
+// @ts-ignore
 import { ChangePasswordComponent } from './change-password/change-password.component';
+// @ts-ignore
 import { ConfirmCodeComponent } from './confirm-code/confirm-code.component';
+import { SlicedModalComponent } from './sliced-modal/sliced-modal.component';
 
 
 
@@ -31,7 +34,8 @@ import { ConfirmCodeComponent } from './confirm-code/confirm-code.component';
     ProductItemComponent,
     LoginFirstComponent,
     ChangePasswordComponent,
-    ConfirmCodeComponent
+    ConfirmCodeComponent,
+    SlicedModalComponent
   ],
   imports: [
     CommonModule,

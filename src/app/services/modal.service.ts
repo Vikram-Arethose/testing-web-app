@@ -8,16 +8,13 @@ import { LoggerService } from './logger.service';
 import { DateService } from './date.service';
 import { Router } from '@angular/router';
 import { PaymentMethodsComponent } from '../components/payment-methods/payment-methods.component';
-import { repeat } from 'rxjs/operators';
+import { SlicedModalComponent } from '../components/sliced-modal/sliced-modal.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-
   date: string;
-  
-
   constructor(
     private dateServ: DateService,
     private modalController: ModalController,
@@ -73,5 +70,18 @@ export class ModalService {
     });
     return await modal.present();
   }
-
+  async presentSlicedModal(product) {
+    const modal = await this.modalController.create({
+      component: SlicedModalComponent,
+      cssClass: 'sliced-modal',
+      showBackdrop: true,
+      componentProps: {
+        product
+      }
+    });
+    return await modal.present();
+  }
+  closeModal() {
+    this.modalController.dismiss();
+  }
 }

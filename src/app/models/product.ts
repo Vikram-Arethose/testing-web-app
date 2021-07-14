@@ -1,4 +1,5 @@
 export interface Product {
+  sliced: number;
   id: number;
   img: string;
   imgCorner: string;

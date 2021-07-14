@@ -205,6 +205,12 @@
     "collection": "Abholung",
     "noItems": "Keine Daten zum Anzeigen. Bitte versuchen Sie es später noch einmal"
   },
+  "sliced": {
+    "cut":"Geschnitten",
+    "cutQuestion":"Möchtest du dein Brot geschnitten haben?",
+    "yes":"Ja",
+    "no":"Nein"
+  },
   "days": {
     "mon": "Mo",
     "tue": "Die",

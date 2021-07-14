@@ -54,7 +54,7 @@ ion-header {
   --border-color: #CBCBCB;
 }
 
-.payment-methods-modal .modal-wrapper, .payment-methods-modal .modal-shadow {
+.payment-methods-modal .modal-wrapper, .payment-methods-modal .modal-shadow,{
   height: 60vh;
   bottom: 0;
   position: absolute;
@@ -84,7 +84,19 @@ ion-header {
     background: transparent;
   }
 }
-.update-alert {
-
+.sliced-modal {
+  --backdrop-opacity: 0.12!important;
+  .modal-wrapper {
+    top: 34vh;
+    height: 20vh;
+    width: 80%;
+    margin: 0 auto;
+    position: absolute;
+    min-height: 170px;
+    min-width: 317px;
+    max-width: 600px;
+    border: 1px solid lightgrey;
+    border-radius: 1vh;
+  }
 }
 

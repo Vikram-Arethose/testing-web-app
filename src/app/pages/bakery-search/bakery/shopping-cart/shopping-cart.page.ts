@@ -30,6 +30,7 @@ export class ShoppingCartPage implements OnInit {
   reorder = false;
   absentProducts: any;
   private branchDetails: BranchDetailsForPayment;
+  checked;
 
   constructor(
     public cartService: CartService,
@@ -139,6 +140,7 @@ export class ShoppingCartPage implements OnInit {
     if (this.checkCart()) {
       if (this.lastPaymentMethod) {
         this.loadingServ.presentLoading();
+        console.log('date', this.date);
         this.httpServ.useLastPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
           this.loadingServ.dismiss();
           console.log('res after pay', res);
@@ -168,5 +170,14 @@ export class ShoppingCartPage implements OnInit {
     this.cartService.clearCart();
     this.cartService.clearAbsentCart();
     this.router.navigate(['/bakery-search']);
+  }
+  cutToggler(e) {
+    let checkedStatus = e.detail.checked;
+    (checkedStatus === true) ? checkedStatus = 1 : checkedStatus = 0;
+    const basket = this.cartService.getCart();
+    const id = e.target.name;
+    const index = basket.findIndex(item => item.id === +id);
+    basket[index].sliced = checkedStatus;
+    this.cartService.updateCart(basket);
   }
 }
