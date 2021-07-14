@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { Subscription } from 'rxjs';
 import { OpeningHours, OpeningHoursDay } from '../../../models/http/homeBranch';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-bakery',
@@ -22,7 +23,7 @@ import { OpeningHours, OpeningHoursDay } from '../../../models/http/homeBranch';
   styleUrls: ['./bakery.page.scss'],
 })
 export class BakeryPage implements OnInit, OnDestroy {
-
+  @ViewChild(IonContent) content: IonContent;
   account: User;
   allWeek: boolean;
   bakeryAddress: string;
@@ -135,7 +136,10 @@ export class BakeryPage implements OnInit, OnDestroy {
 
   onCategorySelect(index: number) {
     this.selectedCategoryIndex = index;
-    this.setProductList();
+    // this.setProductList();
+    const title = document.getElementById(`category_${index}`);
+    console.log('category', title.offsetTop);
+    this.content.scrollToPoint(0, title.offsetTop - 50, 4000);
   }
 
   setProductList() {
