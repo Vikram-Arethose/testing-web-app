@@ -4,6 +4,9 @@ import { CartService } from '../../services/cart.service';
 import { ModalService } from '../../services/modal.service';
 import { LoggerService } from '../../services/logger.service';
 import { AccountService } from '../../services/account.service';
+import { DateService } from '../../services/date.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { SaleServices } from '../../services/sale.services';
 
 @Component({
   selector: 'app-product-item',
@@ -15,13 +18,15 @@ export class ProductItemComponent implements OnInit {
   @Input() date: string;
   @Input() product: Product;
   guest: boolean;
-  // this field added to img when product has limited counter
-  // counter = 12;
+  private dateSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  dateFromDatePicker: Observable<string> = this.dateSource.asObservable();
+
   constructor(
     private accountServ: AccountService,
     private cartServ: CartService,
     private logger: LoggerService,
     private modalServ: ModalService,
+    private saleServ: SaleServices
   ) { }
 
   ngOnInit() {
@@ -37,7 +42,8 @@ export class ProductItemComponent implements OnInit {
   }
 
   addProductToCart() {
-    console.log('product', this.product);
+    // console.log('product', this.product);
+    this.cartServ.setActualDate(this.date);
     if (this.guest) {
       this.modalServ.presentLoginFirstModal();
     } else {

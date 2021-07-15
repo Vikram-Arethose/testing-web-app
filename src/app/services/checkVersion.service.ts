@@ -56,7 +56,7 @@ async getUserVersion() {
         version: '3.0'
       }
     };
-   
+
    this.checkPlatform(userVersion, appLastVersion);
 }
   checkPlatform(userVersion, appLastVersion) {
@@ -68,13 +68,16 @@ async getUserVersion() {
       this.compareVersions(userVersion.version, appLastVersion.android.version, userPlatform);
     }
     if ( userPlatform === 'web') {
-      this.compareVersions(userVersion.version, appLastVersion.web.version, userPlatform);
+      // this.compareVersions(userVersion.version, appLastVersion.web.version, userPlatform);
     }
   }
   compareVersions(userAppVersion, appVersion, platform) {
     if (userAppVersion.length === appVersion.length) {
       if (+userAppVersion.replace(/[\s.,%]/g, '') < +appVersion.replace(/[\s.,%]/g, '')) {
         this.updateAppAlert(platform);
+      }
+      if (platform === 'web') {
+        console.log('Planform web');
       }
     }
     if (userAppVersion.length > appVersion.length) {

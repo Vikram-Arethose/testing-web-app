@@ -7,6 +7,7 @@ import { LoggerService } from './logger.service';
 import { BakeryFull, Product } from '../models/http/bakeryFull';
 import { BakeryService } from './bakery.service';
 import { OpeningHoursDay } from '../models/http/homeBranch';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class DateService {
 
   constructor(
     private logger: LoggerService,
-    private bakeryServ: BakeryService
+    private bakeryServ: BakeryService,
   ) {
     this.bakeryServ.bakery.subscribe((res: BakeryFull) => {
       this.bakery = res;
@@ -142,8 +143,11 @@ export class DateService {
       return true;
     }
   }
+  getDateFromPicker() {
+    return this.date;
+  }
 
-  mapProductPrice(product: Product): Product {
+    mapProductPrice(product: Product): Product {
     // check if there is special_price and if true change price for the product
     if (this.date && product.special_price) {
       if (product.special_price_from && product.special_price_to) {

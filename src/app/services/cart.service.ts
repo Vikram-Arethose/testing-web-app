@@ -5,6 +5,7 @@ import { ProductInCart } from '../models/productInCart';
 import { Product } from '../models/http/bakeryFull';
 import { Router } from '@angular/router';
 import { DateService } from './date.service';
+import { SaleServices } from './sale.services';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,14 @@ import { DateService } from './date.service';
 export class CartService {
   private cart: Product[] = [];
   private absentProductsCart = [];
+  private actualDate: string;
+  product: Product;
+  date: string;
   constructor(
     private logger: LoggerService,
     private router: Router,
+    private saleServ: SaleServices,
+    // private dateServ: DateService
   ) { }
 
   getCart(): Product[]  {
@@ -38,7 +44,9 @@ export class CartService {
     return this.cart[productCartIndex].count;
   }
 
-  addProductToCart(product: Product ){
+  addProductToCart(product: Product, date = null ){
+    this.product = product;
+    this.date = date;
     // console.log('product.count', product);
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
@@ -54,6 +62,7 @@ export class CartService {
       }
     }
   }
+
   addReorderToCart(product, count) {
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
@@ -99,9 +108,21 @@ export class CartService {
     return this.cart.reduce(reducer, initialValue);
   }
 
+  /**
+   * check if product exist discount price
+   */
+  getActualPrice(product) {
+    return this.saleServ.checkSale(this.actualDate, product) ? product.special_price : product.price;
+  }
+
+  setActualDate(date) {
+    this.actualDate = date;
+  }
+
   getTotalPrice() {
+    console.log('this.cart', this.cart);
     const reducer = (accumulator, currentValue: Product) => {
-      return  accumulator + +(currentValue.count * Number.parseFloat(currentValue.price)).toFixed(2);
+      return  accumulator + +(currentValue.count * Number.parseFloat(this.getActualPrice(currentValue))).toFixed(2);
     };
     const initialValue = 0;
     return this.cart.reduce(reducer, initialValue);

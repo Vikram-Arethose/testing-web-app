@@ -1,6 +1,6 @@
 <div class="product">
   <div class="col-left" (click)="presentProductDetailsModal()">
-    <ion-img class="discount-img" src="../../../../assets/icons/discount.png"></ion-img>
+    <ion-img *ngIf="saleServ.checkSale(date, product)" class="discount-img" src="../../../../assets/icons/discount.png"></ion-img>
     <ion-img class="product__img" [src]="product?.photo"></ion-img>
     <ion-img class="product__img-corner product__img-corner_bio" *ngIf="product.bio_certification"
              src="../../../../assets/img/bakery/bio.png"></ion-img>
@@ -19,9 +19,9 @@
         <p ></p>
       </div>
       <div>
-        <p class="product__price" [class.product__price_crossed-out]="product?.isSpecialPrice">
+        <p class="product__price" [class.product__price_crossed-out]="saleServ.checkSale(date, product)">
           {{product.price | currency:'EUR':'symbol'}}</p>
-        <p class="product__special-price" *ngIf="product?.isSpecialPrice">
+        <p class="product__special-price" *ngIf="saleServ.checkSale(date, product)">
           {{product.special_price | currency:'EUR':'symbol'}}</p>
       </div>
     </div>

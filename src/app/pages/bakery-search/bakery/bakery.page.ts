@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LoggerService } from '../../../services/logger.service';
 import { DateService } from '../../../services/date.service';
@@ -43,6 +43,7 @@ export class BakeryPage implements OnInit, OnDestroy {
   private bakeryId: number;
   private lastUsedPayment: string | undefined;
   private subscription: Subscription;
+  totalPrice: number;
 
   constructor(
     public bakeryServ: BakeryService,
@@ -56,7 +57,8 @@ export class BakeryPage implements OnInit, OnDestroy {
     private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cRef: ChangeDetectorRef
   ) {
     this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -77,6 +79,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       }
     });
     this.dateLocale = this.locStorageServ.getDateLocale();
+    this.cartService.getTotalPrice();
   }
 
   getShortDayName(dayName: string) {
@@ -143,6 +146,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       this.productsList = this.categories[this.selectedCategoryIndex].products.slice();
       this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
       this.productsList = this.productsList.map(item => this.dateService.mapProductPrice(item));
+      console.log('product list', this.productsList);
     }
   }
 
@@ -199,5 +203,4 @@ export class BakeryPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
