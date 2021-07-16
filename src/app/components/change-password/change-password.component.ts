@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { ChangePasswordService } from '../../services/changePassword.service';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class ChangePasswordComponent implements OnInit {
     public toast: AlertService,
     private translate: TranslateService,
     private router: Router,
-    private changePassword: ChangePasswordService,
     private http: HttpService,
   ) {
 

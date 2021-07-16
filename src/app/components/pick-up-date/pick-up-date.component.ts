@@ -5,6 +5,7 @@ import { LoggerService } from '../../services/logger.service';
 import { AlertService } from '../../services/alert.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-pick-up-date',
@@ -35,7 +36,8 @@ export class PickUpDateComponent implements OnInit {
     private logger: LoggerService,
     private modalController: ModalController,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cartServ: CartService
   ) {}
 
   ngOnInit() {
@@ -112,6 +114,7 @@ export class PickUpDateComponent implements OnInit {
         this.dateService.changeDate(this.dateService.getDefaultMinOrderDate().toISOString());
       }
     }
+    this.compareDate(this.date);
   }
   redirectToPay() {
     this.onConfirm();
@@ -155,5 +158,10 @@ export class PickUpDateComponent implements OnInit {
     this.datePickerMin = this.dateService.getDatePickerMin();
     this.datePickerMax = this.dateService.getDatePickerMax();
     this.setTimePickerMin();
+  }
+
+  compareDate(date) {
+    this.cartServ.setActualDate(date);
+    this.cartServ.getTotalPrice();
   }
 }

@@ -15,6 +15,7 @@ import { LocalStorageService } from '../../../../services/local-storage.service'
 import { LoadingService } from '../../../../services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from '../../../../services/modal.service';
+import { SaleServices } from '../../../../services/sale.services';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -46,7 +47,8 @@ export class ShoppingCartPage implements OnInit {
     private modalServ: ModalService,
     private route: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private saleServ: SaleServices
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {

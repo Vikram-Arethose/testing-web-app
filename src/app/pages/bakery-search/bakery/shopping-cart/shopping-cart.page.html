@@ -41,7 +41,9 @@
               <p><span class="product-count">{{product.count}}</span> x {{product.name}} </p>
               <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
             </ion-col>
-            <ion-col class="grid__col">{{product.price | currency:'EUR':'symbol'}}</ion-col>
+
+            <ion-col class="grid__col" *ngIf="saleServ.checkSale(date, product)">{{product.special_price | currency:'EUR':'symbol'}}</ion-col>
+            <ion-col class="grid__col" *ngIf="!saleServ.checkSale(date, product)">{{product.price | currency:'EUR':'symbol'}}</ion-col>
           </ion-row>
           <ion-row class="grid__row controls">
             <ion-item *ngIf="product?.sliced === 0 || product?.sliced === 1 ">

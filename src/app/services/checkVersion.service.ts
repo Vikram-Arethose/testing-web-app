@@ -67,9 +67,6 @@ async getUserVersion() {
     if ( userPlatform === 'android') {
       this.compareVersions(userVersion.version, appLastVersion.android.version, userPlatform);
     }
-    if ( userPlatform === 'web') {
-      // this.compareVersions(userVersion.version, appLastVersion.web.version, userPlatform);
-    }
   }
   compareVersions(userAppVersion, appVersion, platform) {
     if (userAppVersion.length === appVersion.length) {
@@ -85,7 +82,6 @@ async getUserVersion() {
       if (appVersion.localeCompare(userAppVersion) > 0 ) {
         this.updateAppAlert(platform);
       }else {
-        console.log('after compare version is fine');
       }
     }
     if (userAppVersion.length < appVersion.length) {
@@ -93,7 +89,6 @@ async getUserVersion() {
       if (appVersion.localeCompare(userAppVersion) > 0 ) {
         this.updateAppAlert(platform);
       }else {
-        console.log('after compare version is fine');
       }
     }
   }

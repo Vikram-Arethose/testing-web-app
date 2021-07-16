@@ -33,7 +33,6 @@ export class CartService {
 
   updateCart(cart: Product[]) {
     this.cart = cart;
-    console.log('update.cart', this.cart);
   }
 
   getProductCount(id: number): number {
@@ -47,7 +46,6 @@ export class CartService {
   addProductToCart(product: Product, date = null ){
     this.product = product;
     this.date = date;
-    // console.log('product.count', product);
     const index = this.cart.findIndex(item => item.id === product.id);
     if (index === -1) {
       product.count = 1;
@@ -120,7 +118,6 @@ export class CartService {
   }
 
   getTotalPrice() {
-    console.log('this.cart', this.cart);
     const reducer = (accumulator, currentValue: Product) => {
       return  accumulator + +(currentValue.count * Number.parseFloat(this.getActualPrice(currentValue))).toFixed(2);
     };
@@ -131,11 +128,9 @@ export class CartService {
     let slicedProduct;
     if (answer === 'yes') {
       slicedProduct = product;
-      console.log('slicedproduct', slicedProduct);
       slicedProduct.sliced = 1;
       this.addProductToCart(product);
     }else {
-      console.log('answer no');
       product.sliced = 0;
       this.addProductToCart(product);
     }

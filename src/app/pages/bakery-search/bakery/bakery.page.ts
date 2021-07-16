@@ -146,7 +146,6 @@ export class BakeryPage implements OnInit, OnDestroy {
       this.productsList = this.categories[this.selectedCategoryIndex].products.slice();
       this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
       this.productsList = this.productsList.map(item => this.dateService.mapProductPrice(item));
-      console.log('product list', this.productsList);
     }
   }
 
