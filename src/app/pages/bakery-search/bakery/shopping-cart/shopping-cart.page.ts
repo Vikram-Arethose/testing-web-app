@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DateService } from '../../../../services/date.service';
 import { CartService } from '../../../../services/cart.service';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -22,7 +22,7 @@ import { SaleServices } from '../../../../services/sale.services';
   templateUrl: './shopping-cart.page.html',
   styleUrls: ['./shopping-cart.page.scss'],
 })
-export class ShoppingCartPage implements OnInit {
+export class ShoppingCartPage implements OnInit, OnDestroy {
 
   date: string;
   dateLocale: string;
@@ -32,6 +32,7 @@ export class ShoppingCartPage implements OnInit {
   absentProducts: any;
   private branchDetails: BranchDetailsForPayment;
   checked;
+  timer;
 
   constructor(
     public cartService: CartService,
@@ -65,7 +66,7 @@ export class ShoppingCartPage implements OnInit {
   ngOnInit() {
     this.dateLocale = this.locStorageServ.getDateLocale();
     this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
-    this.date = localStorage.getItem('date');
+    // this.date = localStorage.getItem('date');
     this.dateService.dateShared.subscribe((res: string) => {
       if (res && res !== this.date) {
         this.date = res;
@@ -74,6 +75,9 @@ export class ShoppingCartPage implements OnInit {
       }
     });
     this.absentProducts = this.cartService.getAbsentCart();
+    if (this.reorder) {
+    this.refreshDate()
+    }
   }
 
   ionViewWillEnter() {
@@ -142,13 +146,10 @@ export class ShoppingCartPage implements OnInit {
     if (this.checkCart()) {
       if (this.lastPaymentMethod) {
         this.loadingServ.presentLoading();
-        console.log('date', this.date);
         this.httpServ.useLastPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
           this.loadingServ.dismiss();
-          console.log('res after pay', res);
           this.logger.log('useLastPayment res : ', res);
           if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
-            console.log('res data', res.data);
             this.cartService.clearCart();
             this.cartService.clearAbsentCart();
             this.bakeryServ.openConfirmOrder(res.data?.order_id);
@@ -167,7 +168,7 @@ export class ShoppingCartPage implements OnInit {
       this.modalServ.presentPaymentMethodsModal();
     }
   }
-  
+
   redirectToMain() {
     this.cartService.clearCart();
     this.cartService.clearAbsentCart();
@@ -181,5 +182,13 @@ export class ShoppingCartPage implements OnInit {
     const index = basket.findIndex(item => item.id === +id);
     basket[index].sliced = checkedStatus;
     this.cartService.updateCart(basket);
+  }
+  refreshDate() {
+    this.timer = setInterval(() => {
+      this.date = this.dateService.getDateFromPicker();
+    }, 200);
+  }
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 }

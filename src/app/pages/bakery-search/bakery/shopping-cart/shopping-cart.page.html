@@ -37,13 +37,13 @@
         <div class="item" *ngFor="let product of cartService.getCart(), let i = index">
           <ion-row class="grid__row">
             <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
-            <ion-col class="grid__col" size="8">
+            <ion-col class="grid__col" size="7">
               <p><span class="product-count">{{product.count}}</span> x {{product.name}} </p>
               <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
             </ion-col>
 
-            <ion-col class="grid__col" *ngIf="saleServ.checkSale(date, product)">{{product.special_price | currency:'EUR':'symbol'}}</ion-col>
-            <ion-col class="grid__col" *ngIf="!saleServ.checkSale(date, product)">{{product.price | currency:'EUR':'symbol'}}</ion-col>
+            <ion-col class="grid__col special_price" *ngIf="saleServ.checkSale(date, product)">{{product.special_price | currency:'EUR':'symbol'}}</ion-col>
+            <ion-col class="grid__col" [class.product_price_crossed-out]="saleServ.checkSale(date, product)">{{product.price | currency:'EUR':'symbol'}}</ion-col>
           </ion-row>
           <ion-row class="grid__row controls">
             <ion-item *ngIf="product?.sliced === 0 || product?.sliced === 1 ">

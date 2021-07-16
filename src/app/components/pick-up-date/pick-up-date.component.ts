@@ -55,7 +55,6 @@ export class PickUpDateComponent implements OnInit {
       }
       this.dateGlobal = res;
     });
-    console.log('reorderData', this.reorderData);
   }
 
   setActiveBtn(date?: string) {

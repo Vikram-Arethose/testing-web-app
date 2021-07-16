@@ -135,6 +135,7 @@ export class OrdersPage implements OnInit {
                  console.log('res', res);
                }
                this.reorderProducts = res.products_for_repeat;
+               console.log('Reorder products', this.reorderProducts);
                this.reorderProducts.map( product => {
                  product.quantity = 'reorder';
                  this.cartServ.addReorderToCart(product, product.count);
