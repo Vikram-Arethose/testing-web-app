@@ -1,5 +1,5 @@
 <ion-header></ion-header>
-<ion-content>
+<ion-content [scrollEvents]="true">
   <div class="header">
     <ion-toolbar class="toolbar" *ngIf="bakeryDetails?.photo" [style.--background]="'url(' + bakeryDetails?.photo +') center/cover'">
       <ion-buttons slot="start">
@@ -90,21 +90,28 @@
                     src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
         </ion-button>
       </div>
-      <div *ngIf="productsList; else noItems">
-        <app-product-item *ngFor="let product of productsList" [date]="date" [product]="product"></app-product-item>
-
+      <div class="products-area">
+        <div id="category_{{i}}" *ngFor="let category of categories; let i = index">
+          <div *ngIf="i > 0" class="category-divider">{{category.name}}</div>
+          <app-product-item *ngFor="let product of category.products" [date]="date" [product]="product"></app-product-item>
+        </div>
       </div>
-      <ng-template #noItems>
-        <div class="no-items">{{ 'bakery.noItems' | translate }}</div>
-      </ng-template>
+
+<!--      <div *ngIf="productsList; else noItems" >-->
+<!--        <app-product-item *ngFor="let product of productsList" [date]="date" [product]="product"></app-product-item>-->
+
+<!--      </div>-->
+<!--      <ng-template #noItems>-->
+<!--        <div class="no-items">{{ 'bakery.noItems' | translate }}</div>-->
+<!--      </ng-template>-->
     </div>
   </div>
-  <div class="cart" *ngIf="cartService.getCart().length > 0" tappable (click)="openShoppingCart()">
-    <div class="cart__icon-wrapper">
-      <ion-icon class="cart__icon" src="../../../../assets/icons/shopping-cart/shopping-bag.svg"></ion-icon>
-      <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>
-    </div>
-    <p class="cart__text">
-      {{ 'shoppingCart.header' | translate }} ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
-  </div>
+<!--  <div class="cart" *ngIf="cartService.getCart().length > 0" tappable (click)="openShoppingCart()">-->
+<!--    <div class="cart__icon-wrapper">-->
+<!--      <ion-icon class="cart__icon" src="../../../../assets/icons/shopping-cart/shopping-bag.svg"></ion-icon>-->
+<!--      <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>-->
+<!--    </div>-->
+<!--    <p class="cart__text">-->
+<!--      {{ 'shoppingCart.header' | translate }} ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>-->
+<!--  </div>-->
 </ion-content>
