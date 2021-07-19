@@ -143,7 +143,7 @@ export class BakeryPage implements OnInit, OnDestroy {
     // this.setProductList();
     const title = document.getElementById(`category_${index}`);
     console.log('category', title.offsetTop);
-    this.content.scrollToPoint(0, title.offsetTop - 50, 4000);
+    this.content.scrollToPoint(0, title.offsetTop - 50, 1000);
   }
 
   setProductList() {
