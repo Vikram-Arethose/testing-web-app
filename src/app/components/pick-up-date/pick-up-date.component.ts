@@ -6,6 +6,8 @@ import { AlertService } from '../../services/alert.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../services/cart.service';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-pick-up-date',
@@ -29,16 +31,7 @@ export class PickUpDateComponent implements OnInit {
   timePickerMin: string;
   private dateGlobal: string;
   private timeHourOffset: number;
-  currentDay = new Date();
-  customDayShortNames = [
-    'Sun',
-    'man',
-    'tue',
-    'wed',
-    'thu',
-    'fry',
-    'sat'
-  ];
+  currentDay:string ;
 
   constructor(
     public dateService: DateService,
@@ -51,6 +44,16 @@ export class PickUpDateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const language = localStorage.getItem('language');
+    if (language === 'de') {
+      this.currentDay = moment().locale('de').format('dddd, DD MMMM YY');
+    }
+    if (language === 'en') {
+      this.currentDay = moment().locale('en').format('dddd, DD MMMM YY');
+    }
+    else {
+      this.currentDay = moment().locale('de').format('dddd, DD MMMM YY');
+    }
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();

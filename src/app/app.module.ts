@@ -27,6 +27,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Market } from '@ionic-native/market/ngx';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+registerLocaleData(localeDe, 'en-US', localeDeExtra);
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,6 +59,7 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'de-De'},
+    { provide: LOCALE_ID, useValue: 'en-Us'},
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorService },
     NativeGeocoder,
