@@ -29,6 +29,16 @@ export class PickUpDateComponent implements OnInit {
   timePickerMin: string;
   private dateGlobal: string;
   private timeHourOffset: number;
+  currentDay = new Date();
+  customDayShortNames = [
+    'Sun',
+    'man',
+    'tue',
+    'wed',
+    'thu',
+    'fry',
+    'sat'
+  ];
 
   constructor(
     public dateService: DateService,
