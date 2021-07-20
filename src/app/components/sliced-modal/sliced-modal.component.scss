@@ -11,14 +11,16 @@
     span {
       display: flex;
       align-items: flex-end;
-      font-size: 1.5vh;
+      font-size: 1.8vh;
+      text-align: center;
+      font-weight: 600;
     }
     img {
-      width: 5.6vh;
+      width: 3.5vh;
       height: 3.5vh;
       max-width: 50px;
-      max-width: 50px;
-      padding-left: 2vh;
+      margin-left: 1vh;
+      margin-right: 2vh;
     }
   }
   .buttons-wrapper {

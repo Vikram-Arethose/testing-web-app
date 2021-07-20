@@ -41,15 +41,15 @@
               <p><span class="product-count">{{product.count}}</span> x {{product.name}} </p>
               <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
             </ion-col>
-
-            <ion-col class="grid__col special_price" *ngIf="saleServ.checkSale(date, product)">{{product.special_price | currency:'EUR':'symbol'}}</ion-col>
             <ion-col class="grid__col" [class.product_price_crossed-out]="saleServ.checkSale(date, product)">{{product.price | currency:'EUR':'symbol'}}</ion-col>
+            <ion-col class="grid__col special_price" *ngIf="saleServ.checkSale(date, product)">{{product.special_price | currency:'EUR':'symbol'}}</ion-col>
+
           </ion-row>
           <ion-row class="grid__row controls">
-            <ion-item *ngIf="product?.sliced === 0 || product?.sliced === 1 ">
-              <span slot="start">{{'sliced.cut' | translate}}</span>
+            <div class="toggler-block" *ngIf="product?.sliced === 0 || product?.sliced === 1 ">
+              <span >{{'sliced.cut' | translate}}</span>
               <ion-toggle slot="start" name="{{product.id}}" color="secondary" checked="{{!!product?.sliced}}" (ionChange)="cutToggler($event)"></ion-toggle>
-            </ion-item>
+            </div>
             <ion-button fill="none" size="small" (click)="delete(i)">
               <ion-icon class="controls__remove-icon"
                         src="../../../../../assets/icons/shopping-cart/trash.svg"></ion-icon>

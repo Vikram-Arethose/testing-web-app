@@ -150,5 +150,15 @@ ion-item {
 .special_price {
   color: #F44336;
   font-weight: bold;
-  margin-right: 1vh;
+  //margin-right: 1vh;
+}
+.toggler-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+  min-width: 155px;
+  span {
+    margin-right: 1vh;
+  }
 }

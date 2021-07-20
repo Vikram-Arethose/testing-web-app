@@ -63,5 +63,8 @@ sendNewPassword() {
     this.toast.comparePasswordToast(message);
   }
 }
+  returnToStartPage() {
+    this.router.navigate(['']);
+  }
 
 }
