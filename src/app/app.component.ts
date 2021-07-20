@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
       this.changePasswordCheck();
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
-      this.checkVersion.checkReleaseVersion();
+      // this.checkVersion.checkReleaseVersion();
       this.platform.resume.subscribe(() => {
         this.checkVersion.checkReleaseVersion();
         this.changePasswordCheck();
@@ -121,10 +121,13 @@ export class AppComponent implements OnInit {
 
   openFirstPage() {
     const token = localStorage.getItem('token');
+    console.log(token);
     if (token) {
         this.router.navigate(['bakery-search']);
+        console.log('++++++++');
       } else {
         this.router.navigate(['start']);
+        console.log('--------');
       }
   }
   openSupportPage(url) {
@@ -132,13 +135,10 @@ export class AppComponent implements OnInit {
   }
   changePasswordCheck() {
     const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
-    console.log('redirectToEnterCode', redirectToEnterCode);
     if (redirectToEnterCode === 'true') {
       setTimeout(() => {
         this.router.navigate(['email-registration/confirm-code']);
       }, 1200);
-    } else {
-      this.router.navigate([this.router.url]);
     }
   }
 }
