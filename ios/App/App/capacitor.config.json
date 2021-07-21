@@ -1,28 +1,31 @@
 {
-  "appId": "com.brotchen.app",
-  "appName": "BrötchenApp",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "plugins": {
-    "SplashScreen": {
-      "autoHide": false
-    },
-    "GoogleAuth": {
-      "scopes": [
-        "profile",
-        "email"
-      ],
-      "serverClientId": "997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com",
-      "forceCodeForRefreshToken": true
-    },
-    "PushNotifications": {
-      "presentationOptions": [
-        "badge",
-        "sound",
-        "alert"
-      ]
-    }
-  },
-  "cordova": {}
+	"appId": "com.brotchen.app",
+	"appName": "BrötchenApp",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"autoHide": false
+		},
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		},
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+	},
+	"cordova": {},
+	"server": {
+		"url": "http://192.168.0.152:8100"
+	}
 }

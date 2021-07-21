@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -6,9 +7,12 @@ import { Injectable } from '@angular/core';
 
 export class SaleServices {
   constructor() {}
-  checkSale(date, product) {
+  checkSale(currentDate, product) {
+    const date = moment(currentDate);
+    const from = moment(product.special_price_from);
+    const to = moment(product.special_price_to);
     if (product.special_price) {
-      return new Date(date).getTime() > new Date(product.special_price_from).getTime() && new Date(date).getTime() < new Date(product.special_price_to).getTime();
+      return date > from && date < to;
     }
   }
 }
