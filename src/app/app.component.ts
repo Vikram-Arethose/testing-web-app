@@ -88,13 +88,14 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang('de');
       this.useLanguage();
       this.openFirstPage();
-      this.changePasswordCheck();
+      // this.changePasswordCheck();
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
       // this.checkVersion.checkReleaseVersion();
       this.platform.resume.subscribe(() => {
         this.checkVersion.checkReleaseVersion();
-        this.changePasswordCheck();
+        // this.changePasswordCheck();
+        this.openFirstPage();
       });
     });
   }
@@ -120,25 +121,32 @@ export class AppComponent implements OnInit {
   }
 
   openFirstPage() {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
+    const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
+    if (redirectToEnterCode === 'true') {
+      this.router.navigate(['start']);
+      setTimeout(() => {
+        this.router.navigate(['email-registration/confirm-code']);
+      }, 200);
+      // this.router.navigate(['email-registration/confirm-code']);
+    }else {
+      const token = localStorage.getItem('token');
+      console.log(token);
+      if (token) {
         this.router.navigate(['bakery-search']);
-        console.log('++++++++');
       } else {
         this.router.navigate(['start']);
-        console.log('--------');
       }
+    }
   }
   openSupportPage(url) {
     this.browser = this.iab.create(url, '_blank');
   }
-  changePasswordCheck() {
-    const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
-    if (redirectToEnterCode === 'true') {
-      setTimeout(() => {
-        this.router.navigate(['email-registration/confirm-code']);
-      }, 1200);
-    }
-  }
+  // changePasswordCheck() {
+  //   const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
+  //   if (redirectToEnterCode === 'true') {
+  //     setTimeout(() => {
+  //       this.router.navigate(['email-registration/confirm-code']);
+  //     }, 1200);
+  //   }
+  // }
 }
