@@ -3,6 +3,7 @@
       <ion-icon slot="icon-only" name="close-outline"></ion-icon>
     </ion-button>
   <h2 class="title-main">{{ 'dateChoose.title' | translate }}</h2>
+  <span>{{'dateChoose.collectedDate' | translate}} {{currentDay}}</span>
   <h2 class="title-date">{{ 'dateChoose.сollectionDate' | translate }}</h2>
   <div class="row">
     <ion-button class="btn btn-outline" fill="outline"
@@ -15,9 +16,16 @@
   <h2 class="label">{{ 'dateChoose.orChooseDate' | translate }}</h2>
   <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg"
             (click)="dateSelector.open()" tappable></ion-icon>
-  <ion-datetime class="date" #dateSelector displayFormat="DD MMMM YYYY" [min]="datePickerMin" [max]="datePickerMax"
+  <ion-datetime class="date"
+                #dateSelector
+                displayFormat="DD MMMM YYYY"
+                picker-format="DD MMMM YYYY"
+                [min]="datePickerMin"
+                [max]="datePickerMax"
                 (ionChange)="onCalendarChange($event.target.value)"
-                [cancelText]="cancel" [doneText]="done"></ion-datetime>
+                [cancelText]="cancel" [doneText]="done">
+
+  </ion-datetime>
   <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
     <ion-datetime class="ion-datetime"  (ionChange)="onTimeChange($event)"

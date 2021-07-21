@@ -5,13 +5,17 @@
 }
 
 .container {
-  width: 307px;
+  width: 360px;
   margin: var(--ion-safe-area-top) auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   color: #493735;
+  span {
+    font-weight: 500;
+    margin: 1vh 0;
+  }
 
   .btn-wrapper {
     position: relative;

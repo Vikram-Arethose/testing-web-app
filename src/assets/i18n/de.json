@@ -172,7 +172,8 @@
     "confirm": "Bestätigen",
     "verify": "Überprüfen",
     "cancel": "Abbrechen",
-    "done": "Fertig"
+    "done": "Fertig",
+    "collectedDate": "Ausgewähltes Datum:"
   },
   "productDetails": {
     "allergens": "Allergene:",

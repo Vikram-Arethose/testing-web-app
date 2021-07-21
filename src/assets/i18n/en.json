@@ -172,7 +172,8 @@
     "confirm": "Confirm",
     "verify": "Verify",
     "cancel": "Cancel",
-    "done": "Done"
+    "done": "Done",
+    "collectedDate": "Selected date:"
   },
   "productDetails": {
     "allergens": "Allergens:",
