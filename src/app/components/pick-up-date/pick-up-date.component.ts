@@ -31,7 +31,7 @@ export class PickUpDateComponent implements OnInit {
   timePickerMin: string;
   private dateGlobal: string;
   private timeHourOffset: number;
-  currentDay:string ;
+  currentDay: any ;
 
   constructor(
     public dateService: DateService,
@@ -44,20 +44,11 @@ export class PickUpDateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const language = localStorage.getItem('language');
-    if (language === 'de') {
-      this.currentDay = moment().locale('de').format('dddd, DD MMMM YY');
-    }
-    if (language === 'en') {
-      this.currentDay = moment().locale('en').format('dddd, DD MMMM YY');
-    }
-    else {
-      this.currentDay = moment().locale('de').format('dddd, DD MMMM YY');
-    }
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.tomorrow = tomorrow.toISOString();
     this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
+    this.convertDate(this.date);
     this.onTomorrow();
     this.setActiveBtn();
     this.dateService.dateShared.subscribe((res: string) => {
@@ -69,7 +60,18 @@ export class PickUpDateComponent implements OnInit {
       this.dateGlobal = res;
     });
   }
-
+  convertDate(date) {
+    const language = localStorage.getItem('language');
+    if (language === 'de') {
+      this.currentDay = moment(date).locale('de').format('dddd, DD MMMM YY');
+    }
+    if (language === 'en') {
+      this.currentDay = moment(date).locale('en').format('dddd, DD MMMM YY');
+    }
+    else {
+      this.currentDay = moment(date).locale('de').format('dddd, DD MMMM YY');
+    }
+  }
   setActiveBtn(date?: string) {
     if (!date) {
       date = this.date;
@@ -87,18 +89,21 @@ export class PickUpDateComponent implements OnInit {
 
   onToday() {
     this.date = this.today;
+    this.convertDate(this.date);
     this.setActiveBtn();
     this.getPickersRanges();
   }
 
   onTomorrow() {
     this.date = this.tomorrow;
+    this.convertDate(this.date);
     this.setActiveBtn();
     this.getPickersRanges();
   }
 
   onCalendarChange(value: string) {
     this.date = value;
+    this.convertDate(this.date);
     this.setActiveBtn();
     this.getPickersRanges();
   }
