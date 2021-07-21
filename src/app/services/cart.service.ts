@@ -110,7 +110,16 @@ export class CartService {
    * check if product exist discount price
    */
   getActualPrice(product) {
-    return this.saleServ.checkSale(this.actualDate, product) ? product.special_price : product.price;
+    return this.saleServ.checkSale(this.actualDate, product) ? product.special_price : (product.special_price === product.price) ? product.old_price : product.price;
+   //  if (this.saleServ.checkSale(this.actualDate, product)) {
+   //    return product.special_price;
+   //  }else {
+   //    if (product.special_price === product.price) {
+   //      return product.old_price;
+   //   }else {
+   //      return product.price;
+   //   }
+   // }
   }
 
   setActualDate(date) {

@@ -1,4 +1,5 @@
 export interface Product {
+  old_price: number;
   sliced: number;
   id: number;
   img: string;
