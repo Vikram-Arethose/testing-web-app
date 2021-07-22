@@ -132,10 +132,8 @@ export class OrdersPage implements OnInit {
                    this.createNotAvailableProducts(res.unavailabile_products[i], orderList);
                  }
                  this.cartServ.addAbsentCart(this.absentProducts);
-                 console.log('res', res);
                }
                this.reorderProducts = res.products_for_repeat;
-               console.log('Reorder products', this.reorderProducts);
                this.reorderProducts.map( product => {
                  product.quantity = 'reorder';
                  this.cartServ.addReorderToCart(product, product.count);
@@ -155,7 +153,6 @@ export class OrdersPage implements OnInit {
     const index = orderListProducts.findIndex( product => product.product_id === id );
     const currentProduct = orderListProducts[index];
     this.absentProducts.push(currentProduct);
-    console.log('ABSENT ARRAY', this.absentProducts);
   }
   getBakeryData() {
     this.httpServ.getBranchDetail(this.bakeryId).subscribe((res: BakeryFull) => {
@@ -166,7 +163,6 @@ export class OrdersPage implements OnInit {
       this.bakeryInfoFull = res.branchDetails.description;
       this.setOpeningHours(res.branchDetails.opening_hours_new);
       this.lastUsedPayment = res?.last_used_payment;
-      console.log(this.lastUsedPayment);
       this.reOrderDataArray = {orderId: this.orderId, bakeryId: this.bakeryId, lastUsedPayment: this.lastUsedPayment, reorder: true};
       this.modalService.presentPickUpDateModal(false, true, this.reOrderDataArray);
     });

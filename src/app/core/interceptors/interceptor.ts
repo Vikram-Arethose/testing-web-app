@@ -56,7 +56,6 @@ export class Interceptor implements HttpInterceptor {
             this.message = this.translate.instant('emailRegister.unregisteredByForm');
           }
           if (error.error.wrong_code) {
-            console.log('-------------');
             this.logger.warn(`Interceptor: A client-side or network error occurred. An error message:`, error.error.message);
             this.message = this.translate.instant('emailRegister.wrongCode');
           }

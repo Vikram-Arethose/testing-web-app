@@ -52,11 +52,8 @@ export class ConfirmCodeComponent implements OnInit {
     this.http.sendPassword(email, null, 1).subscribe( (res: any) => {
       if (res.apiStatus === 'OK' &&  res.apiCode === 'SUCCESS') {
         this.toast.presentToast('code resend');
-        console.log('resend code res', res);
       }
-
     }, err => {
-      console.log('Error when resend code');
     });
     this.disabledBtnFromSpam();
   }
@@ -76,7 +73,6 @@ export class ConfirmCodeComponent implements OnInit {
     if (timeStamp) {
       const currentTime = new Date().getTime();
       const diff = (+timeStamp - currentTime) / 1000;
-      console.log('DIFF', diff);
       if ( diff > 0) {
         this.timer = Math.round(diff);
         this.startTimer();

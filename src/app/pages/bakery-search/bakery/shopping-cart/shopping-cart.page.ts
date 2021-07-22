@@ -64,6 +64,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('reorder', this.reorder);
     this.dateLocale = this.locStorageServ.getDateLocale();
     this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
     // this.date = localStorage.getItem('date');

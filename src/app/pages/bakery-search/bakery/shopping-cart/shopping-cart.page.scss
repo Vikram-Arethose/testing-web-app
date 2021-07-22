@@ -96,6 +96,10 @@
         text-align: right;
       }
     }
+    .product_crossed-out {
+      text-decoration: line-through;
+      -webkit-text-decoration-line: line-through;
+    }
   }
 }
 
@@ -144,9 +148,7 @@
 ion-item {
   margin-right: 15vh;
 }
-.product_price_crossed-out {
-  text-decoration: line-through;
-}
+
 .special_price {
   color: #F44336;
   font-weight: bold;

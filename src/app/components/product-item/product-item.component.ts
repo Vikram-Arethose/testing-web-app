@@ -42,7 +42,6 @@ export class ProductItemComponent implements OnInit {
   }
 
   addProductToCart() {
-    // console.log('product', this.product);
     this.cartServ.setActualDate(this.date);
     if (this.guest) {
       this.modalServ.presentLoginFirstModal();

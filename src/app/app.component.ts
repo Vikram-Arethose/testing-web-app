@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(['start']);
       setTimeout(() => {
         this.router.navigate(['email-registration/confirm-code']);
-      }, 200);
+      }, 800);
       // this.router.navigate(['email-registration/confirm-code']);
     }else {
       const token = localStorage.getItem('token');

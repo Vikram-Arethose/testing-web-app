@@ -1,5 +1,5 @@
 <ion-header>
-  <div *ngIf="!reorder; else reorder">
+  <div *ngIf="reorder === false; else reorderBlock">
     <ion-toolbar mode="ios" class="toolbar">
       <ion-buttons slot="start" >
         <ion-back-button  class="toolbar__button"
@@ -9,7 +9,7 @@
       <h1 class="toolbar__title ion-text-left">{{ 'shoppingCart.header' | translate }}</h1>
     </ion-toolbar>
   </div>
-  <ng-template #reorder>
+  <ng-template #reorderBlock>
     <ion-toolbar mode="ios" class="toolbar">
       <ion-buttons slot="start" >
         <ion-back-button  class="toolbar__button"
@@ -41,15 +41,18 @@
               <p><span class="product-count">{{product.count}}</span> x {{product.name}} </p>
               <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
             </ion-col>
-            <ion-col class="grid__col"
-                     *ngIf="product.special_price === product.price"
-                     [class.product_price_crossed-out]="saleServ.checkSale(date, product)">
+            <ion-col class="grid__col "
+                     *ngIf="product.special_price === product.price">
+              <span [class.product_crossed-out]="saleServ.checkSale(date, product)">
               {{product.old_price | currency:'EUR':'symbol'}}
+              </span>
             </ion-col>
             <ion-col class="grid__col"
-                     *ngIf="product.special_price !== product.price"
-                     [class.product_price_crossed-out]="saleServ.checkSale(date, product)">
-              {{product.price | currency:'EUR':'symbol'}}
+                     *ngIf="product.special_price !== product.price">
+              <span [class.product_crossed-out]="saleServ.checkSale(date, product)">
+                {{product.price | currency:'EUR':'symbol'}}
+              </span>
+
             </ion-col>
             <ion-col class="grid__col special_price" *ngIf="saleServ.checkSale(date, product)">{{product.special_price | currency:'EUR':'symbol'}}</ion-col>
 
