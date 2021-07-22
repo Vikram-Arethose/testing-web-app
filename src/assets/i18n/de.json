@@ -3,7 +3,7 @@
     "error": "Schade!",
     "bakeryNotWorkAtThisTime": "Diese Bäckerei hat zum ausgewählten Zeitpunkt geschlossen.",
     "defaultErrorMessage": "Beim Laden der Daten ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
-    "paymentWasFailed": "Die Bezahlung wurde abgebrochen.",
+    "paymentWasFailed": "Wir konnten deine Zahlung nicht verarbeiten. Wahrscheinlich hast du dich vertippt. Versuch es doch noch einmal oder wähle eine andere Zahlungsmethode.",
     "minOrderCost": "Der Mindestbestellwert bei dieser Bäckerei beträgt"
   },
   "general": {

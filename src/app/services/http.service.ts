@@ -274,7 +274,7 @@ export class HttpService {
         this.cartServ.clearCart();
         this.dateServ.changeDate('');
       } else if (res.url.includes('/payment/failed')) {
-        this.alertServ.presentAlert(this.translate.instant('alert.paymentWasFailed'));
+        this.alertServ.presentAlert(this.translate.instant('alert.paymentWasFailed'), 'Bezahlung fehlgeschlagen' );
         browser.close();
       }
     });

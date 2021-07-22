@@ -13,12 +13,12 @@ export class AlertService {
     private translate: TranslateService
   ) { }
 
-  async presentAlert(message?: string) {
+  async presentAlert(message?: string, header?: string) {
     if (!message) {
       message = this.translate.instant('alert.defaultErrorMessage');
     }
     const alert = await this.alertCtrl.create({
-      header: this.translate.instant('alert.error'),
+      header: (localStorage.getItem('language') === 'de' && header) ? header : this.translate.instant('alert.error'),
       message,
       buttons: ['OK']
     });
