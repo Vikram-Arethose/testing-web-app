@@ -49,7 +49,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private saleServ: SaleServices
+    public saleServ: SaleServices
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {

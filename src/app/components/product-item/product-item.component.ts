@@ -26,7 +26,7 @@ export class ProductItemComponent implements OnInit {
     private cartServ: CartService,
     private logger: LoggerService,
     private modalServ: ModalService,
-    private saleServ: SaleServices
+    public saleServ: SaleServices
   ) { }
 
   ngOnInit() {
