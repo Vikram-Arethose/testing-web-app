@@ -154,7 +154,13 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
             this.cartService.clearCart();
             this.cartService.clearAbsentCart();
             this.bakeryServ.openConfirmOrder(res.data?.order_id);
-          } else {
+          }
+          if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res?.iframe_url) {
+            this.httpServ.handleIabResult(this.httpServ.getIab(res.iframe_url));
+            this.cartService.clearCart();
+            this.cartService.clearAbsentCart();
+          }
+          else {
             this.alertServ.presentAlert();
           }
         });
