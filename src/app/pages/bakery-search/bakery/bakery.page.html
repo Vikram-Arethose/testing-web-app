@@ -93,7 +93,7 @@
       <div class="products-area">
         <div id="category_{{i}}" *ngFor="let category of categories; let i = index">
           <div *ngIf="i > 0" class="category-divider">{{category.name}}</div>
-          <app-product-item *ngFor="let product of category.products" [date]="date" [product]="product"></app-product-item>
+          <app-product-item *ngFor="let product of productsList[i]; let i = index" [date]="date" [product]="product"></app-product-item>
         </div>
         <div class="cart" *ngIf="cartService.getCart().length > 0" tappable (click)="openShoppingCart()">
               <div class="cart__icon-wrapper">

@@ -38,7 +38,7 @@ export class BakeryPage implements OnInit, OnDestroy {
   dateLocale: string;
   isInfoFull: boolean;
   guest: boolean;
-  productsList: Product[];
+  productsList: any;
   openingHours: [string, any][];
   isBakeryInfoFull: boolean;
   selectedCategoryIndex: number;
@@ -140,17 +140,20 @@ export class BakeryPage implements OnInit, OnDestroy {
 
   onCategorySelect(index: number) {
     this.selectedCategoryIndex = index;
-    // this.setProductList();
+    // this.setProductList(index);
     const title = document.getElementById(`category_${index}`);
     this.content.scrollToPoint(0, title.offsetTop - 50, 1000);
   }
 
   setProductList() {
-    if (this.categories && this.categories[0] && this.categories[0].products) {
-      this.productsList = this.categories[this.selectedCategoryIndex].products.slice();
-      this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
-      this.productsList = this.productsList.map(item => this.dateService.mapProductPrice(item));
-    }
+    // if (this.categories && this.categories[0] && this.categories[0].products) {
+    //   this.productsList = this.categories[index].products;
+    //   this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
+    //   this.productsList = this.productsList.map(item => this.dateService.mapProductPrice(item));
+    // }
+    let list = this.categories.map( item => item.products);
+    list = list.map( category => category.filter(item => this.dateService.getProductAvailability(item)));
+    this.productsList = list.map(item => item.map( filteredProduct => this.dateService.mapProductPrice(filteredProduct)));
   }
 
   getCart() {
