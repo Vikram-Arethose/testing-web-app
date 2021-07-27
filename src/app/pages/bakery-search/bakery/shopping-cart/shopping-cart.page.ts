@@ -150,17 +150,15 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         this.httpServ.useLastPayment(this.bakeryServ.getDataForPayment(this.date)).subscribe((res: ApiResponse) => {
           this.loadingServ.dismiss();
           this.logger.log('useLastPayment res : ', res);
-          if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
-            this.cartService.clearCart();
-            this.cartService.clearAbsentCart();
-            this.bakeryServ.openConfirmOrder(res.data?.order_id);
-          }
           if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res?.iframe_url) {
             this.httpServ.handleIabResult(this.httpServ.getIab(res.iframe_url));
             this.cartService.clearCart();
             this.cartService.clearAbsentCart();
-          }
-          else {
+          } else if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.order_id) {
+            this.cartService.clearCart();
+            this.cartService.clearAbsentCart();
+            this.bakeryServ.openConfirmOrder(res.data?.order_id);
+          }else {
             this.alertServ.presentAlert();
           }
         });
