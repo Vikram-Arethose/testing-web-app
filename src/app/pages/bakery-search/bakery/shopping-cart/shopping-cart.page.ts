@@ -33,6 +33,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   private branchDetails: BranchDetailsForPayment;
   checked;
   timer;
+  dateChanged = false;
 
   constructor(
     public cartService: CartService,
@@ -76,10 +77,8 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         const basket = this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
         const updatedBasket = this.validateBasketByDate(basket);
         this.cartService.updateCart(updatedBasket);
-        if (basket.length > updatedBasket.length) {
-          this.toast.deletedProductToast(this.translate.instant('shoppingCart.deletedProduct'));
-        }
         if (this.cartService.getCart().length <= 0) {
+          // this.toast.deletedProductToast(this.translate.instant('shoppingCart.deletedProduct'));
           this.router.navigate(['bakery-search/bakery']);
         }
       }
@@ -92,8 +91,6 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   validateBasketByDate(basket) {
     let orderTimeInSec = this.dateService.getOrderDateInSeconds();
     orderTimeInSec =  orderTimeInSec  - 86400 * Math.trunc(orderTimeInSec / 86400);
-    console.log('ORDER IN SEC', orderTimeInSec);
-    console.log('BASKET', basket);
     return basket.filter(item => item.isAvailable === true && orderTimeInSec <= item.pre_order_time );
   }
   ionViewWillEnter() {
@@ -181,6 +178,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         this.modalServ.presentPaymentMethodsModal();
       }
     }
+    this.dateChanged = false;
   }
 
   chooseOtherPayment() {
@@ -193,6 +191,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     this.cartService.clearCart();
     this.cartService.clearAbsentCart();
     this.router.navigate(['/bakery-search']);
+    this.dateChanged = false;
   }
   cutToggler(e) {
     let checkedStatus = e.detail.checked;

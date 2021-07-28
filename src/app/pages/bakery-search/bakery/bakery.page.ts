@@ -155,6 +155,8 @@ export class BakeryPage implements OnInit, OnDestroy {
     console.log('LIST', list);
     list = list.map( category => category.filter(item => this.dateService.getProductAvailability(item)));
     this.productsList = list.map(item => item.map( filteredProduct => this.dateService.mapProductPrice(filteredProduct)));
+    console.log('FILTERED PRODUCTLIST', this.productsList);
+    
   }
 
   getCart() {

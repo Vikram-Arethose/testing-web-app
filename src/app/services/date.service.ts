@@ -101,8 +101,10 @@ export class DateService {
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (this.specificTime === 0) {
-        if (this.orderTime > this.fullDay * 2 ) {
+        if (this.orderTime > this.fullDay ) {
+          console.log('ORDERTIME', this.orderTime);
           const notTodayTime = this.orderTime - this.fullDay * Math.trunc(this.orderTime / this.fullDay) ;
+          console.log('NOTTODAYTIME', notTodayTime);
           if (product.pre_order_time > this.fullDay) {
             this.preOrderTime = product.pre_order_time - this.fullDay;
             return this.checkPreOrderTime(notTodayTime);

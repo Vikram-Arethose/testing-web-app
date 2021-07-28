@@ -70,6 +70,7 @@ export class PaymentMethodsComponent implements OnInit {
   }
 
   createSmartTransaction() {
+    console.log('GET DATA FOR PAYMENT', this.bakeryServ.getDataForPayment(this.date));
     this.httpServ.createSmartTransaction(this.bakeryServ.getDataForPayment(this.date))
       .subscribe((res: CreateStxRes | false) => {
         if (res) {

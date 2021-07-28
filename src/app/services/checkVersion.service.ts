@@ -14,7 +14,6 @@ const { Device } = Plugins;
 export class CheckVersion {
   private userPackageName = 'com.brotchen.app';
   browser: any;
-  
   constructor(
     private appVersion: AppVersion,
     public alertController: AlertController,
@@ -69,28 +68,37 @@ async getUserVersion() {
     }
   }
   compareVersions(userAppVersion, appVersion, platform) {
-    if (userAppVersion.length === appVersion.length) {
-      if (+userAppVersion.replace(/[\s.,%]/g, '') < +appVersion.replace(/[\s.,%]/g, '')) {
-        this.updateAppAlert(platform);
-      }
-      if (platform === 'web') {
-        console.log('Planform web');
-      }
+    const userVersion = userAppVersion.split('.');
+    const serverVersion = appVersion.split('.');
+    if (+userVersion[0] < +serverVersion[0]) {
+      this.updateAppAlert(platform);
     }
-    if (userAppVersion.length > appVersion.length) {
-      appVersion += '.0';
-      if (appVersion.localeCompare(userAppVersion) > 0 ) {
-        this.updateAppAlert(platform);
-      }else {
-      }
+    if (+userVersion[1] < +serverVersion[1]) {
+      this.updateAppAlert(platform);
     }
-    if (userAppVersion.length < appVersion.length) {
-      userAppVersion += '.0';
-      if (appVersion.localeCompare(userAppVersion) > 0 ) {
-        this.updateAppAlert(platform);
-      }else {
-      }
-    }
+    // if (userAppVersion.length === appVersion.length) {
+    //   if (+userAppVersion.replace(/[\s.,%]/g, '') < +appVersion.replace(/[\s.,%]/g, '')) {
+    //     this.updateAppAlert(platform);
+    //   }
+    //   if (platform === 'web') {
+    //     console.log('Planform web');
+    //   }
+    // }
+    // // if (userAppVersion.length > appVersion.length) {
+    // //   appVersion += '.0';
+    // //   if (appVersion.localeCompare(userAppVersion) > 0 ) {
+    // //     this.updateAppAlert(platform);
+    // //   }else {
+    // //   }
+    // // }
+    // if (userAppVersion.length < appVersion.length) {
+    //   // userAppVersion += '.0';
+    //   console.log('appVersion.localeCompare(userAppVersion)', appVersion.localeCompare(userAppVersion));
+    //   if (appVersion.localeCompare(userAppVersion) > 0 ) {
+    //     this.updateAppAlert(platform);
+    //   }else {
+    //   }
+    // }
   }
   async updateAppAlert(platform) {
     const alert = await this.alertController.create({
