@@ -16,7 +16,6 @@ import { LoginFirstComponent } from './login-first/login-first.component';
 // @ts-ignore
 import { ChangePasswordComponent } from './change-password/change-password.component';
 // @ts-ignore
-import { ConfirmCodeComponent } from './confirm-code/confirm-code.component';
 import { SlicedModalComponent } from './sliced-modal/sliced-modal.component';
 
 
@@ -34,7 +33,6 @@ import { SlicedModalComponent } from './sliced-modal/sliced-modal.component';
     ProductItemComponent,
     LoginFirstComponent,
     ChangePasswordComponent,
-    ConfirmCodeComponent,
     SlicedModalComponent
   ],
   imports: [

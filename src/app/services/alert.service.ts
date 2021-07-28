@@ -41,6 +41,14 @@ export class AlertService {
     });
     toast.present();
   }
-  
+  async deletedProductToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 4000,
+      cssClass: 'deleted-product',
+      position: 'middle'
+    });
+    toast.present();
+  }
 
 }

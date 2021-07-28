@@ -49,7 +49,8 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    public saleServ: SaleServices
+    public saleServ: SaleServices,
+    public toast: AlertService
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -72,15 +73,29 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
       if (res && res !== this.date) {
         this.date = res;
         localStorage.setItem('date', res);
-        this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
+        const basket = this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
+        const updatedBasket = this.validateBasketByDate(basket);
+        this.cartService.updateCart(updatedBasket);
+        if (basket.length > updatedBasket.length) {
+          this.toast.deletedProductToast(this.translate.instant('shoppingCart.deletedProduct'));
+        }
+        if (this.cartService.getCart().length <= 0) {
+          this.router.navigate(['bakery-search/bakery']);
+        }
       }
     });
     this.absentProducts = this.cartService.getAbsentCart();
     if (this.reorder) {
-    this.refreshDate()
+    this.refreshDate();
     }
   }
-
+  validateBasketByDate(basket) {
+    let orderTimeInSec = this.dateService.getOrderDateInSeconds();
+    orderTimeInSec =  orderTimeInSec  - 86400 * Math.trunc(orderTimeInSec / 86400);
+    console.log('ORDER IN SEC', orderTimeInSec);
+    console.log('BASKET', basket);
+    return basket.filter(item => item.isAvailable === true && orderTimeInSec <= item.pre_order_time );
+  }
   ionViewWillEnter() {
     if (this.cartService.getCart().length === 0) {
       this.router.navigateByUrl('/bakery-search');

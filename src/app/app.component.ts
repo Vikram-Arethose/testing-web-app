@@ -88,14 +88,15 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang('de');
       this.useLanguage();
       this.openFirstPage();
-      // this.changePasswordCheck();
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
-      // this.checkVersion.checkReleaseVersion();
+      this.checkVersion.checkReleaseVersion();
       this.platform.resume.subscribe(() => {
         this.checkVersion.checkReleaseVersion();
-        // this.changePasswordCheck();
-        this.openFirstPage();
+        const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
+        if (redirectToEnterCode === 'true') {
+          this.router.navigate(['confirm-code']);
+        }
       });
     });
   }
@@ -123,11 +124,7 @@ export class AppComponent implements OnInit {
   openFirstPage() {
     const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
     if (redirectToEnterCode === 'true') {
-      this.router.navigate(['start']);
-      setTimeout(() => {
-        this.router.navigate(['email-registration/confirm-code']);
-      }, 800);
-      // this.router.navigate(['email-registration/confirm-code']);
+      this.router.navigate(['confirm-code']);
     }else {
       const token = localStorage.getItem('token');
       console.log(token);

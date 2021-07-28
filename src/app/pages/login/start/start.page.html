@@ -14,10 +14,10 @@
       <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/google.svg"></ion-icon>
       {{ 'start.googleBtn' | translate }}
     </ion-button>
-    <ion-button class="controls__btn controls__btn_g btn"
+    <ion-button class="controls__btn controls__btn_a btn"
                 *ngIf="!android" (click)="loginWith('ios')"
                 expand="block" size="large" fill="outline" [disabled]="otherOptOn">
-      <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/apple.svg"></ion-icon>
+      <ion-icon class="btn__icon" slot="start" src="../../../assets/icons/apple_white.svg"></ion-icon>
       {{ 'start.appleBtn' | translate }}
     </ion-button>
     <ion-button class="controls__btn controls__btn_fb btn" *ngIf="!otherOptOn"

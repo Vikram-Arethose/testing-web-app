@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/start/start.module').then(m => m.StartPageModule)
   },
   {
+    path: 'confirm-code',
+    loadChildren: () => import('./pages/login/confirm-code/confirm-code.module').then(m => m.ConfirmCodeModule)
+  },
+  {
     path: 'google-login',
     loadChildren: () => import('./pages/login/google-login/google-login.module').then(m => m.GoogleLoginPageModule)
   },

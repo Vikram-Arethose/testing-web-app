@@ -95,14 +95,6 @@
           <div *ngIf="i > 0" class="category-divider">{{category.name}}</div>
           <app-product-item *ngFor="let product of productsList[i]; let i = index" [date]="date" [product]="product"></app-product-item>
         </div>
-        <div class="cart" *ngIf="cartService.getCart().length > 0" tappable (click)="openShoppingCart()">
-              <div class="cart__icon-wrapper">
-                <ion-icon class="cart__icon" src="../../../../assets/icons/shopping-cart/shopping-bag.svg"></ion-icon>
-                <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>
-              </div>
-              <p class="cart__text">
-                {{ 'shoppingCart.header' | translate }} ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
-            </div>
       </div>
 
 <!--      <div *ngIf="productsList; else noItems" >-->
@@ -112,6 +104,14 @@
 <!--      <ng-template #noItems>-->
 <!--        <div class="no-items">{{ 'bakery.noItems' | translate }}</div>-->
 <!--      </ng-template>-->
+    </div>
+    <div class="cart" *ngIf="cartService.getCart().length > 0" tappable (click)="openShoppingCart()">
+      <div class="cart__icon-wrapper">
+        <ion-icon class="cart__icon" src="../../../../assets/icons/shopping-cart/shopping-bag.svg"></ion-icon>
+        <ion-badge class="cart__icon-badge">{{cartService.getTotalCount()}}</ion-badge>
+      </div>
+      <p class="cart__text">
+        {{ 'shoppingCart.header' | translate }} ({{cartService.getTotalPrice() | currency:'EUR':'symbol'}})</p>
     </div>
   </div>
 

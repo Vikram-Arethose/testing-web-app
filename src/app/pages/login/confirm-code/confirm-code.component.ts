@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../services/http.service';
+import { AlertService } from '../../../services/alert.service';
+import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-confirm-code',

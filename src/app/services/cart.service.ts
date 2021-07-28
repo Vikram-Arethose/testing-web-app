@@ -54,6 +54,7 @@ export class CartService {
     } else {
       if (product.quantity === 'unlimited' || product.quantity_items > this.cart[index].count) {
         this.cart[index].count++;
+        // console.log('ADD TO CART', this.cart);
       }
       if (product.quantity === 'reorder') {
           this.cart[index].count++;

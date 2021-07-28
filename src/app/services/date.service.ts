@@ -146,7 +146,10 @@ export class DateService {
   getDateFromPicker() {
     return this.date;
   }
-
+  getOrderDateInSeconds() {
+    const hourOffset = -new Date(this.date).getTimezoneOffset() * 60 ;
+    return (new Date(this.date).getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + hourOffset;
+  }
     mapProductPrice(product: Product): Product {
     // check if there is special_price and if true change price for the product
     if (this.date && product.special_price) {

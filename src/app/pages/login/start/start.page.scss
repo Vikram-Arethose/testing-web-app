@@ -41,7 +41,13 @@
 
     &_g {
       --border-color: #CBCBCB;
-      --color: #CBCBCB;
+      --background: rgba(183, 183, 183, 0.2);
+      --color: #939393;
+    }
+    &_a {
+      --border-color: #151515;
+      --background: #151515;
+      --color: #ffffff;
     }
 
     &_fb {
@@ -60,7 +66,9 @@
     text-transform: uppercase;
     font: normal normal 500 16px/19px Montserrat;
 
-    &__icon {}
+    &__icon {
+      --color: white;
+    }
   }
 
   &__link {

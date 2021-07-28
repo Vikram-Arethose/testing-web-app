@@ -15,6 +15,7 @@ export class ChangePasswordComponent implements OnInit {
   email: null;
   password: null;
   compareError = false;
+  showSpinner = false;
   constructor(
     public toast: AlertService,
     private translate: TranslateService,
@@ -38,6 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 sendNewPassword() {
+  this.showSpinner = true;
   const compareRes = this.comparePassword();
   if (compareRes) {
     this.email = this.updatePassword.controls.emailVal.value;
@@ -48,11 +50,13 @@ sendNewPassword() {
         localStorage.setItem('changeDataEmail', this.email);
         this.http.sendPassword(this.email, this.password, status).subscribe( (response: any) => {
           if ( response.apiCode === 'SUCCESS') {
-             this.router.navigate(['email-registration/confirm-code']);
+             this.showSpinner = false;
+             this.router.navigate(['confirm-code']);
              localStorage.setItem('ConfirmStatusCode', 'true');
           }
         });
       }else {
+        this.showSpinner = false;
         const message = this.translate.instant('emailRegister.notConfirmedEmail');
         this.toast.presentAlert(message);
         this.updatePassword.reset();
