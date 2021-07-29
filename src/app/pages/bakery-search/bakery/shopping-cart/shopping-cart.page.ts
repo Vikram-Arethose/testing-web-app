@@ -16,6 +16,7 @@ import { LoadingService } from '../../../../services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from '../../../../services/modal.service';
 import { SaleServices } from '../../../../services/sale.services';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -66,7 +67,6 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('reorder', this.reorder);
     this.dateLocale = this.locStorageServ.getDateLocale();
     this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
     // this.date = localStorage.getItem('date');
@@ -89,9 +89,14 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     }
   }
   validateBasketByDate(basket) {
-    let orderTimeInSec = this.dateService.getOrderDateInSeconds();
-    orderTimeInSec =  orderTimeInSec  - 86400 * Math.trunc(orderTimeInSec / 86400);
-    return basket.filter(item => item.isAvailable === true && orderTimeInSec <= item.pre_order_time );
+    if (moment().isSameOrAfter(this.date, 'day')) {
+      let orderTimeInSec = this.dateService.getOrderDateInSeconds();
+      orderTimeInSec =  orderTimeInSec  - 86400 * Math.trunc(orderTimeInSec / 86400);
+      return basket.filter(item => item.isAvailable === true && orderTimeInSec <= item.pre_order_time );
+    }else {
+      console.log('NOT');
+      return basket;
+    }
   }
   ionViewWillEnter() {
     if (this.cartService.getCart().length === 0) {

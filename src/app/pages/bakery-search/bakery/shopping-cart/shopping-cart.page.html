@@ -39,7 +39,7 @@
             <ion-col class="grid__col" size="1">{{i + 1}}</ion-col>
             <ion-col class="grid__col" size="7">
               <p><span class="product-count">{{product.count}}</span> x {{product.name}} </p>
-              <p class="notification" *ngIf="!product.isAvailable">Product not available</p>
+<!--              <p class="notification" *ngIf="!product.isAvailable">Product not available</p>-->
             </ion-col>
             <ion-col class="grid__col "
                      *ngIf="product.special_price === product.price">

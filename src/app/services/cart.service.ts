@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-// import { Product } from '../models/product';
 import { LoggerService } from './logger.service';
-import { ProductInCart } from '../models/productInCart';
 import { Product } from '../models/http/bakeryFull';
 import { Router } from '@angular/router';
-import { DateService } from './date.service';
 import { SaleServices } from './sale.services';
 
 @Injectable({
@@ -20,7 +17,6 @@ export class CartService {
     private logger: LoggerService,
     private router: Router,
     private saleServ: SaleServices,
-    // private dateServ: DateService
   ) { }
 
   getCart(): Product[]  {
@@ -54,7 +50,6 @@ export class CartService {
     } else {
       if (product.quantity === 'unlimited' || product.quantity_items > this.cart[index].count) {
         this.cart[index].count++;
-        // console.log('ADD TO CART', this.cart);
       }
       if (product.quantity === 'reorder') {
           this.cart[index].count++;

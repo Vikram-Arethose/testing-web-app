@@ -28,6 +28,7 @@ export class DateService {
   private timeHourOffset: number;
   fullDay = 86400;
   orderTime: number;
+  userTime: any;
 
   constructor(
     private logger: LoggerService,
@@ -94,6 +95,9 @@ export class DateService {
     }
     // check availability by date
     if (this.date) {
+      const currentTime =  moment();
+      const startOfDay = moment().startOf('day');
+      this.userTime = currentTime.diff(startOfDay, 'minutes') * 60;
       this.selectedDate = new Date(this.date);
       this.timeHourOffset = -this.selectedDate.getTimezoneOffset() * 60 ;
       // check pre order period and pre_order_time
@@ -101,31 +105,14 @@ export class DateService {
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
       if (this.specificTime === 0) {
-        if (this.orderTime > this.fullDay ) {
-          console.log('ORDERTIME', this.orderTime);
-          const notTodayTime = this.orderTime - this.fullDay * Math.trunc(this.orderTime / this.fullDay) ;
-          console.log('NOTTODAYTIME', notTodayTime);
-          if (product.pre_order_time > this.fullDay) {
-            this.preOrderTime = product.pre_order_time - this.fullDay;
-            return this.checkPreOrderTime(notTodayTime);
-          }
-          if (product.pre_order_time <= this.fullDay) {
-            this.preOrderTime = product.pre_order_time;
-            return this.checkPreOrderTime(notTodayTime);
+        if (this.orderTime < this.fullDay) {
+          if (this.userTime > product.pre_order_time) {
+            return false;
           }
         }
-        if (product.pre_order_time < this.fullDay && this.orderTime < this.fullDay ) {
-           return this.checkPreOrderTime(this.orderTime);
-        }
-        if (product.pre_order_time > this.fullDay) {
-          return this.checkPreOrderTime(this.orderTime);
-        }
-
         if (product.pre_order_time === this.fullDay) {
           if (minPreOrderDate > this.selectedDate ) {
             return false;
-          }else {
-            return true;
           }
         }
       }
@@ -139,7 +126,6 @@ export class DateService {
           return this.checkSpecificTime(notTodayOrderTime);
         }
       }
-
       return this.getDaysAvailability(product);
     } else {
       return true;
