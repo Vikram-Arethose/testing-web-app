@@ -109,9 +109,18 @@ export class DateService {
           if (this.userTime > product.pre_order_time) {
             return false;
           }
+          if (product.pre_order_time > this.fullDay) {
+            return false;
+          }
         }
         if (product.pre_order_time === this.fullDay) {
           if (minPreOrderDate > this.selectedDate ) {
+            return false;
+          }
+        }
+        if (this.orderTime > this.fullDay && this.orderTime < this.fullDay * 2 && product.pre_order_time > this.fullDay) {
+          console.log('product.pre_order_time - this.fullDay', product.pre_order_time - this.fullDay);
+          if (this.userTime > product.pre_order_time - this.fullDay) {
             return false;
           }
         }

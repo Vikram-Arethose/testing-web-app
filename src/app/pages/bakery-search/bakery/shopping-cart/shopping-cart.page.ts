@@ -34,7 +34,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   private branchDetails: BranchDetailsForPayment;
   checked;
   timer;
-  dateChanged = false;
+  toastIsShowing: boolean;
 
   constructor(
     public cartService: CartService,
@@ -67,6 +67,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.toastIsShowing = false;
     this.dateLocale = this.locStorageServ.getDateLocale();
     this.lastPaymentMethod = this.branchDetails.lastUsedPayment;
     // this.date = localStorage.getItem('date');
@@ -75,10 +76,14 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         this.date = res;
         localStorage.setItem('date', res);
         const basket = this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
-        const updatedBasket = this.validateBasketByDate(basket);
+        const updatedBasket = basket.filter( item => this.dateService.getProductAvailability(item));
+        if (basket.length !== updatedBasket.length) {
+          this.toastIsShowing = true;
+          this.showToast(this.toastIsShowing);
+          this.toastIsShowing = false;
+        }
         this.cartService.updateCart(updatedBasket);
-        if (this.cartService.getCart().length <= 0) {
-          // this.toast.deletedProductToast(this.translate.instant('shoppingCart.deletedProduct'));
+        if (this.cartService.getCart().length === 0) {
           this.router.navigate(['bakery-search/bakery']);
         }
       }
@@ -90,12 +95,16 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   }
   validateBasketByDate(basket) {
     if (moment().isSameOrAfter(this.date, 'day')) {
-      let orderTimeInSec = this.dateService.getOrderDateInSeconds();
-      orderTimeInSec =  orderTimeInSec  - 86400 * Math.trunc(orderTimeInSec / 86400);
-      return basket.filter(item => item.isAvailable === true && orderTimeInSec <= item.pre_order_time );
+      const filteredBasket = basket.filter( item => this.dateService.getProductAvailability(item));
+      console.log('filteredBasket', filteredBasket);
+      return filteredBasket;
     }else {
-      console.log('NOT');
       return basket;
+    }
+  }
+  showToast(showToast) {
+    if (showToast) {
+      this.toast.deletedProductToast(this.translate.instant('shoppingCart.deletedProduct'));
     }
   }
   ionViewWillEnter() {
@@ -183,7 +192,6 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         this.modalServ.presentPaymentMethodsModal();
       }
     }
-    this.dateChanged = false;
   }
 
   chooseOtherPayment() {
@@ -196,7 +204,6 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     this.cartService.clearCart();
     this.cartService.clearAbsentCart();
     this.router.navigate(['/bakery-search']);
-    this.dateChanged = false;
   }
   cutToggler(e) {
     let checkedStatus = e.detail.checked;
