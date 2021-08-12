@@ -14,6 +14,7 @@ import { BakeryService } from '../../../services/bakery.service';
 import { CartService } from '../../../services/cart.service';
 import { ApiResponse } from '../../../models/http/apiResponse';
 import { AlertService } from '../../../services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-orders',
@@ -59,6 +60,7 @@ export class OrdersPage implements OnInit {
     private cartServ: CartService,
     private  vps: ViewportScroller,
     public alertServ: AlertService,
+    public translate: TranslateService
 
   ) {
     this.route.queryParams.subscribe(params => {
@@ -113,18 +115,14 @@ export class OrdersPage implements OnInit {
     if (this.isSave) {}
   }
 
-   repeatOrder(order, bakeryId, orderList) {
+   repeatOrder(order, branchId, orderList) {
     this.orderId = order;
-    this.bakeryId = bakeryId;
+    this.bakeryId = branchId;
     this.cartServ.clearCart();
     this.httpServ.getReorderData(this.orderId).subscribe( (res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
               if (res.products_for_repeat.length === 0) {
-                let alertMsg = 'Alle Produkte in Ihrer Bestellung fehlen. Versuchen Sie, eine neue Bestellung aufzugeben';
-                if (localStorage.getItem('language') === 'en') {
-                  alertMsg = 'All products in your order are absent. Try to make a new order';
-                }
-                this.alertServ.presentAlert(alertMsg);
+                this.alertServ.presentAlert(this.translate.instant('shoppingCart.reorderEmptyBasket'));
                 this.router.navigate(['orders']);
              }else {
                if (res.unavailabile_products.length > 0) {

@@ -189,7 +189,8 @@
     "checkout": "Pay now",
     "lastPaymentMethod": "Last Payment method:",
     "chooseOtherPayment": "Choose other payment method",
-    "deletedProduct": "One of the selected products is not available on the date you selected and has been removed from the cart"
+    "deletedProduct": "One of the selected products is not available on the date you selected and has been removed from the cart",
+    "reorderEmptyBasket": "All products in your order are absent. Try to make a new order"
   },
   "gPay": {
     "dataProtection": "If you continue you accept it the data protection information and Terms of Use from Google Payments",

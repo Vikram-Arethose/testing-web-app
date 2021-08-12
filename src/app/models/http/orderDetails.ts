@@ -1,4 +1,5 @@
 export interface OrderDetails {
+  branch_id: number;
   bakery_id: number;
   bakery_name: string;
   branch_name: string;
