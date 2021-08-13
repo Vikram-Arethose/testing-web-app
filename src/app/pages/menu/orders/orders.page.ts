@@ -26,7 +26,7 @@ export class OrdersPage implements OnInit {
   dateLocale: string;
   header: string;
   isSave: boolean;
-  orderId: number;
+  orderId = null;
   currentOrderId: any;
   ordersToShow: OrderDetails[] = [];
   segmentValue = 'current';
@@ -62,18 +62,19 @@ export class OrdersPage implements OnInit {
     public alertServ: AlertService,
     public translate: TranslateService
 
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state.orderId) {
+      if (this.router.getCurrentNavigation().extras.state) {
         // this.isConfirm = this.router.getCurrentNavigation().extras.state.isConfirm;
         this.orderId = this.router.getCurrentNavigation().extras.state.orderId;
         this.isPush = false;
         this.logger.log('this.orderId in orders page: ', this.orderId);
       }
+    }, error => {
+      console.log(error);
     });
-  }
-
-  ngOnInit() {
   }
   ionViewWillEnter() {
     this.dateLocale = this.localStorServ.getDateLocale();
