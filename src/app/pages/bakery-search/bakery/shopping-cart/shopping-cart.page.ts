@@ -35,6 +35,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   checked;
   timer;
   toastIsShowing: boolean;
+  reorderDisabled = false;
 
   constructor(
     public cartService: CartService,
@@ -75,23 +76,13 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
       if (res && res !== this.date) {
         this.date = res;
         localStorage.setItem('date', res);
-        const basket = this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
-        const updatedBasket = basket.filter( item => this.dateService.getProductAvailability(item));
-        if (basket.length !== updatedBasket.length) {
-          this.toastIsShowing = true;
-          this.showToast(this.toastIsShowing);
-          this.toastIsShowing = false;
+        if (this.reorder) {
+          this.refreshDate();
         }
-        this.cartService.updateCart(updatedBasket);
-        if (this.cartService.getCart().length === 0) {
-          this.router.navigate(['bakery-search/bakery']);
+        this.validateProducts();
         }
-      }
     });
     this.absentProducts = this.cartService.getAbsentCart();
-    if (this.reorder) {
-    this.refreshDate();
-    }
   }
   validateBasketByDate(basket) {
     if (moment().isSameOrAfter(this.date, 'day')) {
@@ -218,6 +209,30 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     this.timer = setInterval(() => {
       this.date = this.dateService.getDateFromPicker();
     }, 200);
+  }
+  validateProducts() {
+    const basket = this.cartService.getCart().map(item => this.dateService.mapProductInCartAvailability(item));
+    const updatedBasket = basket.filter( item => this.dateService.getProductAvailability(item));
+    if (basket.length !== updatedBasket.length) {
+      this.toastIsShowing = true;
+      this.showToast(this.toastIsShowing);
+      this.toastIsShowing = false;
+      // (this.reorder) ? this.reorderDisabled = true : this.reorderDisabled = false ;
+    }
+    // if (basket.length === updatedBasket.length) {
+    //   this.reorderDisabled = false;
+    // }
+    // if (!this.reorder) {
+    //   this.cartService.updateCart(updatedBasket);
+    // }
+    this.cartService.updateCart(updatedBasket);
+    if (this.cartService.getCart().length === 0) {
+      if (this.reorder){
+        this.router.navigate(['orders']);
+      }else {
+        this.router.navigate(['bakery-search/bakery']);
+      }
+    }
   }
   ngOnDestroy() {
     clearInterval(this.timer);

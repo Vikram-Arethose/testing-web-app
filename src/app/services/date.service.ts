@@ -58,6 +58,7 @@ export class DateService {
   }
 
   getDaysAvailability(product: Product): boolean {
+    console.log(product);
     // check days availability
     const selectedDay = this.selectedDate.getDay();
     if (product.availability_new.some(item => item.day === this.weekDays[selectedDay])) {
