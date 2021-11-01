@@ -4,6 +4,10 @@
     <string name="title_activity_main">BrötchenApp</string>
     <string name="package_name">com.brotchen.app</string>
     <string name="custom_url_scheme">com.brotchen.app</string>
+    <string name="URL_SCHEME">brotchen</string>
+    <string name="DEEPLINK_SCHEME">https</string>
+    <string name="DEEPLINK_HOST">com.brotchen.app</string>
+    <string name="ANDROID_PATH_PREFIX">/registration</string>
     <string name="server_client_id">997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com</string>
     <string name="facebook_app_id">209432110768704</string>
     <string name="fb_login_protocol_scheme">fb209432110768704</string>
