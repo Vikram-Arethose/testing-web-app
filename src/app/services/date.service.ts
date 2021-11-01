@@ -87,7 +87,7 @@ export class DateService {
       return false;
     }
   }
-  
+
   datesAreOnSameDay(today, selected) {
     return today.getFullYear() === selected.getFullYear() &&
            today.getMonth() === selected.getMonth() &&
@@ -111,7 +111,7 @@ export class DateService {
       const minPreOrderDate = new Date();
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
-      
+
       if (!product.pre_order_time || (product.pre_order_time && product.pre_order_time === 86400)) {
         if (minPreOrderDate > this.selectedDate ) {
           return false;
@@ -119,9 +119,10 @@ export class DateService {
       }else {
         const zeroStartTime = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), this.selectedDate.getDate(), 0, 0, 0, 0);
         zeroStartTime.setSeconds(product.pre_order_time);
-        if (this.datesAreOnSameDay(new Date(), this.selectedDate) && this.selectedDate > zeroStartTime ){
+        if (this.datesAreOnSameDay(new Date(), this.selectedDate) && this.selectedDate > zeroStartTime) {
           return false;
         }
+      }
       if (this.specificTime === 0) {
         if (this.orderTime < this.fullDay) {
           if (this.userTime > product.pre_order_time) {
@@ -261,12 +262,13 @@ export class DateService {
     for (let i = 0; i < 7; i++) {
       // tslint:disable-next-line:max-line-length
       specDate = this.getSpecialDateByDate(minColDateMom.toDate());
-  
+
       if (specDate !== undefined && !specDate.closed){
         selDate = minColDateMom.toDate();
         break;
       }
-      
+
+      // tslint:disable-next-line:max-line-length
       if (((specDate !== undefined && !specDate.closed) || specDate === undefined ) && openingHoursArr.length !== 0 && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHoursArr[openingHoursArr.length - 1]))
       ) {
           break;
