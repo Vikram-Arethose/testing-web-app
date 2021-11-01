@@ -113,7 +113,6 @@ export class PickUpDateComponent implements OnInit {
   }
 
   onConfirm() {
-    
     this.date = this.date.split('T')[0];
     this.time = this.time.split('T')[1];
     const dateForCheck = new Date(this.date + 'T' + this.time);
@@ -150,6 +149,12 @@ export class PickUpDateComponent implements OnInit {
   }
   closeModal() {
     if (!this.dateGlobal) {
+      this.router.navigate(['bakery-search']);
+    }
+    this.modalController.dismiss();
+  }
+  returnToBakeryList() {
+    if (!this.isVerify) {
       this.router.navigate(['bakery-search']);
     }
     this.modalController.dismiss();
