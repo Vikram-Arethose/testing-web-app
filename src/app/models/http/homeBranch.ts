@@ -27,9 +27,19 @@ export interface OpeningHours {
     tuesday: OpeningHoursDay[];
     wednesday: OpeningHoursDay[];
   };
+  specialDate?: [];
 }
 
 export interface OpeningHoursDay {
   start: string;
   end: string;
+}
+
+export interface SpecialDate {
+  date: string;
+  start_am: string;
+  end_am: string;
+  start_pm: string;
+  end_pm: string;
+  closed: boolean;
 }

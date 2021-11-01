@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import * as moment from 'moment';
 
@@ -58,7 +58,6 @@ export class DateService {
   }
 
   getDaysAvailability(product: Product): boolean {
-    console.log(product);
     // check days availability
     const selectedDay = this.selectedDate.getDay();
     if (product.availability_new.some(item => item.day === this.weekDays[selectedDay])) {
@@ -88,6 +87,13 @@ export class DateService {
       return false;
     }
   }
+  
+  datesAreOnSameDay(today, selected) {
+    return today.getFullYear() === selected.getFullYear() &&
+           today.getMonth() === selected.getMonth() &&
+           today.getDate() === selected.getDate();
+  }
+
   getProductAvailability(product: Product): boolean {
     this.specificTime = product.specific_time;
     this.preOrderTime = product.pre_order_time;
@@ -105,6 +111,17 @@ export class DateService {
       const minPreOrderDate = new Date();
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
+      
+      if (!product.pre_order_time || (product.pre_order_time && product.pre_order_time === 86400)) {
+        if (minPreOrderDate > this.selectedDate ) {
+          return false;
+        }
+      }else {
+        const zeroStartTime = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), this.selectedDate.getDate(), 0, 0, 0, 0);
+        zeroStartTime.setSeconds(product.pre_order_time);
+        if (this.datesAreOnSameDay(new Date(), this.selectedDate) && this.selectedDate > zeroStartTime ){
+          return false;
+        }
       if (this.specificTime === 0) {
         if (this.orderTime < this.fullDay) {
           if (this.userTime > product.pre_order_time) {
@@ -195,7 +212,27 @@ export class DateService {
     }
   }
 
+  getSpecialDateByDate(date: Date): boolean {
+    const myDate = moment(date).format('DD-MM-YYYY');
+    const findDay: any = this.bakery.branchDetails.opening_hours_new.specialDate.find((item: any) => item.date === myDate);
+    // if (findDay !== undefined && !findDay.closed){
+    //   return true;
+    // }
+    return findDay;
+  }
+
   checkSelectedDate(date: Date): boolean {
+    const specDate: any = this.getSpecialDateByDate(date);
+    // // tslint:disable-next-line:max-line-length
+    if (specDate !== undefined) {
+      if (!specDate.closed){
+        const openingH: any = [{start: specDate.start_am, end: specDate.end_am}, {start: specDate.start_pm, end: specDate.end_pm}];
+        return openingH.some(item => date >= this.getDateByTime(date, 'start', item) &&
+          date <= this.getDateByTime(date, 'end', item) && date > new Date());
+      }
+      return false;
+    }
+
     if (this.checkAllWeek()) {
       return true;
     }
@@ -219,16 +256,29 @@ export class DateService {
       return minColDateMom.toDate();
     }
     let openingHoursArr: OpeningHoursDay[] = this.getOpeningHoursByDate(minColDateMom.toDate());
+    let selDate: any;
+    let specDate;
     for (let i = 0; i < 7; i++) {
       // tslint:disable-next-line:max-line-length
-      if (openingHoursArr.length !== 0 && (minColDateMom.toDate() <=
-        this.getDateByTime(minColDateMom.toDate(), 'end', openingHoursArr[openingHoursArr.length - 1]))) {
+      specDate = this.getSpecialDateByDate(minColDateMom.toDate());
+  
+      if (specDate !== undefined && !specDate.closed){
+        selDate = minColDateMom.toDate();
         break;
+      }
+      
+      if (((specDate !== undefined && !specDate.closed) || specDate === undefined ) && openingHoursArr.length !== 0 && (minColDateMom.toDate() <= this.getDateByTime(minColDateMom.toDate(), 'end', openingHoursArr[openingHoursArr.length - 1]))
+      ) {
+          break;
       } else {
         openingHoursArr = this.getOpeningHoursByDate(minColDateMom.add(1, 'day').startOf('day').toDate());
       }
     }
-    if (this.checkSelectedDate(minColDateMom.toDate())) {
+    if (specDate !== undefined && !specDate.closed){
+      selDate.setHours(parseInt((specDate.start_am).split(':')[0], 10),
+        parseInt((specDate.start_am).split(':')[1], 10));
+      minColDate = selDate;
+    } else if (this.checkSelectedDate(minColDateMom.toDate())) {
       minColDate = minColDateMom.toDate();
     } else {
       // tslint:disable-next-line:max-line-length

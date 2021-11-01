@@ -126,7 +126,8 @@ export class BakeryPage implements OnInit, OnDestroy {
   }
 
   setOpeningHours(openingHours: OpeningHours) {
-    const openingHoursCopy = JSON.parse(JSON.stringify(openingHours.default));
+    const openingHoursCopy = openingHours.default;
+    // const openingHoursCopy = JSON.parse(JSON.stringify(openingHours.default));
     for (const day in openingHoursCopy) {
       if (openingHoursCopy.hasOwnProperty(day)) {
         if (openingHoursCopy[day]?.length === 3) {
@@ -186,9 +187,9 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.isBakeryInfoFull = !this.isBakeryInfoFull;
   }
 
-  getProductAvailability(product: Product) {
-    return this.dateService.getProductAvailability(product);
-  }
+  // getProductAvailability(product: Product) {
+  //   return this.dateService.getProductAvailability(product);
+  // }
 
   openShoppingCart() {
     if (this.account.first_name && this.account.last_name && this.account.email) {
