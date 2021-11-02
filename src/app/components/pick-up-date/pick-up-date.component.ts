@@ -46,14 +46,16 @@ export class PickUpDateComponent implements OnInit {
   ngOnInit() {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(9, 0, 0, 0);
+    this.time = tomorrow.toISOString();
     this.tomorrow = tomorrow.toISOString();
-    this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
     this.convertDate(this.date);
     this.onTomorrow();
     this.setActiveBtn();
     this.dateService.dateShared.subscribe((res: string) => {
       if (res) {
         this.date = this.time = res;
+        this.date = this.time = this.dateService.getDefaultMinOrderDate().toISOString();
         this.setActiveBtn(res);
         this.getPickersRanges();
       }

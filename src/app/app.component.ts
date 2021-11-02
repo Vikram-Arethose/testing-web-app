@@ -12,8 +12,10 @@ import { AccountService } from './services/account.service';
 import { PushService } from './services/push.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertController } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
 import { CheckVersion } from './services/checkVersion.service';
 
+const { App } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -91,6 +93,7 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.pushServ.setResetPushBadgeCount();
       this.checkVersion.checkReleaseVersion();
+      this.deviceBackButton();
       this.platform.resume.subscribe(() => {
         this.checkVersion.checkReleaseVersion();
         const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
@@ -146,4 +149,11 @@ export class AppComponent implements OnInit {
   //     }, 1200);
   //   }
   // }
+  deviceBackButton() {
+    this.platform.backButton.subscribe(() => {
+      if (this.router.url === '/bakery-search') {
+        App.exitApp();
+      }
+    });
+  }
 }
