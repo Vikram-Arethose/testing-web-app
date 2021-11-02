@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoggerService } from './logger.service';
-import { Product } from '../models/http/bakeryFull';
+import { PayPalSettings, Product } from '../models/http/bakeryFull';
 import { Router } from '@angular/router';
 import { SaleServices } from './sale.services';
 
@@ -13,6 +13,7 @@ export class CartService {
   private actualDate: string;
   product: Product;
   date: string;
+  payPalSettings: PayPalSettings;
   constructor(
     private logger: LoggerService,
     private router: Router,
@@ -139,5 +140,11 @@ export class CartService {
       product.sliced = 0;
       this.addProductToCart(product);
     }
+  }
+  setPeymentsSettings(data) {
+    this.payPalSettings = data;
+  }
+  getPaymentSettings() {
+    return this.payPalSettings;
   }
 }

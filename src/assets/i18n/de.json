@@ -4,7 +4,8 @@
     "bakeryNotWorkAtThisTime": "Diese Bäckerei hat zum ausgewählten Zeitpunkt geschlossen.",
     "defaultErrorMessage": "Beim Laden der Daten ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
     "paymentWasFailed": "Wir konnten deine Zahlung nicht verarbeiten. Wahrscheinlich hast du dich vertippt. Versuch es doch noch einmal oder wähle eine andere Zahlungsmethode.",
-    "minOrderCost": "Der Mindestbestellwert bei dieser Bäckerei beträgt"
+    "minOrderCost": "Der Mindestbestellwert bei dieser Bäckerei beträgt",
+    "noMoney": "Ups, tut mir leid, du hast kein Geld"
   },
   "general": {
     "continue": "Weiter",
@@ -149,7 +150,8 @@
     "header": "Zahlungsmethoden",
     "title": "Wir bieten im Bestellprozess folgende Zahlungsmethoden an.",
     "comingSoon": "Kommt bald!",
-    "otherOptions": "Andere Optionen"
+    "otherOptions": "Andere Optionen",
+    "minOrderPayPal": "Der Mindestbestellwert für PayPal"
   },
   "bakerySearch": {
     "thereIsNoBakery": "In deiner Umgebung nimmt noch keine Bäckerei teil. Aber das ändert sich bestimmt bald.",

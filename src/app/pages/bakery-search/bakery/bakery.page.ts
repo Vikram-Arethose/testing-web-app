@@ -116,6 +116,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       this.bakeryInfoFull = res.branchDetails.description;
       this.bakeryInfo = this.trimBakeryInfo();
       this.setOpeningHours(res.branchDetails.opening_hours_new);
+      this.cartService.setPeymentsSettings(res.branchDetails.payment_settings);
       this.categories = res.categories;
       if (res.categories[0] && res.categories[0].products) {
         this.selectedCategoryIndex = 0;

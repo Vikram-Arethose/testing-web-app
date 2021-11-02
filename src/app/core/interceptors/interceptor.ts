@@ -65,6 +65,15 @@ export class Interceptor implements HttpInterceptor {
             this.loginServ.logout();
           }
           this.logger.warn('Interceptor: An error occurred: ', error);
+          if (error.status === 405 ) {
+            this.message =  error.error.message;
+            this.alertServ.presentAlert(this.message);
+          }
+          if (error.status === 400 ) {
+            this.message =  error.error.message;
+            this.alertServ.presentAlert(this.message);
+          }
+
           if (this.message === '') {
             this.alertServ.presentAlert();
           }else {
