@@ -74,6 +74,7 @@ export interface Product {
   availability_new: AvailableDay[];
   branch_product: [];
   specific_time: number;
+  sold_out_products: Array<any>;
 }
 
 export interface AvailableDay {
