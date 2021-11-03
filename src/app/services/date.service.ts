@@ -95,6 +95,14 @@ export class DateService {
   }
 
   getProductAvailability(product: Product): boolean {
+    if (product.sold_out_products.length > 0) {
+      const soldOutDate = product.sold_out_products[0].sold_out_date;
+      if (moment(this.date) > moment(soldOutDate)) {
+        return true;
+      }else {
+        return false;
+      }
+    }
     this.specificTime = product.specific_time;
     this.preOrderTime = product.pre_order_time;
     if (product.quantity === 'unavailable') {
@@ -111,7 +119,7 @@ export class DateService {
       const minPreOrderDate = new Date();
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
-
+      
       if (!product.pre_order_time || (product.pre_order_time && product.pre_order_time === 86400)) {
         if (minPreOrderDate > this.selectedDate ) {
           return false;
@@ -138,7 +146,6 @@ export class DateService {
           }
         }
         if (this.orderTime > this.fullDay && this.orderTime < this.fullDay * 2 && product.pre_order_time > this.fullDay) {
-          console.log('product.pre_order_time - this.fullDay', product.pre_order_time - this.fullDay);
           if (this.userTime > product.pre_order_time - this.fullDay) {
             return false;
           }
