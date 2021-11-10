@@ -62,12 +62,12 @@ export class HttpService {
   }
 
   postData(endPoint: string, data) {
-    return this.http.post(this.baseUrl + endPoint, data);
+    return this.http.post(this.baseUrl + '/v1' + endPoint, data);
   }
 
   checkEmail(email: string) {
     const subject = new Subject();
-    this.http.get(`${this.baseUrl}/check/email?email=${email}`).subscribe((res: ApiResponse) => {
+    this.http.get(`${this.baseUrl}/v1/check/email?email=${email}`).subscribe((res: ApiResponse) => {
       if (this.checkApiRes(res)) {
         subject.next(res.data);
       }
@@ -77,7 +77,7 @@ export class HttpService {
 
   getBranchesNear(lat: string, lng: string) {
     const subject = new Subject<BranchNear[]>();
-    this.http.get(this.baseUrl + '/branches-near-me?lat=' + lat + '&lng=' + lng)
+    this.http.get(this.baseUrl + '/v1/branches-near-me?lat=' + lat + '&lng=' + lng)
       .subscribe((res: BranchesNearResponse) => {
         if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
           subject.next(res.data);
@@ -89,7 +89,7 @@ export class HttpService {
 
   getHomeBranches(lat: string, lng: string) {
     const subject = new Subject<HomeBranch[]>();
-    this.http.get(`${this.baseUrl}/branches/home?lat=${lat}&lng=${lng}`)
+    this.http.get(`${this.baseUrl}/v1/branches/home?lat=${lat}&lng=${lng}`)
       .subscribe((res: HomeBranchesRes) => {
         if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
           subject.next(res.data);
@@ -101,7 +101,7 @@ export class HttpService {
 
   removeAddToFavorites(branchId: number) {
     const subject = new Subject();
-    this.http.put(`${this.baseUrl}/branches/favourites/${branchId}`, null)
+    this.http.put(`${this.baseUrl}/v1/branches/favourites/${branchId}`, null)
       .subscribe((res: ApiResponse) => {
         if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
           subject.next(res.data);
@@ -113,7 +113,7 @@ export class HttpService {
 
   getFavorites(): Observable<HomeBranch[]> {
     const subject = new Subject<HomeBranch[]>();
-    this.http.get<Observable<ApiResponse>>(`${this.baseUrl}/branches/favourites`).subscribe((res: any) => {
+    this.http.get<Observable<ApiResponse>>(`${this.baseUrl}/v1/branches/favourites`).subscribe((res: any) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
@@ -124,7 +124,7 @@ export class HttpService {
 
   getBranchDetail(branchId: number) {
     const subject = new Subject();
-    this.http.get(`${this.baseUrl}/branch/${branchId}`).subscribe((res: ApiResponse) => {
+    this.http.get(`${this.baseUrl}/v2/branch/${branchId}`).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
@@ -135,7 +135,7 @@ export class HttpService {
 
   getUserDetails() {
     const subject = new Subject<User>();
-    this.http.get(`${this.baseUrl}/user/details`).subscribe((res: ApiResponse) => {
+    this.http.get(`${this.baseUrl}/v1/user/details`).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http user/details res.data: ', res.data);
@@ -146,7 +146,7 @@ export class HttpService {
 
   updateUserDetails(data): Observable<boolean> {
     const subject = new Subject<boolean>();
-    this.http.put(`${this.baseUrl}/user/details`, data).subscribe((res: ApiResponse) => {
+    this.http.put(`${this.baseUrl}/v1/user/details`, data).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         if (Array.isArray(res.data) && res.data.length === 0) {
           subject.next(true);
@@ -159,7 +159,7 @@ export class HttpService {
 
   getInboxMessages(): Observable<InboxMessage[]> {
     const subject = new Subject<InboxMessage[]>();
-    this.http.get(this.baseUrl + '/inbox/messages').subscribe((res: ApiResponse) => {
+    this.http.get(this.baseUrl + '/v1/inbox/messages').subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
@@ -170,7 +170,7 @@ export class HttpService {
 
   deleteUserAccount() {
     const subject = new Subject<boolean>();
-    this.http.delete(this.baseUrl + '/user/delete').subscribe( (res: ApiResponse) => {
+    this.http.delete(this.baseUrl + '/v1/user/delete').subscribe( (res: ApiResponse) => {
       this.logger.log('deleteUserAccount res', res);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(true);
@@ -192,7 +192,7 @@ export class HttpService {
     this.loadingServ.presentLoading();
     const body = this.getBodyForPayment(data);
     const subject = new Subject<CreateStxRes | false>();
-    this.http.post(this.baseUrl + '/payment/transaction/create', body).subscribe((res: ApiResponse) => {
+    this.http.post(this.baseUrl + '/v1/payment/transaction/create', body).subscribe((res: ApiResponse) => {
       this.loadingServ.dismiss();
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
@@ -205,7 +205,7 @@ export class HttpService {
   }
 
   openCreditCardPayment(stxId: string, userId: number): InAppBrowserObject {
-    return this.iab.create(`${this.baseUrl}/payment/creditcard?stx_id=${stxId}&user_id=${userId}`, '_blank', this.getIabOptions());
+    return this.iab.create(`${this.baseUrl}/v1/payment/creditcard?stx_id=${stxId}&user_id=${userId}`, '_blank', this.getIabOptions());
   }
 
   getIab(url: string) {
@@ -233,14 +233,14 @@ export class HttpService {
       products: debitArgs.products,
       pickup_date: debitArgs.pickup_date,
     };
-    return  this.http.post(this.baseUrl + '/payment/debit', body);
+    return  this.http.post(this.baseUrl + '/v1/payment/debit', body);
   }
 
   iabPayment(endPoint: string) {
     this.loadingServ.presentLoading();
     const body = this.getBodyForPayment(this.bakeryServ.getDataForPayment(this.date));
     const subject = new Subject<boolean>();
-    this.http.post(this.baseUrl + endPoint, body).subscribe((res: ApiResponse) => {
+    this.http.post(this.baseUrl + '/v1' + endPoint, body).subscribe((res: ApiResponse) => {
       this.loadingServ.dismiss();
       this.logger.log('http res.data: ', res.data);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && res.data?.iframeUrl) {
@@ -256,7 +256,7 @@ export class HttpService {
 
   useLastPayment(data: DataForPayment) {
     const body = this.getBodyForPayment(data);
-    return this.http.post(this.baseUrl + '/payment/last-used', body);
+    return this.http.post(this.baseUrl + '/v1/payment/last-used', body);
   }
 
   handleIabResult(browser: InAppBrowserObject) {
@@ -282,7 +282,7 @@ export class HttpService {
 
   getOrderDetails(orderId: number) {
     const subject = new Subject<OrderDetails>();
-    this.http.get(`${this.baseUrl}/order/details/${orderId}`).subscribe((res: ApiResponse) => {
+    this.http.get(`${this.baseUrl}/v1/order/details/${orderId}`).subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
@@ -295,7 +295,7 @@ export class HttpService {
 
   getOrders() {
     const subject = new Subject();
-    this.http.get(this.baseUrl + '/orders').subscribe((res: ApiResponse) => {
+    this.http.get(this.baseUrl + '/v1/orders').subscribe((res: ApiResponse) => {
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS') {
         subject.next(res.data);
         this.logger.log('http res.data: ', res.data);
@@ -307,7 +307,7 @@ export class HttpService {
   }
   getVersionFromDB() {
     let result: any;
-    result = this.http.get(this.baseUrl + '/check/version').toPromise();
+    result = this.http.get(this.baseUrl + '/v1/check/version').toPromise();
     return result;
   }
 
@@ -318,7 +318,7 @@ export class HttpService {
       platform,
       os_version: osVersion
     };
-    this.http.post(this.baseUrl + '/pushNotification/register', body).subscribe((res: ApiResponse) => {
+    this.http.post(this.baseUrl + '/v1/pushNotification/register', body).subscribe((res: ApiResponse) => {
       this.logger.log('http res.data: ', res.data);
       if (res.apiStatus === 'OK' && res.apiCode === 'SUCCESS' && !res.data?.error) {
       } else {
@@ -327,12 +327,12 @@ export class HttpService {
     });
   }
   getReorderData(orderId: number) {
-    return this.http.post(`${this.baseUrl}/order/repeat/${orderId}`, null);
+    return this.http.post(`${this.baseUrl}/v1/order/repeat/${orderId}`, null);
   }
   sendPassword(email, password, status) {
-    return this.http.get(this.baseUrl + `/forgott-password/${email}/${password}/${status}`);
+    return this.http.get(this.baseUrl + `/v1/forgott-password/${email}/${password}/${status}`);
   }
   sendConfirmationCode(code) {
-    return this.http.get(this.baseUrl + `/check-code/${code}`);
+    return this.http.get(this.baseUrl + `/v1/check-code/${code}`);
   }
 }

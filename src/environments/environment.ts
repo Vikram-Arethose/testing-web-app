@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://dev.server6.w3control.de/api/v1',
+  serverUrl: 'https://dev.server6.w3control.de/api',
   firebaseConfig: {
     apiKey: 'AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ',
     authDomain: 'brotchenuserapp-4f1b7.firebaseapp.com',
