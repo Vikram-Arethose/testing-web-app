@@ -16,10 +16,19 @@
       </ng-template>
       <p class="item__label">sofort.</p>
     </div>
-    <div class="payments__item item" (click)="makePaymentBy('paypal')" tappable>
-      <ion-icon class="item__icon" src="../../../assets/icons/payments/paypal.svg"></ion-icon>
-      <p class="item__label">PayPal</p>
+    <div *ngIf="visiblePayPal"
+         class="payments__item item"
+         (click)="makePaymentBy('paypal')"
+         tappable>
+      <ion-icon class="item__icon"  src="../../../assets/icons/payments/paypal.svg"></ion-icon>
+      <div ><p class="item__label">PayPal</p>
+        <p>
+          <small class="low_sum" *ngIf="checkTotalValue()">{{ 'paymentMethods.minOrderPayPal' | translate}} {{minAmount}} € </small>
+        </p>
+      </div>
+
     </div>
+
     <div class="payments__item item" (click)="makePaymentBy('debit')" tappable>
       <ion-icon class="item__icon" src="../../../assets/icons/payments/sepa.svg"></ion-icon>
       <p class="item__label">Sepa Lastschrift</p>

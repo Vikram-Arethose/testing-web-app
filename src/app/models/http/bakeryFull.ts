@@ -5,8 +5,13 @@ export interface BakeryFull {
   categories: Category[];
   last_used_payment?: string;
 }
+export interface PayPalSettings {
+  payment_paypal: boolean;
+  min_amount_paypal: string;
+}
 
 export interface BakeryDetails {
+  payment_settings: PayPalSettings;
   active: number;
   bakery_id: number;
   bakery_logo?: string;

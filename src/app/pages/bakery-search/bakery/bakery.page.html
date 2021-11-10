@@ -1,5 +1,5 @@
 <ion-header></ion-header>
-<ion-content [scrollEvents]="true">
+<ion-content [scrollEvents]="true" (ionScroll)="getPosition($event)">
   <div class="header">
     <ion-toolbar class="toolbar" *ngIf="bakeryDetails?.photo" [style.--background]="'url(' + bakeryDetails?.photo +') center/cover'">
       <ion-buttons slot="start">
@@ -76,7 +76,7 @@
   </div>
   <div class="products" *ngIf="!isInfoFull">
     <div class="sections">
-      <div class="sections__item" *ngFor="let category of categories, let i = index"
+      <div class="sections__item"  *ngFor="let category of categories, let i = index"
            (click)="onCategorySelect(i)"
            [class.sections__item_selected]="i === selectedCategoryIndex" tappable>{{category.name}}</div>
     </div>
@@ -91,8 +91,8 @@
         </ion-button>
       </div>
       <div class="products-area">
-        <div id="category_{{i}}" *ngFor="let category of categories; let i = index">
-          <div *ngIf="i > 0" class="category-divider">{{category.name}}</div>
+        <div id="category_{{i}}"   *ngFor="let category of categories; let i = index">
+          <div class="category-divider qq11" *ngIf="category.products.length > 0" [class.hidden-element]="i === 0">{{category.name}}</div>
           <app-product-item *ngFor="let product of productsList[i]; let i = index" [date]="date" [product]="product"></app-product-item>
         </div>
       </div>

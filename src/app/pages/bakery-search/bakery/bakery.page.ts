@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 
 import { LoggerService } from '../../../services/logger.service';
@@ -116,6 +116,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       this.bakeryInfoFull = res.branchDetails.description;
       this.bakeryInfo = this.trimBakeryInfo();
       this.setOpeningHours(res.branchDetails.opening_hours_new);
+      this.cartService.setPeymentsSettings(res.branchDetails.payment_settings);
       this.categories = res.categories;
       if (res.categories[0] && res.categories[0].products) {
         this.selectedCategoryIndex = 0;
@@ -146,17 +147,15 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.content.scrollToPoint(0, title.offsetTop - 50, 1000);
   }
 
+  changeCategory(index: number) {
+    this.selectedCategoryIndex = index;
+  }
+
   setProductList() {
-    // if (this.categories && this.categories[0] && this.categories[0].products) {
-    //   this.productsList = this.categories[index].products;
-    //   this.productsList = this.productsList.filter(item => this.dateService.getProductAvailability(item));
-    //   this.productsList = this.productsList.map(item => this.dateService.mapProductPrice(item));
-    // }
     let list = this.categories.map( item => item.products);
     console.log('LIST', list);
     list = list.map( category => category.filter(item => this.dateService.getProductAvailability(item)));
     this.productsList = list.map(item => item.map( filteredProduct => this.dateService.mapProductPrice(filteredProduct)));
-    console.log('FILTERED PRODUCTLIST', this.productsList);
   }
 
   getCart() {
@@ -211,5 +210,21 @@ export class BakeryPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+  getPosition(e) {
+    const dist = e.detail.scrollTop;
+    const pos = document.getElementsByClassName('qq11');
+    const htmlColArr = [];
+    for (let i = 0; i < pos.length; i++) {
+      htmlColArr.push(pos[i]);
+    }
+    const offsetTopArr = htmlColArr.map(div => {
+      return div = div.offsetTop - document.body.clientHeight / 2;
+    });
+    for (let i = 0; i <= offsetTopArr.length  ; i++) {
+      if (dist > offsetTopArr[i] ) {
+        this.changeCategory(i);
+      }
+    }
   }
 }

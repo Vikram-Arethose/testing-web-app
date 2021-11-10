@@ -4,7 +4,8 @@
     "bakeryNotWorkAtThisTime": "This bakery doesn't work at selected date/time!",
     "defaultErrorMessage": "Something went wrong! Please try again later.",
     "paymentWasFailed": "Payment was failed! Please try again later.",
-    "minOrderCost": "Min order total cost for this bakery should be bigger or equal"
+    "minOrderCost": "Min order total cost for this bakery should be bigger or equal",
+    "noMoney": "Ooops, sorry, you does not have money"
   },
   "general": {
     "continue": "continue",
@@ -149,7 +150,8 @@
     "header": "Payment Methods",
     "title": "We offer the following payment methods in our order process.",
     "comingSoon": "Coming soon!",
-    "otherOptions": "Other options"
+    "otherOptions": "Other options",
+    "minOrderPayPal": " The minimum order amount for PayPal"
   },
   "bakerySearch": {
     "thereIsNoBakery": "There is no bakery in your area yet. But that will change soon.",

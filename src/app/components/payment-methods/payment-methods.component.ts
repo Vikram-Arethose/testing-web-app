@@ -22,6 +22,8 @@ export class PaymentMethodsComponent implements OnInit {
   isAndroid: boolean = this.platform.is('android');
   private bakery: BakeryFull;
   private date: string;
+  minAmount: string;
+  visiblePayPal: boolean;
 
   constructor(
     private alertServ: AlertService,
@@ -35,6 +37,11 @@ export class PaymentMethodsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const val = this.cartServ.getPaymentSettings();
+    console.log('*******', val);
+    this.visiblePayPal = val.payment_paypal;
+    this.minAmount = val.min_amount_paypal;
+    console.log('this.visiblePayPal', this.visiblePayPal);
     this.bakeryServ.bakery.subscribe(res => this.bakery = res);
     this.dateServ.dateShared.subscribe(res => this.date = res);
   }
@@ -64,7 +71,11 @@ export class PaymentMethodsComponent implements OnInit {
         this.makeIabPayment('/payment/sofort');
         break;
       case 'paypal':
-        this.makeIabPayment('/payment/paypal');
+        if (this.checkTotalValue()) {
+          return false;
+        }else {
+          this.makeIabPayment('/payment/paypal');
+        }
         break;
     }
   }
@@ -97,6 +108,9 @@ export class PaymentMethodsComponent implements OnInit {
       }
     });
     return await modal.present();
+  }
+  checkTotalValue() {
+    return this.cartServ.getTotalPrice() > this.minAmount ? false :  true;
   }
 
 }
