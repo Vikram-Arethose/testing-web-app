@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent implements OnInit {
-  updatePassword: FormGroup;
+  updatePassword: UntypedFormGroup;
   email: null;
   password: null;
   compareError = false;
@@ -23,10 +23,10 @@ export class ChangePasswordComponent implements OnInit {
     private http: HttpService,
   ) {
 
-    this.updatePassword = new FormGroup({
-      emailVal: new FormControl('', [Validators.required, Validators.email]),
-      passwordVal: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmPasswordVal: new FormControl('', [Validators.required, Validators.minLength(8)])
+    this.updatePassword = new UntypedFormGroup({
+      emailVal: new UntypedFormControl('', [Validators.required, Validators.email]),
+      passwordVal: new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmPasswordVal: new UntypedFormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
   ngOnInit() {

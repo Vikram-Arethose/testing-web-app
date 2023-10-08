@@ -7,7 +7,7 @@ import { Language } from '../../../../models/language';
 import { AccountService } from '../../../../services/account.service';
 import { HttpService } from '../../../../services/http.service';
 import { User } from '../../../../models/user';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../../services/alert.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class AccountDetailPage implements OnInit {
   account: User;
   countries: string[] = ['Germany', 'Austria', 'Switzerland'];
   country: string[];
-  changePasswordForm: FormGroup;
+  changePasswordForm: UntypedFormGroup;
   data: string;
   enter: string = this.translate.instant('account.enter');
   inputText: string;
@@ -41,7 +41,7 @@ export class AccountDetailPage implements OnInit {
     private translate: TranslateService,
     private accountService: AccountService,
     private httpServ: HttpService,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.route.queryParams.subscribe( params => {
       if (this.router.getCurrentNavigation().extras.state) {

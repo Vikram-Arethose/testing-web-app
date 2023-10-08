@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlatformService } from '../../../services/platform.service';
 import { TranslateService } from '@ngx-translate/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 
 import { LoggerService } from '../../../services/logger.service';
@@ -17,13 +17,13 @@ export class GoogleLoginPage implements OnInit {
   checkbox: boolean;
   isLogin: boolean;
   loginWith: string;
-  myForm: FormGroup;
+  myForm: UntypedFormGroup;
 
 
   constructor(
     private translate: TranslateService,
     private platformService: PlatformService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private logger: LoggerService,
     private router: Router,
   ) {}

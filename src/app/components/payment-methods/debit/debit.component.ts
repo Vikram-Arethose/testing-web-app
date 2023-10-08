@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DataForPayment } from '../../../models/http/dataForPayment';
 import { LoggerService } from '../../../services/logger.service';
 import { HttpService } from '../../../services/http.service';
@@ -20,13 +20,13 @@ import { Location } from '@angular/common';
 export class DebitComponent implements OnInit {
 
   @Input() dataForCreateStx: DataForPayment;
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(
     public cartServ: CartService,
     private alertServ: AlertService,
     private bakeryServ: BakeryService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private httpServ: HttpService,
     private loadingServ: LoadingService,
     private location: Location,

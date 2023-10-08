@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { SlicedModalComponent } from './sliced-modal.component';
@@ -7,7 +7,7 @@ describe('SlicedModalComponent', () => {
   let component: SlicedModalComponent;
   let fixture: ComponentFixture<SlicedModalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SlicedModalComponent ],
       imports: [IonicModule.forRoot()]

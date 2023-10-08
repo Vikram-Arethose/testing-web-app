@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { LocationSettingPage } from './location-setting.page';
@@ -7,7 +7,7 @@ describe('LocationSettingPage', () => {
   let component: LocationSettingPage;
   let fixture: ComponentFixture<LocationSettingPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LocationSettingPage ],
       imports: [IonicModule.forRoot()]

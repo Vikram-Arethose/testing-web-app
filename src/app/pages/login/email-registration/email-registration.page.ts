@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmailRegister } from '../../../models/emailRegister';
 import { LoggerService } from '../../../services/logger.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../../services/http.service';
 import { AuthResponse } from '../../../models/authResponse';
 import { LoginService } from '../../../services/login.service';
@@ -18,12 +18,12 @@ export class EmailRegistrationPage implements OnInit {
 
   emailRegisterData: EmailRegister = new EmailRegister();
   isLogin: boolean;
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   step = 0;
 
   constructor(
     private httpService: HttpService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private location: Location,
     private logger: LoggerService,
     private loginServ: LoginService,
