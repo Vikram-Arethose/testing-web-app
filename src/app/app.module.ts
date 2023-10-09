@@ -20,11 +20,11 @@ import localeDeExtra from '@angular/common/locales/extra/de';
 import { Interceptor } from './core/interceptors/interceptor';
 import { ErrorService } from './services/error.service';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-import { AgmCoreModule } from '@agm/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Market } from '@ionic-native/market/ngx';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 registerLocaleData(localeDe, 'en-US', localeDeExtra);
@@ -37,6 +37,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    GoogleMapsModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -48,12 +49,8 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ',
-      libraries: ['places']
-    }),
-  ],
+    })
+    ],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,22 +1,43 @@
-import { ElementRef, Injectable, NgZone } from '@angular/core';
+import { ElementRef, Injectable, NgZone, ViewChild } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { Plugins } from '@capacitor/core';
 import { AlertService } from './alert.service';
 import { Coordinates } from '../models/coordinates';
-
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
-import { MapsAPILoader } from '@agm/core';
 import { Location } from '../models/location';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-import { newArray } from '@angular/compiler/src/util';
+import { GoogleMapsModule, GoogleMap } from '@angular/google-maps'
 
 const { Geolocation } = Plugins;
 
 @Injectable({
   providedIn: 'root'
-})
+})  
 export class GeolocationService {
+
+  title = 'angular-google-map-search';
+
+  @ViewChild('search')
+  public searchElementRef!: ElementRef;
+  @ViewChild(GoogleMap)
+  public map!: GoogleMap;
+
+  zoom = 12;
+  center!: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = {
+    zoomControl: true,
+    scrollwheel: false,
+    disableDefaultUI: true,
+    fullscreenControl: true,
+    disableDoubleClickZoom: true,
+    mapTypeId: 'hybrid',
+    // maxZoom:this.maxZoom,
+    // minZoom:this.minZoom,
+  };
+  latitude!: any;
+  longitude!: any;
+
 
   private locationSource: BehaviorSubject<Location> = new BehaviorSubject<Location>(new Location());
   currLocation = this.locationSource.asObservable();
@@ -30,10 +51,46 @@ export class GeolocationService {
     private logger: LoggerService,
     private alertServ: AlertService,
     private nativeGeocoder: NativeGeocoder,
-    private mapsApiLoader: MapsAPILoader,
     private ngZone: NgZone,
-    private localStorageServ: LocalStorageService
+    private localStorageServ: LocalStorageService,
+    private googleMaps: GoogleMap,
   ) { }
+  
+  ngOnInit() {
+    this.getCurrentPosition();
+  }
+
+  // ngAfterViewInit(): void {
+  //   // Binding autocomplete to search input control
+  //   let autocomplete = new google.maps.places.Autocomplete(
+  //     this.searchElementRef.nativeElement
+  //   );
+  //   // Align search box to center
+  //   this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+  //     this.searchElementRef.nativeElement
+  //   );
+  //   autocomplete.addListener('place_changed', () => {
+  //     this.ngZone.run(() => {
+  //       //get the place result
+  //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+  //       //verify result
+  //       if (place.geometry === undefined || place.geometry === null) {
+  //         return;
+  //       }
+
+  //       console.log({ place }, place.geometry.location?.lat());
+
+  //       //set latitude, longitude and zoom
+  //       this.latitude = place.geometry.location?.lat();
+  //       this.longitude = place.geometry.location?.lng();
+  //       this.center = {
+  //         lat: this.latitude,
+  //         lng: this.longitude,
+  //       };
+  //     });
+  //   });
+  // }
 
   changeLocation(location?: Location) {
     if (!location) {
@@ -52,7 +109,7 @@ export class GeolocationService {
         locationArr.length = 3;
       }
     } else {
-      locationArr = newArray(1, location);
+      throw new Error("Location error");
     }
     this.localStorageServ.setArr([{key: 'locationArr', value: locationArr}]);
   }
@@ -76,7 +133,6 @@ export class GeolocationService {
       useLocale: true,
       maxResults: 1
     };
-
     try {
       const result: NativeGeocoderResult[] = await this.nativeGeocoder.reverseGeocode(lat, lng, options);
       this.logger.log('getAddress result: ', result);
@@ -88,9 +144,8 @@ export class GeolocationService {
     }
   }
 
-  findAddress(elementRef: ElementRef): Promise<void> {
+  async findAddress(elementRef: ElementRef): Promise<void> {
     return new Promise(resolve => {
-      this.mapsApiLoader.load().then(() => {
         const autocomplete = new google.maps.places.Autocomplete(elementRef.nativeElement);
         autocomplete.addListener('place_changed', () => {
           this.ngZone.run(() => {
@@ -103,7 +158,8 @@ export class GeolocationService {
             this.changeLocation({lat, lng, address});
           });
         });
-      });
+      // });
     });
   }
+
 }

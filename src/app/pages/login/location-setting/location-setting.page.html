@@ -5,12 +5,12 @@
       <h1 class="header__title">{{ 'locationSet.title' | translate }}</h1>
     </div>
     <ng-container *ngIf="showMap">
-      <agm-map class="map" [latitude]="lat" [longitude]="lng" [zoom]="12">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        <agm-marker *ngFor="let bakery of branchesNear$ | async"
+      <google-map #myGoogleMap [latitude]="lat" [longitude]="lng" [zoom]="12">
+        <map-marker [latitude]="lat" [longitude]="lng"></map-marker>
+        <map-marker *ngFor="let bakery of branchesNear$ | async"
                     [latitude]="+bakery.lat" [longitude]="+bakery.lng"
-                    [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></agm-marker>
-      </agm-map>
+                    [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></map-marker>
+      </google-map>
     </ng-container>
     <div class="btn-wrapper">
       <ion-item class="item" lines="none" (click)="onUseCurrLocation()" detail="false" button>

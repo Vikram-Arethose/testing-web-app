@@ -1,6 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 
-import { MapsAPILoader } from '@agm/core';
+import { GoogleMapsModule } from '@angular/google-maps'
+
 import { LoggerService } from '../../../services/logger.service';
 import { GeolocationService } from '../../../services/geolocation.service';
 import { BranchNear } from '../../../models/http/branchesNear';
@@ -29,7 +30,6 @@ export class LocationSettingPage implements OnInit {
   public searchElementRef: ElementRef;
 
   constructor(
-    private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private logger: LoggerService,
     private geolocationServ: GeolocationService,

@@ -8,7 +8,6 @@ import { LocationSettingPageRoutingModule } from './location-setting-routing.mod
 
 import { LocationSettingPage } from './location-setting.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { AgmCoreModule } from '@agm/core';
 import { ComponentsModule } from '../../../components/components.module';
 
 @NgModule({
@@ -18,10 +17,6 @@ import { ComponentsModule } from '../../../components/components.module';
     IonicModule,
     LocationSettingPageRoutingModule,
     TranslateModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ',
-      libraries: ['places']
-    }),
     ComponentsModule
   ],
   declarations: [LocationSettingPage]
