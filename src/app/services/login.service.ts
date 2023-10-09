@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthResponse } from '../models/authResponse';
 import { AnalyticsService } from './analytics.service';
 import { AccountService } from './account.service';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class LoginService {
   ) { }
 
   async googleLogin() {
+    GoogleAuth.initialize();
     const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
     // this.logger.log('googleUser: ', googleUser);
     if (googleUser) {
