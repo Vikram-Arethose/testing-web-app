@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
-import {
-  Plugins,
-  PushNotification,
+import { PushNotifications,
+  PushNotificationSchema,
   PushNotificationToken,
-  Capacitor, PushNotificationActionPerformed
-} from '@capacitor/core';
+  PushNotificationActionPerformed,
+  PushNotification,
+  ActionPerformed,} from "@capacitor/push-notifications";  
 import { LoggerService } from './logger.service';
 import { HttpService } from './http.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
+import { Plugins } from "protractor/built/plugins";
+import { Platform } from '@ionic/angular';
+import { Device } from '@capacitor/device';
+import { App } from '@capacitor/app';
 
-const { App, Device, PushNotifications } = Plugins;
+// const {App} = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +24,9 @@ export class PushService {
   constructor(
     private logger: LoggerService,
     private httpServ: HttpService,
-    private router: Router
+    private router: Router,
+    private platform: Platform,
+
   ) {
     this.actionForPushTouch();
   }
@@ -31,8 +38,11 @@ export class PushService {
   }
 
   registerPush() {
-    PushNotifications.requestPermission().then((permission) => {
-      if (permission.granted) {
+    if (! this.platform.is('capacitor')) return;
+    if (! this.platform.is('ios')) return;
+
+    PushNotifications.requestPermissions().then((permission) => {
+      if (permission.receive) {
         PushNotifications.register();
         // this.createChannel();
       }
@@ -48,10 +58,11 @@ export class PushService {
 
     PushNotifications.addListener(
       'pushNotificationReceived',
-      async (notification: PushNotification) => {
+      async (notification: PushNotificationSchema) => {
         this.logger.log('Push received: ' + JSON.stringify(notification));
       }
     );
+        
   }
 
   setResetPushBadgeCount() {
@@ -65,7 +76,7 @@ export class PushService {
   actionForPushTouch() {
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
-      async (notification: PushNotificationActionPerformed) => {
+      async (notification: ActionPerformed) => {
         let  orderId: any;
         const deviceInfo = await Device.getInfo();
         if (deviceInfo.platform === 'ios') {
