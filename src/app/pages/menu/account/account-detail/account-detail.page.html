@@ -61,18 +61,18 @@
         <div class="setting">
           <h3 class="setting__label setting__label_upper">{{ 'account.currentPass' | translate }}</h3>
           <ion-item class="item" >
-            <ion-input class="item__input item__input_upper" formControlName="currentPassword" type="password"
+            <ion-input class="item__input item__input_upper" appAutofill formControlName="currentPassword" type="password" autocomplete="current-password"
                        [placeholder]="enter + ('account.currentPass' | translate)"></ion-input>
           </ion-item>
         </div>
         <div class="setting">
           <h3 class="setting__label setting__label_upper">{{ 'account.newPass' | translate }}</h3>
           <ion-item class="setting__item item">
-            <ion-input class="item__input item__input_upper" formControlName="newPassword" type="password"
+            <ion-input class="item__input item__input_upper" appAutoFill formControlName="newPassword" type="password" autocomplete="current-password"
                        [placeholder]="enter + ('account.newPass' | translate)"></ion-input>
           </ion-item>
           <ion-item class="setting__item item">
-            <ion-input class="item__input item__input_upper" formControlName="newPasswordConfirm" type="password"
+            <ion-input class="item__input item__input_upper" appAutofill formControlName="newPasswordConfirm" type="password" autocomplete="current-password"
                        [placeholder]="('dateChoose.confirm' | translate) + ' ' + ('account.newPass' | translate)">
 
             </ion-input>
