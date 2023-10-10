@@ -55,18 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return CAPBridge.handleContinueActivity(userActivity, restorationHandler)
   }
 
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
 
-    let statusBarRect = UIApplication.shared.statusBarFrame
-    guard let touchPoint = event?.allTouches?.first?.location(in: self.window) else { return }
 
-    if statusBarRect.contains(touchPoint) {
-      NotificationCenter.default.post(CAPBridge.statusBarTappedNotification)
-    }
-  }
-
-  #if USE_PUSH
 
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     NotificationCenter.default.post(name: Notification.Name(CAPNotifications.DidRegisterForRemoteNotificationsWithDeviceToken.name()), object: deviceToken)
@@ -76,7 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     NotificationCenter.default.post(name: Notification.Name(CAPNotifications.DidFailToRegisterForRemoteNotificationsWithError.name()), object: error)
   }
 
-#endif
+
 
 }
+
 
