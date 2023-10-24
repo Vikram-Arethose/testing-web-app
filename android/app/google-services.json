@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "997978298378-1080s0ge5s5hcgm7rq0tmspfcbfm2b99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brotchen.app",
+            "certificate_hash": "90cbf2e3ca7d702e008039a62ef1938bd76f9b6e"
+          }
+        },
+        {
           "client_id": "997978298378-21d70ejl0v8204hb0ue9ibkenje2io0n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
