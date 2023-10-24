@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { Plugins } from '@capacitor/core';
+import { AlertController, isPlatform } from '@ionic/angular';
+import { Plugins, registerPlugin, registerWebPlugin } from '@capacitor/core';
 import { Router } from '@angular/router';
 
 import { Md5 } from 'ts-md5/dist/md5';
@@ -14,6 +14,8 @@ import { AuthResponse } from '../models/authResponse';
 import { AnalyticsService } from './analytics.service';
 import { AccountService } from './account.service';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { FacebookLogin, FacebookLoginPlugin } from '@capacitor-community/facebook-login';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +33,13 @@ export class LoginService {
     private pushServ: PushService,
     private router: Router,
     private localStorageServ: LocalStorageService,
-    private translate: TranslateService
-  ) { }
+    private translate: TranslateService,
+    private http: HttpClient
+  ) { 
+  }
 
   async googleLogin() {
-    GoogleAuth.initialize();
+    GoogleAuth.initialize( );
     const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
     // this.logger.log('googleUser: ', googleUser);
     if (googleUser) {
@@ -50,7 +54,6 @@ export class LoginService {
       this.registerOnApi();
     }
   }
-
   openAppleSignIn() {
     this.analyticsServ.logEvent('start_apple_login');
     const {SignInWithApple} = Plugins;
@@ -78,7 +81,6 @@ export class LoginService {
         this.presentAlert();
       });
   }
-
   async facebookSignIn(): Promise<void> {
     this.logger.log('facebookSignIn');
     const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
