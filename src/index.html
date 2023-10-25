@@ -13,13 +13,33 @@
   <meta name="msapplication-tap-highlight" content="no" />
 
   <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
-
+  <!-- Google Maps API key -->
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAB--90SnNbbUbAdO3qWPuyAdSq8slN-7g&sensor=false&libraries=places" type="text/javascript"></script>
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <!-- for testing Google Sign In on the web -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJO2_bi4MbTVRaSzcwj_jg-AvMYRA_9lQ"></script>
-  <meta name="google-signin-client_id" content="997978298378-haki6k5ek35flfurcq9u51mal17ve7r3.apps.googleusercontent.com">
+  <meta name="google-signin-client_id" content="997978298378-1080s0ge5s5hcgm7rq0tmspfcbfm2b99.apps.googleusercontent.com">
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '209432110768704',
+        cookie: true, // enable cookies to allow the server to access the session
+        xfbml: true, // parse social plugins on this page
+        version: 'v5.0' // use graph api current version
+      });
+    };
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
 </head>
 
 <body>
