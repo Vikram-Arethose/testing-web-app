@@ -14,18 +14,20 @@
                 (click)="onTomorrow()">{{ 'dateChoose.tomorrow' | translate }}</ion-button>
   </div>
   <h2 class="label">{{ 'dateChoose.orChooseDate' | translate }}</h2>
-  <ion-icon class="calendar-icon" src="../../../assets/icons/bakery/calendar.svg"
-            (click)="dateSelector.open()" tappable></ion-icon>
-  <ion-datetime class="date"
+  <!-- <ion-datetime-button ion-button icon-only clear item-right (click)="dateSelector()"  class="calendar-icon" tappable>
+    <ion-icon tappable icon-start src="../../../assets/icons/bakery/calendar.svg" ></ion-icon>
+  </ion-datetime-button> -->
+      <ion-datetime class="date"
                 #dateSelector
                 displayFormat="DD MMMM YYYY"
                 picker-format="DD MMMM YYYY"
                 [min]="datePickerMin"
                 [max]="datePickerMax"
                 (ionChange)="onCalendarChange($event.target.value)"
-                [cancelText]="cancel" [doneText]="done">
+                [cancelText]="cancel" [doneText]="done"
+                value="../../../assets/icons/bakery/calendar.svg">
 
-  </ion-datetime>
+      </ion-datetime>
   <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
   <ion-item class="time-item ion-align-items-center" lines="none">
     <ion-datetime class="ion-datetime"  (ionChange)="onTimeChange($event)"
