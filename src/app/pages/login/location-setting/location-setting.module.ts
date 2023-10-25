@@ -9,7 +9,7 @@ import { LocationSettingPageRoutingModule } from './location-setting-routing.mod
 import { LocationSettingPage } from './location-setting.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../../components/components.module';
-
+import { GoogleMapsModule} from '@angular/google-maps';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +17,8 @@ import { ComponentsModule } from '../../../components/components.module';
     IonicModule,
     LocationSettingPageRoutingModule,
     TranslateModule,
-    ComponentsModule
+    ComponentsModule,
+    GoogleMapsModule,
   ],
   declarations: [LocationSettingPage]
 })
