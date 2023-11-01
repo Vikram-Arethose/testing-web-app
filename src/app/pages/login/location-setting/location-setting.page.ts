@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMap, GoogleMapsModule } from '@angular/google-maps'
 
 import { LoggerService } from '../../../services/logger.service';
 import { GeolocationService } from '../../../services/geolocation.service';
@@ -25,11 +25,24 @@ export class LocationSettingPage implements OnInit {
   googleMapType = 'satellite';
   showMap: boolean;
   private subscription: Subscription;
-
+  @ViewChild(GoogleMap)
+  public map!: GoogleMap;
   @ViewChild('search')
   public searchElementRef: ElementRef;
+  options: google.maps.MapOptions = {
+    mapTypeId: 'hybrid',
+    zoomControl: false,
+    scrollwheel: false,
+    disableDoubleClickZoom: true,
+    maxZoom: 15,
+    minZoom: 8,
+  };
+  defaultPosition = {    
+    lat: 51.165691,
+    lng: 10.451526,
+};
 
-  constructor(
+  constructor(  
     private ngZone: NgZone,
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
@@ -49,6 +62,8 @@ export class LocationSettingPage implements OnInit {
   }
 
   async makeInit() {
+    this.defaultPosition = this.geolocationServ.defaultLocation;
+
     this.subscription = this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.lat = res.lat;
       this.lng = res.lng;

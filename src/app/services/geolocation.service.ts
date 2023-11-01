@@ -7,7 +7,6 @@ import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@io
 import { Location } from '../models/location';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-import { GoogleMapsModule, GoogleMap } from '@angular/google-maps'
 
 const { Geolocation } = Plugins;
 
@@ -20,9 +19,6 @@ export class GeolocationService {
 
   @ViewChild('search')
   public searchElementRef!: ElementRef;
-  @ViewChild(GoogleMap)
-  public map!: GoogleMap;
-
   zoom = 12;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
@@ -53,7 +49,6 @@ export class GeolocationService {
     private nativeGeocoder: NativeGeocoder,
     private ngZone: NgZone,
     private localStorageServ: LocalStorageService,
-    private googleMaps: GoogleMap,
   ) { }
   
   ngOnInit() {
@@ -109,7 +104,7 @@ export class GeolocationService {
         locationArr.length = 3;
       }
     } else {
-      throw new Error("Location error");
+      locationArr = new Array<Location>( location);
     }
     this.localStorageServ.setArr([{key: 'locationArr', value: locationArr}]);
   }
@@ -119,6 +114,7 @@ export class GeolocationService {
       const coordinates = await Geolocation.getCurrentPosition();
       const lat = coordinates.coords.latitude;
       const lng = coordinates.coords.longitude;
+      console.log(coordinates);
       await this.getAddress(lat, lng);
       return true;
     } catch (error) {

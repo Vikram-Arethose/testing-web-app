@@ -5,11 +5,11 @@
       <h1 class="header__title">{{ 'locationSet.title' | translate }}</h1>
     </div>
     <ng-container *ngIf="showMap">
-      <google-map #myGoogleMap [latitude]="lat" [longitude]="lng" [zoom]="12">
-        <map-marker [latitude]="lat" [longitude]="lng"></map-marker>
-        <map-marker *ngFor="let bakery of branchesNear$ | async"
+      <google-map #myGoogleMap [options]="options" [center]="defaultPosition">
+        <!-- <map-marker [position]="defaultPosition"></map-marker> -->
+        <!-- <map-marker *ngFor="let bakery of branchesNear$ | async"
                     [latitude]="+bakery.lat" [longitude]="+bakery.lng"
-                    [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></map-marker>
+                    [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></map-marker> -->
       </google-map>
     </ng-container>
     <div class="btn-wrapper">
