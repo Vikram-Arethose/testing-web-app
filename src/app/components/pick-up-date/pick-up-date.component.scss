@@ -4,6 +4,9 @@
   overflow-y: auto;
 }
 
+ion-modal{
+  --width:100% !important;
+}
 .container {
   width: 360px;
   margin: var(--ion-safe-area-top) auto 0;
@@ -91,12 +94,30 @@
     @media (max-device-height: 500px) {
       margin:  0 0 4vh;
     }
-    .ion-datetime {
-      width: 100%;
-      padding-right: 0;
-      text-align: center;
-    }
   }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  ion-datetime-Time{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding-left: 25%;
+
+  }
+  .datetimeDate {
+    width: 100%;
+    padding-right: 0;
+    text-align: center;
+  }
+
+
 
   .btn-filled {
     width: 200px;
