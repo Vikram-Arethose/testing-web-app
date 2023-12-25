@@ -7,8 +7,8 @@ import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@io
 import { Location } from '../models/location';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { Geolocation } from '@capacitor/geolocation';
 
-const { Geolocation } = Plugins;
 
 @Injectable({
   providedIn: 'root'
