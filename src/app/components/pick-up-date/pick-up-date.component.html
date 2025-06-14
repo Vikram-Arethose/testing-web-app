@@ -1,68 +1,46 @@
 <div class="container">
-  <ion-button class="close-btn" size="small" fill="none" (click)="returnToBakeryList()">
-    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-  </ion-button>
-<h2 class="title-main">{{ 'dateChoose.title' | translate }}</h2>
-<span>{{'dateChoose.collectedDate' | translate}} {{currentDay}}</span>
-<h2 class="title-date">{{ 'dateChoose.сollectionDate' | translate }}</h2>
-<div class="row">
-  <ion-button class="btn btn-outline" fill="outline"
-              [class.btn-outline_active]="activeBtn === 'today'"
-              (click)="onToday()">{{ 'dateChoose.today' | translate }}</ion-button>
-  <ion-button class="btn btn-outline" fill="outline"
-              [class.btn-outline_active]="activeBtn === 'tomorrow'"
-              (click)="onTomorrow()">{{ 'dateChoose.tomorrow' | translate }}</ion-button>
-</div>
-<h2 class="label">{{ 'dateChoose.orChooseDate' | translate }}</h2>
-<ion-datetime-button datetime="date" class="time-item ion-align-items-center" ></ion-datetime-button>
+    <ion-button class="close-btn" size="small" fill="none" (click)="returnToBakeryList()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+    <h2 class="title-main">{{ 'dateChoose.title' | translate }}</h2>
+    <span>{{'dateChoose.collectedDate' | translate}} {{currentDay}}</span>
+    <h2 class="title-date">{{ 'dateChoose.сollectionDate' | translate }}</h2>
+    <div class="row">
+        <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="activeBtn === 'today'" (click)="onToday()">{{ 'dateChoose.today' | translate }}</ion-button>
+        <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="activeBtn === 'tomorrow'" (click)="onTomorrow()">{{ 'dateChoose.tomorrow' | translate }}</ion-button>
+    </div>
+    <h2 class="label">{{ 'dateChoose.orChooseDate' | translate }}</h2>
+    <ion-datetime-button datetime="date" class="time-item ion-align-items-center"></ion-datetime-button>
 
-<!-- <ion-button color="light" id="open-modal-date" >
+    <!-- <ion-button color="light" id="open-modal-date" >
   <ion-icon tappable slot="icon-only" src="../../../assets/icons/bakery/calendar.svg" ></ion-icon>
 </ion-button> -->
-<ion-modal #modal trigger="open-modal-date" [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
-  <ng-template class="center" >
-    <ion-datetime 
-                class="datetimeDate"
-                id="date"
-                #dateSelector
-                [showDefaultButtons]="true"
-                [min]="datePickerMin"
-                [max]="datePickerMax"
-                presentation="date"
-                [preferWheel]="true"
-                (ionChange)="onCalendarChange($event.target.value)">
-    </ion-datetime>
-  </ng-template>
-  </ion-modal>
+    <ion-modal #modal trigger="open-modal-date" [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
+        <ng-template class="center">
+            <ion-datetime class="datetimeDate" id="date" [value]="date" #dateSelector [showDefaultButtons]="true" [min]="datePickerMin" [max]="datePickerMax" presentation="date" [preferWheel]="true" (ionChange)="onCalendarChange($event.target.value)">
+            </ion-datetime>
+        </ng-template>
+    </ion-modal>
 
-<h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
+    <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
 
-<ion-datetime-button datetime="time" class="time-item ion-align-items-center" ></ion-datetime-button>
-<!-- <ion-button id="open-modal-time">{{time}}</ion-button> -->
-<ion-modal [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
-  <ng-template class="center" >
-        <ion-datetime id="time"
-                      class="ion-datetime-Time"
-                      (ionChange)="onTimeChange($event)"
-                      presentation="time"
-                      [preferWheel]="true"
-                      [showDefaultButtons]="true"
-                      minuteValues="0,15,30,45"
-                      [attr.value]="time ? time : ''"
-                      [disabled]="!date"></ion-datetime>
-  </ng-template>
-</ion-modal>
+    <ion-datetime-button datetime="time" class="time-item ion-align-items-center"></ion-datetime-button>
+    <!-- <ion-button id="open-modal-time">{{time}}</ion-button> -->
+    <ion-modal [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
+        <ng-template class="center">
+            <ion-datetime id="time" class="ion-datetime-Time" (ionChange)="onTimeChange($event)" presentation="time" [preferWheel]="true" [showDefaultButtons]="true" minuteValues="0,15,30,45" [attr.value]="time ? time : ''" [disabled]="!date"></ion-datetime>
+        </ng-template>
+    </ion-modal>
 
-<div *ngIf="repeatOrder; else main">
-  <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="redirectToPay()" [disabled]="!date || !time">
-    {{ 'dateChoose.confirm' | translate }}</ion-button>
+    <div *ngIf="repeatOrder; else main">
+        <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="redirectToPay()" [disabled]="!date || !time">
+            {{ 'dateChoose.confirm' | translate }}</ion-button>
 
-</div>
-<ng-template #main>
-  <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
-    {{ 'dateChoose.confirm' | translate }}</ion-button>
-  <ion-button class="btn btn-filled verify" *ngIf="isVerify" expand="block" (click)="onConfirm()"
-              [disabled]="!date || !time">{{ 'dateChoose.verify' | translate }}</ion-button>
-</ng-template>
+    </div>
+    <ng-template #main>
+        <ion-button class="btn btn-filled" *ngIf="!isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">
+            {{ 'dateChoose.confirm' | translate }}</ion-button>
+        <ion-button class="btn btn-filled verify" *ngIf="isVerify" expand="block" (click)="onConfirm()" [disabled]="!date || !time">{{ 'dateChoose.verify' | translate }}</ion-button>
+    </ng-template>
 
 </div>
