@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Plugins } from '@capacitor/core';
-const { FirebaseAnalytics } = Plugins;
+import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 import { LoggerService } from './logger.service';
 
 @Injectable({

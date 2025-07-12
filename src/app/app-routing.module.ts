@@ -67,6 +67,10 @@ const routes: Routes = [
     path: 'bakery',
     loadChildren: () => import('./pages/bakery-search/bakery/bakery.module').then(m => m.BakeryPageModule)
   },
+  {
+    path: 'addresses',
+    loadChildren: () => import('./pages/address-list/address-list.module').then(m => m.AddressListPageModule)
+  },
 ];
 
 @NgModule({

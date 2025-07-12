@@ -32,6 +32,7 @@ export interface BakeryDetails {
   updated_at: string;
   updated_by: number;
   zipcode: string;
+  delivery: any;
 }
 
 export interface Category {
@@ -80,6 +81,7 @@ export interface Product {
   branch_product: [];
   specific_time: number;
   sold_out_products: Array<any>;
+  deliver_availability: AvailableDay[];
 }
 
 export interface AvailableDay {

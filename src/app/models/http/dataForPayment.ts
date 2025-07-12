@@ -5,4 +5,5 @@ export interface DataForPayment {
   basket_sum: number;
   products: ProductForTransaction[];
   pickup_date: string;
+  delivery: boolean;
 }

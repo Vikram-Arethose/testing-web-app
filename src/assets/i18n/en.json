@@ -175,7 +175,10 @@
     "verify": "Verify",
     "cancel": "Cancel",
     "done": "Done",
-    "collectedDate": "Selected date:"
+    "collectedDate": "Selected date:",
+    "delivery": "Delivery",
+    "takeaway": "Takeaway",
+    "notAvailable": "This product is not available on selected date and time."
   },
   "productDetails": {
     "allergens": "Allergens:",
@@ -194,6 +197,45 @@
     "deletedProduct": "One of the selected products is not available on the date you selected and has been removed from the cart",
     "reorderEmptyBasket": "All products in your order are absent. Try to make a new order"
   },
+  
+"ADDRESS": {
+"title": "Address",
+"FULL_NAME": "Full Name",
+"FULL_NAME_REQUIRED": " Full Name Required",
+"PHONE_NUMBER": "Phone Number",
+"PHONE_NUMBER_INVALID": "Phone Number Required",
+"EMAIL": "Email",
+"EMAIL_INVALID": "Email Invaild",
+"ADDRESS_DETAILS": "Address Details",
+"ADDRESS_LINE_1": "Address Line 1",
+"ADDRESS_LINE_1_REQUIRED": "Addreaa Line 1 Required",
+"ADDRESS_LINE_2": "Address Line 2",
+"Default":  "Default",
+"addNewAddress": "Add New Address",
+"editaddress": "Edit Address",
+"edit": "Edit",
+"address": "Address",
+"Personal_Info": " Personal Info",
+"STATE": "State",
+"STATE_REQUIRED": "State Required",
+"CITY": "City",
+"CITY_REQUIRED": "City required",
+"POSTAL_CODE": "Postel Code",
+"POSTAL_CODE_INVALID": "Postal Code Invalid",
+"COUNTRY": "Country",
+"COUNTRY_REQUIRED": "Country Required",
+"SAVE": "Save",
+"SET_AS_DEFAULT": "Set As Default",
+"delete": "Delete",
+"deleteAddress": "Delete address?",
+"deleteAddressText": "Are you sure you want to delete this address?",
+"noAddresses": "No addresses yet. Please add an address.",
+"Cancel": "Cancel",
+"EDIT_ADDRESS": "Edit Address",
+"ADD_ADDRESS": "Add Address",
+"PERSONAL_INFO": "Personal Info"
+},
+
   "gPay": {
     "dataProtection": "If you continue you accept it the data protection information and Terms of Use from Google Payments",
     "pay": "pay"

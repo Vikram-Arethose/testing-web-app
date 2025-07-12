@@ -7,6 +7,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../services/cart.service';
 import * as moment from 'moment';
+import { BakeryService } from 'src/app/services/bakery.service';
+import { BakeryDetails } from 'src/app/models/http/bakeryFull';
 
 
 @Component({
@@ -19,6 +21,9 @@ export class PickUpDateComponent implements OnInit {
   @Input() repeatOrder;
   @Input() reorderData;
   activeBtn: string;
+  activeBtnDelTake: string;
+  bakeryDetails: any;
+  isDelveryAvailable: boolean = false;
   cancel: string = this.translate.instant('dateChoose.cancel');
   customPickerOptions: any;
   date: string;
@@ -35,6 +40,7 @@ export class PickUpDateComponent implements OnInit {
 
   constructor(
     public dateService: DateService,
+    private bakeryService: BakeryService,
     private alertServ: AlertService,
     private logger: LoggerService,
     private modalController: ModalController,
@@ -44,6 +50,11 @@ export class PickUpDateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.bakeryService.bakeryDetails$.subscribe(details => {
+      this.bakeryDetails = details;
+      if(this.bakeryDetails && this.bakeryDetails.delivery && this.bakeryDetails.delivery == 1)this.isDelveryAvailable = true;
+      console.log('bakeryDetails: ', this.bakeryDetails);
+    });
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow.setHours(9, 0, 0, 0);
@@ -88,6 +99,15 @@ export class PickUpDateComponent implements OnInit {
       this.activeBtn = null;
     }
   }
+
+  onDelivery(){
+ this.activeBtnDelTake = 'delivery';
+  }
+
+  onTakeaway(){
+    this.activeBtnDelTake = 'takeaway'
+  }
+
 
   onToday() {
     this.date = this.today;

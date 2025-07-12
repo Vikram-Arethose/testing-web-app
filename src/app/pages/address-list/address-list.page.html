@@ -1,0 +1,68 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()" [icon]="'arrow-back-outline'" mode="md" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'ADDRESS.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <div class="address-card" *ngFor="let address of addresses">
+      <ion-item>
+        <ion-label>
+          <h2>{{ address.full_name }}</h2>
+          <p class="address-details">
+            {{ address.address_line_1 }}
+            <span *ngIf="address.addressLine2">, {{ address.address_line_2 }}</span>
+          </p>
+          <p class="location-details">
+            {{ address.city }}, {{ address.state }}, {{ address.postal }}
+          </p>
+          <p class="contact-details">
+            {{ address.phone_number }}
+            <span *ngIf="address.email">, {{ address.email }}</span>
+          </p>
+          <p class="country">{{ address.country }}</p>
+        </ion-label>
+        <ion-button 
+          fill="outline" 
+          size="small"
+          slot="end"
+          [color]="address.is_default ? 'primary' : 'medium'"
+          (click)="setDefault(address)"
+          class="default-btn"
+        >
+          {{ 'ADDRESS.Default' | translate }}
+        </ion-button>
+      </ion-item>
+
+      <div class="action-buttons">
+        <ion-button 
+          fill="clear" 
+          color="primary" 
+          (click)="openAddressForm(address)"
+        >
+          <ion-icon name="create" slot="start"></ion-icon>
+          {{ 'ADDRESS.edit' | translate }}
+        </ion-button>
+
+        <ion-button 
+          fill="clear" 
+          color="danger" 
+          (click)="deleteAddress(address, $event)"
+        >
+          <ion-icon name="trash" slot="start"></ion-icon>
+          {{ 'ADDRESS.delete' | translate }}
+        </ion-button>
+      </div>
+    </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openAddressForm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

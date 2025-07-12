@@ -112,6 +112,7 @@ export class BakeryPage implements OnInit, OnDestroy {
       }
       this.allWeek = res.branchDetails.opening_hours_new.allWeek;
       this.bakeryDetails = res.branchDetails;
+      this.bakeryServ.setBakeryDetails(this.bakeryDetails);
       this.bakeryAddress = `${res.branchDetails.street} ${res.branchDetails.number}, ${res.branchDetails.city}`;
       this.bakeryInfoFull = res.branchDetails.description;
       this.bakeryInfo = this.trimBakeryInfo();
@@ -154,7 +155,13 @@ export class BakeryPage implements OnInit, OnDestroy {
   setProductList() {
     let list = this.categories.map( item => item.products);
     console.log('LIST', list);
-    list = list.map( category => category.filter(item => this.dateService.getProductAvailability(item)));
+    // list = list.map( category => category.filter(item => this.dateService.getProductAvailability(item)));
+    list = list.map(category =>
+  category.map(product => ({
+    ...product,
+    isProductAvailable: this.dateService.getProductAvailability(product)
+  }))
+);
     this.productsList = list.map(item => item.map( filteredProduct => this.dateService.mapProductPrice(filteredProduct)));
   }
 

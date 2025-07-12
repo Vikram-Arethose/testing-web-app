@@ -1,0 +1,112 @@
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 8px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+
+  &.selected {
+    --background: var(--ion-color-light);
+    
+    h2 {
+      color: var(--ion-color-primary);
+      font-weight: 600;
+    }
+  }
+
+  ion-label {
+    margin: 12px 0;
+    h2 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: var(--ion-color-medium);
+
+      &.address-details {
+        color: var(--ion-color-dark);
+      }
+
+      &.location-details {
+        font-weight: 500;
+      }
+
+      &.contact-details {
+        font-size: 13px;
+      }
+
+      &.country {
+        color: var(--ion-color-medium);
+        font-size: 13px;
+      }
+    }
+  }
+
+  ion-badge {
+    font-size: 12px;
+    font-weight: normal;
+    padding: 4px 8px;
+    margin-left: 8px;
+  }
+
+  .default-btn {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin: 8px 0;
+  min-width: 90px;
+  
+  &.button-outline {
+    --border-width: 1px;
+    --border-radius: 4px;
+  }
+}
+}
+
+ion-item-option {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+ion-fab {
+  margin: 16px;
+}
+
+.address-card {
+  margin-bottom: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+
+  ion-item {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    --background: transparent;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 8px 16px 12px;
+    border-top: 1px solid var(--ion-color-light);
+
+    ion-button {
+      margin: 0;
+      height: 36px;
+      font-size: 14px;
+
+      ion-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+}

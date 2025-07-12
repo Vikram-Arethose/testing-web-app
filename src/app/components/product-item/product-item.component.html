@@ -20,15 +20,21 @@
       </div>
       <div>
         <p class="product__price" [class.product__price_crossed-out]="saleServ.checkSale(date, product)">
-          {{product.price | currency:'EUR':'symbol'}}</p>
+          {{product.price | currency:product.currency == 'eur' ?'EUR' : 'CHF':'symbol'}}</p>
         <p class="product__special-price" *ngIf="saleServ.checkSale(date, product)">
-          {{product.special_price | currency:'EUR':'symbol'}}</p>
-      </div>
+            {{product.special_price | currency:product.currency == 'eur' ?'EUR' : 'CHF':'symbol'}}</p>
     </div>
-    <div class="product__count count">
+  </div>
+  <div class="product__count count">
+    <ng-container *ngIf="product.isProductAvailable; else notAvailable">
       <ion-button class="count__btn" size="small" (click)="removeProductFromCart()">-</ion-button>
       <div class="count__value">{{getProductCount(product.id)}}</div>
       <ion-button class="count__btn" size="small" (click)="addProductToCart()">+</ion-button>
-    </div>
+    </ng-container>
+    <ng-template #notAvailable>
+      <div class="count__message">
+        {{ 'dateChoose.notAvailable' | translate }}
+      </div>
+    </ng-template>
   </div>
 </div>

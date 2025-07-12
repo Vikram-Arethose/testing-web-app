@@ -164,3 +164,52 @@ ion-item {
     margin-right: 1vh;
   }
 }
+.delivery-address {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .no-address {
+    text-align: center;
+    padding: 20px;
+
+    p {
+      margin-bottom: 12px;
+      color: #666;
+    }
+
+    ion-button {
+      --border-color: #0E8DF1;
+      --color: #0E8DF1;
+    }
+  }
+
+  .address-details-container {
+    margin: 12px 0;
+    padding: 8px 0;
+  }
+
+  h2 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #493735;
+  }
+
+  p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .address-details, .location-details, .contact-details, .country {
+    margin-bottom: 4px;
+  }
+
+  ion-button {
+    margin-top: 8px;
+  }
+}

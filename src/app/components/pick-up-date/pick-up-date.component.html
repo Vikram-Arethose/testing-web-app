@@ -3,6 +3,10 @@
         <ion-icon slot="icon-only" name="close-outline"></ion-icon>
     </ion-button>
     <h2 class="title-main">{{ 'dateChoose.title' | translate }}</h2>
+        <div class="row">
+        <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="isDelveryAvailable" >{{ 'dateChoose.delivery' | translate }}</ion-button>
+        <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="false" >{{ 'dateChoose.takeaway' | translate }}</ion-button>
+    </div>
     <span>{{'dateChoose.collectedDate' | translate}} {{currentDay}}</span>
     <h2 class="title-date">{{ 'dateChoose.сollectionDate' | translate }}</h2>
     <div class="row">
@@ -17,7 +21,7 @@
 </ion-button> -->
     <ion-modal #modal trigger="open-modal-date" [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
         <ng-template class="center">
-            <ion-datetime class="datetimeDate" id="date" [value]="date" #dateSelector [showDefaultButtons]="true" [min]="datePickerMin" [max]="datePickerMax" presentation="date" [preferWheel]="true" (ionChange)="onCalendarChange($event.target.value)">
+            <ion-datetime class="datetimeDate" id="date" [value]="date" #dateSelector [showDefaultButtons]="true" [min]="datePickerMin" [max]="datePickerMax" presentation="date"  (ionChange)="onCalendarChange($event.target.value)">
             </ion-datetime>
         </ng-template>
     </ion-modal>
@@ -28,7 +32,7 @@
     <!-- <ion-button id="open-modal-time">{{time}}</ion-button> -->
     <ion-modal [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
         <ng-template class="center">
-            <ion-datetime id="time" class="ion-datetime-Time" (ionChange)="onTimeChange($event)" presentation="time" [preferWheel]="true" [showDefaultButtons]="true" minuteValues="0,15,30,45" [attr.value]="time ? time : ''" [disabled]="!date"></ion-datetime>
+            <ion-datetime id="time" class="ion-datetime-Time" (ionChange)="onTimeChange($event)" presentation="time"  [showDefaultButtons]="true" minuteValues="0,15,30,45" [attr.value]="time ? time : ''" [disabled]="!date"></ion-datetime>
         </ng-template>
     </ion-modal>
 

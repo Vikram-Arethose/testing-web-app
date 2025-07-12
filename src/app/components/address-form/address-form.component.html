@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ address ? ('ADDRESS.EDIT_ADDRESS' | translate) : ('ADDRESS.ADD_ADDRESS' | translate) }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()">
+        {{ 'ADDRESS.Cancel' | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+    <!-- Personal Information -->
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>{{ 'ADDRESS.PERSONAL_INFO' | translate }}</ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.FULL_NAME' | translate }} *</ion-label>
+        <ion-input type="text" formControlName="fullName"></ion-input>
+        <ion-note slot="error" *ngIf="fullName?.invalid && fullName?.touched">
+          {{ 'ADDRESS.FULL_NAME_REQUIRED' | translate }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.PHONE_NUMBER' | translate }} *</ion-label>
+        <ion-input type="tel" formControlName="phoneNumber"></ion-input>
+        <ion-note slot="error" *ngIf="phoneNumber?.invalid && phoneNumber?.touched">
+          {{ 'ADDRESS.PHONE_NUMBER_INVALID' | translate }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.EMAIL' | translate }}</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="email?.invalid && email?.touched">
+          {{ 'ADDRESS.EMAIL_INVALID' | translate }}
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+
+    <!-- Address Details -->
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>{{ 'ADDRESS.ADDRESS_DETAILS' | translate }}</ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.ADDRESS_LINE_1' | translate }} *</ion-label>
+        <ion-input type="text" formControlName="addressLine1"></ion-input>
+        <ion-note slot="error" *ngIf="addressLine1?.invalid && addressLine1?.touched">
+          {{ 'ADDRESS.ADDRESS_LINE_1_REQUIRED' | translate }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.ADDRESS_LINE_2' | translate }}</ion-label>
+        <ion-input type="text" formControlName="addressLine2"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.CITY' | translate }} *</ion-label>
+        <ion-input type="text" formControlName="city"></ion-input>
+        <ion-note slot="error" *ngIf="city?.invalid && city?.touched">
+          {{ 'ADDRESS.CITY_REQUIRED' | translate }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.STATE' | translate }} *</ion-label>
+        <ion-input type="text" formControlName="state"></ion-input>
+        <ion-note slot="error" *ngIf="state?.invalid && state?.touched">
+          {{ 'ADDRESS.STATE_REQUIRED' | translate }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.POSTAL_CODE' | translate }} *</ion-label>
+        <ion-input type="text" formControlName="postalCode" maxlength="5"></ion-input>
+        <ion-note slot="error" *ngIf="postalCode?.invalid && postalCode?.touched">
+          {{ 'ADDRESS.POSTAL_CODE_INVALID' | translate }}
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'ADDRESS.COUNTRY' | translate }} *</ion-label>
+        <ion-input type="text" formControlName="country"></ion-input>
+        <ion-note slot="error" *ngIf="country?.invalid && country?.touched">
+          {{ 'ADDRESS.COUNTRY_REQUIRED' | translate }}
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item>
+      <ion-label>{{ 'ADDRESS.SET_AS_DEFAULT' | translate }}</ion-label>
+      <ion-toggle formControlName="isDefault"></ion-toggle>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" [disabled]="!addressForm.valid">
+        {{ 'ADDRESS.SAVE' | translate }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

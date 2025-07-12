@@ -16,7 +16,7 @@ export class LoggerService {
     }
   }
 
-  error(error: Error) {
+  error(p0: string, error: Error) {
     this.errorHandler.handleError(error);
   }
 

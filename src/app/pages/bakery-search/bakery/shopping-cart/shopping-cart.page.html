@@ -23,7 +23,7 @@
 
 <ion-content>
   <div class="shopping-cart">
-    <div class="date">
+    <div class="date" *ngIf="!isDelveryAvailable">
       <h2 class="date__title">{{ 'shoppingCart.pickUp' | translate }}:
         <span class="date__title_purple">
           {{ date | date:'EEEE, d.M.yyyy,  H:mm': '' : dateLocale}}
@@ -31,6 +31,32 @@
       <ion-button fill="none" size="small" (click)="presentVerifyDateModal()">
         <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
       </ion-button>
+    </div>
+    <div class="delivery-address" *ngIf="isDelveryAvailable">
+      <div *ngIf="!defaultAddress" class="no-address">
+        <p>{{ 'shoppingCart.noDeliveryAddress' | translate }}</p>
+        <ion-button fill="outline" size="small" (click)="navigateToAddresses($event)" (blur)="onAddressButtonBlur($event)">
+          {{ 'shoppingCart.addAddress' | translate }}
+        </ion-button>
+      </div>
+      <div *ngIf="defaultAddress" class="address-details-container">
+        <h2>{{ defaultAddress?.fullName }}</h2>
+        <p class="address-details">
+          {{ defaultAddress?.addressLine1 }}
+          <span *ngIf="defaultAddress?.addressLine2">, {{ defaultAddress?.addressLine2 }}</span>
+        </p>
+        <p class="location-details">
+          {{ defaultAddress?.city }}{{ defaultAddress?.state ? ', ' + defaultAddress?.state : '' }}{{ defaultAddress?.postalCode ? ', ' + defaultAddress?.postalCode : '' }}
+        </p>
+        <p class="contact-details">
+          {{ defaultAddress?.phoneNumber }}
+          <span *ngIf="defaultAddress?.email">, {{ defaultAddress?.email }}</span>
+        </p>
+        <p *ngIf="defaultAddress?.country" class="country">{{ defaultAddress?.country }}</p>
+        <ion-button fill="none" size="small" (click)="navigateToAddresses($event)" (blur)="onAddressButtonBlur($event)">
+          <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
+        </ion-button>
+      </div>
     </div>
     <div class="product-list">
       <ion-grid class="grid">
@@ -90,8 +116,7 @@
 
     <div class="buttons-wrapper">
       <ion-button class="buttons-wrapper__btn" expand="block"
-                  [routerLink]="'/bakery-search/bakery'"
-                  routerDirection="back"
+                  (click)="goToBakery()"
                   *ngIf="!reorder"
                   >{{ 'shoppingCart.addMore' | translate }}</ion-button>
       <ion-button class="buttons-wrapper__btn btn" color="primary" expand="block" (click)="checkout()" >

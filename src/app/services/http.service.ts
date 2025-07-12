@@ -133,6 +133,23 @@ export class HttpService {
     return subject.asObservable();
   }
 
+  getAddressById(): Observable<any> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/v2/delivery/address/1/100`);
+  }
+
+  updateAdress(body, Id): Observable<any> {
+    return this.http.put(`${this.baseUrl}/v2/delivery/address/${Id}`, body);
+  }
+
+  CreateAddress(body): Observable<any> {
+     return this.http.post(this.baseUrl + '/v2/delivery/create-address', body);
+  }
+
+  deleteAddress(addressId): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/v2/delivery/address/${addressId}`);
+  }
+  
+
   getUserDetails() {
     const subject = new Subject<User>();
     this.http.get(`${this.baseUrl}/v1/user/details`).subscribe((res: ApiResponse) => {
@@ -180,11 +197,19 @@ export class HttpService {
   }
 
   getBodyForPayment(data: DataForPayment) {
+let Selectedaddress;
+      this.bakeryServ.addresses$.subscribe(address => {
+        Selectedaddress = address.id;
+      // Do something with the addresses
+    });
     return {
       branch_id: data.branch_id,
       basket_sum: data.basket_sum,
       products: data.products,
       pickup_date: data.pickup_date,
+      delivery: data.delivery,
+      delivery_address_id: data.delivery ? Selectedaddress : null,
+      time_slot: data.pickup_date,
     };
   }
 
@@ -219,6 +244,17 @@ export class HttpService {
   }
 
   debitPayment(debitArgs: DebitArgs) {
+    let Selectedaddress;
+      this.bakeryServ.addresses$.subscribe(address => {
+        Selectedaddress = address.id;
+      // Do something with the addresses
+    });
+    let isDelveryAvailable
+      this.bakeryServ.bakeryDetails$.subscribe(details => {
+      let bakeryDetails = details;
+      if(bakeryDetails && bakeryDetails.delivery && bakeryDetails.delivery == 1)isDelveryAvailable = true;
+    });
+
     const body = {
       first_name: debitArgs.first_name,
       last_name: debitArgs.last_name,
@@ -232,6 +268,9 @@ export class HttpService {
       basket_sum: debitArgs.basket_sum,
       products: debitArgs.products,
       pickup_date: debitArgs.pickup_date,
+      delivery: isDelveryAvailable,
+      delivery_address_id: isDelveryAvailable ? Selectedaddress : null,
+      time_slot: isDelveryAvailable ? debitArgs.pickup_date : null,
     };
     return  this.http.post(this.baseUrl + '/v1/payment/debit', body);
   }

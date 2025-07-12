@@ -29,6 +29,8 @@ export class DateService {
   fullDay = 86400;
   orderTime: number;
   userTime: any;
+  bakeryDetails: any;
+  isDelveryAvailable: boolean = false;
 
   constructor(
     private logger: LoggerService,
@@ -60,7 +62,15 @@ export class DateService {
   getDaysAvailability(product: Product): boolean {
     // check days availability
     const selectedDay = this.selectedDate.getDay();
-    if (product.availability_new.some(item => item.day === this.weekDays[selectedDay])) {
+    let takeAwayAvailability = product.availability_new
+    let deliveryAvailability = product.deliver_availability
+      this.bakeryServ.bakeryDetails$.subscribe(details => {
+      this.bakeryDetails = details;
+      if(this.bakeryDetails && this.bakeryDetails.delivery && this.bakeryDetails.delivery == 1)this.isDelveryAvailable = true;
+      console.log('bakeryDetails: ', this.bakeryDetails);
+    });
+    let takeAwayOrDeliveryAvailability = !this.isDelveryAvailable ? product?.deliver_availability : product?.availability_new;
+    if (takeAwayOrDeliveryAvailability.some(item => item.day === this.weekDays[selectedDay])) {
       // check product available from to
       if (product?.period_available_from && product?.period_available_to) {
         this.availableFrom = this.getLocalFromServerDate(product.period_available_from);
