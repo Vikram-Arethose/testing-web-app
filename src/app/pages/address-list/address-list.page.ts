@@ -28,7 +28,7 @@ export class AddressListPage implements OnInit {
     private logger: LoggerService,
     private loadingController: LoadingController,
     private bakeryServ: BakeryService,
-    
+
 
   ) {
     // this.addresses$ = this.addressService.getAddresses();
@@ -60,34 +60,34 @@ export class AddressListPage implements OnInit {
   goBack() {
     this.navController.back();
   }
-  
-  getAddress(){
-    this.httpServ.getAddressById().subscribe( res =>{
-      if(res.apiStatus == true && res.apiCode == 200 && res.data) {
+
+  getAddress() {
+    this.httpServ.getAddressById().subscribe(res => {
+      if (res.apiStatus == true && res.apiCode == 200 && res.data) {
         this.addresses = res.data.deliveryAddresses;
         console.log('this.addresses:', this.addresses);
         let SelectedAddress = this.addresses.find(addr => addr.is_default === true);
-        if (SelectedAddress){
-        this.bakeryServ.updateAddresses(SelectedAddress);
+        if (SelectedAddress) {
+          this.bakeryServ.updateAddresses(SelectedAddress);
         }
         // this.logger.log('Address data:', addressData);
         // const defaultAddress = addressData.deliveryAddresses.find(addr => addr.is_default == true);
-            // if (defaultAddress) {
-            //   this.defaultAddress = {
-            //     id: defaultAddress.id,
-            //     fullName: defaultAddress.full_name,
-            //     phoneNumber: defaultAddress.phone_number,
-            //     email: defaultAddress.email,
-            //     addressLine1: defaultAddress.address_line1,
-            //     addressLine2: defaultAddress.address_line2,
-            //     city: defaultAddress.city,
-            //     state: defaultAddress.state,
-            //     postalCode: defaultAddress.postal_code,
-            //     country: defaultAddress.country,
-            //     isDefault: true
-            //   };
-            // }
-      }else{
+        // if (defaultAddress) {
+        //   this.defaultAddress = {
+        //     id: defaultAddress.id,
+        //     fullName: defaultAddress.full_name,
+        //     phoneNumber: defaultAddress.phone_number,
+        //     email: defaultAddress.email,
+        //     addressLine1: defaultAddress.address_line1,
+        //     addressLine2: defaultAddress.address_line2,
+        //     city: defaultAddress.city,
+        //     state: defaultAddress.state,
+        //     postalCode: defaultAddress.postal_code,
+        //     country: defaultAddress.country,
+        //     isDefault: true
+        //   };
+        // }
+      } else {
         this.logger.log('Error fetching address:', res);
         this.addresses = [];
         this.bakeryServ.updateAddresses(null);
@@ -119,43 +119,49 @@ export class AddressListPage implements OnInit {
     }
   }
 
-   async createNewAddress(formData) {
+  async createNewAddress(formData) {
     const loading = await this.loadingController.create({
-      message: 'Setting as default...',
+      message: 'creating address...',
       spinner: 'circular'
     });
     await loading.present();
-  let Payload = {
-    "full_name": formData.fullName,
-    "phone_number": formData.phoneNumber,
-    "email": formData.email,
-    "address_line_1": formData.addressLine1,
-    "address_line_2": formData.addressLine2,
-    "city": formData.city,
-    "state": formData.state,
-    "postal": formData.postalCode,
-    "country": formData.country,
-    "is_default" : formData.isDefault 
-}
-      this.httpServ.CreateAddress(Payload).subscribe(res => {
-      if(res.apiStatus == true && res.apiCode == 200) {
-        
-          this.logger.error('Address created successfully:',  res.message);
-            // Navigate to address list page after successful creation
-          // this.navCtrl.navigateForward('/address-list');
-          this.getAddress(); // Refresh the address list
+    let Payload = {
+      "full_name": formData.fullName,
+      "phone_number": formData.phoneNumber,
+      "email": formData.email,
+      "address_line_1": formData.addressLine1,
+      "address_line_2": formData.addressLine2,
+      "city": formData.city,
+      "state": formData.state,
+      "postal": formData.postalCode,
+      "country": formData.country,
+      "is_default": formData.isDefault
+    }
+    this.httpServ.CreateAddress(Payload).subscribe({
+      next: async (res) => {
+        if (res.apiStatus && res.apiCode === 200) {
+          this.logger.log('Address updated successfully:', res.message);
+          await this.getAddress();
+          // this.addressService.setDefaultAddress(address.id!);
+          // address.is_default = true;
+        } else {
+          this.logger.error('Error updating address:', res.message);
+        }
+        // Dismiss loader after operation completes
+        await loading.dismiss();
+      },
+      error: async (err) => {
+        this.logger.error('Error updating address:', err);
+        // Dismiss loader if there's an error
+        await loading.dismiss();
       }
-        else {
-          this.logger.error('Error creating address:', res.message);
-        }  
-        this.modalController.dismiss();
 
-      });
+    });
   }
 
- async UpdateAddress(address) {
+  async UpdateAddress(address) {
     const loading = await this.loadingController.create({
-      message: 'Setting as default...',
+      message: 'updating address...',
       spinner: 'circular'
     });
     await loading.present();
@@ -238,31 +244,31 @@ export class AddressListPage implements OnInit {
     });
   }
 
-   async deleteAddress(address: Address, event: Event) {
-      const loading = await this.loadingController.create({
-      message: 'Setting as default...',
+  async deleteAddress(address: Address, event: Event) {
+    const loading = await this.loadingController.create({
+      message: 'deleting address...',
       spinner: 'circular'
     });
     await loading.present();
-    if(address?.id) {
+    if (address?.id) {
       this.httpServ.deleteAddress(address.id!).subscribe({
-       next: async (res) => {
-        if (res.apiStatus && res.apiCode === 200) {
-          this.logger.log('Address deleted successfully:', res.message);
-          await this.getAddress();
-          // this.addressService.setDefaultAddress(address.id!);
-          // address.is_default = true;
-        } else {
-          this.logger.error('Error deleted address:', res.message);
-        }
-        // Dismiss loader after operation completes
-        await loading.dismiss();
-      },       
+        next: async (res) => {
+          if (res.apiStatus && res.apiCode === 200) {
+            this.logger.log('Address deleted successfully:', res.message);
+            await this.getAddress();
+            // this.addressService.setDefaultAddress(address.id!);
+            // address.is_default = true;
+          } else {
+            this.logger.error('Error deleted address:', res.message);
+          }
+          // Dismiss loader after operation completes
+          await loading.dismiss();
+        },
         error: async (err) => {
-        this.logger.error('Error deleting address:', err);
-        // Dismiss loader if there's an error
-        await loading.dismiss();
-      }
+          this.logger.error('Error deleting address:', err);
+          // Dismiss loader if there's an error
+          await loading.dismiss();
+        }
       });
     }
     // event.stopPropagation();

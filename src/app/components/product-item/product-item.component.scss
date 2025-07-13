@@ -50,6 +50,7 @@ $darkBrown: #493735;
     font: normal normal 500 14px/18px Montserrat;
     display: -webkit-box;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -101,6 +102,10 @@ $darkBrown: #493735;
     align-self: flex-end;
     display: flex;
     text-align: center;
+    width: 134px;
+    min-width: 134px;
+    max-width: 134px;
+    margin-right: 8px;
 
     &__btn {
       width: 47px;
@@ -114,6 +119,21 @@ $darkBrown: #493735;
     &__value {
       width: 40px;
       align-self: center;
+    }
+
+    &__message {
+      font-size: 10px;
+      color: #666;
+      text-align: center;
+      padding: 0px;
+      align-self: center;
+      width: 100%;
+      max-width: 100%;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      line-height: 1.1;
+      box-sizing: border-box;
     }
   }
 }

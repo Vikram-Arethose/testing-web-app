@@ -26,7 +26,7 @@ export class AddressFormComponent implements OnInit {
   ) {
     this.addressForm = this.formBuilder.group({
       fullName: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10,}$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[\\+]?[0-9\\s\\-\\(\\)]{10,}$')]],      
       email: ['', [Validators.email]],
       addressLine1: ['', [Validators.required]],
       addressLine2: [''],
