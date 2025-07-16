@@ -58,9 +58,23 @@
         </ion-button>
       </div>
     </div>
+    <div class="empty-state" *ngIf="addresses.length == 0">
+      <ion-icon name="location-outline" class="empty-state-icon"></ion-icon>
+      <h3>{{ 'ADDRESS.noAddresses' | translate }}</h3>
+      <!-- <p>{{ 'ADDRESS.noAddressesDescription' | translate }}</p> -->
+      <ion-button 
+        fill="solid" 
+        color="primary"
+        (click)="openAddressForm()"
+        class="add-address-btn"
+      >
+        <ion-icon name="add" slot="start"></ion-icon>
+        {{ 'ADDRESS.addNewAddress' | translate }}
+      </ion-button>
+    </div>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="addresses.length > 0">
     <ion-fab-button (click)="openAddressForm()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

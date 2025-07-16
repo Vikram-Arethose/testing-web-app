@@ -7,6 +7,7 @@ import { LoggerService } from './logger.service';
 import { BakeryFull, Product } from '../models/http/bakeryFull';
 import { BakeryService } from './bakery.service';
 import { OpeningHoursDay } from '../models/http/homeBranch';
+// import { format } from 'date-fns';
 import { CartService } from './cart.service';
 
 @Injectable({
@@ -16,6 +17,8 @@ export class DateService {
 
   availableFrom: Date;
   availableTo: Date;
+  datePickerMin: string = '';
+  datePickerMax: string = '';
   weekDays: string[] = ['sun', 'mo', 'tue', 'wed', 'thu', 'fri', 'sat'];
   weekDaysFull: string[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   private bakery: BakeryFull;
@@ -43,14 +46,13 @@ export class DateService {
 
   getDatePickerMin() {
     const today = new Date();
-    return today.toISOString();
+  return this.datePickerMin = moment(today).format('YYYY-MM-DD');
   }
 
-  getDatePickerMax(): string {
+  getDatePickerMax() {
     const today = new Date();
-    const currMonth = today.getMonth();
-    today.setMonth(currMonth + 1);
-    return today.toISOString();
+    const maxDate = moment(today).add(1, 'months');
+    return this.datePickerMax = moment(maxDate).format('YYYY-MM-DD');
   }
 
   changeDate(date: string) {

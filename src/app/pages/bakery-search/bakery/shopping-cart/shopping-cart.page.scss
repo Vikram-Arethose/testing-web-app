@@ -189,6 +189,35 @@ ion-item {
   .address-details-container {
     margin: 12px 0;
     padding: 8px 0;
+
+    .address-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+
+      h2 {
+        margin: 0;
+        flex: 1;
+      }
+
+      .edit-address-btn {
+        margin: 0;
+        padding: 4px;
+        min-height: auto;
+        --padding-start: 4px;
+        --padding-end: 4px;
+        --padding-top: 4px;
+        --padding-bottom: 4px;
+      }
+    }
+
+    .address-details,
+    .location-details,
+    .contact-details,
+    .country {
+      margin-bottom: 4px;
+    }
   }
 
   h2 {

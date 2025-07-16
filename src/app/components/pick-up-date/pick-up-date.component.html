@@ -5,7 +5,7 @@
     <h2 class="title-main">{{ 'dateChoose.title' | translate }}</h2>
         <div class="row">
         <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="isDelveryAvailable" >{{ 'dateChoose.delivery' | translate }}</ion-button>
-        <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="false" >{{ 'dateChoose.takeaway' | translate }}</ion-button>
+        <ion-button class="btn btn-outline" fill="outline" [class.btn-outline_active]="!isDelveryAvailable" >{{ 'dateChoose.takeaway' | translate }}</ion-button>
     </div>
     <span>{{'dateChoose.collectedDate' | translate}} {{currentDay}}</span>
     <h2 class="title-date">{{ 'dateChoose.сollectionDate' | translate }}</h2>
@@ -19,12 +19,25 @@
     <!-- <ion-button color="light" id="open-modal-date" >
   <ion-icon tappable slot="icon-only" src="../../../assets/icons/bakery/calendar.svg" ></ion-icon>
 </ion-button> -->
-    <ion-modal #modal trigger="open-modal-date" [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
-        <ng-template class="center">
-            <ion-datetime class="datetimeDate" id="date" [value]="date" #dateSelector [showDefaultButtons]="true" [min]="datePickerMin" [max]="datePickerMax" presentation="date"  (ionChange)="onCalendarChange($event.target.value)">
+<ion-modal #modal trigger="open-modal-date" [keepContentsMounted]="true" [initialBreakpoint]="1" [breakpoints]="[1]">
+    <ng-template>
+        <div class="calendar-center-wrapper">
+            <ion-datetime 
+                class="datetimeDate"
+                id="date"
+                [value]="date"
+                #dateSelector
+                [showDefaultButtons]="true"
+                [min]="datePickerMin"
+                [max]="datePickerMax"
+                presentation="date"
+                [showClearButton]="false"
+                [showDefaultTitle]="true"
+                (ionChange)="onCalendarChange($event.target.value)">
             </ion-datetime>
-        </ng-template>
-    </ion-modal>
+        </div>
+    </ng-template>
+</ion-modal>
 
     <h2 class="title-date">{{ 'dateChoose.chooseTime' | translate }}</h2>
 

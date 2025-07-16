@@ -67,9 +67,9 @@ export class AddressListPage implements OnInit {
         this.addresses = res.data.deliveryAddresses;
         console.log('this.addresses:', this.addresses);
         let SelectedAddress = this.addresses.find(addr => addr.is_default === true);
-        if (SelectedAddress) {
+        // if (SelectedAddress) {
           this.bakeryServ.updateAddresses(SelectedAddress);
-        }
+        // }
         // this.logger.log('Address data:', addressData);
         // const defaultAddress = addressData.deliveryAddresses.find(addr => addr.is_default == true);
         // if (defaultAddress) {

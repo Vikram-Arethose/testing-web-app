@@ -110,3 +110,36 @@ ion-fab {
     }
   }
 }
+
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  margin-top: 40px;
+
+  .empty-state-icon {
+    font-size: 64px;
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+
+  .add-address-btn {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+  }
+}

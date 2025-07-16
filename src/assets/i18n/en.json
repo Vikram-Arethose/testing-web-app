@@ -196,7 +196,7 @@
     "chooseOtherPayment": "Choose other payment method",
     "deletedProduct": "One of the selected products is not available on the date you selected and has been removed from the cart",
     "reorderEmptyBasket": "All products in your order are absent. Try to make a new order",
-    "noDeliveryAddress": " No delivery available",
+    "noDeliveryAddress": " No delivery address available. Please add a delivery address.",
     "addAddress": "Add address"
   },
   

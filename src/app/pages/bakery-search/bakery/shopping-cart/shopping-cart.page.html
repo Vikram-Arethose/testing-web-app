@@ -40,22 +40,25 @@
         </ion-button>
       </div>
       <div *ngIf="defaultAddress" class="address-details-container">
-        <h2>{{ defaultAddress?.fullName }}</h2>
+        <div class="address-header">
+          <h2>{{ defaultAddress?.full_name }}</h2>
+          <ion-button fill="none" size="small" (click)="navigateToAddresses($event)" (blur)="onAddressButtonBlur($event)" class="edit-address-btn">
+            <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
+          </ion-button>
+        </div>
         <p class="address-details">
-          {{ defaultAddress?.addressLine1 }}
-          <span *ngIf="defaultAddress?.addressLine2">, {{ defaultAddress?.addressLine2 }}</span>
+          {{ defaultAddress?.address_line_1 }}
+          <span *ngIf="defaultAddress?.address_line_2">, {{ defaultAddress?.address_line_2 }}</span>
         </p>
         <p class="location-details">
-          {{ defaultAddress?.city }}{{ defaultAddress?.state ? ', ' + defaultAddress?.state : '' }}{{ defaultAddress?.postalCode ? ', ' + defaultAddress?.postalCode : '' }}
-        </p>
-        <p class="contact-details">
-          {{ defaultAddress?.phoneNumber }}
-          <span *ngIf="defaultAddress?.email">, {{ defaultAddress?.email }}</span>
+          {{ defaultAddress?.city }}{{ defaultAddress?.state ? ', ' + defaultAddress?.state : '' }}{{ defaultAddress?.postal ? ', ' + defaultAddress?.postal : '' }}
         </p>
         <p *ngIf="defaultAddress?.country" class="country">{{ defaultAddress?.country }}</p>
-        <ion-button fill="none" size="small" (click)="navigateToAddresses($event)" (blur)="onAddressButtonBlur($event)">
-          <ion-icon class="date__btn-icon" src="../../../../../assets/icons/shopping-cart/pen.svg"></ion-icon>
-        </ion-button>
+        <p class="contact-details">
+          {{ defaultAddress?.phone_number }}
+          <span *ngIf="defaultAddress?.email">, {{ defaultAddress?.email }}</span>
+        </p>
+        <!-- Debug info -->
       </div>
     </div>
     <div class="product-list">

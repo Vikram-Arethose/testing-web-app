@@ -41,7 +41,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
   reorderDisabled = false;
   bakeryDetails: any;
   isDelveryAvailable: boolean = false;
-  defaultAddress: Address | null = null;
+  defaultAddress:any = [];
 
 
   constructor(
@@ -99,10 +99,14 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         }
     });
     this.absentProducts = this.cartService.getAbsentCart();
-      this.bakeryServ.addresses$.subscribe(address => {
-      this.defaultAddress = address
+
+    this.bakeryServ.addresses$.subscribe(address => {
+    this.defaultAddress = address
+    console.log('from BS defaultAddress:', this.defaultAddress);
     });
-    this.getAddress()
+    if(!this.defaultAddress){
+      this.getAddress()
+    }
   }
   validateBasketByDate(basket) {
     if (moment().isSameOrAfter(this.date, 'day')) {
@@ -186,29 +190,29 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
         console.log('Address API Response:', res);
         const addressData = res.data;
         this.logger.log('Address data:', addressData);
-        const defaultAddress = addressData.deliveryAddresses.find(addr => addr.is_default == true);
-        this.bakeryServ.updateAddresses(defaultAddress);
+        this.defaultAddress = addressData.deliveryAddresses.find(addr => addr.is_default == true);
+        // this.bakeryServ.updateAddresses(this.defaultAddress);
 
-            if (defaultAddress) {
-              this.defaultAddress = {
-                id: defaultAddress.id,
-                fullName: defaultAddress.full_name,
-                phoneNumber: defaultAddress.phone_number,
-                email: defaultAddress.email,
-                addressLine1: defaultAddress.address_line1,
-                addressLine2: defaultAddress.address_line2,
-                city: defaultAddress.city,
-                state: defaultAddress.state,
-                postalCode: defaultAddress.postal_code,
-                country: defaultAddress.country,
-                isDefault: defaultAddress.is_default
-              };
-            }
+            // if (defaultAddress) {
+            //   this.defaultAddress = {
+            //     id: defaultAddress.id,
+            //     fullName: defaultAddress.full_name,
+            //     phoneNumber: defaultAddress.phone_number,
+            //     email: defaultAddress.email,
+            //     addressLine1: defaultAddress.address_line1,
+            //     addressLine2: defaultAddress.address_line2,
+            //     city: defaultAddress.city,
+            //     state: defaultAddress.state,
+            //     postalCode: defaultAddress.postal_code,
+            //     country: defaultAddress.country,
+            //     isDefault: defaultAddress.is_default
+            //   };
+            // }
       }else{
         this.logger.log('Error fetching address:', res);
         this.defaultAddress = null;
       }
-
+      console.log('From GET this.defaultAddress:', this.defaultAddress);
     })
   }
 

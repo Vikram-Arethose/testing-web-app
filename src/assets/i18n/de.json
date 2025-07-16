@@ -233,7 +233,7 @@
     "chooseOtherPayment": "Wähle eine andere Zahlungsmethode",
     "deletedProduct": "Eines der ausgewählten Produkte ist an dem von Ihnen ausgewählten Datum nicht verfügbar und wurde aus dem Warenkorb entfernt",
     "reorderEmptyBasket": "Alle Produkte in Ihrer Bestellung fehlen. Versuchen Sie, eine neue Bestellung aufzugeben",
-    "noDeliveryAddress": "Keine Lieferung verfügbar",
+    "noDeliveryAddress": "Keine Lieferadresse verfügbar. Bitte füge eine Lieferadresse hinzu.",
     "addAddress": "Adresse hinzufügen"
   },
   "gPay": {
