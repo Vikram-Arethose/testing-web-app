@@ -61,13 +61,19 @@ export class AddressListPage implements OnInit {
     this.navController.back();
   }
 
-  getAddress() {
-    this.httpServ.getAddressById().subscribe(res => {
-      if (res.apiStatus == true && res.apiCode == 200 && res.data) {
-        this.addresses = res.data.deliveryAddresses;
-        console.log('this.addresses:', this.addresses);
-        let SelectedAddress = this.addresses.find(addr => addr.is_default === true);
-        // if (SelectedAddress) {
+ async getAddress() {
+      const loading = await this.loadingController.create({
+      message: 'fetching addresses...',
+      spinner: 'circular'
+    });
+    await loading.present();
+    this.httpServ.getAddressById().subscribe({
+      next: async (res) => {
+        if (res.apiStatus == true && res.apiCode == 200 && res.data) {
+          this.addresses = res.data.deliveryAddresses;
+          console.log('this.addresses:', this.addresses);
+          let SelectedAddress = this.addresses.find(addr => addr.is_default === true);
+          // if (SelectedAddress) {
           this.bakeryServ.updateAddresses(SelectedAddress);
         // }
         // this.logger.log('Address data:', addressData);
@@ -92,7 +98,8 @@ export class AddressListPage implements OnInit {
         this.addresses = [];
         this.bakeryServ.updateAddresses(null);
       }
-
+      await loading.dismiss();
+    }
     })
   }
 

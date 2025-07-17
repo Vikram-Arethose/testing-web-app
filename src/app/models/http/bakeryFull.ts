@@ -82,6 +82,7 @@ export interface Product {
   specific_time: number;
   sold_out_products: Array<any>;
   deliver_availability: AvailableDay[];
+  delivery_days: any;
 }
 
 export interface AvailableDay {

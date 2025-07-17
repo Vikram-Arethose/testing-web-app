@@ -64,21 +64,32 @@ export class DateService {
   getDaysAvailability(product: Product): boolean {
     // check days availability
     const selectedDay = this.selectedDate.getDay();
-    let takeAwayAvailability = product.availability_new
-    let deliveryAvailability = product.deliver_availability
-      this.bakeryServ.bakeryDetails$.subscribe(details => {
-      this.bakeryDetails = details;
-      if(this.bakeryDetails && this.bakeryDetails.delivery && this.bakeryDetails.delivery == 1)this.isDelveryAvailable = true;
-      console.log('bakeryDetails: ', this.bakeryDetails);
-    });
-    let takeAwayOrDeliveryAvailability = !this.isDelveryAvailable ? product?.deliver_availability : product?.availability_new;
-    if (takeAwayOrDeliveryAvailability.some(item => item.day === this.weekDays[selectedDay])) {
+    let takeAwayOrDeliveryAvailability = this.isDelveryAvailable ? product?.deliver_availability : product?.availability_new;
+    if (takeAwayOrDeliveryAvailability ? takeAwayOrDeliveryAvailability.some(item => item.day === this.weekDays[selectedDay]) : false) {
       // check product available from to
-      if (product?.period_available_from && product?.period_available_to) {
+      if (product?.period_available_from && product?.period_available_to && !this.isDelveryAvailable) {
         this.availableFrom = this.getLocalFromServerDate(product.period_available_from);
         this.availableTo = this.getLocalFromServerDate(product.period_available_to);
         return this.selectedDate >= this.availableFrom && this.selectedDate <= this.availableTo;
       }
+      let Slecteddaytimings = product?.delivery_days?.default[this.weekDaysFull[selectedDay]]
+      if (Slecteddaytimings && this.isDelveryAvailable) {  
+
+        const slots = Object.keys(Slecteddaytimings)
+      .filter(key => key !== 'is_disable') // Ignore non-slot keys
+      .map(key => Slecteddaytimings[key]);
+
+         return slots.some(slot => {
+         const [startH, startM] = slot.start.split(':').map(Number); 
+         const [endH, endM] = slot.end.split(':').map(Number);
+
+         const selectedMinutes = this.selectedDate.getHours() * 60 + this.selectedDate.getMinutes();
+         const startMinutes = startH * 60 + startM; 
+         const endMinutes = endH * 60 + endM; 
+
+       return selectedMinutes >= startMinutes && selectedMinutes <= endMinutes;
+        });
+     }
     } else {
       return false;
     }
@@ -107,6 +118,15 @@ export class DateService {
   }
 
   getProductAvailability(product: Product): boolean {
+      this.bakeryServ.bakeryDetails$.subscribe(details => {
+      this.bakeryDetails = details;
+      if(this.bakeryDetails && this.bakeryDetails.delivery && this.bakeryDetails.delivery == 1){
+        this.isDelveryAvailable = true;
+      }else{
+        this.isDelveryAvailable = false;
+      }
+      console.log('bakeryDetails: ', this.bakeryDetails);
+    });
     if (product.sold_out_products.length > 0) {
       const soldOutDate = product.sold_out_products[0].sold_out_date;
       if (moment(this.date) > moment(soldOutDate)) {
@@ -131,7 +151,7 @@ export class DateService {
       const minPreOrderDate = new Date();
       this.orderTime = (this.selectedDate.getTime() - Math.floor(Date.now() / 1000 / 60 / 60 / 24 ) * 24 * 60 * 60 * 1000 ) / 1000 + this.timeHourOffset;
       minPreOrderDate.setSeconds(product.pre_order_period);
-      
+      if(!this.isDelveryAvailable){
       if (!product.pre_order_time || (product.pre_order_time && product.pre_order_time === 86400)) {
         if (minPreOrderDate > this.selectedDate ) {
           return false;
@@ -173,6 +193,7 @@ export class DateService {
           return this.checkSpecificTime(notTodayOrderTime);
         }
       }
+    }
       return this.getDaysAvailability(product);
     } else {
       return true;

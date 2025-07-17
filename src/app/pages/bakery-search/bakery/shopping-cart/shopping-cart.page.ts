@@ -20,6 +20,7 @@ import { SaleServices } from '../../../../services/sale.services';
 import * as moment from 'moment';
 import { AddressService } from '../../../../services/address.service';
 import { Address } from '../../../../models/address.model';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -63,7 +64,9 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     public toast: AlertService,
     private navController: NavController,
     private bakeryService: BakeryService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private loadingController: LoadingController
+    
   ) {
     this.route.queryParamMap.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -184,7 +187,12 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
     }
   }
 
-  getAddress(){
+  async getAddress(){
+        const loading = await this.loadingController.create({
+      message: 'fetching addresses...',
+      spinner: 'circular'
+    });
+    await loading.present();
     this.httpServ.getAddressById().subscribe( res =>{
       if(res.apiStatus == true && res.apiCode == 200 && res.data) {
         console.log('Address API Response:', res);
@@ -214,6 +222,7 @@ export class ShoppingCartPage implements OnInit, OnDestroy {
       }
       console.log('From GET this.defaultAddress:', this.defaultAddress);
     })
+    await loading.dismiss();
   }
 
   // getAddress1() {

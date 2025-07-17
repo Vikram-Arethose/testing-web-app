@@ -74,6 +74,7 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.dateService.changeDate(null);
     this.cartService.clearCart();
     this.getBakeryData();
+    this.getAddress();
     this.dateService.dateShared.subscribe(res => {
       if (res) {
         this.date = res;
@@ -141,6 +142,24 @@ export class BakeryPage implements OnInit, OnDestroy {
     this.openingHours = Object.entries(openingHoursCopy);
   }
 
+  async getAddress(){
+    this.httpServ.getAddressById().subscribe( res =>{
+      if(res.apiStatus == true && res.apiCode == 200 && res.data) {
+        console.log('Address API Response:', res);
+        const addressData = res.data;          
+        // this.logger.log('Address data:', addressData);
+        let SelectedAddress = addressData.deliveryAddresses.find(addr => addr.is_default == true);
+          console.log('From GET this.defaultAddress:', SelectedAddress);
+        this.bakeryServ.updateAddresses(SelectedAddress);
+      }else{
+        this.logger.log('Error fetching address:', res);
+        this.bakeryServ.updateAddresses(null);
+      }
+    })
+    // await loading.dismiss();
+  }
+
+
   onCategorySelect(index: number) {
     this.selectedCategoryIndex = index;
     // this.setProductList(index);
@@ -153,16 +172,18 @@ export class BakeryPage implements OnInit, OnDestroy {
   }
 
   setProductList() {
-    let list = this.categories.map( item => item.products);
+    let list = this.categories.map(item => item.products);
     console.log('LIST', list);
     // list = list.map( category => category.filter(item => this.dateService.getProductAvailability(item)));
-    list = list.map(category =>
-  category.map(product => ({
-    ...product,
-    isProductAvailable: this.dateService.getProductAvailability(product)
-  }))
-);
-    this.productsList = list.map(item => item.map( filteredProduct => this.dateService.mapProductPrice(filteredProduct)));
+    // if (this.bakeryDetails?.delivery == 0) {
+      list = list.map(category =>
+        category.map(product => ({
+          ...product,
+          isProductAvailable: this.dateService.getProductAvailability(product)
+        }))
+      );
+    // }
+    this.productsList = list.map(item => item.map(filteredProduct => this.dateService.mapProductPrice(filteredProduct)));
   }
 
   getCart() {
