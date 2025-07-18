@@ -185,7 +185,8 @@
     "ingredients": "Inhaltsstoffe:",
     "availableEveryDay": "Jeden Tag verfügbar",
     "only": "Nur",
-    "description": "Beschreibung"
+    "description": "Beschreibung",
+    "notAvailable": "Dieses Produkt ist an keinem Tag verfügbar"
   },
 "ADDRESS": {
   "title": "Meine Adressen",

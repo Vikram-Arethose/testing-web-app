@@ -185,7 +185,8 @@
     "ingredients": "Ingredients:",
     "availableEveryDay": "Available every day",
     "only": "Only",
-    "description": "Description"
+    "description": "Description",
+  "notAvailable":"This product not available on any day"
   },
   "shoppingCart": {
     "header": "Shopping cart",
