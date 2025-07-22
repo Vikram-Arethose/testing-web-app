@@ -569,7 +569,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AlertService": () => (/* binding */ AlertService)
 /* harmony export */ });
-/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ 93819);
@@ -587,7 +587,7 @@ let AlertService = class AlertService {
   }
   presentAlert(message, header) {
     var _this = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       if (!message) {
         message = _this.translate.instant('alert.defaultErrorMessage');
       }
@@ -601,7 +601,7 @@ let AlertService = class AlertService {
   }
   presentToast(message) {
     var _this2 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const toast = yield _this2.toastController.create({
         message,
         duration: 2000
@@ -611,7 +611,7 @@ let AlertService = class AlertService {
   }
   comparePasswordToast(message) {
     var _this3 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const toast = yield _this3.toastController.create({
         message,
         duration: 2000,
@@ -622,7 +622,7 @@ let AlertService = class AlertService {
   }
   deletedProductToast(message) {
     var _this4 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const toast = yield _this4.toastController.create({
         message,
         duration: 4000,
@@ -997,7 +997,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CheckVersion": () => (/* binding */ CheckVersion)
 /* harmony export */ });
-/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ 85209);
@@ -1032,7 +1032,7 @@ let CheckVersion = class CheckVersion {
   }
   getUserVersion() {
     var _this = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const userVersion = {
         version: '',
         packageName: null,
@@ -1053,7 +1053,7 @@ let CheckVersion = class CheckVersion {
   }
   checkReleaseVersion() {
     var _this2 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const userVersion = yield _this2.getUserVersion();
       const versionResponse = yield _this2.httpServ.getVersionFromDB();
       const appLastVersion = {
@@ -1115,7 +1115,7 @@ let CheckVersion = class CheckVersion {
 
   updateAppAlert(platform) {
     var _this3 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const alert = yield _this3.alertController.create({
         cssClass: 'update-alert',
         message: _this3.translate.instant('start.updateApp'),
@@ -1918,7 +1918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoadingService": () => (/* binding */ LoadingService)
 /* harmony export */ });
-/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ 93819);
@@ -1932,7 +1932,7 @@ let LoadingService = class LoadingService {
   }
   presentLoading() {
     var _this = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this.loadingController.create({
         cssClass: 'loading-bag',
         message: '<ion-img src="/assets/gifs/loader_bag.gif" alt="loading..."></ion-img>',
@@ -2056,7 +2056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoginService": () => (/* binding */ LoginService)
 /* harmony export */ });
-/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 93819);
@@ -2105,7 +2105,7 @@ let LoginService = class LoginService {
   }
   googleLogin() {
     var _this = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_9__.GoogleAuth.initialize();
       const googleUser = yield _capacitor_core__WEBPACK_IMPORTED_MODULE_1__.Plugins.GoogleAuth.signIn(null);
       // this.logger.log('googleUser: ', googleUser);
@@ -2150,7 +2150,7 @@ let LoginService = class LoginService {
   }
   facebookSignIn() {
     var _this2 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this2.logger.log('facebookSignIn');
       const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
       const result = yield _capacitor_core__WEBPACK_IMPORTED_MODULE_1__.Plugins.FacebookLogin.login({
@@ -2204,7 +2204,7 @@ let LoginService = class LoginService {
   }
   logout() {
     var _this3 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _capacitor_core__WEBPACK_IMPORTED_MODULE_1__.Plugins.FacebookLogin.logout();
       yield _this3.router.navigate(['start'], {
         replaceUrl: true
@@ -2216,7 +2216,7 @@ let LoginService = class LoginService {
   }
   presentAlert() {
     var _this4 = this;
-    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const alert = yield _this4.alertController.create({
         header: 'Login Failed',
         message: 'Please try again later',
@@ -2267,7 +2267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PushService": () => (/* binding */ PushService)
 /* harmony export */ });
-/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @capacitor/push-notifications */ 71704);
@@ -2289,52 +2289,58 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// const {App} = Plugins;
 let PushService = class PushService {
   constructor(logger, httpServ, router, platform) {
     this.logger = logger;
     this.httpServ = httpServ;
     this.router = router;
     this.platform = platform;
-    this.actionForPushTouch();
+    this.isNative = _capacitor_core__WEBPACK_IMPORTED_MODULE_4__.Capacitor.getPlatform() !== 'web';
   }
   initPush() {
-    if (_capacitor_core__WEBPACK_IMPORTED_MODULE_4__.Capacitor.platform !== 'web') {
-      this.registerPush();
+    // ✅ Only proceed if running on Capacitor and native platform (Android/iOS)
+    if (!_capacitor_core__WEBPACK_IMPORTED_MODULE_4__.Capacitor.isNativePlatform && (_capacitor_core__WEBPACK_IMPORTED_MODULE_4__.Capacitor.getPlatform() === 'web' || !this.platform.is('capacitor'))) {
+      this.logger.log('Push notifications skipped: Not running in native platform or not a Capacitor app.');
+      return;
     }
+    this.registerPush();
   }
   registerPush() {
     var _this = this;
-    if (!this.platform.is('capacitor')) return;
-    if (!this.platform.is('ios')) return;
     _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.requestPermissions().then(permission => {
-      if (permission.receive) {
+      if (permission.receive === 'granted') {
         _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.register();
-        // this.createChannel();
+        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.addListener('registration', /*#__PURE__*/function () {
+          var _ref = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (token) {
+            const info = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_5__.Device.getInfo();
+            _this.logger.log('Push Token:', token.value);
+            _this.logger.log('Device Info:', info);
+            _this.httpServ.registerPushToken(token.value, info.model, info.platform, info.osVersion);
+          });
+          return function (_x) {
+            return _ref.apply(this, arguments);
+          };
+        }());
+        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.addListener('registrationError', error => {
+          this.logger.log('Push registration error:', error);
+        });
+        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.addListener('pushNotificationReceived', notification => {
+          this.logger.log('Notification received:', notification);
+        });
+        this.actionForPushTouch();
+        this.setResetPushBadgeCount();
+      } else {
+        this.logger.log('Push permission not granted.');
       }
+    }).catch(err => {
+      this.logger.log('Push permission request failed:', err);
     });
-
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.addListener('registration', /*#__PURE__*/function () {
-      var _ref = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (token) {
-        const info = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_5__.Device.getInfo();
-        _this.logger.log('My token: ' + JSON.stringify(token));
-        _this.logger.log('info: ', info);
-        _this.httpServ.registerPushToken(token.value, info.model, info.platform, info.osVersion);
-      });
-      return function (_x) {
-        return _ref.apply(this, arguments);
-      };
-    }());
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.addListener('pushNotificationReceived', /*#__PURE__*/function () {
-      var _ref2 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (notification) {
-        _this.logger.log('Push received: ' + JSON.stringify(notification));
-      });
-      return function (_x2) {
-        return _ref2.apply(this, arguments);
-      };
-    }());
   }
   setResetPushBadgeCount() {
+    if (!_capacitor_core__WEBPACK_IMPORTED_MODULE_4__.Capacitor.isNativePlatform()) {
+      this.logger.log('Skipping badge count reset — not a native platform.');
+      return;
+    }
     _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.removeAllDeliveredNotifications();
     _capacitor_app__WEBPACK_IMPORTED_MODULE_6__.App.addListener('appStateChange', state => {
       if (state.isActive) {
@@ -2345,7 +2351,7 @@ let PushService = class PushService {
   actionForPushTouch() {
     var _this2 = this;
     _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_1__.PushNotifications.addListener('pushNotificationActionPerformed', /*#__PURE__*/function () {
-      var _ref3 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (notification) {
+      var _ref2 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (notification) {
         let orderId;
         const deviceInfo = yield _capacitor_device__WEBPACK_IMPORTED_MODULE_5__.Device.getInfo();
         if (deviceInfo.platform === 'ios') {
@@ -2360,8 +2366,8 @@ let PushService = class PushService {
         };
         _this2.router.navigate(['orders'], navigationExtras);
       });
-      return function (_x3) {
-        return _ref3.apply(this, arguments);
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
       };
     }());
   }
@@ -2434,6 +2440,8 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const environment = {
+  enablePushNotifications: false,
+  pushEnabled: false,
   production: false,
   serverUrl: 'https://dev.server6.w3control.de/api',
   firebaseConfig: {

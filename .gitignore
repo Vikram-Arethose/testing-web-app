@@ -23,16 +23,7 @@ npm-debug.log*
 /coverage
 /node_modules
 
-.gradle
-android
-!android/app/google-services.json
-!android/app/src/main/res
-!android/app/src/main/java/com/brotchen/app/MainActivity.java
-!android/app/src/main/java/com/devdactic/capalogin/MainActivity.java
-!android/app/src/main/AndroidManifest.xml
-!android/build.gradle
-!android/app/build.gradle
-!android/gradle/variables.gradle
+
 
 
 

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BrötchenApp</string>
+    <string name="title_activity_main">BrötchenApp</string>
+    <string name="package_name">com.brotchen.app</string>
+    <string name="custom_url_scheme">com.brotchen.app</string>
+    <string name="facebook_app_id">123456789012345</string>
+
+</resources>
