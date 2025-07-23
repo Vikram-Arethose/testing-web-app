@@ -90,7 +90,9 @@ export class AppComponent implements OnInit {
       this.translate.setDefaultLang('de');
       this.useLanguage();
       this.openFirstPage();
-      this.splashScreen.hide();
+      setTimeout(() => {
+        this.splashScreen.hide();
+      }, 2000);
       this.pushServ.setResetPushBadgeCount();
       this.checkVersion.checkReleaseVersion();
       this.deviceBackButton();
@@ -128,7 +130,7 @@ export class AppComponent implements OnInit {
     const redirectToEnterCode = localStorage.getItem('ConfirmStatusCode');
     if (redirectToEnterCode === 'true') {
       this.router.navigate(['confirm-code']);
-    }else {
+    } else {
       const token = localStorage.getItem('token');
       console.log(token);
       if (token) {

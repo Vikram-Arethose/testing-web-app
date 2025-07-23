@@ -5,8 +5,12 @@
   "npmClient": "npm",
   "webDir": "www",
   "plugins": {
-    "SplashScreen": {
-      "autoHide": false
+  "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffff",
+      "androidScaleType": "FIT_CENTER",
+      "showSpinner": false
     },
     "GoogleAuth": {
       "scopes": [
