@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddressFormComponent": () => (/* binding */ AddressFormComponent)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _address_form_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./address-form.component.html?ngResource */ 76386);
 /* harmony import */ var _address_form_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./address-form.component.scss?ngResource */ 79988);
@@ -112,7 +112,7 @@ let AddressFormComponent = class AddressFormComponent {
     return this.addressForm.get('country');
   }
   presentErrorToast() {
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const toast = document.createElement('ion-toast');
       toast.message = 'Please fill in all required fields correctly';
       toast.duration = 2000;
@@ -201,7 +201,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddressListPage": () => (/* binding */ AddressListPage)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _address_list_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./address-list.page.html?ngResource */ 45769);
 /* harmony import */ var _address_list_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./address-list.page.scss?ngResource */ 12282);
@@ -262,7 +262,7 @@ let AddressListPage = class AddressListPage {
   }
   getAddress() {
     var _this = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this.loadingController.create({
         message: 'fetching addresses...',
         spinner: 'circular'
@@ -270,7 +270,7 @@ let AddressListPage = class AddressListPage {
       yield loading.present();
       _this.httpServ.getAddressById().subscribe({
         next: function () {
-          var _ref = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
+          var _ref = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
             if (res.apiStatus == true && res.apiCode == 200 && res.data) {
               _this.addresses = res.data.deliveryAddresses;
               console.log('this.addresses:', _this.addresses);
@@ -311,7 +311,7 @@ let AddressListPage = class AddressListPage {
   }
   openAddressForm(address) {
     var _this2 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _components_address_form_address_form_component__WEBPACK_IMPORTED_MODULE_3__.AddressFormComponent,
         componentProps: {
@@ -338,7 +338,7 @@ let AddressListPage = class AddressListPage {
   }
   createNewAddress(formData) {
     var _this3 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this3.loadingController.create({
         message: 'creating address...',
         spinner: 'circular'
@@ -358,7 +358,7 @@ let AddressListPage = class AddressListPage {
       };
       _this3.httpServ.CreateAddress(Payload).subscribe({
         next: function () {
-          var _ref2 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
+          var _ref2 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
             if (res.apiStatus && res.apiCode === 200) {
               _this3.logger.log('Address updated successfully:', res.message);
               yield _this3.getAddress();
@@ -375,7 +375,7 @@ let AddressListPage = class AddressListPage {
           };
         }(),
         error: function () {
-          var _ref3 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
+          var _ref3 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
             _this3.logger.error('Error updating address:', err);
             // Dismiss loader if there's an error
             yield loading.dismiss();
@@ -389,7 +389,7 @@ let AddressListPage = class AddressListPage {
   }
   UpdateAddress(address) {
     var _this4 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this4.loadingController.create({
         message: 'updating address...',
         spinner: 'circular'
@@ -410,7 +410,7 @@ let AddressListPage = class AddressListPage {
       };
       _this4.httpServ.updateAdress(payload, ID).subscribe({
         next: function () {
-          var _ref4 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
+          var _ref4 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
             if (res.apiStatus && res.apiCode === 200) {
               _this4.logger.log('Address updated successfully:', res.message);
               yield _this4.getAddress();
@@ -427,7 +427,7 @@ let AddressListPage = class AddressListPage {
           };
         }(),
         error: function () {
-          var _ref5 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
+          var _ref5 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
             _this4.logger.error('Error updating address:', err);
             // Dismiss loader if there's an error
             yield loading.dismiss();
@@ -441,7 +441,7 @@ let AddressListPage = class AddressListPage {
   }
   setDefault(address) {
     var _this5 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       // Create and present the loader
       const loading = yield _this5.loadingController.create({
         message: 'Setting as default...',
@@ -463,7 +463,7 @@ let AddressListPage = class AddressListPage {
       };
       _this5.httpServ.updateAdress(payload, ID).subscribe({
         next: function () {
-          var _ref6 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
+          var _ref6 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
             if (res.apiStatus && res.apiCode === 200) {
               _this5.logger.log('Address updated successfully:', res.message);
               yield _this5.getAddress();
@@ -480,7 +480,7 @@ let AddressListPage = class AddressListPage {
           };
         }(),
         error: function () {
-          var _ref7 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
+          var _ref7 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
             _this5.logger.error('Error updating address:', err);
             // Dismiss loader if there's an error
             yield loading.dismiss();
@@ -494,7 +494,7 @@ let AddressListPage = class AddressListPage {
   }
   deleteAddress(address, event) {
     var _this6 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this6.loadingController.create({
         message: 'deleting address...',
         spinner: 'circular'
@@ -503,7 +503,7 @@ let AddressListPage = class AddressListPage {
       if (address?.id) {
         _this6.httpServ.deleteAddress(address.id).subscribe({
           next: function () {
-            var _ref8 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
+            var _ref8 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (res) {
               if (res.apiStatus && res.apiCode === 200) {
                 _this6.logger.log('Address deleted successfully:', res.message);
                 yield _this6.getAddress();
@@ -520,7 +520,7 @@ let AddressListPage = class AddressListPage {
             };
           }(),
           error: function () {
-            var _ref9 = (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
+            var _ref9 = (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (err) {
               _this6.logger.error('Error deleting address:', err);
               // Dismiss loader if there's an error
               yield loading.dismiss();

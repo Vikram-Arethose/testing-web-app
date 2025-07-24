@@ -6,10 +6,14 @@
   "webDir": "www",
   "plugins": {
   "SplashScreen": {
-      "launchShowDuration": 3000,
+      "launchShowDuration": 2000,
       "launchAutoHide": true,
-      "backgroundColor": "#ffffff",
-      "androidScaleType": "FIT_CENTER",
+      "launchFadeOutDuration": 1000,
+      "splashFullScreen": true,
+      "splashImmersive": true,
+      "useDialog": false,
+      "backgroundColor": "#FFFFFF",
+      "androidSplashResourceName": "splash",
       "showSpinner": false
     },
     "GoogleAuth": {

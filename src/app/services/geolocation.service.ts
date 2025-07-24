@@ -9,16 +9,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { Geolocation } from '@capacitor/geolocation';
 
-
+declare var google: any
 @Injectable({
   providedIn: 'root'
-})  
+})
 export class GeolocationService {
 
   title = 'angular-google-map-search';
 
-  @ViewChild('search')
-  public searchElementRef!: ElementRef;
+  @ViewChild('search') searchElementRef!: ElementRef;
   zoom = 12;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
@@ -50,7 +49,7 @@ export class GeolocationService {
     private ngZone: NgZone,
     private localStorageServ: LocalStorageService,
   ) { }
-  
+
   ngOnInit() {
     this.getCurrentPosition();
   }
@@ -104,9 +103,9 @@ export class GeolocationService {
         locationArr.length = 3;
       }
     } else {
-      locationArr = new Array<Location>( location);
+      locationArr = new Array<Location>(location);
     }
-    this.localStorageServ.setArr([{key: 'locationArr', value: locationArr}]);
+    this.localStorageServ.setArr([{ key: 'locationArr', value: locationArr }]);
   }
 
   async getCurrentPosition() {
@@ -118,9 +117,9 @@ export class GeolocationService {
       await this.getAddress(lat, lng);
       return true;
     } catch (error) {
-        this.logger.warn('Geolocation.getCurrentPosition error: ', error);
-        if (error.message) {
-        }
+      this.logger.warn('Geolocation.getCurrentPosition error: ', error);
+      if (error.message) {
+      }
     }
   }
 
@@ -133,7 +132,7 @@ export class GeolocationService {
       const result: NativeGeocoderResult[] = await this.nativeGeocoder.reverseGeocode(lat, lng, options);
       this.logger.log('getAddress result: ', result);
       const address = `${result[0].thoroughfare} ${result[0].subThoroughfare}, ${result[0].postalCode} ${result[0].locality}`;
-      this.changeLocation({lat, lng, address});
+      this.changeLocation({ lat, lng, address });
       return address;
     } catch (error) {
       this.logger.warn('get address error: ', error);
@@ -142,18 +141,18 @@ export class GeolocationService {
 
   async findAddress(elementRef: ElementRef): Promise<void> {
     return new Promise(resolve => {
-        const autocomplete = new google.maps.places.Autocomplete(elementRef.nativeElement);
-        autocomplete.addListener('place_changed', () => {
-          this.ngZone.run(() => {
-            const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-            this.logger.log('find address: ', place);
-            const address = place.formatted_address;
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-            resolve();
-            this.changeLocation({lat, lng, address});
-          });
+      const autocomplete = new google.maps.places.Autocomplete(elementRef.nativeElement);
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          this.logger.log('find address: ', place);
+          const address = place.formatted_address;
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+          resolve();
+          this.changeLocation({ lat, lng, address });
         });
+      });
       // });
     });
   }

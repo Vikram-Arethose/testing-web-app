@@ -25,8 +25,7 @@ export class LocationSettingPage implements OnInit {
   googleMapType = 'satellite';
   showMap: boolean;
   private subscription: Subscription;
-  @ViewChild(GoogleMap)
-  public map!: GoogleMap;
+  @ViewChild(GoogleMap) map!: GoogleMap;
   @ViewChild('search')
   public searchElementRef: ElementRef;
   options: google.maps.MapOptions = {
@@ -37,17 +36,20 @@ export class LocationSettingPage implements OnInit {
     maxZoom: 15,
     minZoom: 8,
   };
-  defaultPosition = {    
+  defaultPosition = {
     lat: 51.165691,
     lng: 10.451526,
-};
+  };
 
-  constructor(  
+  constructor(
     private ngZone: NgZone,
     private logger: LoggerService,
     private geolocationServ: GeolocationService,
     private httpServ: HttpService,
-  ) { }
+  ) {
+
+
+  }
 
   ngOnInit() {
     this.makeInit();
@@ -58,6 +60,12 @@ export class LocationSettingPage implements OnInit {
       this.getBranchesNear();
       this.useCurrLocation = false;
       this.locationSearched = true;
+
+    //   const latest = this.geolocationServ.defaultLocation;
+    //   this.defaultPosition = {
+    //     lat: latest.lat,
+    //     lng: latest.lng
+    //   };
     });
   }
 
@@ -67,6 +75,7 @@ export class LocationSettingPage implements OnInit {
     this.subscription = this.geolocationServ.currLocation.subscribe((res: Location) => {
       this.lat = res.lat;
       this.lng = res.lng;
+      // this.defaultPosition = { lat: res.lat ? res.lat : 51.165691, lng: res.lng ? res.lng : 10.451526 };
       this.logger.log('lat, lng', this.lat, this.lng);
     });
     if (await this.geolocationServ.getCurrentPosition()) {
@@ -82,6 +91,7 @@ export class LocationSettingPage implements OnInit {
     await this.geolocationServ.getCurrentPosition();
     if (this.lat && this.lng) {
       this.useCurrLocation = true;
+      // this.defaultPosition = { lat: this.lat, lng: this.lng };
       this.getBranchesNear();
       this.resetSearchField();
     }

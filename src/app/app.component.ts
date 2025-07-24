@@ -92,7 +92,7 @@ export class AppComponent implements OnInit {
       this.openFirstPage();
       setTimeout(() => {
         this.splashScreen.hide();
-      }, 2000);
+      }, 3000);
       this.pushServ.setResetPushBadgeCount();
       this.checkVersion.checkReleaseVersion();
       this.deviceBackButton();

@@ -10,22 +10,25 @@
         <ion-label>{{ 'locationSet.useCurrLocation' | translate}}</ion-label>
       </ion-item>
       <ion-item class="item" lines="none">
-        <input #search class="item__input" [placeholder]="'locationSet.searchLocation' | translate "
-                   autocorrect="off" autocapitalize="off" spellcheck="false" type="text">
+        <input #search class="item__input" [placeholder]="'locationSet.searchLocation' | translate " autocorrect="off"
+          autocapitalize="off" spellcheck="false" type="text">
         <ion-icon slot="start" class="item__icon" src="../../../assets/icons/search.svg"></ion-icon>
       </ion-item>
-      <ion-button class="btn-wrapper__btn btn" size="block" mode="ios"
-                  [routerLink]="'/bakery-search'"
-                  [disabled]="!useCurrLocation  && !locationSearched">
+      <ion-button class="btn-wrapper__btn btn" size="block" mode="ios" [routerLink]="'/bakery-search'"
+        [disabled]="!useCurrLocation  && !locationSearched">
         {{ locationSearched ? ('locationSet.useThisLocation' | translate) : 'GO!' }}</ion-button>
     </div>
 
     <ng-container *ngIf="showMap">
+      <!-- <google-map #myGoogleMap [options]="options" [center]="defaultPosition">
+        <map-marker *ngIf="defaultPosition" [position]="defaultPosition"></map-marker>
+      </google-map> -->
+
       <google-map #myGoogleMap [options]="options" [center]="defaultPosition">
-        <!-- <map-marker [position]="defaultPosition"></map-marker> -->
-        <!-- <map-marker *ngFor="let bakery of branchesNear$ | async"
+        <!-- <map-marker [position]="defaultPosition"></map-marker>
+       <map-marker *ngFor="let bakery of branchesNear$ | async"
                     [latitude]="+bakery.lat" [longitude]="+bakery.lng"
-                    [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></map-marker> -->
+                    [iconUrl]="'../../../../assets/icons/bakery/circle-green.png'"></map-marker>  -->
       </google-map>
     </ng-container>
   </div>

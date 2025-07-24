@@ -177,7 +177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GooglePayComponent": () => (/* binding */ GooglePayComponent)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _google_pay_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./google-pay.component.html?ngResource */ 66921);
 /* harmony import */ var _google_pay_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./google-pay.component.scss?ngResource */ 9400);
@@ -206,7 +206,7 @@ let GooglePayComponent = class GooglePayComponent {
   ngOnInit() {}
   onPay() {
     var _this = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this.modalController.dismiss();
       const navigationExtras = {
         state: {
@@ -246,7 +246,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoginFirstComponent": () => (/* binding */ LoginFirstComponent)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _login_first_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login-first.component.html?ngResource */ 47195);
 /* harmony import */ var _login_first_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login-first.component.scss?ngResource */ 21939);
@@ -272,7 +272,7 @@ let LoginFirstComponent = class LoginFirstComponent {
   }
   toLogin() {
     var _this = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this.loginServ.logout();
       _this.close();
     })();
@@ -467,7 +467,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PaymentMethodsComponent": () => (/* binding */ PaymentMethodsComponent)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _payment_methods_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-methods.component.html?ngResource */ 75118);
 /* harmony import */ var _payment_methods_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./payment-methods.component.scss?ngResource */ 82948);
@@ -519,7 +519,7 @@ let PaymentMethodsComponent = class PaymentMethodsComponent {
   }
   onGooglePay() {
     var _this = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this.modalController.dismiss();
       const modal = yield _this.modalController.create({
         component: _google_pay_google_pay_component__WEBPACK_IMPORTED_MODULE_3__.GooglePayComponent,
@@ -568,7 +568,7 @@ let PaymentMethodsComponent = class PaymentMethodsComponent {
   }
   presentDebitModal() {
     var _this2 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this2.modalController.dismiss();
       const modal = yield _this2.modalController.create({
         component: _debit_debit_component__WEBPACK_IMPORTED_MODULE_9__.DebitComponent,
@@ -1138,7 +1138,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ModalService": () => (/* binding */ ModalService)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 93819);
@@ -1172,7 +1172,7 @@ let ModalService = class ModalService {
   }
   presentPickUpDateModal(isVerify, repeatOrder, reorderData) {
     var _this = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalController.create({
         component: _components_pick_up_date_pick_up_date_component__WEBPACK_IMPORTED_MODULE_1__.PickUpDateComponent,
         cssClass: 'pick-up-date-modal',
@@ -1192,7 +1192,7 @@ let ModalService = class ModalService {
   }
   presentProductDetailsModal(product) {
     var _this2 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _components_product_details_product_details_component__WEBPACK_IMPORTED_MODULE_2__.ProductDetailsComponent,
         cssClass: 'product-details-modal',
@@ -1205,7 +1205,7 @@ let ModalService = class ModalService {
   }
   presentLoginFirstModal() {
     var _this3 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this3.modalController.create({
         component: _components_login_first_login_first_component__WEBPACK_IMPORTED_MODULE_3__.LoginFirstComponent,
         cssClass: 'login-first-modal'
@@ -1215,7 +1215,7 @@ let ModalService = class ModalService {
   }
   presentPaymentMethodsModal() {
     var _this4 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this4.modalController.create({
         component: _components_payment_methods_payment_methods_component__WEBPACK_IMPORTED_MODULE_6__.PaymentMethodsComponent,
         cssClass: 'payment-methods-modal'
@@ -1225,7 +1225,7 @@ let ModalService = class ModalService {
   }
   presentSlicedModal(product) {
     var _this5 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this5.modalController.create({
         component: _components_sliced_modal_sliced_modal_component__WEBPACK_IMPORTED_MODULE_7__.SlicedModalComponent,
         cssClass: 'sliced-modal',

@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LocationSettingPage": () => (/* binding */ LocationSettingPage)
 /* harmony export */ });
-/* harmony import */ var D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 42321);
 /* harmony import */ var _location_setting_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./location-setting.page.html?ngResource */ 47997);
 /* harmony import */ var _location_setting_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./location-setting.page.scss?ngResource */ 41515);
@@ -130,15 +130,22 @@ let LocationSettingPage = class LocationSettingPage {
       this.getBranchesNear();
       this.useCurrLocation = false;
       this.locationSearched = true;
+      //   const latest = this.geolocationServ.defaultLocation;
+      //   this.defaultPosition = {
+      //     lat: latest.lat,
+      //     lng: latest.lng
+      //   };
     });
   }
+
   makeInit() {
     var _this = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.defaultPosition = _this.geolocationServ.defaultLocation;
       _this.subscription = _this.geolocationServ.currLocation.subscribe(res => {
         _this.lat = res.lat;
         _this.lng = res.lng;
+        // this.defaultPosition = { lat: res.lat ? res.lat : 51.165691, lng: res.lng ? res.lng : 10.451526 };
         _this.logger.log('lat, lng', _this.lat, _this.lng);
       });
       if (yield _this.geolocationServ.getCurrentPosition()) {
@@ -152,10 +159,11 @@ let LocationSettingPage = class LocationSettingPage {
   }
   onUseCurrLocation() {
     var _this2 = this;
-    return (0,D_VIKRAM_ionic_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_Users_vikra_OneDrive_Desktop_ionic_ap_testing_web_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this2.geolocationServ.getCurrentPosition();
       if (_this2.lat && _this2.lng) {
         _this2.useCurrLocation = true;
+        // this.defaultPosition = { lat: this.lat, lng: this.lng };
         _this2.getBranchesNear();
         _this2.resetSearchField();
       }
@@ -229,7 +237,7 @@ module.exports = ___CSS_LOADER_EXPORT___.toString();
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<app-menu-header [title]=\"'Maps'\"></app-menu-header>\r\n<ion-content>\r\n  <div class=\"content\">\r\n    <div class=\"header\">\r\n      <h1 class=\"header__title\">{{ 'locationSet.title' | translate }}</h1>\r\n    </div>\r\n    <div class=\"btn-wrapper\">\r\n      <ion-item class=\"item\" lines=\"none\" (click)=\"onUseCurrLocation()\" detail=\"false\" button>\r\n        <ion-icon slot=\"start\" class=\"item__icon\" src=\"../../../assets/icons/map-location-arrow.svg\"></ion-icon>\r\n        <ion-label>{{ 'locationSet.useCurrLocation' | translate}}</ion-label>\r\n      </ion-item>\r\n      <ion-item class=\"item\" lines=\"none\">\r\n        <input #search class=\"item__input\" [placeholder]=\"'locationSet.searchLocation' | translate \"\r\n                   autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" type=\"text\">\r\n        <ion-icon slot=\"start\" class=\"item__icon\" src=\"../../../assets/icons/search.svg\"></ion-icon>\r\n      </ion-item>\r\n      <ion-button class=\"btn-wrapper__btn btn\" size=\"block\" mode=\"ios\"\r\n                  [routerLink]=\"'/bakery-search'\"\r\n                  [disabled]=\"!useCurrLocation  && !locationSearched\">\r\n        {{ locationSearched ? ('locationSet.useThisLocation' | translate) : 'GO!' }}</ion-button>\r\n    </div>\r\n\r\n    <ng-container *ngIf=\"showMap\">\r\n      <google-map #myGoogleMap [options]=\"options\" [center]=\"defaultPosition\">\r\n        <!-- <map-marker [position]=\"defaultPosition\"></map-marker> -->\r\n        <!-- <map-marker *ngFor=\"let bakery of branchesNear$ | async\"\r\n                    [latitude]=\"+bakery.lat\" [longitude]=\"+bakery.lng\"\r\n                    [iconUrl]=\"'../../../../assets/icons/bakery/circle-green.png'\"></map-marker> -->\r\n      </google-map>\r\n    </ng-container>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<app-menu-header [title]=\"'Maps'\"></app-menu-header>\r\n<ion-content>\r\n  <div class=\"content\">\r\n    <div class=\"header\">\r\n      <h1 class=\"header__title\">{{ 'locationSet.title' | translate }}</h1>\r\n    </div>\r\n    <div class=\"btn-wrapper\">\r\n      <ion-item class=\"item\" lines=\"none\" (click)=\"onUseCurrLocation()\" detail=\"false\" button>\r\n        <ion-icon slot=\"start\" class=\"item__icon\" src=\"../../../assets/icons/map-location-arrow.svg\"></ion-icon>\r\n        <ion-label>{{ 'locationSet.useCurrLocation' | translate}}</ion-label>\r\n      </ion-item>\r\n      <ion-item class=\"item\" lines=\"none\">\r\n        <input #search class=\"item__input\" [placeholder]=\"'locationSet.searchLocation' | translate \" autocorrect=\"off\"\r\n          autocapitalize=\"off\" spellcheck=\"false\" type=\"text\">\r\n        <ion-icon slot=\"start\" class=\"item__icon\" src=\"../../../assets/icons/search.svg\"></ion-icon>\r\n      </ion-item>\r\n      <ion-button class=\"btn-wrapper__btn btn\" size=\"block\" mode=\"ios\" [routerLink]=\"'/bakery-search'\"\r\n        [disabled]=\"!useCurrLocation  && !locationSearched\">\r\n        {{ locationSearched ? ('locationSet.useThisLocation' | translate) : 'GO!' }}</ion-button>\r\n    </div>\r\n\r\n    <ng-container *ngIf=\"showMap\">\r\n      <!-- <google-map #myGoogleMap [options]=\"options\" [center]=\"defaultPosition\">\r\n        <map-marker *ngIf=\"defaultPosition\" [position]=\"defaultPosition\"></map-marker>\r\n      </google-map> -->\r\n\r\n      <google-map #myGoogleMap [options]=\"options\" [center]=\"defaultPosition\">\r\n        <!-- <map-marker [position]=\"defaultPosition\"></map-marker>\r\n       <map-marker *ngFor=\"let bakery of branchesNear$ | async\"\r\n                    [latitude]=\"+bakery.lat\" [longitude]=\"+bakery.lng\"\r\n                    [iconUrl]=\"'../../../../assets/icons/bakery/circle-green.png'\"></map-marker>  -->\r\n      </google-map>\r\n    </ng-container>\r\n  </div>\r\n</ion-content>";
 
 /***/ })
 
